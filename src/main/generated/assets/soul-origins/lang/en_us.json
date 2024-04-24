@@ -1,4 +1,5 @@
 {
+  "container.soul-origins.inventory.deck": "Deck",
   "item.soul-origins.marigold_card": "Marigold Card",
   "item.soul-origins.marigold_card.empty": "Empty",
   "item.soul-origins.marigold_card.multiple_items": "%s x%s"

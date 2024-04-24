@@ -125,17 +125,20 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
             get() = nbt?.contains(ENTITY_NBT) ?: false
 
         private fun getNbtRefForPreferredSlot(insertStack: ItemStack, targetStack: ItemStack): Pair<NbtList, Int> {
-            return if (insertStack.isIn(ItemTags.ARROWS) || insertStack.isOf(Items.TOTEM_OF_UNDYING))
-                targetStack.getCreateHandItems() to 1
-            else
-                when ((insertStack.item as? Equipment)?.slotType) {
-                    EquipmentSlot.FEET -> targetStack.getCreateArmorItems() to 0
-                    EquipmentSlot.LEGS -> targetStack.getCreateArmorItems() to 1
-                    EquipmentSlot.CHEST -> targetStack.getCreateArmorItems() to 2
-                    EquipmentSlot.HEAD -> targetStack.getCreateArmorItems() to 3
-                    EquipmentSlot.OFFHAND -> targetStack.getCreateHandItems() to 1
-                    else -> targetStack.getCreateHandItems() to 0
-                }
+            if (insertStack.isIn(ItemTags.ARROWS) || insertStack.isOf(Items.TOTEM_OF_UNDYING))
+                return targetStack.getCreateHandItems() to 1
+
+            if (insertStack.isOf(Items.CARVED_PUMPKIN))
+                return targetStack.getCreateArmorItems() to 3
+
+            return when ((insertStack.item as? Equipment)?.slotType) {
+                EquipmentSlot.FEET -> targetStack.getCreateArmorItems() to 0
+                EquipmentSlot.LEGS -> targetStack.getCreateArmorItems() to 1
+                EquipmentSlot.CHEST -> targetStack.getCreateArmorItems() to 2
+                EquipmentSlot.HEAD -> targetStack.getCreateArmorItems() to 3
+                EquipmentSlot.OFFHAND -> targetStack.getCreateHandItems() to 1
+                else -> targetStack.getCreateHandItems() to 0
+            }
         }
 
         private fun getNbtRefForRemoval(targetStack: ItemStack): Pair<NbtList, Int>? {

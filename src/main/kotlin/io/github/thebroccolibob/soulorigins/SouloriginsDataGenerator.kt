@@ -32,6 +32,7 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			translationBuilder.add(SouloriginsItems.MARIGOLD_CARD, "Marigold Card")
 			translationBuilder.add("${SouloriginsItems.MARIGOLD_CARD.translationKey}.empty", "Empty")
 			translationBuilder.add("${SouloriginsItems.MARIGOLD_CARD.translationKey}.multiple_items", "%s x%s")
+			translationBuilder.add("container.soul-origins.inventory.deck", "Deck")
 		}
 	}
 }
