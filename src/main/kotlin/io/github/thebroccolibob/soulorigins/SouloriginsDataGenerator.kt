@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.data.client.BlockStateModelGenerator
 import net.minecraft.data.client.ItemModelGenerator
-import net.minecraft.data.client.Models
 
 object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 	override fun onInitializeDataGenerator(fabricDataGenerator: FabricDataGenerator) {
@@ -24,7 +23,7 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 		}
 
 		override fun generateItemModels(itemModelGenerator: ItemModelGenerator) {
-			itemModelGenerator.register(SouloriginsItems.MARIGOLD_CARD, Models.GENERATED);
+
 		}
 	}
 
@@ -32,6 +31,7 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 		override fun generateTranslations(translationBuilder: TranslationBuilder) {
 			translationBuilder.add(SouloriginsItems.MARIGOLD_CARD, "Marigold Card")
 			translationBuilder.add("${SouloriginsItems.MARIGOLD_CARD.translationKey}.empty", "Empty")
+			translationBuilder.add("${SouloriginsItems.MARIGOLD_CARD.translationKey}.multiple_items", "%s x%s")
 		}
 	}
 }

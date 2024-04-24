@@ -27,7 +27,7 @@ fun NbtCompound.getOrCreateCompound(key: String): NbtCompound {
     return NbtCompound().also { put(key, it) }
 }
 fun NbtCompound.getOrCreateList(key: String, type: Byte): NbtList {
-    if (key in this) return getList(key, type.toInt())
+    if (key in this) return getList(key, type)
     return NbtList().also { put(key, it) }
 }
 
@@ -37,6 +37,8 @@ fun NbtList.setIfEmpty(index: Int, element: NbtElement) : Boolean {
     set(index, element)
     return true
 }
+
+fun NbtCompound.getList(key: String, type: Byte): NbtList = getList(key, type.toInt())
 
 fun <T: Any> Optional<T>.toNullable(): T? = orElse(null)
 fun <T: Any> T?.toOptional() = Optional.ofNullable(this)
