@@ -37,6 +37,8 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
         })
         entity.customName?.let(stack::setCustomName)
         entity.discard()
+
+        // mana refund
         return ActionResult.SUCCESS
     }
 
@@ -45,6 +47,7 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
         val nbt = stack.nbt
 
         if (nbt?.contains(ENTITY_NBT) != true) return ActionResult.PASS
+        // mana check fails return
 
         if (world !is ServerWorld) return ActionResult.SUCCESS
 
@@ -57,7 +60,9 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
         nbt.remove(ENTITY_NBT)
         stack.removeCustomName()
 
+        // mana expense
         return ActionResult.CONSUME
+
     }
 
     override fun appendTooltip(
