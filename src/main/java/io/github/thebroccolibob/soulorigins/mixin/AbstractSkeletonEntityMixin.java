@@ -3,6 +3,7 @@ package io.github.thebroccolibob.soulorigins.mixin;
 import io.github.thebroccolibob.soulorigins.Soulorigins;
 import io.github.thebroccolibob.soulorigins.entity.OwnableSkeleton;
 import io.github.thebroccolibob.soulorigins.entity.ai.goal.SkeletonAttackWithOwnerGoal;
+import io.github.thebroccolibob.soulorigins.entity.ai.goal.SkeletonFollowOwnerGoal;
 import io.github.thebroccolibob.soulorigins.entity.ai.goal.SkeletonTrackOwnerAttackerGoal;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;
@@ -57,11 +58,13 @@ public abstract class AbstractSkeletonEntityMixin extends HostileEntity implemen
 		}
 	}
 
-	@Inject(
+	@SuppressWarnings("DataFlowIssue")
+    @Inject(
 			method = "initGoals",
 			at = @At("TAIL")
 	)
 	private void injectGoals(CallbackInfo ci) {
+		goalSelector.add(4, new SkeletonFollowOwnerGoal((AbstractSkeletonEntity) (Object) this, 1.0, 16f, 8f, false));
 		targetSelector.add(1, new SkeletonTrackOwnerAttackerGoal((AbstractSkeletonEntity) (Object) this));
 		targetSelector.add(2, new SkeletonAttackWithOwnerGoal((AbstractSkeletonEntity) (Object) this));
 	}
