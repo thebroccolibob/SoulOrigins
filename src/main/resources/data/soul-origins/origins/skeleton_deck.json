@@ -1,0 +1,13 @@
+{
+    "name": "Skeleton Deck Builder",
+    "description": "For Crisanto",
+    "icon": {
+        "item": "soul-origins:marigold_card",
+        "tag": {"EntityTag": {}}
+    },
+    "impact": 1,
+    "powers": [
+        "soul-origins:skeleton_friend",
+        "soul-origins:skeleton_deck"
+    ]
+}
