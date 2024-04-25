@@ -1,0 +1,9 @@
+{
+  "type": "origins:self_action_on_kill",
+  "hidden": true,
+  "entity_action": {
+    "type": "origins:change_resource",
+    "resource": "soul-origins:soul_meter",
+    "change": 2
+  }
+}
