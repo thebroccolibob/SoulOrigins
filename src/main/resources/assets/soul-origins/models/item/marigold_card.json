@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "soul-origins:item/marigold_card"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "soul-origins:has_entity": 1
+      },
+      "model": "soul-origins:item/marigold_card_filled"
+    }
+  ]
+}

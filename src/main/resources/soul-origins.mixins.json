@@ -3,7 +3,8 @@
 	"package": "io.github.thebroccolibob.soulorigins.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"ExampleMixin"
+		"AbstractSkeletonEntityMixin",
+		"RevengeGoalMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
