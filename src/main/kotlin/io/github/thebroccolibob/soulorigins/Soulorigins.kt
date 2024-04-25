@@ -2,12 +2,14 @@ package io.github.thebroccolibob.soulorigins
 
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import net.fabricmc.api.ModInitializer
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 object Soulorigins : ModInitializer {
 	const val MOD_ID = "soul-origins"
 
-    private val logger = LoggerFactory.getLogger(MOD_ID)
+	@JvmField
+    val logger: Logger = LoggerFactory.getLogger(MOD_ID)
 
 	override fun onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.

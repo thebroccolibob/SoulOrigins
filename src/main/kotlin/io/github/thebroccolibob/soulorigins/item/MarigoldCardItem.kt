@@ -1,6 +1,7 @@
 package io.github.thebroccolibob.soulorigins.item
 
 import io.github.thebroccolibob.soulorigins.*
+import io.github.thebroccolibob.soulorigins.entity.OwnableSkeleton
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.EquipmentSlot
@@ -49,7 +50,9 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
 
         val spawnPosition = if (world.getBlockState(blockPos).getCollisionShape(world, blockPos).isEmpty) blockPos else blockPos.offset(side)
 
-        EntityType.fromNbt(nbt.getCompound(ENTITY_NBT)).toNullable()?.spawnFromItemStack(world, stack, player, spawnPosition, SpawnReason.SPAWN_EGG, true, false)
+        val skeleton = EntityType.fromNbt(nbt.getCompound(ENTITY_NBT)).toNullable()?.spawnFromItemStack(world, stack, player, spawnPosition, SpawnReason.SPAWN_EGG, true, false)
+
+        (skeleton as OwnableSkeleton).owner = player
 
         nbt.remove(ENTITY_NBT)
         stack.removeCustomName()
@@ -88,6 +91,7 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
 
     override fun onClicked(stack: ItemStack, otherStack: ItemStack, slot: Slot, clickType: ClickType, player: PlayerEntity, cursorStackReference: StackReference): Boolean {
         if (clickType != ClickType.RIGHT) return false
+        if (!stack.hasEntity) return false
 
         val stackNbt = if(otherStack.isEmpty) NbtCompound() else otherStack.writeNbt(NbtCompound())
 
