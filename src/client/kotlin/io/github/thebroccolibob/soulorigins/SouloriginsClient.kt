@@ -1,6 +1,6 @@
 package io.github.thebroccolibob.soulorigins
 
-import io.github.thebroccolibob.soulorigins.screen.LaOfrenda
+import io.github.thebroccolibob.soulorigins.screen.LaBaraja
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
@@ -14,7 +14,7 @@ object SouloriginsClient : ClientModInitializer {
 		KeyBindingHelper.registerKeyBinding(TEST)
 		ClientTickEvents.END_CLIENT_TICK.register {client ->
 			while(TEST.wasPressed()) {
-				client.setScreen(LaOfrenda())
+				client.setScreen(LaBaraja())
 			}
 		}
 	}
