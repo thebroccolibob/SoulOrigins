@@ -8,9 +8,8 @@
     "impact": 1,
     "powers": [
         "soul-origins:skeleton_friend",
-        "soul-origins:skeleton_deck",
         "soul-origins:soul_meter",
         "soul-origins:soul_extract",
-        "soul-origins:use_card"
+        "soul-origins:test"
     ]
 }
