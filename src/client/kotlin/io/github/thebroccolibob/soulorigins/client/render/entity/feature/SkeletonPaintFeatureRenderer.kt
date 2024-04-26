@@ -2,6 +2,7 @@ package io.github.thebroccolibob.soulorigins.client.render.entity.feature
 
 import io.github.thebroccolibob.soulorigins.Soulorigins
 import io.github.thebroccolibob.soulorigins.entity.OwnableSkeleton
+import io.github.thebroccolibob.soulorigins.entity.isTamed
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.feature.FeatureRenderer
 import net.minecraft.client.render.entity.feature.FeatureRendererContext

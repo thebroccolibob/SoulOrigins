@@ -1,6 +1,8 @@
 package io.github.thebroccolibob.soulorigins.entity.ai.goal
 
 import io.github.thebroccolibob.soulorigins.entity.OwnableSkeleton
+import io.github.thebroccolibob.soulorigins.entity.isTamed
+import io.github.thebroccolibob.soulorigins.entity.owner
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.goal.TrackTargetGoal
@@ -20,7 +22,7 @@ class SkeletonTrackOwnerAttackerGoal(private val skeleton: AbstractSkeletonEntit
 
     override fun canStart(): Boolean {
         if (asOwnable.isTamed) {
-            val owner = asOwnable.getOwner()
+            val owner = asOwnable.owner
             if (owner == null) {
                 return false
             } else {
@@ -39,7 +41,7 @@ class SkeletonTrackOwnerAttackerGoal(private val skeleton: AbstractSkeletonEntit
 
     override fun start() {
         mob.target = this.attacker
-        val livingEntity = asOwnable.getOwner()
+        val livingEntity = asOwnable.owner
         if (livingEntity != null) {
             this.lastAttackedTime = livingEntity.lastAttackedTime
         }

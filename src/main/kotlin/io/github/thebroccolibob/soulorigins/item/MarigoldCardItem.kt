@@ -8,6 +8,7 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.mob.AbstractSkeletonEntity
+import net.minecraft.entity.mob.MobEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.StackReference
 import net.minecraft.item.*
@@ -23,6 +24,7 @@ import net.minecraft.util.ClickType
 import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
 import net.minecraft.world.World
+import io.github.thebroccolibob.soulorigins.entity.owner
 
 class MarigoldCardItem(settings: Settings) : Item(settings) {
     override fun useOnEntity(stack: ItemStack, user: PlayerEntity, entity: LivingEntity, hand: Hand): ActionResult {
@@ -55,7 +57,8 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
 
         val skeleton = EntityType.fromNbt(nbt.getCompound(ENTITY_NBT)).toNullable()?.spawnFromItemStack(world, stack, player, spawnPosition, SpawnReason.SPAWN_EGG, true, false)
 
-        (skeleton as OwnableSkeleton).owner = player
+        (skeleton as? OwnableSkeleton)?.owner = player
+        (skeleton as? MobEntity)?.setPersistent()
 
         nbt.remove(ENTITY_NBT)
         stack.removeCustomName()

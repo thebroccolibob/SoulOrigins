@@ -22,7 +22,7 @@ public abstract class RevengeGoalMixin extends TrackTargetGoal {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/ai/goal/RevengeGoal;canTrack(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/ai/TargetPredicate;)Z")
     )
     private boolean preventTeamAggro(RevengeGoal instance, LivingEntity livingEntity, TargetPredicate targetPredicate, Operation<Boolean> original) {
-        if (mob instanceof OwnableSkeleton selfSkeleton && livingEntity instanceof OwnableSkeleton targetSkeleton && selfSkeleton.getOwner() == targetSkeleton.getOwner())
+        if (mob instanceof OwnableSkeleton selfSkeleton && livingEntity instanceof OwnableSkeleton targetSkeleton && selfSkeleton.soulOrigins$getOwner() == targetSkeleton.soulOrigins$getOwner())
             return false;
 
         return original.call(instance, livingEntity, targetPredicate);

@@ -1,10 +1,12 @@
 package io.github.thebroccolibob.soulorigins.entity.ai.goal
 
 import io.github.thebroccolibob.soulorigins.entity.OwnableSkeleton
+import io.github.thebroccolibob.soulorigins.entity.isTamed
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.goal.TrackTargetGoal
 import net.minecraft.entity.mob.AbstractSkeletonEntity
+import io.github.thebroccolibob.soulorigins.entity.owner
 import java.util.*
 
 class SkeletonAttackWithOwnerGoal(private val skeleton: AbstractSkeletonEntity) : TrackTargetGoal(skeleton, false) {
