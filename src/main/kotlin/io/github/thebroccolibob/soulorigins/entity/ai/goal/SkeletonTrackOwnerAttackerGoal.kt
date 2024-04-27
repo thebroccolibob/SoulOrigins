@@ -13,16 +13,14 @@ class SkeletonTrackOwnerAttackerGoal(private val skeleton: AbstractSkeletonEntit
     private var attacker: LivingEntity? = null
     private var lastAttackedTime: Int = 0
 
-    private inline val asOwnable get() = skeleton as OwnableSkeleton
-
     init {
         this.controls = EnumSet.of(Control.TARGET)
     }
 
 
     override fun canStart(): Boolean {
-        if (asOwnable.isTamed) {
-            val owner = asOwnable.owner
+        if (skeleton.isTamed) {
+            val owner = skeleton.owner
             if (owner == null) {
                 return false
             } else {
@@ -41,7 +39,7 @@ class SkeletonTrackOwnerAttackerGoal(private val skeleton: AbstractSkeletonEntit
 
     override fun start() {
         mob.target = this.attacker
-        val livingEntity = asOwnable.owner
+        val livingEntity = skeleton.owner
         if (livingEntity != null) {
             this.lastAttackedTime = livingEntity.lastAttackedTime
         }

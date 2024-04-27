@@ -1,6 +1,5 @@
 package io.github.thebroccolibob.soulorigins.entity.ai.goal
 
-import io.github.thebroccolibob.soulorigins.entity.OwnableSkeleton
 import io.github.thebroccolibob.soulorigins.entity.owner
 import net.minecraft.block.LeavesBlock
 import net.minecraft.entity.LivingEntity
@@ -29,8 +28,6 @@ class SkeletonFollowOwnerGoal(
     private val navigation: EntityNavigation = skeleton.navigation
     private var updateCountdownTicks = 0
     private var oldWaterPathfindingPenalty = 0f
-    private inline val asOwnable
-        get() = skeleton as OwnableSkeleton
 
     init {
         this.controls = EnumSet.of(Control.MOVE, Control.LOOK)
@@ -38,7 +35,7 @@ class SkeletonFollowOwnerGoal(
     }
 
     override fun canStart(): Boolean {
-        val livingEntity = asOwnable.owner
+        val livingEntity = skeleton.owner
         if (livingEntity == null) {
             return false
         } else if (livingEntity.isSpectator) {

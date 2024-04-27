@@ -1,7 +1,6 @@
 package io.github.thebroccolibob.soulorigins.client.render.entity.feature
 
 import io.github.thebroccolibob.soulorigins.Soulorigins
-import io.github.thebroccolibob.soulorigins.entity.OwnableSkeleton
 import io.github.thebroccolibob.soulorigins.entity.isTamed
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.feature.FeatureRenderer
@@ -30,7 +29,7 @@ class SkeletonPaintFeatureRenderer(context: FeatureRendererContext<AbstractSkele
         headYaw: Float,
         headPitch: Float
     ) {
-        if ((skeletonEntity as OwnableSkeleton).isTamed && !skeletonEntity.isInvisible) {
+        if (skeletonEntity.isTamed && !skeletonEntity.isInvisible) {
             renderModel(this.contextModel, SKIN, matrices, vertexConsumers, light, skeletonEntity, 1.0f, 1.0f, 1.0f)
         }
     }
