@@ -1,14 +1,43 @@
 {
   "type": "origins:active_self",
-  "key": "key.origins.primary_active",
-  "condition": {
-    "type": "origins:sneaking",
-    "inverted": true
-  },
+  "key": "key.origins.secondary_active",
   "cooldown": 40,
   "hud_render": {
     "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png",
     "bar_index": 23
+  },
+  "condition": {
+    "type": "origins:or",
+    "conditions": [
+      {
+        "type": "apugli:key_pressed",
+        "key": {
+          "key": "key.forward",
+          "continuous": true
+        }
+      },
+      {
+        "type": "apugli:key_pressed",
+        "key": {
+          "key": "key.back",
+          "continuous": true
+        }
+      },
+      {
+        "type": "apugli:key_pressed",
+        "key": {
+          "key": "key.left",
+          "continuous": true
+        }
+      },
+      {
+        "type": "apugli:key_pressed",
+        "key": {
+          "key": "key.right",
+          "continuous": true
+        }
+      }
+    ]
   },
   "entity_action": {
     "type": "origins:and",
@@ -75,6 +104,21 @@
           "client": true,
           "space": "local_horizontal_normalized",
           "x": -1
+        }
+      },
+      
+      {
+        "type": "origins:grant_power",
+        "power": "soul-origins:wind/dash_active",
+        "source": "soul-origins:toggle"
+      },
+      {
+        "type": "origins:delay",
+        "ticks": 10,
+        "action": {
+          "type": "origins:revoke_power",
+          "power": "soul-origins:wind/dash_active",
+          "source": "soul-origins:toggle"
         }
       },
 

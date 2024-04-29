@@ -3,9 +3,7 @@
         "soul-origins:wind/dash",
         "soul-origins:wind/jump",
         "soul-origins:wind/float",
-        "soul-origins:wind/bar",
         "soul-origins:wind/shield",
-        "soul-origins:wind/disengage",
-        "soul-origins:wind/refill_bar"
+        "soul-origins:wind/disengage"
     ]
 }

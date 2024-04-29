@@ -1,20 +1,19 @@
 {
     "type": "origins:active_self",
-    "key": "key.origins.secondary_active",
+    "key": "key.origins.primary_active",
     "condition": {
         "type": "origins:and",
         "conditions": [
             {
-                "type": "origins:sneaking",
-                "inverted": true
-            },
-            {
-                "type": "origins:resource",
-                "resource": "soul-origins:wind/bar",
-                "comparison": ">=",
-                "compare_to": 1
+                "type": "origins:sneaking"
             }
         ]
+    },
+    "cooldown": 1200,
+    "hud_render": {
+        "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+        "bar_index": 8,
+        "should_render": true
     },
     "entity_action": {
         "type": "origins:and",
@@ -28,8 +27,8 @@
             {
                 "type": "origins:add_velocity",
                 "space": "local",
-                "y": 2,
-                "z": -1,
+                "y": 1,
+                "z": -2,
                 "set": true
             },
             {

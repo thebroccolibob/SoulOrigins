@@ -7,7 +7,8 @@
     "bar_index": 23
   },
   "condition": {
-    "type": "origins:sneaking"
+    "type": "origins:sneaking",
+    "inverted": true
   },
   "entity_action": {
     "type": "origins:and",
