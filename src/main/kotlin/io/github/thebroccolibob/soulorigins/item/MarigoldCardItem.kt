@@ -1,7 +1,17 @@
 package io.github.thebroccolibob.soulorigins.item
 
+import io.github.apace100.apoli.component.PowerHolderComponent
+import io.github.apace100.apoli.power.Power
+import io.github.apace100.apoli.power.PowerType
+import io.github.apace100.apoli.power.PowerTypeRegistry
+import io.github.apace100.apoli.power.PowerTypes
+import io.github.apace100.apoli.power.ResourcePower
+import io.github.apace100.apoli.power.VariableIntPower
+import io.github.apace100.apoli.power.factory.PowerFactory
+import io.github.apace100.apoli.util.ResourceOperation
 import io.github.thebroccolibob.soulorigins.*
 import io.github.thebroccolibob.soulorigins.entity.OwnableSkeleton
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator.Pack.Factory
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.EquipmentSlot
@@ -15,14 +25,15 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
 import net.minecraft.registry.tag.ItemTags
+import net.minecraft.resource.ResourceFactory
+import net.minecraft.resource.ResourceType
 import net.minecraft.screen.slot.Slot
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
-import net.minecraft.util.ActionResult
-import net.minecraft.util.ClickType
-import net.minecraft.util.Formatting
-import net.minecraft.util.Hand
+import net.minecraft.util.*
 import net.minecraft.world.World
+import javax.lang.model.type.TypeVariable
+import kotlin.Pair
 
 class MarigoldCardItem(settings: Settings) : Item(settings) {
     override fun useOnEntity(stack: ItemStack, user: PlayerEntity, entity: LivingEntity, hand: Hand): ActionResult {
@@ -38,7 +49,8 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
         entity.customName?.let(stack::setCustomName)
         entity.discard()
 
-        // mana refund
+        // mana refund :3
+        changeSoulMeter(2, user)
         return ActionResult.SUCCESS
     }
 
@@ -47,7 +59,9 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
         val nbt = stack.nbt
 
         if (nbt?.contains(ENTITY_NBT) != true) return ActionResult.PASS
+
         // mana check fails return
+        if (getSoulMeter(player!!) < 2) return  ActionResult.PASS
 
         if (world !is ServerWorld) return ActionResult.SUCCESS
 
@@ -60,7 +74,8 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
         nbt.remove(ENTITY_NBT)
         stack.removeCustomName()
 
-        // mana expense
+        // mana expense >:3
+        changeSoulMeter(-2, player!!)
         return ActionResult.CONSUME
 
     }
@@ -164,6 +179,25 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
             ).firstOrNull { (list, index) ->
                 !list.getCompound(index).isEmpty
             }
+        }
+        fun changeSoulMeter(change: Int, entity: PlayerEntity) {
+            val component = PowerHolderComponent.KEY[entity]
+            val powerType: PowerType<*> = PowerTypeRegistry.get(Identifier("soul-origins", "soul_meter"))
+            val p: Power = component.getPower(powerType)
+            if (p is VariableIntPower) {
+                val newValue: Int = p.value + change
+                p.setValue(newValue)
+                PowerHolderComponent.syncPower(entity, powerType)
+            }
+        }
+        fun getSoulMeter(entity: PlayerEntity): Int {
+            val component = PowerHolderComponent.KEY[entity]
+            val powerType: PowerType<*> = PowerTypeRegistry.get(Identifier("soul-origins", "soul_meter"))
+            val p: Power = component.getPower(powerType)
+            if (p is VariableIntPower) {
+                return p.value
+            }
+            return 0
         }
     }
 }
