@@ -14,11 +14,70 @@
     "type": "origins:and",
     "actions": [
       {
-        "type": "apoli:add_velocity",
-        "client": true,
-        "space": "local",
-        "z": 1
+        "type": "origins:if_else",
+        "condition": {
+          "type": "apugli:key_pressed",
+          "key": {
+            "key": "key.forward",
+            "continuous": true
+          }
+        },
+        "if_action": {
+          "type": "apoli:add_velocity",
+          "client": true,
+          "space": "local_horizontal_normalized",
+          "z": 1
+        }
       },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "apugli:key_pressed",
+          "key": {
+            "key": "key.back",
+            "continuous": true
+          }
+        },
+        "if_action": {
+          "type": "apoli:add_velocity",
+          "client": true,
+          "space": "local_horizontal_normalized",
+          "z": -1
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "apugli:key_pressed",
+          "key": {
+            "key": "key.left",
+            "continuous": true
+          }
+        },
+        "if_action": {
+          "type": "apoli:add_velocity",
+          "client": true,
+          "space": "local_horizontal_normalized",
+          "x": 1
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "apugli:key_pressed",
+          "key": {
+            "key": "key.right",
+            "continuous": true
+          }
+        },
+        "if_action": {
+          "type": "apoli:add_velocity",
+          "client": true,
+          "space": "local_horizontal_normalized",
+          "x": -1
+        }
+      },
+
       {
         "type": "origins:play_sound",
         "category": "players",
