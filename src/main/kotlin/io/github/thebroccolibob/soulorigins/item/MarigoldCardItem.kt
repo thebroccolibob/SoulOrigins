@@ -10,6 +10,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.mob.AbstractSkeletonEntity
 import net.minecraft.entity.mob.MobEntity
+import net.minecraft.entity.mob.SkeletonHorseEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.StackReference
 import net.minecraft.item.*
@@ -30,18 +31,30 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
     override fun useOnEntity(stack: ItemStack, user: PlayerEntity, entity: LivingEntity, hand: Hand): ActionResult {
         if (stack.hasEntity) return ActionResult.PASS
 
-        if (entity !is AbstractSkeletonEntity) return ActionResult.PASS
+        val targetEntity = (entity as? AbstractSkeletonEntity) ?: (entity.firstPassenger as? AbstractSkeletonEntity) ?: return ActionResult.PASS
 
         stack.orCreateNbt.put(ENTITY_NBT, NbtCompound().apply {
-            entity.saveSelfNbt(this)
+            targetEntity.saveSelfNbt(this)
             remove("Pos")
             remove("UUID")
         })
-        entity.customName?.let(stack::setCustomName)
-        entity.discard()
+
+        (targetEntity.vehicle as? SkeletonHorseEntity)?.let {
+            stack.orCreateNbt.put(VEHICLE_NBT, NbtCompound().apply {
+                it.saveSelfNbt(this)
+                remove("Pos")
+                remove("UUID")
+            })
+            it.discard()
+        }
+
+        targetEntity.customName?.let(stack::setCustomName)
+        targetEntity.discard()
 
         // mana refund :3
         user.soulMeter += 2
+        user.syncSoulMeter()
+
         return ActionResult.SUCCESS
     }
 
@@ -51,23 +64,33 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
 
         if (nbt?.contains(ENTITY_NBT) != true) return ActionResult.PASS
 
+        val soulMeter = player?.soulMeter
+
         // mana check fails return
-        if ((player?.soulMeter ?: 0) < 2) return  ActionResult.PASS
+        if ((soulMeter?.value ?: 0) < 2) return  ActionResult.PASS
 
         if (world !is ServerWorld) return ActionResult.SUCCESS
 
         val spawnPosition = if (world.getBlockState(blockPos).getCollisionShape(world, blockPos).isEmpty) blockPos else blockPos.offset(side)
 
         val skeleton = EntityType.fromNbt(nbt.getCompound(ENTITY_NBT)).toNullable()?.spawnFromItemStack(world, stack, player, spawnPosition, SpawnReason.SPAWN_EGG, true, false)
+        if (nbt.contains(VEHICLE_NBT)) {
+            nbt.put(ENTITY_NBT, nbt.getCompound(VEHICLE_NBT))
+            val vehicle = EntityType.fromNbt(nbt.getCompound(ENTITY_NBT)).toNullable()?.spawnFromItemStack(world, stack, player, spawnPosition, SpawnReason.SPAWN_EGG, true, false)
+            skeleton?.startRiding(vehicle)
+        }
 
         (skeleton as? OwnableSkeleton)?.owner = player
         (skeleton as? MobEntity)?.setPersistent()
 
         nbt.remove(ENTITY_NBT)
+        nbt.remove(VEHICLE_NBT)
         stack.removeCustomName()
 
         // mana expense >:3
-        player?.apply { soulMeter -= 2 }
+        soulMeter -= 2
+        player?.syncSoulMeter()
+
         return ActionResult.CONSUME
 
     }
@@ -88,6 +111,8 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
         }
 
         EntityType.fromNbt(entityNbt).toNullable()?.name?.let(tooltip::add)
+        stack.nbt?.getCompound(VEHICLE_NBT)?.let { EntityType.fromNbt(it).toNullable() }?.name?.let(tooltip::add)
+
         val armorItems = entityNbt.getList("ArmorItems", NbtCompound.COMPOUND_TYPE)
         val handItems = entityNbt.getList("HandItems", NbtCompound.COMPOUND_TYPE)
         (handItems + armorItems).forEach {
@@ -124,6 +149,7 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
 
     companion object {
         const val ENTITY_NBT = "EntityTag"
+        const val VEHICLE_NBT = "VehicleEntityTag"
 
         private fun ItemStack.getCreateArmorItems() =
             orCreateNbt.getOrCreateCompound(ENTITY_NBT).getOrCreateList("ArmorItems", NbtElement.COMPOUND_TYPE)
