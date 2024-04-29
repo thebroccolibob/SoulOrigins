@@ -4,14 +4,9 @@ import io.github.apace100.apoli.component.PowerHolderComponent
 import io.github.apace100.apoli.power.Power
 import io.github.apace100.apoli.power.PowerType
 import io.github.apace100.apoli.power.PowerTypeRegistry
-import io.github.apace100.apoli.power.PowerTypes
-import io.github.apace100.apoli.power.ResourcePower
 import io.github.apace100.apoli.power.VariableIntPower
-import io.github.apace100.apoli.power.factory.PowerFactory
-import io.github.apace100.apoli.util.ResourceOperation
 import io.github.thebroccolibob.soulorigins.*
 import io.github.thebroccolibob.soulorigins.entity.OwnableSkeleton
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator.Pack.Factory
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.EquipmentSlot
@@ -26,15 +21,12 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
 import net.minecraft.registry.tag.ItemTags
-import net.minecraft.resource.ResourceFactory
-import net.minecraft.resource.ResourceType
 import net.minecraft.screen.slot.Slot
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import net.minecraft.util.*
 import net.minecraft.world.World
 import io.github.thebroccolibob.soulorigins.entity.owner
-import javax.lang.model.type.TypeVariable
 import kotlin.Pair
 
 class MarigoldCardItem(settings: Settings) : Item(settings) {
@@ -78,7 +70,7 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
         stack.removeCustomName()
 
         // mana expense >:3
-        changeSoulMeter(-2, player!!)
+        changeSoulMeter(-2, player)
         return ActionResult.CONSUME
 
     }
