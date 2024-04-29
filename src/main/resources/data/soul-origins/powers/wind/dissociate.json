@@ -1,0 +1,59 @@
+{
+    "type": "origins:active_self",
+    "key": "key.origins.secondary_active",
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:sneaking",
+                "inverted": true
+            },
+            {
+                "type": "origins:resource",
+                "resource": "soul-origins:wind/bar",
+                "comparison": ">=",
+                "compare_to": 1
+            },
+            {
+                "type": "origins:power_active",
+                "inverted": true,
+                "power": "soul-origins:wind/dissociate_active"
+            }
+        ]
+    },
+    "entity_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.wither.ambient",
+                "pitch": 0.7,
+                "volume": 0.5
+            },
+            {
+                "type": "origins:add_velocity",
+                "space": "world",
+                "y": 16,
+                "set": true
+            },
+            {
+                "type": "origins:grant_power",
+                "power": "soul-origins:wind/dissociate_active",
+                "source": "soul-origins:toggle"
+            },
+            {
+                "type": "origins:change_resource",
+                "resource": "soul-origins:wind/bar",
+                "operation": "add",
+                "change": -1
+            },
+            {
+              "type": "origins:spawn_particles",
+              "count": 32,
+              "particle": "minecraft:cloud",
+              "speed": 0.1
+            }
+
+        ]
+    }
+}

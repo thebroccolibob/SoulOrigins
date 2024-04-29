@@ -1,0 +1,12 @@
+{
+    "type": "origins:modify_falling",
+    "velocity": 0.02,
+    "take_fall_damage": false,
+    "condition": {
+        "type": "apugli:key_pressed",
+        "key": {
+            "key": "key.jump",
+            "continuous": true
+        }
+    }
+}

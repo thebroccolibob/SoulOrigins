@@ -1,0 +1,65 @@
+{
+    "type": "origins:active_self",
+    "key": "key.origins.secondary_active",
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:sneaking"
+            },
+            {
+                "type": "origins:resource",
+                "resource": "soul-origins:wind/bar",
+                "comparison": ">=",
+                "compare_to": 1
+            },
+            {
+                "type": "origins:power_active",
+                "inverted": true,
+                "power": "soul-origins:wind/shield_active"
+            }
+        ]
+    },
+    "entity_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "origins:grant_power",
+                "power": "soul-origins:wind/shield_active",
+                "source": "soul-origins:toggle"
+            },
+            {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.wither.ambient",
+                "pitch": 0.5,
+                "volume": 0.5
+            },
+            {
+                "type": "origins:delay",
+                "ticks": 600,
+                "action": {
+                    "type": "origins:and",
+                    "actions": [
+                        {
+                            "type": "origins:revoke_power",
+                            "power": "soul-origins:wind/shield_active",
+                            "source": "soul-origins:toggle"
+                        },
+                        {
+                            "type": "origins:play_sound",
+                            "sound": "minecraft:entity.wither.death",
+                            "pitch": 0.5,
+                            "volume": 0.5
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "origins:change_resource",
+                "resource": "soul-origins:wind/bar",
+                "operation": "add",
+                "change": -1
+            }
+        ]
+    }
+}
