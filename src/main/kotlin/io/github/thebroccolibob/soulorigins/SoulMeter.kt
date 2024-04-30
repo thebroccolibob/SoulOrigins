@@ -1,30 +1,28 @@
 package io.github.thebroccolibob.soulorigins
 
 import io.github.apace100.apoli.component.PowerHolderComponent
-import io.github.apace100.apoli.power.Power
 import io.github.apace100.apoli.power.PowerType
 import io.github.apace100.apoli.power.PowerTypeRegistry
 import io.github.apace100.apoli.power.VariableIntPower
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.util.Identifier
 
-var PlayerEntity.soulMeter: Int
+@Suppress("UNCHECKED_CAST")
+val soulMeterType
+    get() = PowerTypeRegistry.get(Identifier("soul-origins", "soul_meter")) as PowerType<VariableIntPower>
+
+val PlayerEntity.soulMeter: VariableIntPower
     get() {
-        val component = PowerHolderComponent.KEY[this]
-        val powerType: PowerType<*> = PowerTypeRegistry.get(Identifier("soul-origins", "soul_meter"))
-        val p: Power = component.getPower(powerType)
-        if (p is VariableIntPower) {
-            return p.value
-        }
-        return 0
+        return PowerHolderComponent.KEY[this].getPower(soulMeterType)
     }
-    set(value) {
-        val component = PowerHolderComponent.KEY[this]
-        val powerType: PowerType<*> = PowerTypeRegistry.get(Identifier("soul-origins", "soul_meter"))
-        val p: Power = component.getPower(powerType)
-        if (p is VariableIntPower) {
-            val newValue: Int = p.value + value
-            p.setValue(newValue)
-            PowerHolderComponent.syncPower(this, powerType)
-        }
-    }
+
+operator fun VariableIntPower?.plusAssign(change: Int) {
+    this?.setValue(value + change)
+}
+operator fun VariableIntPower?.minusAssign(change: Int) {
+    this?.setValue(value - change)
+}
+
+fun PlayerEntity.syncSoulMeter() {
+    PowerHolderComponent.syncPower(this, soulMeterType)
+}
