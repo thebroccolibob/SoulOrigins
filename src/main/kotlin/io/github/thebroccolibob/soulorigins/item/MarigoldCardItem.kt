@@ -2,6 +2,7 @@ package io.github.thebroccolibob.soulorigins.item
 
 import io.github.thebroccolibob.soulorigins.*
 import io.github.thebroccolibob.soulorigins.entity.OwnableSkeleton
+import io.github.thebroccolibob.soulorigins.entity.isTamed
 import io.github.thebroccolibob.soulorigins.entity.owner
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.EntityType
@@ -52,8 +53,10 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
         targetEntity.discard()
 
         // mana refund :3
-        user.soulMeter += 2
-        user.syncSoulMeter()
+        if (targetEntity.isTamed) {
+            user.soulMeter += 2
+            user.syncSoulMeter()
+        }
 
         return ActionResult.SUCCESS
     }
