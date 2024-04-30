@@ -78,6 +78,8 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
 
         val skeleton = EntityType.fromNbt(nbt.getCompound(ENTITY_NBT)).toNullable()?.spawnFromItemStack(world, stack, player, spawnPosition, SpawnReason.SPAWN_EGG, true, false)
         if (nbt.contains(VEHICLE_NBT)) {
+            // This is an ugly hack
+            // ...but it works!
             nbt.put(ENTITY_NBT, nbt.getCompound(VEHICLE_NBT))
             val vehicle = EntityType.fromNbt(nbt.getCompound(ENTITY_NBT)).toNullable()?.spawnFromItemStack(world, stack, player, spawnPosition, SpawnReason.SPAWN_EGG, true, false)
             skeleton?.startRiding(vehicle)
