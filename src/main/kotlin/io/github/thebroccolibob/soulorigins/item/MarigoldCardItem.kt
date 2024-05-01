@@ -2,6 +2,7 @@ package io.github.thebroccolibob.soulorigins.item
 
 import io.github.thebroccolibob.soulorigins.*
 import io.github.thebroccolibob.soulorigins.entity.OwnableSkeleton
+import io.github.thebroccolibob.soulorigins.entity.owner
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.EquipmentSlot
@@ -24,7 +25,6 @@ import net.minecraft.util.ClickType
 import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
 import net.minecraft.world.World
-import io.github.thebroccolibob.soulorigins.entity.owner
 
 class MarigoldCardItem(settings: Settings) : Item(settings) {
     override fun useOnEntity(stack: ItemStack, user: PlayerEntity, entity: LivingEntity, hand: Hand): ActionResult {
@@ -40,7 +40,8 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
         entity.customName?.let(stack::setCustomName)
         entity.discard()
 
-        // mana refund
+        // mana refund :3
+        user.soulMeter += 2
         return ActionResult.SUCCESS
     }
 
@@ -49,7 +50,9 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
         val nbt = stack.nbt
 
         if (nbt?.contains(ENTITY_NBT) != true) return ActionResult.PASS
+
         // mana check fails return
+        if ((player?.soulMeter ?: 0) < 2) return  ActionResult.PASS
 
         if (world !is ServerWorld) return ActionResult.SUCCESS
 
@@ -63,7 +66,8 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
         nbt.remove(ENTITY_NBT)
         stack.removeCustomName()
 
-        // mana expense
+        // mana expense >:3
+        player?.apply { soulMeter -= 2 }
         return ActionResult.CONSUME
 
     }

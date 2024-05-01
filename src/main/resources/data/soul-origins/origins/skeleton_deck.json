@@ -9,7 +9,6 @@
     "powers": [
         "soul-origins:skeleton_friend",
         "soul-origins:soul_meter",
-        "soul-origins:soul_extract",
-        "soul-origins:test"
+        "soul-origins:soul_extract"
     ]
 }
