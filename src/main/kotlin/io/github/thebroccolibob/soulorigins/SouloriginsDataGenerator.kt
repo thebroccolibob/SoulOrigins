@@ -8,12 +8,14 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.data.client.BlockStateModelGenerator
 import net.minecraft.data.client.ItemModelGenerator
+import io.github.thebroccolibob.soulorigins.datagen.PowerGenerator
 
 object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 	override fun onInitializeDataGenerator(fabricDataGenerator: FabricDataGenerator) {
 		fabricDataGenerator.createPack().apply {
 			addProvider(::ModelGenerator)
 			addProvider(::LangGenerator)
+			addProvider(::PowerGenerator)
 		}
 	}
 
