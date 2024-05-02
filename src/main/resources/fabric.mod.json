@@ -29,7 +29,7 @@
 		],
 		"fabric-datagen": [
 			{
-				"value": "io.github.thebroccolibob.soulorigins.SouloriginsDataGenerator",
+				"value": "io.github.thebroccolibob.soulorigins.datagen.SouloriginsDataGenerator",
 				"adapter": "kotlin"
 			}
 		]
