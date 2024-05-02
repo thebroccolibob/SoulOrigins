@@ -27,12 +27,35 @@ class JsonObjectBuilder(val jsonObject: JsonObject) {
         jsonObject.add(this, value)
     }
 
+    infix fun String.to(value: JsonArray) {
+        jsonObject.add(this, value)
+    }
+
     infix fun String.to(value: Nothing?) {
         jsonObject.add(this, JsonNull.INSTANCE)
     }
 
     inline infix fun String.to(valueInit: JsonObjectBuilder.() -> Unit) {
         to(JsonObject(valueInit))
+    }
+
+    infix fun String.to(array: Iterable<JsonElement>) {
+        this to array.toJson()
+    }
+
+    @JvmName("toStringArray")
+    infix fun String.to(array: Iterable<String>) {
+        this to array.toJson()
+    }
+
+    @JvmName("toNumberArray")
+    infix fun String.to(array: Iterable<Number>) {
+        this to array.toJson()
+    }
+
+    @JvmName("toBooleanArray")
+    infix fun String.to(array: Iterable<Boolean>) {
+        this to array.toJson()
     }
 
     val String.to
