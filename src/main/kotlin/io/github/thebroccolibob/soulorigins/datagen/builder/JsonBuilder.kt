@@ -6,6 +6,11 @@ import com.google.gson.JsonNull
 import com.google.gson.JsonObject
 
 class JsonObjectBuilder(val jsonObject: JsonObject) {
+    @Deprecated("Second value is not a JSON element.")
+    infix fun String.to (other: Any) {
+
+    }
+
     infix fun String.to(value: String) {
         jsonObject.addProperty(this, value)
     }
@@ -74,4 +79,32 @@ class JsonObjectBuilder(val jsonObject: JsonObject) {
 
 inline fun JsonObject(init: JsonObjectBuilder.() -> Unit): JsonObject {
     return JsonObjectBuilder(JsonObject()).apply(init).jsonObject
+}
+
+fun JsonArray(vararg jsonInit: JsonObjectBuilder.() -> Unit) = jsonInit.map(::JsonObject).toJson()
+
+fun JsonArray(vararg elements: JsonElement) = elements.asIterable().toJson()
+fun JsonArray(vararg elements: String) = elements.asIterable().toJson()
+fun JsonArray(vararg elements: Number) = elements.asIterable().toJson()
+fun JsonArray(vararg elements: Boolean) = elements.asIterable().toJson()
+
+operator fun JsonArray.plus(other: JsonArray) = plus(other as Iterable<JsonElement>).toJson()
+
+fun Iterable<JsonElement>.toJson() = JsonArray().apply {
+    this@toJson.forEach(::add)
+}
+
+@JvmName("toJsonStrings")
+fun Iterable<String>.toJson() = JsonArray().apply {
+    this@toJson.forEach(::add)
+}
+
+@JvmName("toJsonNumbers")
+fun Iterable<Number>.toJson() = JsonArray().apply {
+    this@toJson.forEach(::add)
+}
+
+@JvmName("toJsonBooleans")
+fun Iterable<Boolean>.toJson() = JsonArray().apply {
+    this@toJson.forEach(::add)
 }
