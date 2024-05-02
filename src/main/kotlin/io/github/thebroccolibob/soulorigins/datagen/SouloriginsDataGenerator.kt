@@ -1,4 +1,4 @@
-package io.github.thebroccolibob.soulorigins
+package io.github.thebroccolibob.soulorigins.datagen
 
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.data.client.BlockStateModelGenerator
 import net.minecraft.data.client.ItemModelGenerator
-import io.github.thebroccolibob.soulorigins.datagen.PowerGenerator
 
 object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 	override fun onInitializeDataGenerator(fabricDataGenerator: FabricDataGenerator) {

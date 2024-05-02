@@ -1,5 +1,6 @@
 package io.github.thebroccolibob.soulorigins.datagen
 
+import io.github.thebroccolibob.soulorigins.datagen.builder.ArbitraryJsonProvider
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 
 class PowerGenerator(dataOutput: FabricDataOutput) : ArbitraryJsonProvider(dataOutput, "powers", "Origins Powers") {

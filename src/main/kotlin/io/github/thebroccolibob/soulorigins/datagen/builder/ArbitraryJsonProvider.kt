@@ -1,5 +1,6 @@
-package io.github.thebroccolibob.soulorigins.datagen
+package io.github.thebroccolibob.soulorigins.datagen.builder
 
+import com.google.gson.JsonObject
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.minecraft.data.DataOutput
 import net.minecraft.data.DataProvider
@@ -18,11 +19,15 @@ abstract class ArbitraryJsonProvider(val dataOutput: FabricDataOutput, val direc
 
     override fun getName() = name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 
-    inner class Writer(val writer: DataWriter) {
+    inner class Writer(private val writer: DataWriter) {
         val entries = mutableListOf<CompletableFuture<*>>()
 
+        fun json(path: String, jsonObject: JsonObject) {
+            entries.add(DataProvider.writeToPath(writer, jsonObject, dataOutput.getResolver(DataOutput.OutputType.DATA_PACK, directoryName).resolveJson(Identifier(dataOutput.modId, path))))
+        }
+
         inline fun json(path: String, jsonInit: JsonObjectBuilder.() -> Unit) {
-            entries.add(DataProvider.writeToPath(writer, JsonObject(jsonInit), dataOutput.getResolver(DataOutput.OutputType.DATA_PACK, directoryName).resolveJson(Identifier(dataOutput.modId, path))))
+            json(path, JsonObject(jsonInit))
         }
     }
 }
