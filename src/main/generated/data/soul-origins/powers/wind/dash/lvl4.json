@@ -50,6 +50,31 @@
       "type": "origins:and",
       "actions": [
         {
+          "type": "origins:grant_power",
+          "power": "soul-origins:wind/dash_active",
+          "source": "soul-origins:toggle"
+        },
+        {
+          "type": "origins:delay",
+          "action": {
+            "type": "origins:revoke_power",
+            "power": "soul-origins:wind/dash_active",
+            "source": "soul-origins:toggle"
+          },
+          "ticks": 10
+        },
+        {
+          "type": "origins:play_sound",
+          "category": "players",
+          "sound": "minecraft:entity.player.attack.sweep"
+        },
+        {
+          "type": "origins:spawn_particles",
+          "count": 16,
+          "particle": "minecraft:cloud",
+          "speed": 0.05
+        },
+        {
           "type": "origins:if_else",
           "condition": {
             "type": "apugli:key_pressed",
@@ -117,31 +142,6 @@
           "type": "soul-origins:change_cooldown",
           "change": 100,
           "cooldown": "soul-origins:wind/dash/lvl4_cooldown"
-        },
-        {
-          "type": "origins:grant_power",
-          "power": "soul-origins:wind/dash_active",
-          "source": "soul-origins:toggle"
-        },
-        {
-          "type": "origins:delay",
-          "action": {
-            "type": "origins:revoke_power",
-            "power": "soul-origins:wind/dash_active",
-            "source": "soul-origins:toggle"
-          },
-          "ticks": 10
-        },
-        {
-          "type": "origins:play_sound",
-          "category": "players",
-          "sound": "minecraft:entity.player.attack.sweep"
-        },
-        {
-          "type": "origins:spawn_particles",
-          "count": 16,
-          "particle": "minecraft:cloud",
-          "speed": 0.05
         }
       ]
     },

@@ -26,7 +26,7 @@ abstract class ArbitraryJsonProvider(val dataOutput: FabricDataOutput, val direc
             entries.add(DataProvider.writeToPath(writer, jsonObject, dataOutput.getResolver(DataOutput.OutputType.DATA_PACK, directoryName).resolveJson(Identifier(dataOutput.modId, path))))
         }
 
-        inline fun json(path: String, jsonInit: JsonObjectBuilder.() -> Unit) {
+        inline fun json(path: String, jsonInit: JsonInit) {
             json(path, JsonObject(jsonInit))
         }
     }
