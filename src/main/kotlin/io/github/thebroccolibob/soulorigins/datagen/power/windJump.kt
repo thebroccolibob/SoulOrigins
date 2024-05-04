@@ -1,6 +1,6 @@
 package io.github.thebroccolibob.soulorigins.datagen.power
 
-import io.github.thebroccolibob.soulorigins.datagen.lib.ArbitraryJsonProvider
+import io.github.thebroccolibob.soulorigins.datagen.lib.ArbitraryResourceProvider
 import io.github.thebroccolibob.soulorigins.datagen.lib.listOfJson
 
 fun windJump(id: String, strength: Double, recharge: Int, charges: Int) = multiCooldown(
@@ -30,7 +30,7 @@ fun windJump(id: String, strength: Double, recharge: Int, charges: Int) = multiC
     )
 )
 
-fun ArbitraryJsonProvider.Writer.jsonWindJump(level: Int, strength: Double, recharge: Int, charges: Int) {
+fun ArbitraryResourceProvider.Writer.jsonWindJump(level: Int, strength: Double, recharge: Int, charges: Int) {
     val path = "wind/jump/lvl$level"
     json(path, windJump(path, strength, recharge, charges))
 }

@@ -1,6 +1,6 @@
 package io.github.thebroccolibob.soulorigins.datagen.power
 
-import io.github.thebroccolibob.soulorigins.datagen.lib.ArbitraryJsonProvider
+import io.github.thebroccolibob.soulorigins.datagen.lib.ArbitraryResourceProvider
 import io.github.thebroccolibob.soulorigins.datagen.lib.JsonObject
 import io.github.thebroccolibob.soulorigins.datagen.lib.listOfJson
 
@@ -73,7 +73,7 @@ fun windDash(id: String, strength: Double, recharge: Int, charges: Int) = multiC
     )
 )
 
-fun ArbitraryJsonProvider.Writer.jsonWindDash(level: Int, strength: Double, recharge: Int, charges: Int) {
+fun ArbitraryResourceProvider.Writer.jsonWindDash(level: Int, strength: Double, recharge: Int, charges: Int) {
     val path = "wind/dash/lvl$level"
     json(path, windDash(path, strength, recharge, charges))
 }

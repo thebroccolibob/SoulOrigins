@@ -1,10 +1,10 @@
 package io.github.thebroccolibob.soulorigins.datagen.power
 
-import io.github.thebroccolibob.soulorigins.datagen.lib.ArbitraryJsonProvider
+import io.github.thebroccolibob.soulorigins.datagen.lib.ArbitraryResourceProvider
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 
-class PowerGenerator(dataOutput: FabricDataOutput) : ArbitraryJsonProvider(dataOutput, "powers", "Powers") {
-    override fun Writer.generateJsons() {
+class PowerGenerator(dataOutput: FabricDataOutput) : ArbitraryResourceProvider(dataOutput, "powers", "Powers") {
+    override fun Writer.generateResources() {
         jsonWindDash(1, 1.0, 200, 1)
         jsonWindDash(2, 1.0, 140, 1)
         jsonWindDash(3, 1.0, 140, 2)

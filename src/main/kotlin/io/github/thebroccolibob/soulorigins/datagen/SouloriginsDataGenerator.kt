@@ -1,6 +1,7 @@
 package io.github.thebroccolibob.soulorigins.datagen
 
 import io.github.thebroccolibob.soulorigins.datagen.power.PowerGenerator
+import io.github.thebroccolibob.soulorigins.datagen.power.UpgradeFunctionGenerator
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
@@ -16,6 +17,7 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			addProvider(::ModelGenerator)
 			addProvider(::LangGenerator)
 			addProvider(::PowerGenerator)
+			addProvider(::UpgradeFunctionGenerator)
 		}
 	}
 
