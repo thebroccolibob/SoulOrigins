@@ -1,9 +1,9 @@
 package io.github.thebroccolibob.soulorigins.datagen.power
 
 import com.google.gson.JsonObject
-import io.github.thebroccolibob.soulorigins.datagen.builder.JsonObject
+import io.github.thebroccolibob.soulorigins.datagen.lib.JsonObject
 
-fun multiCooldown(id: String, recharge: Int, charges: Int, otherConditions: Iterable<JsonObject> = emptyList(), otherActions: Iterable<JsonObject> = emptyList()) = JsonObject {
+fun multiCooldown(id: String, key: String, recharge: Int, charges: Int, otherConditions: Iterable<JsonObject> = emptyList(), otherActions: Iterable<JsonObject> = emptyList()) = JsonObject {
     "type" to "origins:multiple"
     "cooldown" to {
         "type" to "origins:cooldown"
@@ -15,7 +15,7 @@ fun multiCooldown(id: String, recharge: Int, charges: Int, otherConditions: Iter
     }
     "activate" to {
         "type" to "origins:active_self"
-        "key" to "key.origins.secondary_active"
+        "key" to key
         "condition" to {
             "type" to "origins:and"
             "conditions" to

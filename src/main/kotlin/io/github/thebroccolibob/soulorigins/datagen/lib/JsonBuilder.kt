@@ -1,4 +1,4 @@
-package io.github.thebroccolibob.soulorigins.datagen.builder
+package io.github.thebroccolibob.soulorigins.datagen.lib
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonElement

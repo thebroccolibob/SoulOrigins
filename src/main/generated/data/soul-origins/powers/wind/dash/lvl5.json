@@ -50,6 +50,70 @@
       "type": "origins:and",
       "actions": [
         {
+          "type": "origins:if_else",
+          "condition": {
+            "type": "apugli:key_pressed",
+            "key": {
+              "continuous": true,
+              "key": "key.forward"
+            }
+          },
+          "if_action": {
+            "type": "apoli:add_velocity",
+            "client": true,
+            "space": "local_horizontal_normalized",
+            "z": 2.0
+          }
+        },
+        {
+          "type": "origins:if_else",
+          "condition": {
+            "type": "apugli:key_pressed",
+            "key": {
+              "continuous": true,
+              "key": "key.back"
+            }
+          },
+          "if_action": {
+            "type": "apoli:add_velocity",
+            "client": true,
+            "space": "local_horizontal_normalized",
+            "z": -2.0
+          }
+        },
+        {
+          "type": "origins:if_else",
+          "condition": {
+            "type": "apugli:key_pressed",
+            "key": {
+              "continuous": true,
+              "key": "key.left"
+            }
+          },
+          "if_action": {
+            "type": "apoli:add_velocity",
+            "client": true,
+            "space": "local_horizontal_normalized",
+            "x": 2.0
+          }
+        },
+        {
+          "type": "origins:if_else",
+          "condition": {
+            "type": "apugli:key_pressed",
+            "key": {
+              "continuous": true,
+              "key": "key.right"
+            }
+          },
+          "if_action": {
+            "type": "apoli:add_velocity",
+            "client": true,
+            "space": "local_horizontal_normalized",
+            "x": -2.0
+          }
+        },
+        {
           "type": "origins:grant_power",
           "power": "soul-origins:wind/dash_active",
           "source": "soul-origins:toggle"
@@ -73,70 +137,6 @@
           "count": 16,
           "particle": "minecraft:cloud",
           "speed": 0.05
-        },
-        {
-          "type": "origins:if_else",
-          "condition": {
-            "type": "apugli:key_pressed",
-            "key": {
-              "continuous": true,
-              "key": "key.forward"
-            }
-          },
-          "if_action": {
-            "type": "apoli:add_velocity",
-            "client": true,
-            "space": "local_horizontal_normalized",
-            "z": 1.5
-          }
-        },
-        {
-          "type": "origins:if_else",
-          "condition": {
-            "type": "apugli:key_pressed",
-            "key": {
-              "continuous": true,
-              "key": "key.back"
-            }
-          },
-          "if_action": {
-            "type": "apoli:add_velocity",
-            "client": true,
-            "space": "local_horizontal_normalized",
-            "z": -1.5
-          }
-        },
-        {
-          "type": "origins:if_else",
-          "condition": {
-            "type": "apugli:key_pressed",
-            "key": {
-              "continuous": true,
-              "key": "key.left"
-            }
-          },
-          "if_action": {
-            "type": "apoli:add_velocity",
-            "client": true,
-            "space": "local_horizontal_normalized",
-            "x": 1.5
-          }
-        },
-        {
-          "type": "origins:if_else",
-          "condition": {
-            "type": "apugli:key_pressed",
-            "key": {
-              "continuous": true,
-              "key": "key.right"
-            }
-          },
-          "if_action": {
-            "type": "apoli:add_velocity",
-            "client": true,
-            "space": "local_horizontal_normalized",
-            "x": -1.5
-          }
         },
         {
           "type": "soul-origins:change_cooldown",
