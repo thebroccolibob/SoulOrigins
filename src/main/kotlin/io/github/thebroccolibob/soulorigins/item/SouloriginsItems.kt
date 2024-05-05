@@ -11,7 +11,7 @@ import net.minecraft.util.Rarity
 object SouloriginsItems {
     private fun register(id: String, item: Item) = Registry.register(Registries.ITEM, Identifier(Soulorigins.MOD_ID, id), item)
 
-    val MARIGOLD_CARD = register("marigold_card", MarigoldCardItem(FabricItemSettings {
+    val MARIGOLD_CARD: Item = register("marigold_card", MarigoldCardItem(FabricItemSettings {
         maxCount(1)
         rarity(Rarity.UNCOMMON)
     }))

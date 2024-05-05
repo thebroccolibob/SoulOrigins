@@ -27,7 +27,7 @@ import java.util.UUID;
 public abstract class AbstractSkeletonEntityMixin extends HostileEntity implements OwnableSkeleton {
     @Unique
 	@SuppressWarnings("WrongEntityDataParameterClass")
-	private static final TrackedData<Optional<UUID>> OWNER_UUID = DataTracker.registerData(AbstractSkeletonEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);;
+	private static final TrackedData<Optional<UUID>> OWNER_UUID = DataTracker.registerData(AbstractSkeletonEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
 
 	protected AbstractSkeletonEntityMixin(EntityType<? extends HostileEntity> entityType, World world) {
 		super(entityType, world);
