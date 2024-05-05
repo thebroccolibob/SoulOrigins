@@ -1,0 +1,57 @@
+{
+    "type": "origins:multiple",
+    "swirl": {
+        "type": "apugli:energy_swirl",
+        "texture_location": "minecraft:textures/entity/wither/wither_armor.png",
+        "speed": 0.05,
+        "condition": {
+            "type": "origins:health",
+            "comparison": "<=",
+            "compare_to": 6
+        }
+    },
+    "prevent_damage": {
+        "type": "origins:modify_damage_taken",
+        "damage_condition": {
+            "type": "origins:projectile"
+        },
+        "modifier": {
+            "operation": "set_total",
+            "value": 0
+        },
+        "condition": {
+            "type": "origins:health",
+            "comparison": "<=",
+            "compare_to": 6
+        }
+    },
+    "shader": {
+        "type": "origins:shader",
+        "shader": "minecraft:shaders/post/deconverge.json",
+        "condition": {
+            "type": "origins:health",
+            "comparison": "<=",
+            "compare_to": 6
+        }
+    },
+    "redirect": {
+        "type": "apugli:action_when_projectile_hit",
+        "bientity_action": {
+            "type": "origins:invert",
+            "action": {
+                "type": "apoli:add_velocity",
+                "set": true,
+                "reference": "position",
+                "z": -6
+            }
+        },
+        "hud_render": {
+            "should_render": false
+        },
+        "condition": {
+            "type": "origins:health",
+            "comparison": "<=",
+            "compare_to": 6
+        }
+    }
+}

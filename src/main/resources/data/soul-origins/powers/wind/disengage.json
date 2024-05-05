@@ -1,0 +1,80 @@
+{
+    "type": "origins:active_self",
+    "key": "key.origins.primary_active",
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:sneaking"
+            }
+        ]
+    },
+    "cooldown": 1200,
+    "hud_render": {
+        "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+        "bar_index": 8,
+        "should_render": true
+    },
+    "entity_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.wither.ambient",
+                "pitch": 0.7,
+                "volume": 0.5
+            },
+            {
+                "type": "origins:add_velocity",
+                "space": "local",
+                "y": 1,
+                "z": -2,
+                "set": true
+            },
+            {
+                "type": "origins:change_resource",
+                "resource": "soul-origins:wind/bar",
+                "operation": "add",
+                "change": -1
+            },
+            {
+                "type": "origins:area_of_effect",
+                "shape": "sphere",
+                "radius": 8,
+                "bientity_action": {
+                    "type": "apoli:add_velocity",
+                    "reference": "position",
+                    "z": 1,
+                    "y": 0.2
+                }
+            },
+            {
+                "type": "origins:apply_effect",
+                "effect": {
+                    "effect": "minecraft:speed",
+                    "duration": 300,
+                    "is_ambient": true
+                }
+            },
+            {
+                "type": "origins:change_resource",
+                "resource": "soul-origins:wind/dash",
+                "operation": "set",
+                "change": 100
+            },
+            {
+                "type": "origins:change_resource",
+                "resource": "soul-origins:wind/jump",
+                "operation": "set",
+                "change": 100
+            },
+            {
+              "type": "origins:spawn_particles",
+              "count": 64,
+              "particle": "minecraft:cloud",
+              "speed": 0.2
+            }
+
+        ]
+    }
+}
