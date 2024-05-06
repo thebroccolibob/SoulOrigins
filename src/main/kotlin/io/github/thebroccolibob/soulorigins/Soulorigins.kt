@@ -2,6 +2,7 @@ package io.github.thebroccolibob.soulorigins
 
 import io.github.thebroccolibob.soulorigins.action.SoulOriginsEntityActions
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
+import io.github.thebroccolibob.soulorigins.power.registerSouloriginsPowerFactories
 import net.fabricmc.api.ModInitializer
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -18,5 +19,6 @@ object Soulorigins : ModInitializer {
 		// Proceed with mild caution.
 		SouloriginsItems.register()
 		SoulOriginsEntityActions.register()
+		registerSouloriginsPowerFactories()
 	}
 }
