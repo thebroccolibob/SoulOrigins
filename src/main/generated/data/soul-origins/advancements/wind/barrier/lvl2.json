@@ -1,0 +1,53 @@
+{
+  "parent": "soul-origins:wind/barrier/lvl1",
+  "criteria": {
+    "use_item": {
+      "conditions": {
+        "item": {
+          "items": [
+            "soul-origins:wind_crystal_barrier"
+          ]
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "player",
+                "advancements": {
+                  "soul-origins:wind/barrier/lvl1": true
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.soul-origins.wind.barrier.lvl2.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:feather"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.soul-origins.wind.barrier.lvl2"
+    }
+  },
+  "requirements": [
+    [
+      "use_item"
+    ]
+  ],
+  "rewards": {
+    "function": "soul-origins:powers/wind/upgrade/barrier/lvl2"
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,1 @@
+power grant @s soul-origins:wind/burst/lvl1 soul-origins:wind_spirit

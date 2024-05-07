@@ -1,9 +1,7 @@
 {
     "powers": [
-        "soul-origins:wind/dash",
-        "soul-origins:wind/jump",
-        "soul-origins:wind/float",
-        "soul-origins:wind/shield",
-        "soul-origins:wind/disengage"
+        "soul-origins:wind/dash/lvl1",
+        "soul-origins:wind/jump/lvl1",
+        "soul-origins:wind/neutral/lvl1"
     ]
 }

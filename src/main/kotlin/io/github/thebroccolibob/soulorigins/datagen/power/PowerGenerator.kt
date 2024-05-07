@@ -16,5 +16,13 @@ class PowerGenerator(dataOutput: FabricDataOutput) : ArbitraryResourceProvider(d
         jsonWindJump(3, 0.85, 300, 2)
         jsonWindJump(4, 1.0, 200, 2)
         jsonWindJump(5, 1.15, 140, 2)
+
+        for (ability in listOf("burst", "barrier", "neutral")) {
+            for (level in 1..3) {
+                json("wind/$ability/lvl$level") {
+                    "type" to "origins:simple"
+                }
+            }
+        }
     }
 }

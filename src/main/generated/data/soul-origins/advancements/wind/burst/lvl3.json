@@ -1,0 +1,53 @@
+{
+  "parent": "soul-origins:wind/burst/lvl2",
+  "criteria": {
+    "use_item": {
+      "conditions": {
+        "item": {
+          "items": [
+            "soul-origins:wind_crystal_burst"
+          ]
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "player",
+                "advancements": {
+                  "soul-origins:wind/burst/lvl2": true
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.soul-origins.wind.burst.lvl3.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:feather"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.soul-origins.wind.burst.lvl3"
+    }
+  },
+  "requirements": [
+    [
+      "use_item"
+    ]
+  ],
+  "rewards": {
+    "function": "soul-origins:powers/wind/upgrade/burst/lvl3"
+  },
+  "sends_telemetry_event": false
+}
