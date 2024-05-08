@@ -4,7 +4,7 @@ import io.github.thebroccolibob.soulorigins.datagen.lib.JsonObject
 import io.github.thebroccolibob.soulorigins.datagen.lib.listOfJson
 import io.github.thebroccolibob.soulorigins.datagen.power.LeveledCooldownEntry
 import io.github.thebroccolibob.soulorigins.datagen.power.levelAction
-import io.github.thebroccolibob.soulorigins.datagen.power.multiCooldown
+import io.github.thebroccolibob.soulorigins.datagen.power.leveledMultiCooldown
 
 private data class KeyDir(val key: String, val axis: String, val invert: Boolean)
 
@@ -28,7 +28,7 @@ val tailwindEntries = listOf(
 
 private val advancement = { (lvl, _, _, _): TailwindEntry -> "soul-origins:wind/tailwind/lvl$lvl" }
 
-fun tailwind(id: String) = multiCooldown(id, tailwindEntries, "key.origins.secondary_active", advancement,
+fun tailwind(id: String) = leveledMultiCooldown(id, tailwindEntries, "key.origins.secondary_active", advancement,
     otherConditions = listOf(JsonObject {
         "type" to "origins:or"
         "conditions" to keyDirs.map { (key, _, _) -> JsonObject {

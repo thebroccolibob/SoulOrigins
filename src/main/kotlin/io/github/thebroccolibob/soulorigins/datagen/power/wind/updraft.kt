@@ -4,7 +4,7 @@ import io.github.thebroccolibob.soulorigins.datagen.lib.JsonObject
 import io.github.thebroccolibob.soulorigins.datagen.lib.listOfJson
 import io.github.thebroccolibob.soulorigins.datagen.power.LeveledCooldownEntry
 import io.github.thebroccolibob.soulorigins.datagen.power.levelAction
-import io.github.thebroccolibob.soulorigins.datagen.power.multiCooldown
+import io.github.thebroccolibob.soulorigins.datagen.power.leveledMultiCooldown
 
 data class UpdraftEntry(override val level: Int, val strength: Double, override val recharge: Int, override val charges: Int):
     LeveledCooldownEntry
@@ -19,7 +19,7 @@ val updraftEntries = listOf(
 
 private val advancement = { (lvl, _, _, _): UpdraftEntry -> "soul-origins:wind/updraft/lvl$lvl" }
 
-fun updraft(id: String) = multiCooldown(
+fun updraft(id: String) = leveledMultiCooldown(
     id, updraftEntries, "key.origins.primary_active", advancement,
     otherConditions = listOfJson({
         "type" to "origins:sneaking"

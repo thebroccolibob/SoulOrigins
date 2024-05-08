@@ -4,15 +4,13 @@ import com.google.gson.JsonObject
 import io.github.thebroccolibob.soulorigins.datagen.lib.JsonInit
 import io.github.thebroccolibob.soulorigins.datagen.lib.JsonObject
 
-operator fun <T, V> T.get(getter: (T) -> V) = getter(this)
-
 interface LeveledCooldownEntry {
     val level: Int
     val recharge: Int
     val charges: Int
 }
 
-fun <T: LeveledCooldownEntry> multiCooldown(id: String, entries: Iterable<T>, key: String, advancement: (T) -> String, otherConditions: Iterable<JsonObject> = emptyList(), otherActions: Iterable<JsonObject> = emptyList(), hudRender: JsonInit) = JsonObject {
+fun <T: LeveledCooldownEntry> leveledMultiCooldown(id: String, entries: Iterable<T>, key: String, advancement: (T) -> String, otherConditions: Iterable<JsonObject> = emptyList(), otherActions: Iterable<JsonObject> = emptyList(), hudRender: JsonInit) = JsonObject {
     "type" to "origins:multiple"
 
     levelMultiplePowers(entries, {"cooldown${it.level}"}) {
