@@ -3,6 +3,9 @@
         "soul-origins:wind/tailwind",
         "soul-origins:wind/updraft",
         "soul-origins:wind/float",
-        "soul-origins:wind/barrier"
+        "soul-origins:wind/barrier",
+        "soul-origins:wind/compressed_air",
+        "soul-origins:soul_meter",
+        "soul-origins:soul_extract"
     ]
 }
