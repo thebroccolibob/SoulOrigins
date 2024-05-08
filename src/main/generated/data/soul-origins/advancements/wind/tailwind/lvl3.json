@@ -1,11 +1,11 @@
 {
-  "parent": "soul-origins:wind/barrier/lvl2",
+  "parent": "soul-origins:wind/tailwind/lvl2",
   "criteria": {
     "use_item": {
       "conditions": {
         "item": {
           "items": [
-            "soul-origins:wind_crystal_barrier"
+            "soul-origins:wind_crystal_tailwind"
           ]
         },
         "player": [
@@ -16,7 +16,7 @@
               "type_specific": {
                 "type": "player",
                 "advancements": {
-                  "soul-origins:wind/barrier/lvl2": true
+                  "soul-origins:wind/tailwind/lvl2": true
                 }
               }
             }
@@ -29,16 +29,16 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "advancements.soul-origins.wind.barrier.lvl3.description"
+      "translate": "advancements.soul-origins.wind.tailwind.lvl3.description"
     },
-    "frame": "challenge",
+    "frame": "task",
     "hidden": false,
     "icon": {
       "item": "minecraft:feather"
     },
     "show_toast": false,
     "title": {
-      "translate": "advancements.soul-origins.wind.barrier.lvl3"
+      "translate": "advancements.soul-origins.wind.tailwind.lvl3"
     }
   },
   "requirements": [

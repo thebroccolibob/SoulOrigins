@@ -6,7 +6,6 @@ import io.github.thebroccolibob.soulorigins.datagen.lib.*
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import net.minecraft.advancement.Advancement
 import net.minecraft.advancement.AdvancementFrame
-import net.minecraft.advancement.AdvancementRewards
 import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.loot.condition.EntityPropertiesLootCondition
@@ -52,8 +51,6 @@ fun Consumer<Advancement>.windLevels(root: Advancement, id: String, item: Item, 
                         ), item
                     )
                 )
-
-                rewards(AdvancementRewards.Builder.function(Identifier(Soulorigins.MOD_ID, "powers/wind/upgrade/$id/lvl$index")))
             }
         }
     }
@@ -75,8 +72,8 @@ fun Consumer<Advancement>.generateAdvancements() {
         criterion("wind_origin", chose_wind)
     }
 
-    windLevels(root, "dash", SouloriginsItems.DASH_CRYSTAL, 5, true)
-    windLevels(root, "jump", SouloriginsItems.JUMP_CRYSTAL, 5, true)
+    windLevels(root, "tailwind", SouloriginsItems.TAILWIND_CRYSTAL, 5, true)
+    windLevels(root, "updraft", SouloriginsItems.UPDRAFT_CRYSTAL, 5, true)
     windLevels(root, "burst", SouloriginsItems.BURST_CRYSTAL, 3)
     windLevels(root, "barrier", SouloriginsItems.BARRIER_CRYSTAL, 3)
     windLevels(root, "neutral", SouloriginsItems.NEUTRAL_CRYSTAL, 3, true)

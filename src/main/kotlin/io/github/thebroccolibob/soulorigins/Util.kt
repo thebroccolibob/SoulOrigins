@@ -42,3 +42,11 @@ fun NbtCompound.getList(key: String, type: Byte): NbtList = getList(key, type.to
 
 fun <T: Any> Optional<T>.toNullable(): T? = orElse(null)
 fun <T: Any> T?.toOptional() = Optional.ofNullable(this)
+
+fun <T, R> Iterable<T>.mapWithNext(transform: (current: T, next: T?) -> R): List<R> {
+    return toList().let {
+        it.mapIndexed { index, item ->
+            transform(item, it.getOrNull(index + 1))
+        }
+    }
+}

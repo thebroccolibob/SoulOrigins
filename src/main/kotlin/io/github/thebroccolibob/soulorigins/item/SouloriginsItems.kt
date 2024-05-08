@@ -21,8 +21,8 @@ object SouloriginsItems {
         rarity(Rarity.UNCOMMON)
     }))
 
-    val JUMP_CRYSTAL = registerCrystal("jump")
-    val DASH_CRYSTAL = registerCrystal("dash")
+    val UPDRAFT_CRYSTAL = registerCrystal("updraft")
+    val TAILWIND_CRYSTAL = registerCrystal("tailwind")
     val BURST_CRYSTAL = registerCrystal("burst")
     val BARRIER_CRYSTAL = registerCrystal("barrier")
     val NEUTRAL_CRYSTAL = registerCrystal("neutral")

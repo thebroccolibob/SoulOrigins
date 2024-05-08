@@ -1,6 +1,8 @@
 package io.github.thebroccolibob.soulorigins.datagen
 
+import io.github.thebroccolibob.soulorigins.datagen.power.LeveledCooldownEntry
 import io.github.thebroccolibob.soulorigins.datagen.power.PowerGenerator
+import io.github.thebroccolibob.soulorigins.datagen.power.wind.updraftEntries
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
@@ -20,7 +22,6 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			addProvider(::ModelGenerator)
 			addProvider(::LangGenerator)
 			addProvider(::PowerGenerator)
-			addProvider(::UpgradeFunctionGenerator)
 			addProvider(::AdvancementGenerator)
 		}
 	}
@@ -31,8 +32,8 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 		}
 
 		override fun generateItemModels(itemModelGenerator: ItemModelGenerator) {
-			itemModelGenerator.register(SouloriginsItems.JUMP_CRYSTAL, Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.DASH_CRYSTAL, Models.GENERATED)
+			itemModelGenerator.register(SouloriginsItems.UPDRAFT_CRYSTAL, Models.GENERATED)
+			itemModelGenerator.register(SouloriginsItems.TAILWIND_CRYSTAL, Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.BURST_CRYSTAL, Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.BARRIER_CRYSTAL, Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.NEUTRAL_CRYSTAL, Models.GENERATED)
@@ -40,11 +41,48 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 	}
 
 	class LangGenerator(dataOutput: FabricDataOutput?) : FabricLanguageProvider(dataOutput) {
+		private val romanNumerals = mapOf(
+			1 to "I",
+			2 to "II",
+			3 to "III",
+			4 to "IV",
+			5 to "V"
+		)
+
+		private val updraftDescription = fun(level: Int) = when(level) {
+			1 -> "Unlocks jumping"
+			2 -> "Increases height"
+			3 -> null
+			4 -> "Increases height"
+			5 -> "Increases height"
+			else -> null
+		}
+
+		private val tailwindDescription = fun(level: Int) = when(level) {
+			1 -> "Unlocks dashing"
+			2 -> "Increases speed"
+			3 -> null
+			4 -> "Increases speed"
+			5 -> "Increases speed"
+			else -> null
+		}
+
+		private fun TranslationBuilder.cooldownDescriptions(id: String, name: String, entries: Iterable<LeveledCooldownEntry>, description: (Int) -> String?) {
+			entries.forEach {
+				val level = it.level
+				add("advancements.soul-origins.wind.$id.lvl$level", "$name ${romanNumerals[level]}")
+				add("advancements.soul-origins.wind.$id.lvl$level.description", (description(level)?.let {desc->"$desc\n"} ?: "") + "${it.charges} charge${if (it.charges == 1) "" else "s"}\n${it.recharge / 20}s")
+			}
+		}
+
 		override fun generateTranslations(translationBuilder: TranslationBuilder) {
 			translationBuilder.add(SouloriginsItems.MARIGOLD_CARD, "Marigold Card")
 			translationBuilder.add("${SouloriginsItems.MARIGOLD_CARD.translationKey}.empty", "Empty")
 			translationBuilder.add("${SouloriginsItems.MARIGOLD_CARD.translationKey}.multiple_items", "%s x%s")
 			translationBuilder.add("container.soul-origins.inventory.deck", "Deck")
+
+			translationBuilder.cooldownDescriptions("updraft", "Updraft", updraftEntries, updraftDescription)
+			translationBuilder.cooldownDescriptions("tailwind", "Tailwind", updraftEntries, tailwindDescription)
 		}
 	}
 

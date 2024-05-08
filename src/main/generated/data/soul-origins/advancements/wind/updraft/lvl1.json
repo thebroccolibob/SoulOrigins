@@ -1,21 +1,17 @@
 {
   "parent": "soul-origins:wind/root",
   "criteria": {
-    "use_item": {
+    "wind_origin": {
       "conditions": {
-        "item": {
-          "items": [
-            "soul-origins:wind_crystal_barrier"
-          ]
-        }
+        "origin": "soul-origins:wind_spirit"
       },
-      "trigger": "minecraft:consume_item"
+      "trigger": "origins:chose_origin"
     }
   },
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "advancements.soul-origins.wind.barrier.lvl1.description"
+      "translate": "advancements.soul-origins.wind.updraft.lvl1.description"
     },
     "frame": "task",
     "hidden": false,
@@ -24,12 +20,12 @@
     },
     "show_toast": false,
     "title": {
-      "translate": "advancements.soul-origins.wind.barrier.lvl1"
+      "translate": "advancements.soul-origins.wind.updraft.lvl1"
     }
   },
   "requirements": [
     [
-      "use_item"
+      "wind_origin"
     ]
   ],
   "sends_telemetry_event": false
