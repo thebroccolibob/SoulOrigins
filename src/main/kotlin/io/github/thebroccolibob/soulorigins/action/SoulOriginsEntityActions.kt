@@ -35,4 +35,10 @@ fun registerSoulOriginsEntityActions() {
             }
         }
     })
+
+    register(ActionFactory(
+        Identifier(Soulorigins.MOD_ID, "despawn"), SerializableData()
+    ) { _, entity ->
+        entity.discard()
+    })
 }

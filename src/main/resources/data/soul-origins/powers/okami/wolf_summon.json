@@ -1,0 +1,75 @@
+{
+    "type": "origins:multiple",
+    "set": {
+        "type": "origins:entity_set"
+    },
+    "activate": {
+        "type": "origins:active_self",
+        "condition": {
+            "type": "origins:sneaking",
+            "inverted": false
+        },
+        "key": "key.origins.secondary_active",
+        "cooldown": 60,
+        "entity_action": {
+            "type": "apoli:if_else",
+            "condition": {
+                "type": "origins:set_size",
+                "set": "soul-origins:okami/wolf_summon_set",
+                "comparison": ">",
+                "compare_to": 0
+            },
+            "if_action": {
+                "type": "origins:action_on_set",
+                "set": "soul-origins:okami/wolf_summon_set",
+                "bientity_action": {
+                    "type": "origins:and",
+                    "actions": [
+                        {
+                            "type": "origins:remove_from_set",
+                            "set": "soul-origins:okami/wolf_summon_set"
+                        },
+                        {
+                            "type": "origins:target_action",
+                            "action": {
+                                "type": "soul-origins:despawn"
+                            }
+                        }
+                    ]
+                }
+            },
+            "else_action": {
+                "type": "origins:spawn_entity",
+                "entity_type": "minecraft:wolf",
+                "tag": {
+                    "CustomName": "{\"text\":\"Moro\"}"
+                },
+                "bientity_action": {
+                    "type": "origins:and",
+                    "actions": [
+                        {
+                            "type": "origins:add_to_set",
+                            "set": "soul-origins:okami/wolf_summon_set"
+                        },
+                        {
+                            "type": "origins:tame"
+                        }
+                    ]
+                },
+                "entity_action": {
+                    "type": "origins:and",
+                    "actions": [
+                        {
+                            "type": "origins:execute_command",
+                            "command": "scale set 2"
+                        },
+                        {
+                            "type": "origins:execute_command",
+                            "command": "scale delay set 0"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
