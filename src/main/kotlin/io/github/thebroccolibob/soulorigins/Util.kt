@@ -13,6 +13,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 import java.util.*
+import net.minecraft.util.Pair as McPair
 
 inline fun FabricItemSettings(init: FabricItemSettings.() -> Unit) = FabricItemSettings().apply(init)
 
@@ -51,6 +52,9 @@ fun <T, R> Iterable<T>.mapWithNext(transform: (current: T, next: T?) -> R): List
         }
     }
 }
+
+operator fun <T> McPair<T, *>.component1(): T = left
+operator fun <T> McPair<*, T>.component2(): T = right
 
 fun <T> Iterable<T>.forEachWithNext(transform: (current: T, next: T?) -> Unit) {
     toList().let {

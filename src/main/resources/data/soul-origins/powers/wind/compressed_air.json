@@ -1,0 +1,38 @@
+{
+    "type": "origins:action_on_item_use",
+    "item_condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "soul-origins:backtank_air",
+                "comparison": ">=",
+                "compare_to": 18000
+            },
+            {
+                "type": "origins:ingredient",
+                "ingredient": {
+                    "item": "create:copper_backtank"
+                }
+            }
+        ]
+    },
+    "entity_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "origins:change_resource",
+                "resource": "soul-origins:soul_meter",
+                "operation": "add",
+                "change": 10
+            },
+            {
+                "type": "origins:play_sound",
+                "sound": "minecraft:item.bottle.fill_dragonbreath"
+            }
+        ]
+    },
+    "item_action": {
+        "type": "soul-origins:change_backtank_air",
+        "change": -18000
+    }
+}
