@@ -2,12 +2,16 @@ package io.github.thebroccolibob.soulorigins.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.thebroccolibob.soulorigins.entity.OwnableSkeleton;
+import io.github.thebroccolibob.soulorigins.power.DisengagePower;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.ai.goal.TrackTargetGoal;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -26,5 +30,18 @@ public abstract class RevengeGoalMixin extends TrackTargetGoal {
             return false;
 
         return original.call(instance, livingEntity, targetPredicate);
+    }
+
+    @Override
+    public boolean shouldContinue() {
+        if (!(this.mob.getTarget() instanceof PlayerEntity playerEntity)) return super.shouldContinue();
+
+        var powers = PowerHolderComponent.getPowers(playerEntity, DisengagePower.class);
+
+        for (var power : powers) {
+            if (mob.squaredDistanceTo(playerEntity) > Math.pow(power.getDistance() * mob.getAttributeValue(EntityAttributes.GENERIC_FOLLOW_RANGE), 2)) return false;
+        }
+
+        return super.shouldContinue();
     }
 }

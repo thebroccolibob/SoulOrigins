@@ -1,5 +1,6 @@
 package io.github.thebroccolibob.soulorigins
 
+import io.github.apace100.calio.data.SerializableData
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
@@ -50,3 +51,13 @@ fun <T, R> Iterable<T>.mapWithNext(transform: (current: T, next: T?) -> R): List
         }
     }
 }
+
+fun <T> Iterable<T>.forEachWithNext(transform: (current: T, next: T?) -> Unit) {
+    toList().let {
+        it.forEachIndexed { index, item ->
+            transform(item, it.getOrNull(index + 1))
+        }
+    }
+}
+
+fun SerializableData(init: SerializableData.() -> Unit) = SerializableData().apply(init)

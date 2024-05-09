@@ -12,14 +12,14 @@
               "type": "origins:and",
               "conditions": [
                 {
-                  "type": "origins:advancement",
-                  "advancement": "soul-origins:wind/updraft/lvl1"
-                },
-                {
                   "type": "origins:resource",
                   "compare_to": 0,
                   "comparison": "<=",
                   "resource": "soul-origins:wind/updraft_cooldown1"
+                },
+                {
+                  "type": "origins:advancement",
+                  "advancement": "soul-origins:wind/updraft/lvl1"
                 },
                 {
                   "type": "origins:advancement",
@@ -32,14 +32,14 @@
               "type": "origins:and",
               "conditions": [
                 {
-                  "type": "origins:advancement",
-                  "advancement": "soul-origins:wind/updraft/lvl2"
-                },
-                {
                   "type": "origins:resource",
                   "compare_to": 0,
                   "comparison": "<=",
                   "resource": "soul-origins:wind/updraft_cooldown2"
+                },
+                {
+                  "type": "origins:advancement",
+                  "advancement": "soul-origins:wind/updraft/lvl2"
                 },
                 {
                   "type": "origins:advancement",
@@ -52,14 +52,14 @@
               "type": "origins:and",
               "conditions": [
                 {
-                  "type": "origins:advancement",
-                  "advancement": "soul-origins:wind/updraft/lvl3"
-                },
-                {
                   "type": "origins:resource",
                   "compare_to": 300,
                   "comparison": "<=",
                   "resource": "soul-origins:wind/updraft_cooldown3"
+                },
+                {
+                  "type": "origins:advancement",
+                  "advancement": "soul-origins:wind/updraft/lvl3"
                 },
                 {
                   "type": "origins:advancement",
@@ -72,14 +72,14 @@
               "type": "origins:and",
               "conditions": [
                 {
-                  "type": "origins:advancement",
-                  "advancement": "soul-origins:wind/updraft/lvl4"
-                },
-                {
                   "type": "origins:resource",
                   "compare_to": 200,
                   "comparison": "<=",
                   "resource": "soul-origins:wind/updraft_cooldown4"
+                },
+                {
+                  "type": "origins:advancement",
+                  "advancement": "soul-origins:wind/updraft/lvl4"
                 },
                 {
                   "type": "origins:advancement",
@@ -92,14 +92,14 @@
               "type": "origins:and",
               "conditions": [
                 {
-                  "type": "origins:advancement",
-                  "advancement": "soul-origins:wind/updraft/lvl5"
-                },
-                {
                   "type": "origins:resource",
                   "compare_to": 140,
                   "comparison": "<=",
                   "resource": "soul-origins:wind/updraft_cooldown5"
+                },
+                {
+                  "type": "origins:advancement",
+                  "advancement": "soul-origins:wind/updraft/lvl5"
                 }
               ]
             }
@@ -256,6 +256,20 @@
   },
   "cooldown1": {
     "type": "origins:cooldown",
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:advancement",
+          "advancement": "soul-origins:wind/updraft/lvl1"
+        },
+        {
+          "type": "origins:advancement",
+          "advancement": "soul-origins:wind/updraft/lvl2",
+          "inverted": true
+        }
+      ]
+    },
     "cooldown": 400,
     "hud_render": {
       "bar_index": 8,
@@ -264,6 +278,20 @@
   },
   "cooldown2": {
     "type": "origins:cooldown",
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:advancement",
+          "advancement": "soul-origins:wind/updraft/lvl2"
+        },
+        {
+          "type": "origins:advancement",
+          "advancement": "soul-origins:wind/updraft/lvl3",
+          "inverted": true
+        }
+      ]
+    },
     "cooldown": 300,
     "hud_render": {
       "bar_index": 8,
@@ -272,6 +300,20 @@
   },
   "cooldown3": {
     "type": "origins:cooldown",
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:advancement",
+          "advancement": "soul-origins:wind/updraft/lvl3"
+        },
+        {
+          "type": "origins:advancement",
+          "advancement": "soul-origins:wind/updraft/lvl4",
+          "inverted": true
+        }
+      ]
+    },
     "cooldown": 600,
     "hud_render": {
       "bar_index": 8,
@@ -280,6 +322,20 @@
   },
   "cooldown4": {
     "type": "origins:cooldown",
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:advancement",
+          "advancement": "soul-origins:wind/updraft/lvl4"
+        },
+        {
+          "type": "origins:advancement",
+          "advancement": "soul-origins:wind/updraft/lvl5",
+          "inverted": true
+        }
+      ]
+    },
     "cooldown": 400,
     "hud_render": {
       "bar_index": 8,
@@ -288,6 +344,10 @@
   },
   "cooldown5": {
     "type": "origins:cooldown",
+    "condition": {
+      "type": "origins:advancement",
+      "advancement": "soul-origins:wind/updraft/lvl5"
+    },
     "cooldown": 280,
     "hud_render": {
       "bar_index": 8,

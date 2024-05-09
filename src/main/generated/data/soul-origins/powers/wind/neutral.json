@@ -1,3 +1,29 @@
 {
-  "type": "origins:simple"
+  "type": "origins:multiple",
+  "distance2": {
+    "type": "soul-origins:disengage",
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:advancement",
+          "advancement": "soul-origins:wind/neutral/lvl2"
+        },
+        {
+          "type": "origins:advancement",
+          "advancement": "soul-origins:wind/neutral/lvl3",
+          "inverted": true
+        }
+      ]
+    },
+    "distance_multiplier": 0.4
+  },
+  "distance3": {
+    "type": "soul-origins:disengage",
+    "condition": {
+      "type": "origins:advancement",
+      "advancement": "soul-origins:wind/neutral/lvl3"
+    },
+    "distance_multiplier": 0.2
+  }
 }

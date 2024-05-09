@@ -3,6 +3,7 @@
         "soul-origins:wind/tailwind",
         "soul-origins:wind/updraft",
         "soul-origins:wind/float",
-        "soul-origins:wind/barrier"
+        "soul-origins:wind/neutral",
+        "soul-origins:wind/burst"
     ]
 }

@@ -13,7 +13,7 @@ interface LeveledCooldownEntry {
 fun <T: LeveledCooldownEntry> leveledMultiCooldown(id: String, entries: Iterable<T>, key: String, advancement: (T) -> String, otherConditions: Iterable<JsonObject> = emptyList(), otherActions: Iterable<JsonObject> = emptyList(), hudRender: JsonInit) = JsonObject {
     "type" to "origins:multiple"
 
-    levelMultiplePowers(entries, {"cooldown${it.level}"}) {
+    levelMultiplePowers(entries, {"cooldown${it.level}"}, advancement) {
         "type" to "origins:cooldown"
         "cooldown" to it.charges * it.recharge
         "hud_render" to hudRender
