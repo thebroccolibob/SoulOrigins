@@ -2,6 +2,7 @@ package io.github.thebroccolibob.soulorigins.datagen
 
 import io.github.thebroccolibob.soulorigins.datagen.power.LeveledCooldownEntry
 import io.github.thebroccolibob.soulorigins.datagen.power.PowerGenerator
+import io.github.thebroccolibob.soulorigins.datagen.power.wind.tailwindEntries
 import io.github.thebroccolibob.soulorigins.datagen.power.wind.updraftEntries
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
@@ -35,7 +36,6 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			itemModelGenerator.register(SouloriginsItems.UPDRAFT_CRYSTAL, Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.TAILWIND_CRYSTAL, Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.BURST_CRYSTAL, Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.BARRIER_CRYSTAL, Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.NEUTRAL_CRYSTAL, Models.GENERATED)
 		}
 	}
@@ -82,7 +82,7 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			translationBuilder.add("container.soul-origins.inventory.deck", "Deck")
 
 			translationBuilder.cooldownDescriptions("updraft", "Updraft", updraftEntries, updraftDescription)
-			translationBuilder.cooldownDescriptions("tailwind", "Tailwind", updraftEntries, tailwindDescription)
+			translationBuilder.cooldownDescriptions("tailwind", "Tailwind", tailwindEntries, tailwindDescription)
 		}
 	}
 

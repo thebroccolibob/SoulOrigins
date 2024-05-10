@@ -75,6 +75,5 @@ fun Consumer<Advancement>.generateAdvancements() {
     windLevels(root, "tailwind", SouloriginsItems.TAILWIND_CRYSTAL, 5, true)
     windLevels(root, "updraft", SouloriginsItems.UPDRAFT_CRYSTAL, 5, true)
     windLevels(root, "burst", SouloriginsItems.BURST_CRYSTAL, 3)
-    windLevels(root, "barrier", SouloriginsItems.BARRIER_CRYSTAL, 3)
     windLevels(root, "neutral", SouloriginsItems.NEUTRAL_CRYSTAL, 3, true)
 }

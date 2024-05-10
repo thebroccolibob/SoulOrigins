@@ -1,3 +1,201 @@
 {
-  "type": "origins:simple"
+  "type": "origins:active_self",
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:sneaking"
+      },
+      {
+        "type": "origins:resource",
+        "compare_to": 10,
+        "comparison": ">=",
+        "resource": "soul-origins:soul_meter"
+      },
+      {
+        "type": "origins:advancement",
+        "advancement": "soul-origins:wind/burst/lvl1"
+      }
+    ]
+  },
+  "entity_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:play_sound",
+        "pitch": 0.7,
+        "sound": "minecraft:entity.wither.ambient",
+        "volume": 0.5
+      },
+      {
+        "type": "origins:add_velocity",
+        "set": true,
+        "space": "local",
+        "y": 1,
+        "z": -2
+      },
+      {
+        "type": "origins:change_resource",
+        "change": -10,
+        "operation": "add",
+        "resource": "soul-origins:soul_meter"
+      },
+      {
+        "type": "origins:area_of_effect",
+        "bientity_action": {
+          "type": "apoli:add_velocity",
+          "reference": "position",
+          "y": 0.2,
+          "z": 2
+        },
+        "radius": 8,
+        "shape": "sphere"
+      },
+      {
+        "type": "origins:change_resource",
+        "change": 0,
+        "operation": "set",
+        "resource": "soul-origins:wind/dash"
+      },
+      {
+        "type": "origins:change_resource",
+        "change": 0,
+        "operation": "set",
+        "resource": "soul-origins:wind/jump"
+      },
+      {
+        "type": "origins:spawn_particles",
+        "count": 64,
+        "particle": "minecraft:cloud",
+        "speed": 0.2
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:advancement",
+          "advancement": "soul-origins:wind/burst/lvl2"
+        },
+        "if_action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:grant_power",
+              "power": "soul-origins:wind/shield",
+              "source": "soul-origins:wind/burst"
+            },
+            {
+              "type": "origins:set_resource",
+              "resource": "soul-origins:wind/tailwind_cooldown1",
+              "value": 400
+            },
+            {
+              "type": "origins:set_resource",
+              "resource": "soul-origins:wind/updraft_cooldown1",
+              "value": 400
+            },
+            {
+              "type": "origins:set_resource",
+              "resource": "soul-origins:wind/tailwind_cooldown2",
+              "value": 400
+            },
+            {
+              "type": "origins:set_resource",
+              "resource": "soul-origins:wind/updraft_cooldown2",
+              "value": 400
+            },
+            {
+              "type": "origins:set_resource",
+              "resource": "soul-origins:wind/tailwind_cooldown3",
+              "value": 400
+            },
+            {
+              "type": "origins:set_resource",
+              "resource": "soul-origins:wind/updraft_cooldown3",
+              "value": 400
+            },
+            {
+              "type": "origins:set_resource",
+              "resource": "soul-origins:wind/tailwind_cooldown4",
+              "value": 400
+            },
+            {
+              "type": "origins:set_resource",
+              "resource": "soul-origins:wind/updraft_cooldown4",
+              "value": 400
+            },
+            {
+              "type": "origins:set_resource",
+              "resource": "soul-origins:wind/tailwind_cooldown5",
+              "value": 400
+            },
+            {
+              "type": "origins:set_resource",
+              "resource": "soul-origins:wind/updraft_cooldown5",
+              "value": 400
+            }
+          ]
+        }
+      },
+      {
+        "type": "origins:if_else_list",
+        "actions": [
+          {
+            "action": {
+              "type": "origins:and",
+              "actions": [
+                {
+                  "type": "origins:apply_effect",
+                  "effect": {
+                    "duration": 1200,
+                    "effect": "minecraft:speed",
+                    "is_ambient": true
+                  }
+                },
+                {
+                  "type": "origins:apply_effect",
+                  "effect": {
+                    "duration": 1200,
+                    "effect": "minecraft:invisibility",
+                    "is_ambient": true
+                  }
+                }
+              ]
+            },
+            "condition": {
+              "type": "origins:advancement",
+              "advancement": "soul-origins:wind/burst/lvl3"
+            }
+          },
+          {
+            "action": {
+              "type": "origins:and",
+              "actions": [
+                {
+                  "type": "origins:apply_effect",
+                  "effect": {
+                    "duration": 600,
+                    "effect": "minecraft:speed",
+                    "is_ambient": true
+                  }
+                },
+                {
+                  "type": "origins:apply_effect",
+                  "effect": {
+                    "duration": 600,
+                    "effect": "minecraft:invisibility",
+                    "is_ambient": true
+                  }
+                }
+              ]
+            },
+            "condition": {
+              "type": "origins:advancement",
+              "advancement": "soul-origins:wind/burst/lvl1"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "key": "key.origins.primary_active"
 }

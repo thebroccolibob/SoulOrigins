@@ -24,7 +24,6 @@ object SouloriginsItems {
     val UPDRAFT_CRYSTAL = registerCrystal("updraft")
     val TAILWIND_CRYSTAL = registerCrystal("tailwind")
     val BURST_CRYSTAL = registerCrystal("burst")
-    val BARRIER_CRYSTAL = registerCrystal("barrier")
     val NEUTRAL_CRYSTAL = registerCrystal("neutral")
 
     fun register() {}

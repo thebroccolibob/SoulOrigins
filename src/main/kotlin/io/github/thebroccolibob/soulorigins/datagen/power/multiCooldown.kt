@@ -3,6 +3,7 @@ package io.github.thebroccolibob.soulorigins.datagen.power
 import com.google.gson.JsonObject
 import io.github.thebroccolibob.soulorigins.datagen.lib.JsonInit
 import io.github.thebroccolibob.soulorigins.datagen.lib.JsonObject
+import io.github.thebroccolibob.soulorigins.forEachWithNext
 
 interface LeveledCooldownEntry {
     val level: Int
@@ -13,10 +14,15 @@ interface LeveledCooldownEntry {
 fun <T: LeveledCooldownEntry> leveledMultiCooldown(id: String, entries: Iterable<T>, key: String, advancement: (T) -> String, otherConditions: Iterable<JsonObject> = emptyList(), otherActions: Iterable<JsonObject> = emptyList(), hudRender: JsonInit) = JsonObject {
     "type" to "origins:multiple"
 
-    levelMultiplePowers(entries, {"cooldown${it.level}"}, advancement) {
-        "type" to "origins:cooldown"
-        "cooldown" to it.charges * it.recharge
-        "hud_render" to hudRender
+    entries.forEachWithNext { level, nextLevel ->
+        "cooldown${level.level}" to JsonObject {
+            "type" to "origins:cooldown"
+            "cooldown" to level.charges * level.recharge
+            "hud_render" to JsonObject {
+                hudRender()
+                "condition" to andCondition(levelCondition(advancement, level, nextLevel))
+            }
+        }
     }
 
     "activate" to {

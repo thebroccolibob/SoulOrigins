@@ -2,6 +2,7 @@ package io.github.thebroccolibob.soulorigins.datagen.power
 
 import com.google.gson.JsonObject
 import io.github.thebroccolibob.soulorigins.datagen.lib.ArbitraryResourceProvider
+import io.github.thebroccolibob.soulorigins.datagen.power.wind.burst
 import io.github.thebroccolibob.soulorigins.datagen.power.wind.neutral
 import io.github.thebroccolibob.soulorigins.datagen.power.wind.tailwind
 import io.github.thebroccolibob.soulorigins.datagen.power.wind.updraft
@@ -16,11 +17,6 @@ class PowerGenerator(dataOutput: FabricDataOutput) : ArbitraryResourceProvider(d
         json("wind/tailwind", ::tailwind)
         json("wind/updraft", ::updraft)
         json("wind/neutral", neutral)
-
-        for (ability in listOf("burst")) {
-            json("wind/$ability") {
-                "type" to "origins:simple"
-            }
-        }
+        json("wind/burst", burst)
     }
 }

@@ -60,16 +60,7 @@ fun tailwind(id: String) = leveledMultiCooldown(id, tailwindEntries, "key.origin
         {
             "type" to "origins:grant_power"
             "power" to "soul-origins:wind/dash_active"
-            "source" to "soul-origins:toggle"
-        },
-        {
-            "type" to "origins:delay"
-            "ticks" to 10
-            "action" to {
-                "type" to "origins:revoke_power"
-                "power" to "soul-origins:wind/dash_active"
-                "source" to "soul-origins:toggle"
-            }
+            "source" to "soul-origins:wind/tailwind"
         },
         {
             "type" to "origins:play_sound"

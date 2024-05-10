@@ -446,16 +446,7 @@
         {
           "type": "origins:grant_power",
           "power": "soul-origins:wind/dash_active",
-          "source": "soul-origins:toggle"
-        },
-        {
-          "type": "origins:delay",
-          "action": {
-            "type": "origins:revoke_power",
-            "power": "soul-origins:wind/dash_active",
-            "source": "soul-origins:toggle"
-          },
-          "ticks": 10
+          "source": "soul-origins:wind/tailwind"
         },
         {
           "type": "origins:play_sound",
@@ -534,101 +525,101 @@
   },
   "cooldown1": {
     "type": "origins:cooldown",
-    "condition": {
-      "type": "origins:and",
-      "conditions": [
-        {
-          "type": "origins:advancement",
-          "advancement": "soul-origins:wind/tailwind/lvl1"
-        },
-        {
-          "type": "origins:advancement",
-          "advancement": "soul-origins:wind/tailwind/lvl2",
-          "inverted": true
-        }
-      ]
-    },
     "cooldown": 200,
     "hud_render": {
       "bar_index": 23,
+      "condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:advancement",
+            "advancement": "soul-origins:wind/tailwind/lvl1"
+          },
+          {
+            "type": "origins:advancement",
+            "advancement": "soul-origins:wind/tailwind/lvl2",
+            "inverted": true
+          }
+        ]
+      },
       "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png"
     }
   },
   "cooldown2": {
     "type": "origins:cooldown",
-    "condition": {
-      "type": "origins:and",
-      "conditions": [
-        {
-          "type": "origins:advancement",
-          "advancement": "soul-origins:wind/tailwind/lvl2"
-        },
-        {
-          "type": "origins:advancement",
-          "advancement": "soul-origins:wind/tailwind/lvl3",
-          "inverted": true
-        }
-      ]
-    },
     "cooldown": 140,
     "hud_render": {
       "bar_index": 23,
+      "condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:advancement",
+            "advancement": "soul-origins:wind/tailwind/lvl2"
+          },
+          {
+            "type": "origins:advancement",
+            "advancement": "soul-origins:wind/tailwind/lvl3",
+            "inverted": true
+          }
+        ]
+      },
       "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png"
     }
   },
   "cooldown3": {
     "type": "origins:cooldown",
-    "condition": {
-      "type": "origins:and",
-      "conditions": [
-        {
-          "type": "origins:advancement",
-          "advancement": "soul-origins:wind/tailwind/lvl3"
-        },
-        {
-          "type": "origins:advancement",
-          "advancement": "soul-origins:wind/tailwind/lvl4",
-          "inverted": true
-        }
-      ]
-    },
     "cooldown": 280,
     "hud_render": {
       "bar_index": 23,
+      "condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:advancement",
+            "advancement": "soul-origins:wind/tailwind/lvl3"
+          },
+          {
+            "type": "origins:advancement",
+            "advancement": "soul-origins:wind/tailwind/lvl4",
+            "inverted": true
+          }
+        ]
+      },
       "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png"
     }
   },
   "cooldown4": {
     "type": "origins:cooldown",
-    "condition": {
-      "type": "origins:and",
-      "conditions": [
-        {
-          "type": "origins:advancement",
-          "advancement": "soul-origins:wind/tailwind/lvl4"
-        },
-        {
-          "type": "origins:advancement",
-          "advancement": "soul-origins:wind/tailwind/lvl5",
-          "inverted": true
-        }
-      ]
-    },
     "cooldown": 200,
     "hud_render": {
       "bar_index": 23,
+      "condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:advancement",
+            "advancement": "soul-origins:wind/tailwind/lvl4"
+          },
+          {
+            "type": "origins:advancement",
+            "advancement": "soul-origins:wind/tailwind/lvl5",
+            "inverted": true
+          }
+        ]
+      },
       "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png"
     }
   },
   "cooldown5": {
     "type": "origins:cooldown",
-    "condition": {
-      "type": "origins:advancement",
-      "advancement": "soul-origins:wind/tailwind/lvl5"
-    },
     "cooldown": 300,
     "hud_render": {
       "bar_index": 23,
+      "condition": {
+        "type": "origins:advancement",
+        "advancement": "soul-origins:wind/tailwind/lvl5"
+      },
       "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png"
     }
   }

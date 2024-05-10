@@ -1,38 +1,73 @@
 {
-    "type": "origins:action_on_item_use",
-    "item_condition": {
-        "type": "origins:and",
-        "conditions": [
-            {
-                "type": "soul-origins:backtank_air",
-                "comparison": ">=",
-                "compare_to": 18000
-            },
-            {
-                "type": "origins:ingredient",
-                "ingredient": {
-                    "item": "create:copper_backtank"
+    "type": "origins:multiple",
+    "activate": {
+        "type": "origins:active_self",
+        "key": "key.use",
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:inventory",
+                    "slot": "weapon.mainhand",
+                    "item_condition": {
+                        "type": "origins:and",
+                        "conditions": [
+                            {
+                                "type": "soul-origins:backtank_air",
+                                "comparison": ">=",
+                                "compare_to": 900
+                            },
+                            {
+                                "type": "origins:ingredient",
+                                "ingredient": {
+                                    "item": "create:copper_backtank"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "origins:sneaking"
                 }
-            }
-        ]
+            ]
+        },
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:change_resource",
+                    "resource": "soul-origins:soul_meter",
+                    "operation": "add",
+                    "change": 10
+                },
+                {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:item.bottle.fill_dragonbreath"
+                },
+                {
+                    "type": "apoli:modify_inventory",
+                    "slot": "weapon.mainhand",
+                    "item_action": {
+                        "type": "soul-origins:change_backtank_air",
+                        "change": -900
+                    }
+                },
+                {
+                    "type": "origins:swing_hand"
+                }
+            ]
+        }
     },
-    "entity_action": {
-        "type": "origins:and",
-        "actions": [
-            {
-                "type": "origins:change_resource",
-                "resource": "soul-origins:soul_meter",
-                "operation": "add",
-                "change": 10
-            },
-            {
-                "type": "origins:play_sound",
-                "sound": "minecraft:item.bottle.fill_dragonbreath"
+    "prevent": {
+        "type": "origins:prevent_item_use",
+        "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+                "item": "create:copper_backtank"
             }
-        ]
-    },
-    "item_action": {
-        "type": "soul-origins:change_backtank_air",
-        "change": -18000
+        },
+        "condition": {
+            "type": "origins:sneaking"
+        }
     }
 }

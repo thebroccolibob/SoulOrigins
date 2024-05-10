@@ -256,101 +256,101 @@
   },
   "cooldown1": {
     "type": "origins:cooldown",
-    "condition": {
-      "type": "origins:and",
-      "conditions": [
-        {
-          "type": "origins:advancement",
-          "advancement": "soul-origins:wind/updraft/lvl1"
-        },
-        {
-          "type": "origins:advancement",
-          "advancement": "soul-origins:wind/updraft/lvl2",
-          "inverted": true
-        }
-      ]
-    },
     "cooldown": 400,
     "hud_render": {
       "bar_index": 8,
+      "condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:advancement",
+            "advancement": "soul-origins:wind/updraft/lvl1"
+          },
+          {
+            "type": "origins:advancement",
+            "advancement": "soul-origins:wind/updraft/lvl2",
+            "inverted": true
+          }
+        ]
+      },
       "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png"
     }
   },
   "cooldown2": {
     "type": "origins:cooldown",
-    "condition": {
-      "type": "origins:and",
-      "conditions": [
-        {
-          "type": "origins:advancement",
-          "advancement": "soul-origins:wind/updraft/lvl2"
-        },
-        {
-          "type": "origins:advancement",
-          "advancement": "soul-origins:wind/updraft/lvl3",
-          "inverted": true
-        }
-      ]
-    },
     "cooldown": 300,
     "hud_render": {
       "bar_index": 8,
+      "condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:advancement",
+            "advancement": "soul-origins:wind/updraft/lvl2"
+          },
+          {
+            "type": "origins:advancement",
+            "advancement": "soul-origins:wind/updraft/lvl3",
+            "inverted": true
+          }
+        ]
+      },
       "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png"
     }
   },
   "cooldown3": {
     "type": "origins:cooldown",
-    "condition": {
-      "type": "origins:and",
-      "conditions": [
-        {
-          "type": "origins:advancement",
-          "advancement": "soul-origins:wind/updraft/lvl3"
-        },
-        {
-          "type": "origins:advancement",
-          "advancement": "soul-origins:wind/updraft/lvl4",
-          "inverted": true
-        }
-      ]
-    },
     "cooldown": 600,
     "hud_render": {
       "bar_index": 8,
+      "condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:advancement",
+            "advancement": "soul-origins:wind/updraft/lvl3"
+          },
+          {
+            "type": "origins:advancement",
+            "advancement": "soul-origins:wind/updraft/lvl4",
+            "inverted": true
+          }
+        ]
+      },
       "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png"
     }
   },
   "cooldown4": {
     "type": "origins:cooldown",
-    "condition": {
-      "type": "origins:and",
-      "conditions": [
-        {
-          "type": "origins:advancement",
-          "advancement": "soul-origins:wind/updraft/lvl4"
-        },
-        {
-          "type": "origins:advancement",
-          "advancement": "soul-origins:wind/updraft/lvl5",
-          "inverted": true
-        }
-      ]
-    },
     "cooldown": 400,
     "hud_render": {
       "bar_index": 8,
+      "condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:advancement",
+            "advancement": "soul-origins:wind/updraft/lvl4"
+          },
+          {
+            "type": "origins:advancement",
+            "advancement": "soul-origins:wind/updraft/lvl5",
+            "inverted": true
+          }
+        ]
+      },
       "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png"
     }
   },
   "cooldown5": {
     "type": "origins:cooldown",
-    "condition": {
-      "type": "origins:advancement",
-      "advancement": "soul-origins:wind/updraft/lvl5"
-    },
     "cooldown": 280,
     "hud_render": {
       "bar_index": 8,
+      "condition": {
+        "type": "origins:advancement",
+        "advancement": "soul-origins:wind/updraft/lvl5"
+      },
       "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png"
     }
   }
