@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AbstractSkeletonEntityMixin",
+    "HostileEntityMixin",
     "RevengeGoalMixin"
   ],
   "injectors": {

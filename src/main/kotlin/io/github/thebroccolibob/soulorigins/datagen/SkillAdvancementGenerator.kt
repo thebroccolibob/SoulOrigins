@@ -23,7 +23,7 @@ fun Consumer<Advancement>.windLevels(root: Advancement, id: String, item: Item, 
     (1..levels).fold(root) { prev, index ->
         advancement("wind/$id/lvl${index}") {
             display(
-                Items.FEATHER,
+                item,
                 Text.translatable("advancements.soul-origins.wind.$id.lvl$index"),
                 Text.translatable("advancements.soul-origins.wind.$id.lvl$index.description"),
                 null,
@@ -75,5 +75,5 @@ fun Consumer<Advancement>.generateAdvancements() {
     windLevels(root, "tailwind", SouloriginsItems.TAILWIND_CRYSTAL, 5, true)
     windLevels(root, "updraft", SouloriginsItems.UPDRAFT_CRYSTAL, 5, true)
     windLevels(root, "burst", SouloriginsItems.BURST_CRYSTAL, 3)
-    windLevels(root, "neutral", SouloriginsItems.NEUTRAL_CRYSTAL, 3, true)
+//    windLevels(root, "neutral", SouloriginsItems.NEUTRAL_CRYSTAL, 3, true)
 }

@@ -22,9 +22,9 @@ class WindCrystalItem(settings: Settings) : Item(settings) {
 
         stack.decrement(1)
 
-        // Add some fancy effects here
+        // TODO Add some fancy effects here
 
-        return TypedActionResult.consume(stack)
+        return TypedActionResult.success(stack)
     }
 
     override fun hasGlint(stack: ItemStack) = true

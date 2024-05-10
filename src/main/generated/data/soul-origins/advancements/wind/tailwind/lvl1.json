@@ -16,7 +16,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "minecraft:feather"
+      "item": "soul-origins:wind_crystal_tailwind"
     },
     "show_toast": false,
     "title": {
