@@ -8,8 +8,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.AbstractSkeletonEntity;
-import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -22,19 +22,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Optional;
 import java.util.UUID;
 
-@Mixin(AbstractSkeletonEntity.class)
-public abstract class AbstractSkeletonEntityMixin extends HostileEntity implements OwnableMonster {
+@Mixin(SlimeEntity.class)
+public abstract class SlimeEntityMixin extends MobEntity implements OwnableMonster {
     @Unique
 	@SuppressWarnings("WrongEntityDataParameterClass")
-	private static final TrackedData<Optional<UUID>> OWNER_UUID = DataTracker.registerData(AbstractSkeletonEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
+	private static final TrackedData<Optional<UUID>> OWNER_UUID = DataTracker.registerData(SlimeEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
 
-	protected AbstractSkeletonEntityMixin(EntityType<? extends HostileEntity> entityType, World world) {
+	protected SlimeEntityMixin(EntityType<? extends MobEntity> entityType, World world) {
 		super(entityType, world);
 	}
 
-	@Override
-	protected void initDataTracker() {
-		super.initDataTracker();
+	@Inject(
+			method = "initDataTracker",
+			at = @At("TAIL")
+	)
+	private void injectOwnerData(CallbackInfo ci) {
 		dataTracker.startTracking(OWNER_UUID, Optional.empty());
 	}
 
@@ -62,9 +64,9 @@ public abstract class AbstractSkeletonEntityMixin extends HostileEntity implemen
 			at = @At("TAIL")
 	)
 	private void injectGoals(CallbackInfo ci) {
-		goalSelector.add(4, new MonsterFollowOwnerGoal((AbstractSkeletonEntity) (Object) this, 1.0, 16f, 8f, false));
-		targetSelector.add(1, new MonsterTrackOwnerAttackerGoal((AbstractSkeletonEntity) (Object) this));
-		targetSelector.add(2, new MonsterAttackWithOwnerGoal((AbstractSkeletonEntity) (Object) this));
+		goalSelector.add(4, new MonsterFollowOwnerGoal((SlimeEntity) (Object) this, 1.0, 16f, 8f, false));
+		targetSelector.add(1, new MonsterTrackOwnerAttackerGoal((SlimeEntity) (Object) this));
+		targetSelector.add(2, new MonsterAttackWithOwnerGoal((SlimeEntity) (Object) this));
 	}
 
 	@Override

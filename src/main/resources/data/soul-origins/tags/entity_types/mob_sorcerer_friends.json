@@ -1,0 +1,12 @@
+{
+  "values": [
+    "minecraft:zombie",
+    "minecraft:husk",
+    "minecraft:drowned",
+    "#minecraft:skeletons",
+    "minecraft:spider",
+    "minecraft:enderman",
+    "minecraft:creeper",
+    "minecraft:slime"
+  ]
+}

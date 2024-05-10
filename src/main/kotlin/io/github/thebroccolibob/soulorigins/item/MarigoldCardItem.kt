@@ -1,7 +1,7 @@
 package io.github.thebroccolibob.soulorigins.item
 
 import io.github.thebroccolibob.soulorigins.*
-import io.github.thebroccolibob.soulorigins.entity.OwnableSkeleton
+import io.github.thebroccolibob.soulorigins.entity.OwnableMonster
 import io.github.thebroccolibob.soulorigins.entity.isTamed
 import io.github.thebroccolibob.soulorigins.entity.owner
 import net.minecraft.client.item.TooltipContext
@@ -9,7 +9,6 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.SpawnReason
-import net.minecraft.entity.mob.AbstractSkeletonEntity
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.entity.mob.SkeletonHorseEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -32,9 +31,11 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
     override fun useOnEntity(stack: ItemStack, user: PlayerEntity, entity: LivingEntity, hand: Hand): ActionResult {
         if (stack.hasEntity) return ActionResult.PASS
 
-        val targetEntity = (entity as? AbstractSkeletonEntity) ?: (entity.firstPassenger as? AbstractSkeletonEntity) ?: return ActionResult.PASS
+        val targetEntity = (entity as? OwnableMonster) ?: (entity.firstPassenger as? OwnableMonster) ?: return ActionResult.PASS
+        targetEntity as MobEntity
 
         stack.orCreateNbt.put(ENTITY_NBT, NbtCompound().apply {
+
             targetEntity.saveSelfNbt(this)
             remove("Pos")
             remove("UUID")
@@ -53,7 +54,7 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
         targetEntity.discard()
 
         // mana refund :3
-        if (targetEntity.isTamed) {
+        if ((targetEntity as OwnableMonster).isTamed) {
             user.soulMeter += 2
             user.syncSoulMeter()
         }
@@ -76,17 +77,17 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
 
         val spawnPosition = if (world.getBlockState(blockPos).getCollisionShape(world, blockPos).isEmpty) blockPos else blockPos.offset(side)
 
-        val skeleton = EntityType.fromNbt(nbt.getCompound(ENTITY_NBT)).toNullable()?.spawnFromItemStack(world, stack, player, spawnPosition, SpawnReason.SPAWN_EGG, true, false)
+        val monster = EntityType.fromNbt(nbt.getCompound(ENTITY_NBT)).toNullable()?.spawnFromItemStack(world, stack, player, spawnPosition, SpawnReason.SPAWN_EGG, true, false)
         if (nbt.contains(VEHICLE_NBT)) {
             // This is an ugly hack
             // ...but it works!
             nbt.put(ENTITY_NBT, nbt.getCompound(VEHICLE_NBT))
             val vehicle = EntityType.fromNbt(nbt.getCompound(ENTITY_NBT)).toNullable()?.spawnFromItemStack(world, stack, player, spawnPosition, SpawnReason.SPAWN_EGG, true, false)
-            skeleton?.startRiding(vehicle)
+            monster?.startRiding(vehicle)
         }
 
-        (skeleton as? OwnableSkeleton)?.owner = player
-        (skeleton as? MobEntity)?.setPersistent()
+        (monster as? OwnableMonster)?.owner = player
+        (monster as? MobEntity)?.setPersistent()
 
         nbt.remove(ENTITY_NBT)
         nbt.remove(VEHICLE_NBT)

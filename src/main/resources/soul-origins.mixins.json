@@ -4,7 +4,12 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AbstractSkeletonEntityMixin",
-    "RevengeGoalMixin"
+    "RevengeGoalMixin",
+    "ZombieEntityMixin",
+    "SpiderEntityMixin",
+    "CreeperEntityMixin",
+    "EndermanEntityMixin",
+    "SlimeEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

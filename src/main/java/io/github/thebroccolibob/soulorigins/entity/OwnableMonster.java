@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public interface OwnableSkeleton {
+public interface OwnableMonster {
     /** In {@link net.minecraft.entity.Entity Entity} */
     World getWorld();
     

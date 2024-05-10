@@ -5,7 +5,7 @@ import net.minecraft.block.LeavesBlock
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.goal.Goal
 import net.minecraft.entity.ai.pathing.*
-import net.minecraft.entity.mob.AbstractSkeletonEntity
+import net.minecraft.entity.mob.MobEntity
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.WorldView
 import java.util.*
@@ -15,8 +15,8 @@ import kotlin.math.pow
 /**
  * Copied from [net.minecraft.entity.ai.goal.FollowOwnerGoal]
  */
-class SkeletonFollowOwnerGoal(
-    private val skeleton: AbstractSkeletonEntity,
+class MonsterFollowOwnerGoal(
+    private val monster: MobEntity,
     private val speed: Double,
     private val minDistance: Float,
     private val maxDistance: Float,
@@ -24,25 +24,25 @@ class SkeletonFollowOwnerGoal(
 ) :
     Goal() {
     private var owner: LivingEntity? = null
-    private val world: WorldView = skeleton.world
-    private val navigation: EntityNavigation = skeleton.navigation
+    private val world: WorldView = monster.world
+    private val navigation: EntityNavigation = monster.navigation
     private var updateCountdownTicks = 0
     private var oldWaterPathfindingPenalty = 0f
 
     init {
         this.controls = EnumSet.of(Control.MOVE, Control.LOOK)
-        require(!(skeleton.navigation !is MobNavigation && skeleton.navigation !is BirdNavigation)) { "Unsupported mob type for FollowOwnerGoal" }
+        require(!(monster.navigation !is MobNavigation && monster.navigation !is BirdNavigation)) { "Unsupported mob type for FollowOwnerGoal" }
     }
 
     override fun canStart(): Boolean {
-        val livingEntity = skeleton.owner
+        val livingEntity = monster.owner
         if (livingEntity == null) {
             return false
         } else if (livingEntity.isSpectator) {
             return false
         } else if (this.cannotFollow()) {
             return false
-        } else if (skeleton.squaredDistanceTo(livingEntity) < (this.minDistance * this.minDistance).toDouble()) {
+        } else if (monster.squaredDistanceTo(livingEntity) < (this.minDistance * this.minDistance).toDouble()) {
             return false
         } else {
             this.owner = livingEntity
@@ -56,31 +56,31 @@ class SkeletonFollowOwnerGoal(
         } else if (this.cannotFollow()) {
             false
         } else {
-            !(skeleton.squaredDistanceTo(this.owner) <= (this.maxDistance * this.maxDistance).toDouble())
+            !(monster.squaredDistanceTo(this.owner) <= (this.maxDistance * this.maxDistance).toDouble())
         }
     }
 
     private fun cannotFollow(): Boolean {
-        return skeleton.hasVehicle() || skeleton.isLeashed
+        return monster.hasVehicle() || monster.isLeashed
     }
 
     override fun start() {
         this.updateCountdownTicks = 0
-        this.oldWaterPathfindingPenalty = skeleton.getPathfindingPenalty(PathNodeType.WATER)
-        skeleton.setPathfindingPenalty(PathNodeType.WATER, 0.0f)
+        this.oldWaterPathfindingPenalty = monster.getPathfindingPenalty(PathNodeType.WATER)
+        monster.setPathfindingPenalty(PathNodeType.WATER, 0.0f)
     }
 
     override fun stop() {
         this.owner = null
         navigation.stop()
-        skeleton.setPathfindingPenalty(PathNodeType.WATER, this.oldWaterPathfindingPenalty)
+        monster.setPathfindingPenalty(PathNodeType.WATER, this.oldWaterPathfindingPenalty)
     }
 
     override fun tick() {
-        skeleton.lookControl.lookAt(this.owner, 10.0f, skeleton.maxLookPitchChange.toFloat())
+        monster.lookControl.lookAt(this.owner, 10.0f, monster.maxLookPitchChange.toFloat())
         if (--this.updateCountdownTicks <= 0) {
             this.updateCountdownTicks = this.getTickCount(10)
-            if (skeleton.squaredDistanceTo(this.owner) >= TELEPORT_DISTANCE.toDouble().pow(2)) {
+            if (monster.squaredDistanceTo(this.owner) >= TELEPORT_DISTANCE.toDouble().pow(2)) {
                 this.tryTeleport()
             } else {
                 navigation.startMovingTo(this.owner, this.speed)
@@ -108,9 +108,9 @@ class SkeletonFollowOwnerGoal(
         } else if (!this.canTeleportTo(BlockPos(x, y, z))) {
             return false
         } else {
-            skeleton.refreshPositionAndAngles(
+            monster.refreshPositionAndAngles(
                 x.toDouble() + 0.5, y.toDouble(), z.toDouble() + 0.5,
-                skeleton.yaw, skeleton.pitch
+                monster.yaw, monster.pitch
             )
             navigation.stop()
             return true
@@ -126,14 +126,14 @@ class SkeletonFollowOwnerGoal(
             if (!this.leavesAllowed && blockState.block is LeavesBlock) {
                 return false
             } else {
-                val blockPos = pos.subtract(skeleton.blockPos)
-                return world.isSpaceEmpty(this.skeleton, skeleton.boundingBox.offset(blockPos))
+                val blockPos = pos.subtract(monster.blockPos)
+                return world.isSpaceEmpty(this.monster, monster.boundingBox.offset(blockPos))
             }
         }
     }
 
     private fun getRandomInt(min: Int, max: Int): Int {
-        return skeleton.random.nextInt(max - min + 1) + min
+        return monster.random.nextInt(max - min + 1) + min
     }
 
     companion object {
