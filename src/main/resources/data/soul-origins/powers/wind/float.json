@@ -1,12 +1,29 @@
 {
-    "type": "origins:modify_falling",
-    "velocity": 0.02,
-    "take_fall_damage": false,
-    "condition": {
-        "type": "apugli:key_pressed",
-        "key": {
-            "key": "key.jump",
-            "continuous": true
+    "type": "origins:multiple",
+    "fall": {
+        "type": "origins:modify_falling",
+        "velocity": 0.02,
+        "take_fall_damage": false,
+        "condition": {
+            "type": "apugli:key_pressed",
+            "key": {
+                "key": "key.jump",
+                "continuous": true
+            }
+        }
+    },
+    "speed": {
+        "type": "origins:modify_air_speed",
+        "modifier": {
+            "operation": "multiply_total",
+            "value": 1.5
+        },
+        "condition": {
+            "type": "apugli:key_pressed",
+            "key": {
+                "key": "key.jump",
+                "continuous": true
+            }
         }
     }
 }
