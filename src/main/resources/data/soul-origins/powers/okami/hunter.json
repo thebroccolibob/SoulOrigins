@@ -1,0 +1,37 @@
+{
+    "type": "origins:multiple",
+    "effects": {
+        "type": "origins:action_over_time",
+        "interval": 20,
+        "entity_action": {
+            "type": "origins:apply_effect",
+            "effects": [
+                {
+                    "effect": "minecraft:speed",
+                    "amplifier": 0,
+                    "duration": 140,
+                    "show_icon": false,
+                    "show_particles": false
+                },
+                {
+                    "effect": "minecraft:regeneration",
+                    "amplifier": 0,
+                    "duration": 140,
+                    "show_icon": false,
+                    "show_particles": false
+                },
+                {
+                    "effect": "minecraft:strength",
+                    "amplifier": 0,
+                    "duration": 140,
+                    "show_icon": false,
+                    "show_particles": false
+                }
+            ]
+        }
+    },
+    "bow": {
+        "type": "soul-origins:bow_speed",
+        "multiplier": 2
+    }
+}

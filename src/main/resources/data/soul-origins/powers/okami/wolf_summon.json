@@ -1,59 +1,44 @@
 {
     "type": "origins:multiple",
-    "set": {
-        "type": "origins:entity_set"
-    },
     "activate": {
         "type": "origins:active_self",
         "condition": {
             "type": "origins:sneaking",
-            "inverted": false
+            "inverted": true
         },
         "key": "key.origins.secondary_active",
         "cooldown": 60,
         "entity_action": {
             "type": "apoli:if_else",
             "condition": {
-                "type": "origins:set_size",
-                "set": "soul-origins:okami/wolf_summon_set",
-                "comparison": ">",
-                "compare_to": 0
+                "type": "origins:command",
+                "command": "execute if entity @e[tag=okami_summon]",
+                "comparison": ">=",
+                "compare_to": 1
             },
             "if_action": {
-                "type": "origins:action_on_set",
-                "set": "soul-origins:okami/wolf_summon_set",
+                "type": "origins:selector_action",
+                "selector": "@e[tag=okami_summon]",
                 "bientity_action": {
-                    "type": "origins:and",
-                    "actions": [
-                        {
-                            "type": "origins:remove_from_set",
-                            "set": "soul-origins:okami/wolf_summon_set"
-                        },
-                        {
-                            "type": "origins:target_action",
-                            "action": {
-                                "type": "soul-origins:despawn"
-                            }
-                        }
-                    ]
+                    "type": "origins:target_action",
+                    "action": {
+                        "type": "soul-origins:despawn"
+                    }
                 }
             },
             "else_action": {
-                "type": "origins:spawn_entity",
+                "type": "soul-origins:spawn_entity",
                 "entity_type": "minecraft:wolf",
                 "tag": {
-                    "CustomName": "{\"text\":\"Moro\"}"
+                    "CustomName": "{\"text\":\"Moro\"}",
+                    "Tags": ["okami_summon"],
+                    "CollarColor": 15
                 },
                 "bientity_action": {
                     "type": "origins:and",
                     "actions": [
-                        {
-                            "type": "origins:add_to_set",
-                            "set": "soul-origins:okami/wolf_summon_set"
-                        },
-                        {
-                            "type": "origins:tame"
-                        }
+                        { "type": "origins:tame" },
+                        { "type": "origins:mount" }
                     ]
                 },
                 "entity_action": {

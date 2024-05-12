@@ -41,4 +41,6 @@ fun registerSoulOriginsEntityActions() {
     ) { _, entity ->
         entity.discard()
     })
+
+    register(SpawnEntityAction.factory)
 }

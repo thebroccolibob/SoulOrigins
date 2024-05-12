@@ -10,7 +10,8 @@
     "CreeperEntityMixin",
     "EndermanEntityMixin",
     "SlimeEntityMixin",
-    "HostileEntityMixin"
+    "HostileEntityMixin",
+    "BowItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1
