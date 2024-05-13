@@ -1,0 +1,31 @@
+{
+    "type": "origins:multiple",
+    "tracker": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 10,
+        "start_value": 0
+    },
+    "accumulate": {
+        "type": "origins:self_action_on_kill",
+        "target_condition": {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:player"
+        },
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "soul-origins:okami/gleaning_tracker",
+            "operation": "add",
+            "change": 1
+        }
+    },
+    "boost_health": {
+        "type": "origins:modify_attribute",
+        "attribute": "generic.max_health",
+        "modifier": {
+            "operation": "add_base_late",
+            "resource": "soul-origins:okami/gleaning_tracker",
+            "value": 0
+        }
+    }
+}

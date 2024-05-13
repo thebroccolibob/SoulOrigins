@@ -6,6 +6,8 @@
     "powers": [
         "soul-origins:okami/wolf_rider",
         "soul-origins:okami/wolf_summon",
-        "soul-origins:okami/hunter"
+        "soul-origins:okami/hunter",
+        "soul-origins:okami/hunt",
+        "soul-origins:okami/gleaning"
     ]
 }

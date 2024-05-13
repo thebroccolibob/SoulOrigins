@@ -1,0 +1,34 @@
+{
+    "type": "origins:multiple",
+    "invisible": {
+        "type": "origins:invisibility",
+        "render_armor": false,
+        "render_outline": true
+    },
+    "overlay": {
+        "type": "soul-origins:emissive_overlay",
+        "texture_location": "soul-origins:textures/entity/okami_hunt.png"
+    },
+    "remove_on_hit": {
+        "type": "origins:action_on_hit",
+        "bientity_action": {
+            "type": "origins:actor_action",
+            "action": {
+                "type": "origins:revoke_power",
+                "power": "soul-origins:okami/hunt_active",
+                "source": "soul-origins:okami/hunt"
+            }
+        }
+    },
+    "remove_on_damage": {
+        "type": "apoli:action_when_hit",
+        "bientity_action": {
+            "type": "origins:actor_action",
+            "action": {
+                "type": "origins:revoke_power",
+                "power": "soul-origins:okami/hunt_active",
+                "source": "soul-origins:okami/hunt"
+            }
+        }
+    }
+}

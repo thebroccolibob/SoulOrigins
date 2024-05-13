@@ -10,5 +10,6 @@ private fun register(powerFactory: PowerFactory<*>) {
 
 fun registerSoulOriginsPowers() {
     register(BowSpeedPower.factory)
+    register(EmissiveOverlayPower.factory)
     register(DisengagePower.factory)
 }
