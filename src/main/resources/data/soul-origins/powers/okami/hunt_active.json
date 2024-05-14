@@ -1,9 +1,25 @@
 {
     "type": "origins:multiple",
     "invisible": {
-        "type": "origins:invisibility",
-        "render_armor": false,
-        "render_outline": true
+        "type": "origins:action_over_time",
+        "interval": 20,
+        "entity_action": {
+            "type": "origins:apply_effect",
+            "effect": {
+                "effect": "minecraft:invisibility",
+                "duration": 160,
+                "show_icon": true,
+                "show_particles": false,
+                "is_ambient": true
+            }
+        }
+    },
+    "hide_features": {
+        "type": "origins:prevent_feature_render",
+        "features": [
+            "armor",
+            "held_item"
+        ]
     },
     "overlay": {
         "type": "soul-origins:emissive_overlay",

@@ -14,6 +14,8 @@ class EmissiveOverlayPower(
     textureLocation: Identifier?,
     textureUrl: String?
 ) : TextureOrUrlPower(type, entity, textureLocation, textureUrl) {
+    override fun getPowerClassString() = "EmissiveOverlayPower"
+
     companion object {
         val factory: PowerFactory<EmissiveOverlayPower> = PowerFactory(
             Identifier(Soulorigins.MOD_ID, "emissive_overlay"),

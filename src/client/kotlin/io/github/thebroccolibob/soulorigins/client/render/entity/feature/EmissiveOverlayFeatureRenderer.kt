@@ -3,7 +3,6 @@ package io.github.thebroccolibob.soulorigins.client.render.entity.feature
 import io.github.apace100.apoli.component.PowerHolderComponent
 import io.github.thebroccolibob.soulorigins.power.EmissiveOverlayPower
 import net.merchantpug.apugli.client.util.TextureUtilClient
-import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider
@@ -48,27 +47,10 @@ class EmissiveOverlayFeatureRenderer<T : LivingEntity, M : EntityModel<T>>(
         PowerHolderComponent.getPowers(entity, EmissiveOverlayPower::class.java)
             .forEach { power ->
                 if (power.textureLocation != null || power.textureUrl != null) {
-                    var renderLayer: RenderLayer? = null
-                    if (TextureUtilClient.getUrls().containsKey(power.urlTextureIdentifier)) {
-                        renderLayer = if (MinecraftClient.getInstance()
-                                .hasOutline(entity) && entity.isInvisible
-                        ) RenderLayer.getOutline(power.urlTextureIdentifier) else RenderLayer.getEntityTranslucent(
-                            power.urlTextureIdentifier
-                        )
-                    } else if (power.textureLocation != null) {
-                        renderLayer = if (MinecraftClient.getInstance()
-                                .hasOutline(entity) && entity.isInvisible
-                        ) RenderLayer.getOutline(power.textureLocation) else RenderLayer.getEntityTranslucent(
-                            power.textureLocation
-                        )
-                    }
+                    val renderLayer = RenderLayer.getEntityTranslucentEmissive(if (TextureUtilClient.getUrls().containsKey(power.urlTextureIdentifier)) power.urlTextureIdentifier else power.textureLocation)
 
                     if (renderLayer != null) {
                         matrices.push()
-                        val red = 1.0f
-                        val green = 1.0f
-                        val blue = 1.0f
-                        val alpha = 1.0f
 
                         val entityModel = extraPlayerModel ?: this.contextModel
                         val model: EntityModel<T> = this.contextModel
@@ -82,15 +64,15 @@ class EmissiveOverlayFeatureRenderer<T : LivingEntity, M : EntityModel<T>>(
                             extraModel.rightPants.copyTransform(model.rightPants)
                         }
 
-                        (entityModel as EntityModel<*>).render(
+                        entityModel.render(
                             matrices,
                             vertexConsumers.getBuffer(renderLayer),
-                            15728640,
+                            light,
                             OverlayTexture.DEFAULT_UV,
-                            red,
-                            green,
-                            blue,
-                            alpha
+                            1.0f,
+                            1.0f,
+                            1.0f,
+                            1.0f
                         )
                         matrices.pop()
                     }
