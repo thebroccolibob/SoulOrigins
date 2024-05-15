@@ -1,6 +1,23 @@
 {
     "type": "origins:multiple",
-    "invisible": {
+    "manage_invisible": {
+        "type": "origins:action_on_callback",
+        "entity_action_gained": {
+            "type": "origins:apply_effect",
+            "effect": {
+                "effect": "minecraft:invisibility",
+                "duration": 160,
+                "show_icon": true,
+                "show_particles": false,
+                "is_ambient": true
+            }
+        },
+        "entity_action_lost": {
+            "type": "origins:clear_effect",
+            "effect": "minecraft:invisibility"
+        }
+    },
+    "sustain_invisible": {
         "type": "origins:action_over_time",
         "interval": 20,
         "entity_action": {
@@ -37,13 +54,42 @@
         }
     },
     "remove_on_damage": {
-        "type": "apoli:action_when_hit",
+        "type": "origins:action_when_hit",
         "bientity_action": {
-            "type": "origins:actor_action",
+            "type": "origins:target_action",
             "action": {
                 "type": "origins:revoke_power",
                 "power": "soul-origins:okami/hunt_active",
                 "source": "soul-origins:okami/hunt"
+            }
+        }
+    },
+    "target": {
+        "type": "origins:active_self",
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:okami/hunt_target_cooldown",
+            "comparison": "<=",
+            "compare_to": 0
+        },
+        "entity_action": {
+            "type": "origins:raycast",
+            "entity": true,
+            "block": false,
+            "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                    "type": "origins:entity_type",
+                    "entity_type": "minecraft:player"
+                }
+            },
+            "entity_distance": 64,
+            "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                    "type": "origins:execute_command",
+                    "command": "say PLACEHOLDER TEXT"
+                }
             }
         }
     }
