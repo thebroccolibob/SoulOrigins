@@ -3,7 +3,7 @@
     "tracker": {
         "type": "origins:resource",
         "min": 0,
-        "max": 10,
+        "max": 40,
         "start_value": 0
     },
     "accumulate": {
@@ -16,7 +16,7 @@
             "type": "origins:change_resource",
             "resource": "soul-origins:okami/gleaning_tracker",
             "operation": "add",
-            "change": 1
+            "change": 4
         }
     },
     "boost_health": {
@@ -26,6 +26,15 @@
             "operation": "add_base_late",
             "resource": "soul-origins:okami/gleaning_tracker",
             "value": 0
+        }
+    },
+    "reset": {
+        "type": "origins:action_on_callback",
+        "entity_action_respawned": {
+            "type": "origins:change_resource",
+            "resource": "soul-origins:okami/gleaning_tracker",
+            "operation": "set",
+            "change": 0
         }
     }
 }

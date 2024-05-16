@@ -83,7 +83,7 @@
                     "entity_type": "minecraft:player"
                 }
             },
-            "entity_distance": 64,
+            "distance": 64,
             "bientity_action": {
                 "type": "origins:target_action",
                 "action": {
