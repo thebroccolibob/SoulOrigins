@@ -40,9 +40,11 @@ public abstract class SlimeEntityMixin extends MobEntity implements OwnableMonst
 		dataTracker.startTracking(OWNER_UUID, Optional.empty());
 	}
 
-	@Override
-	public void writeCustomDataToNbt(NbtCompound nbt) {
-		super.writeCustomDataToNbt(nbt);
+	@Inject(
+			method = "writeCustomDataToNbt",
+			at = @At("TAIL")
+	)
+	private void writeOwner(NbtCompound nbt, CallbackInfo ci) {
 		if (this.soulOrigins$getOwnerUuid() != null) {
 			nbt.putUuid("Owner", this.soulOrigins$getOwnerUuid());
 		}

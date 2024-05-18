@@ -39,6 +39,7 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
             targetEntity.saveSelfNbt(this)
             remove("Pos")
             remove("UUID")
+            remove("ActiveEffects")
         })
 
         (targetEntity.vehicle as? SkeletonHorseEntity)?.let {
@@ -46,6 +47,7 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
                 it.saveSelfNbt(this)
                 remove("Pos")
                 remove("UUID")
+                remove("ActiveEffects")
             })
             it.discard()
         }
@@ -53,7 +55,7 @@ class MarigoldCardItem(settings: Settings) : Item(settings) {
         targetEntity.customName?.let(stack::setCustomName)
         targetEntity.discard()
 
-        // mana refund :3
+        // mana refund
         if ((targetEntity as OwnableMonster).isTamed) {
             user.soulMeter += 2
             user.syncSoulMeter()
