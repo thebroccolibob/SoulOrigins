@@ -1,9 +1,12 @@
 {
     "powers": [
-        "soul-origins:wind/dash",
-        "soul-origins:wind/jump",
+        "soul-origins:wind/tailwind",
+        "soul-origins:wind/updraft",
         "soul-origins:wind/float",
-        "soul-origins:wind/shield",
-        "soul-origins:wind/disengage"
+        "soul-origins:wind/neutral",
+        "soul-origins:wind/burst",
+        "soul-origins:wind/compressed_air",
+        "soul-origins:soul_meter",
+        "soul-origins:soul_extract"
     ]
 }

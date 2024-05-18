@@ -1,0 +1,26 @@
+{
+    "type": "origins:active_self",
+    "key": "key.origins.primary_active",
+    "entity_action": {
+        "type": "origins:spawn_entity",
+        "entity_type": "minecraft:wolf",
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:execute_command",
+                    "command": "scale set 2"
+                },
+                {
+                    "type": "origins:execute_command",
+                    "command": "scale delay set 0"
+                }
+            ]
+        }
+    },
+    "cooldown": 6000,
+    "hud_render": {
+        "sprite_location": "origins:textures/gui/resource_bar.png",
+        "bar_index": 5
+    }
+}

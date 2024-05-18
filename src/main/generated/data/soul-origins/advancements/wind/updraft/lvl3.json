@@ -1,0 +1,50 @@
+{
+  "parent": "soul-origins:wind/updraft/lvl2",
+  "criteria": {
+    "use_item": {
+      "conditions": {
+        "item": {
+          "items": [
+            "soul-origins:wind_crystal_updraft"
+          ]
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "player",
+                "advancements": {
+                  "soul-origins:wind/updraft/lvl2": true
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.soul-origins.wind.updraft.lvl3.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "soul-origins:wind_crystal_updraft"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.soul-origins.wind.updraft.lvl3"
+    }
+  },
+  "requirements": [
+    [
+      "use_item"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

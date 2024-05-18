@@ -1,5 +1,6 @@
 package io.github.thebroccolibob.soulorigins
 
+import io.github.apace100.calio.data.SerializableData
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
@@ -12,6 +13,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 import java.util.*
+import net.minecraft.util.Pair as McPair
 
 inline fun FabricItemSettings(init: FabricItemSettings.() -> Unit) = FabricItemSettings().apply(init)
 
@@ -42,3 +44,24 @@ fun NbtCompound.getList(key: String, type: Byte): NbtList = getList(key, type.to
 
 fun <T: Any> Optional<T>.toNullable(): T? = orElse(null)
 fun <T: Any> T?.toOptional() = Optional.ofNullable(this)
+
+fun <T, R> Iterable<T>.mapWithNext(transform: (current: T, next: T?) -> R): List<R> {
+    return toList().let {
+        it.mapIndexed { index, item ->
+            transform(item, it.getOrNull(index + 1))
+        }
+    }
+}
+
+operator fun <T> McPair<T, *>.component1(): T = left
+operator fun <T> McPair<*, T>.component2(): T = right
+
+fun <T> Iterable<T>.forEachWithNext(transform: (current: T, next: T?) -> Unit) {
+    toList().let {
+        it.forEachIndexed { index, item ->
+            transform(item, it.getOrNull(index + 1))
+        }
+    }
+}
+
+fun SerializableData(init: SerializableData.() -> Unit) = SerializableData().apply(init)

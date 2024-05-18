@@ -3,12 +3,7 @@
     "swirl": {
         "type": "apugli:energy_swirl",
         "texture_location": "minecraft:textures/entity/wither/wither_armor.png",
-        "speed": 0.05,
-        "condition": {
-            "type": "origins:health",
-            "comparison": "<=",
-            "compare_to": 6
-        }
+        "speed": 0.05
     },
     "prevent_damage": {
         "type": "origins:modify_damage_taken",
@@ -18,21 +13,11 @@
         "modifier": {
             "operation": "set_total",
             "value": 0
-        },
-        "condition": {
-            "type": "origins:health",
-            "comparison": "<=",
-            "compare_to": 6
         }
     },
     "shader": {
         "type": "origins:shader",
-        "shader": "minecraft:shaders/post/deconverge.json",
-        "condition": {
-            "type": "origins:health",
-            "comparison": "<=",
-            "compare_to": 6
-        }
+        "shader": "minecraft:shaders/post/deconverge.json"
     },
     "redirect": {
         "type": "apugli:action_when_projectile_hit",
@@ -47,11 +32,18 @@
         },
         "hud_render": {
             "should_render": false
-        },
-        "condition": {
-            "type": "origins:health",
-            "comparison": "<=",
-            "compare_to": 6
+        }
+    },
+    "remove": {
+        "type": "origins:action_on_callback",
+        "entity_action_added": {
+            "type": "origins:delay",
+            "ticks": 600,
+            "action": {
+                "type": "origins:revoke_power",
+                "power": "soul-origins:wind/shield",
+                "source": "soul-origins:wind/burst"
+            }
         }
     }
 }

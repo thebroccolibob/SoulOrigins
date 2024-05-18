@@ -3,6 +3,7 @@ package io.github.thebroccolibob.soulorigins.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import io.github.thebroccolibob.soulorigins.entity.OwnableMonster;
+import io.github.thebroccolibob.soulorigins.power.DisengagePower;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.RevengeGoal;
@@ -26,5 +27,12 @@ public abstract class RevengeGoalMixin extends TrackTargetGoal {
             return false;
 
         return original.call(instance, livingEntity, targetPredicate);
+    }
+
+    @Override
+    public boolean shouldContinue() {
+        if (DisengagePower.shouldMobForget(mob)) return false;
+
+        return super.shouldContinue();
     }
 }

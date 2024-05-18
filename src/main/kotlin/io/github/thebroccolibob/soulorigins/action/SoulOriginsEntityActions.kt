@@ -14,27 +14,25 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 
-object SoulOriginsEntityActions {
-    private fun register(actionFactory: ActionFactory<Entity>) {
-        Registry.register(ApoliRegistries.ENTITY_ACTION, actionFactory.serializerId, actionFactory)
-    }
+private fun register(actionFactory: ActionFactory<Entity>) {
+    Registry.register(ApoliRegistries.ENTITY_ACTION, actionFactory.serializerId, actionFactory)
+}
 
-    fun register() {
-        register(ActionFactory(
-            Identifier(Soulorigins.MOD_ID, "change_cooldown"), SerializableData()
-                .add("cooldown", ApoliDataTypes.POWER_TYPE)
-                .add("change", SerializableDataTypes.INT)
-        ) { data: SerializableData.Instance, entity: Entity? ->
-            if (entity is LivingEntity) {
-                val component = PowerHolderComponent.KEY[entity]
-                val powerType = data.get<PowerType<*>>("cooldown")
-                val p = component.getPower(powerType)
-                val change = data.getInt("change")
-                if (p is CooldownPower) {
-                    p.setCooldown((p.cooldownDuration - p.remainingTicks) - change)
-                    PowerHolderComponent.syncPower(entity, powerType)
-                }
+fun registerSoulOriginsEntityActions() {
+    register(ActionFactory(
+        Identifier(Soulorigins.MOD_ID, "change_cooldown"), SerializableData()
+            .add("cooldown", ApoliDataTypes.POWER_TYPE)
+            .add("change", SerializableDataTypes.INT)
+    ) { data, entity ->
+        if (entity is LivingEntity) {
+            val component = PowerHolderComponent.KEY[entity]
+            val powerType = data.get<PowerType<*>>("cooldown")
+            val p = component.getPower(powerType)
+            val change = data.getInt("change")
+            if (p is CooldownPower) {
+                p.setCooldown((p.cooldownDuration - p.remainingTicks) - change)
+                PowerHolderComponent.syncPower(entity, powerType)
             }
-        })
-    }
+        }
+    })
 }

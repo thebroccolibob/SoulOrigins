@@ -1,7 +1,10 @@
 package io.github.thebroccolibob.soulorigins
 
-import io.github.thebroccolibob.soulorigins.action.SoulOriginsEntityActions
+import io.github.thebroccolibob.soulorigins.action.registerSoulOriginsEntityActions
+import io.github.thebroccolibob.soulorigins.action.registerSoulOriginsItemActions
+import io.github.thebroccolibob.soulorigins.condition.registerSoulOriginsItemConditions
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
+import io.github.thebroccolibob.soulorigins.power.registerSoulOriginsPowers
 import net.fabricmc.api.ModInitializer
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -17,6 +20,9 @@ object Soulorigins : ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 		SouloriginsItems.register()
-		SoulOriginsEntityActions.register()
+		registerSoulOriginsEntityActions()
+		registerSoulOriginsItemActions()
+		registerSoulOriginsItemConditions()
+		registerSoulOriginsPowers()
 	}
 }

@@ -1,0 +1,32 @@
+{
+  "criteria": {
+    "wind_origin": {
+      "conditions": {
+        "origin": "soul-origins:wind_spirit"
+      },
+      "trigger": "origins:chose_origin"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "soul-origins:textures/gui/advancements/backgrounds/wind.png",
+    "description": {
+      "translate": "advancements.soul-origins.wind.root.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:feather"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.soul-origins.wind.root"
+    }
+  },
+  "requirements": [
+    [
+      "wind_origin"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

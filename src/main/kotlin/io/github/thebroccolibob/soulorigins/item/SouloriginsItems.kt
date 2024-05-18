@@ -9,12 +9,22 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
 
 object SouloriginsItems {
-    private fun register(id: String, item: Item) = Registry.register(Registries.ITEM, Identifier(Soulorigins.MOD_ID, id), item)
+    private fun register(id: String, item: Item): Item = Registry.register(Registries.ITEM, Identifier(Soulorigins.MOD_ID, id), item)
 
-    val MARIGOLD_CARD: Item = register("marigold_card", MarigoldCardItem(FabricItemSettings {
+    private fun registerCrystal(type: String) = register("wind_crystal_$type", WindCrystalItem(FabricItemSettings {
+        maxCount(1)
+        rarity(Rarity.RARE)
+    }))
+
+    val MARIGOLD_CARD = register("marigold_card", MarigoldCardItem(FabricItemSettings {
         maxCount(1)
         rarity(Rarity.UNCOMMON)
     }))
+
+    val UPDRAFT_CRYSTAL = registerCrystal("updraft")
+    val TAILWIND_CRYSTAL = registerCrystal("tailwind")
+    val BURST_CRYSTAL = registerCrystal("burst")
+//    val NEUTRAL_CRYSTAL = registerCrystal("neutral")
 
     fun register() {}
 }
