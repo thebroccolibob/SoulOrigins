@@ -1,17 +1,26 @@
 package io.github.thebroccolibob.soulorigins.item
 
+import io.github.thebroccolibob.soulorigins.plus
 import net.minecraft.advancement.criterion.Criteria
+import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.stat.Stats
+import net.minecraft.text.Text
+import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 
-class WindCrystalItem(settings: Settings) : Item(settings) {
+class WindShardItem(tooltipColor: Formatting, settings: Settings) : Item(settings) {
+
+    private val flavorTooltip by lazy {
+        Text.translatable(this + "flavor").formatted(tooltipColor, Formatting.ITALIC)
+    }
+
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val stack = user.getStackInHand(hand)
 
@@ -27,5 +36,13 @@ class WindCrystalItem(settings: Settings) : Item(settings) {
         return TypedActionResult.success(stack)
     }
 
-    override fun hasGlint(stack: ItemStack) = true
+    override fun appendTooltip(
+        stack: ItemStack,
+        world: World?,
+        tooltip: MutableList<Text>,
+        context: TooltipContext
+    ) {
+        tooltip.add(flavorTooltip)
+        tooltip.add(Text.translatable("item.soul-origins.wind_shard.origin_exclusive").formatted(Formatting.GRAY, Formatting.ITALIC))
+    }
 }

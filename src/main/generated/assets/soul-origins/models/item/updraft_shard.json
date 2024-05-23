@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "soul-origins:item/wind_crystal_updraft"
+    "layer0": "soul-origins:item/updraft_shard"
   }
 }

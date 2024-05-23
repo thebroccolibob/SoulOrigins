@@ -5,7 +5,7 @@
       "conditions": {
         "item": {
           "items": [
-            "soul-origins:wind_crystal_tailwind"
+            "soul-origins:tailwind_shard"
           ]
         },
         "player": [
@@ -34,7 +34,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "soul-origins:wind_crystal_tailwind"
+      "item": "soul-origins:tailwind_shard"
     },
     "show_toast": false,
     "title": {

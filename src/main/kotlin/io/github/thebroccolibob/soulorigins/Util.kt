@@ -3,6 +3,7 @@ package io.github.thebroccolibob.soulorigins
 import io.github.apace100.calio.data.SerializableData
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ItemUsageContext
 import net.minecraft.nbt.NbtCompound
@@ -65,3 +66,5 @@ fun <T> Iterable<T>.forEachWithNext(transform: (current: T, next: T?) -> Unit) {
 }
 
 fun SerializableData(init: SerializableData.() -> Unit) = SerializableData().apply(init)
+
+operator fun Item.plus(suffix: String) = "$translationKey.$suffix"

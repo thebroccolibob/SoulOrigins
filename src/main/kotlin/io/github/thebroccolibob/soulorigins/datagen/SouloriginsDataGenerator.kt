@@ -29,9 +29,9 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 		}
 
 		override fun generateItemModels(itemModelGenerator: ItemModelGenerator) {
-			itemModelGenerator.register(SouloriginsItems.UPDRAFT_CRYSTAL, Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.TAILWIND_CRYSTAL, Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.BURST_CRYSTAL, Models.GENERATED)
+			itemModelGenerator.register(SouloriginsItems.UPDRAFT_SHARD, Models.GENERATED)
+			itemModelGenerator.register(SouloriginsItems.TAILWIND_SHARD, Models.GENERATED)
+			itemModelGenerator.register(SouloriginsItems.BURST_SHARD, Models.GENERATED)
 //			itemModelGenerator.register(SouloriginsItems.NEUTRAL_CRYSTAL, Models.GENERATED)
 		}
 	}

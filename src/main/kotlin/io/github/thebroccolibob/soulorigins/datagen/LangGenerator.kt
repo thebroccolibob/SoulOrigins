@@ -4,6 +4,7 @@ import io.github.thebroccolibob.soulorigins.datagen.power.LeveledCooldownEntry
 import io.github.thebroccolibob.soulorigins.datagen.power.wind.tailwindEntries
 import io.github.thebroccolibob.soulorigins.datagen.power.wind.updraftEntries
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
+import io.github.thebroccolibob.soulorigins.plus
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 
@@ -61,8 +62,12 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
         translationBuilder.add("advancements.$modId.wind.burst.lvl2.description", "Adds proj prot 30s\nRecharges updraft & tailwind")
         translationBuilder.add("advancements.$modId.wind.burst.lvl3.description", "Increases to 1min")
 
-        translationBuilder.add(SouloriginsItems.BURST_CRYSTAL, "Burst Wind Crystal")
-        translationBuilder.add(SouloriginsItems.UPDRAFT_CRYSTAL, "Updraft Wind Crystal")
-        translationBuilder.add(SouloriginsItems.TAILWIND_CRYSTAL, "Tailwind Wind Crystal")
+        translationBuilder.add(SouloriginsItems.BURST_SHARD, "Burst Shard")
+        translationBuilder.add(SouloriginsItems.BURST_SHARD + "flavor", "A shard resonating with an eruptive power")
+        translationBuilder.add(SouloriginsItems.UPDRAFT_SHARD, "Updraft Shard")
+        translationBuilder.add(SouloriginsItems.UPDRAFT_SHARD + "flavor", "A shard resonating with an uplifting power")
+        translationBuilder.add(SouloriginsItems.TAILWIND_SHARD, "Tailwind Shard")
+        translationBuilder.add(SouloriginsItems.TAILWIND_SHARD + "flavor", "A shard resonating with a turbulent power")
+        translationBuilder.add("item.soul-origins.wind_shard.origin_exclusive", "Only usable by wind spirits")
     }
 }
