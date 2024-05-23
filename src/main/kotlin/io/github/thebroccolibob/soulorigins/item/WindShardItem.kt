@@ -1,6 +1,8 @@
 package io.github.thebroccolibob.soulorigins.item
 
+import io.github.thebroccolibob.soulorigins.hasPower
 import io.github.thebroccolibob.soulorigins.plus
+import io.github.thebroccolibob.soulorigins.power.UseWindShardsPower
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
@@ -23,6 +25,8 @@ class WindShardItem(tooltipColor: Formatting, settings: Settings) : Item(setting
 
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val stack = user.getStackInHand(hand)
+
+        if (!user.hasPower<UseWindShardsPower>()) return TypedActionResult.fail(stack)
 
         if (world is ServerWorld)
             user.incrementStat(Stats.USED.getOrCreateStat(stack.item))

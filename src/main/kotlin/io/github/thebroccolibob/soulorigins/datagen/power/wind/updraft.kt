@@ -20,7 +20,7 @@ val updraftEntries = listOf(
 private val advancement = { (lvl, _, _, _): UpdraftEntry -> "soul-origins:wind/updraft/lvl$lvl" }
 
 fun updraft(id: String) = leveledMultiCooldown(
-    id, updraftEntries, "key.origins.primary_active", advancement,
+    id, updraftEntries, "key.origins.secondary_active", advancement,
     otherConditions = listOfJson({
         "type" to "origins:sneaking"
         "inverted" to true

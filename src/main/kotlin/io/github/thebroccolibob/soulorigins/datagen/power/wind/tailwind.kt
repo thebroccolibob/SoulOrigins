@@ -28,7 +28,7 @@ val tailwindEntries = listOf(
 
 private val advancement = { (lvl, _, _, _): TailwindEntry -> "soul-origins:wind/tailwind/lvl$lvl" }
 
-fun tailwind(id: String) = leveledMultiCooldown(id, tailwindEntries, "key.origins.secondary_active", advancement,
+fun tailwind(id: String) = leveledMultiCooldown(id, tailwindEntries, "key.origins.primary_active", advancement,
     otherConditions = listOf(JsonObject {
         "type" to "origins:or"
         "conditions" to keyDirs.map { (key, _, _) -> JsonObject {

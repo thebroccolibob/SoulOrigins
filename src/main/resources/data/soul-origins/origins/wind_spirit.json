@@ -6,6 +6,7 @@
         "soul-origins:wind/neutral",
         "soul-origins:wind/burst",
         "soul-origins:wind/compressed_air",
+        "soul-origins:wind/use_shards",
         "soul-origins:soul_meter",
         "soul-origins:soul_extract"
     ]

@@ -252,7 +252,7 @@
         }
       ]
     },
-    "key": "key.origins.primary_active"
+    "key": "key.origins.secondary_active"
   },
   "cooldown1": {
     "type": "origins:cooldown",

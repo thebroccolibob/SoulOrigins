@@ -521,7 +521,7 @@
         }
       ]
     },
-    "key": "key.origins.secondary_active"
+    "key": "key.origins.primary_active"
   },
   "cooldown1": {
     "type": "origins:cooldown",
