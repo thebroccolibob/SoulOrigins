@@ -3,9 +3,13 @@
   "package": "io.github.thebroccolibob.soulorigins.mixin.client",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "ModelPredicateProviderRegistryMixin",
     "SkeletonEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-	}
+  },
+  "mixins": [
+    "PlayerEntityRendererMixin"
+  ]
 }
