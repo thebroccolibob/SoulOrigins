@@ -12,6 +12,13 @@
     "entity": true,
     "shape_type": "collider",
     "fluid_handling": "any",
+    "bientity_condition":  {
+      "type": "origins:target_condition",
+      "condition": {
+        "type": "origins:in_tag",
+        "tag": "soul-origins:mob_sorcerer_friends"
+      }
+    },
     "bientity_action": {
       "type": "soul-origins:absorb_mob_orb"
     },

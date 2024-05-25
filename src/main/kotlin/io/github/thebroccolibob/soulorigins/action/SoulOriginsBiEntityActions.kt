@@ -31,10 +31,10 @@ fun registerSoulOriginsBiEntityActions() {
     ) { _, (actor, target) ->
             // Generate orb and inject mob nbt data
             val stack = ItemStack(SouloriginsItems.MOB_ORB)
-            if (stack.hasEntity) ActionResult.PASS
 
-            val targetEntity = (target as? OwnableMonster) ?: (target.firstPassenger as? OwnableMonster) ?: ActionResult.PASS
+            val targetEntity = (target as? OwnableMonster) ?: (target.firstPassenger as? OwnableMonster) ?: return@ActionFactory
             targetEntity as MobEntity
+
             stack.orCreateNbt.put(ENTITY_NBT, NbtCompound().apply {
                 // Get mob NBT data
                 targetEntity.saveSelfNbt(this)
@@ -64,7 +64,7 @@ fun registerSoulOriginsBiEntityActions() {
             }
             // Give player orb with data
             user?.giveItemStack(stack)
-            ActionResult.SUCCESS
+            return@ActionFactory
         }
     )
 }

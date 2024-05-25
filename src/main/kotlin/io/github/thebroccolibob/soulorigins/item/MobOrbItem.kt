@@ -32,7 +32,7 @@ class MobOrbItem(settings: Settings) : Item(settings) {
 
         val soulMeter = player?.soulMeter
 
-        // mana check fails return
+        // Mana check fails return
         if ((soulMeter?.value ?: 0) < 2) return  ActionResult.PASS
 
         if (world !is ServerWorld) return ActionResult.SUCCESS
@@ -53,15 +53,14 @@ class MobOrbItem(settings: Settings) : Item(settings) {
 
         nbt.remove(ENTITY_NBT)
         nbt.remove(VEHICLE_NBT)
-        stack.decrement(1)
         stack.removeCustomName()
 
         // Mana Expense
         soulMeter -= 2
         player?.syncSoulMeter()
 
+        stack.decrement(1)
         return ActionResult.CONSUME
-
     }
 
     override fun appendTooltip(
