@@ -1,0 +1,22 @@
+{
+  "type": "origins:active_self",
+  "cooldown": 20,
+  "hud_render": {
+    "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_02.png",
+    "bar_index": 8
+  },
+  "entity_action": {
+    "type": "origins:raycast",
+    "distance": 16,
+    "block": false,
+    "entity": true,
+    "shape_type": "collider",
+    "fluid_handling": "any",
+    "bientity_action": {
+      "type": "soul-origins:absorb_mob_orb"
+    },
+    "command_along_ray": "particle minecraft:soul_fire_flame",
+    "command_step": 1,
+    "command_along_ray_only_on_hit": true
+  }
+}

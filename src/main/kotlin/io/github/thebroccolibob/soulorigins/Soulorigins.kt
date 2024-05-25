@@ -1,5 +1,6 @@
 package io.github.thebroccolibob.soulorigins
 
+import io.github.thebroccolibob.soulorigins.action.registerSoulOriginsBiEntityActions
 import io.github.thebroccolibob.soulorigins.action.registerSoulOriginsEntityActions
 import io.github.thebroccolibob.soulorigins.action.registerSoulOriginsItemActions
 import io.github.thebroccolibob.soulorigins.condition.registerSoulOriginsItemConditions
@@ -13,13 +14,12 @@ object Soulorigins : ModInitializer {
 	const val MOD_ID = "soul-origins"
 
 	@JvmField
+	@Suppress("unused")
     val logger: Logger = LoggerFactory.getLogger(MOD_ID)
 
 	override fun onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
 		SouloriginsItems.register()
+		registerSoulOriginsBiEntityActions()
 		registerSoulOriginsEntityActions()
 		registerSoulOriginsItemActions()
 		registerSoulOriginsItemConditions()

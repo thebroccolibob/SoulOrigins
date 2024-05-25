@@ -1,0 +1,15 @@
+{
+  "name": "Soul Sorcerer",
+  "description": "A human born with a connection to soul energy. With this connection you can manipulate the souls of weaker beings, and even strengthen your own soul.",
+  "icon": {
+       "item": "origins:orb_of_origin"
+  },
+  "impact": 1,
+  "powers": [
+    "soul-origins:soul_meter",
+    "soul-origins:soul_extract",
+    "soul-origins:sorcerer/absorb_mob",
+    "soul-origins:sorcerer/mob_friend",
+    "soul-origins:sorcerer/anti_slime_damage"
+  ]
+}

@@ -2,6 +2,7 @@ package io.github.thebroccolibob.soulorigins.item
 
 import io.github.thebroccolibob.soulorigins.FabricItemSettings
 import io.github.thebroccolibob.soulorigins.Soulorigins
+import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder.Mob
 import net.minecraft.item.Item
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -22,10 +23,14 @@ object SouloriginsItems {
         rarity(Rarity.UNCOMMON)
     }))
 
+    val MOB_ORB = register("mob_orb", MobOrbItem(FabricItemSettings {
+        maxCount(1)
+        rarity(Rarity.EPIC)
+    }))
+
     val UPDRAFT_SHARD = registerShard("updraft", Formatting.AQUA)
     val TAILWIND_SHARD = registerShard("tailwind", Formatting.GREEN)
     val BURST_SHARD = registerShard("burst", Formatting.LIGHT_PURPLE)
-//    val NEUTRAL_CRYSTAL = registerCrystal("neutral")
 
     fun register() {}
 }

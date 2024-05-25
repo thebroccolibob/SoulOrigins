@@ -1,5 +1,6 @@
 {
   "origins": [
+    "soul-origins:soul_sorcerer",
     "soul-origins:mob_sorcerer",
     "soul-origins:wind_spirit",
     "soul-origins:okami"
