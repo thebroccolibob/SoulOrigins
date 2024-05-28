@@ -6,7 +6,6 @@ import io.github.apace100.calio.data.SerializableData
 import io.github.thebroccolibob.soulorigins.*
 import io.github.thebroccolibob.soulorigins.entity.OwnableMonster
 import io.github.thebroccolibob.soulorigins.entity.isTamed
-import io.github.thebroccolibob.soulorigins.item.MarigoldCardItem.Companion.hasEntity
 import io.github.thebroccolibob.soulorigins.item.MobOrbItem.Companion.ENTITY_NBT
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import net.minecraft.entity.Entity
@@ -16,7 +15,6 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.Registry
-import net.minecraft.util.ActionResult
 import net.minecraft.util.Identifier
 import net.minecraft.util.Pair as McPair
 
