@@ -8,11 +8,17 @@ import io.github.apace100.apoli.power.factory.action.ActionFactory
 import io.github.apace100.apoli.registry.ApoliRegistries
 import io.github.apace100.calio.data.SerializableData
 import io.github.apace100.calio.data.SerializableDataTypes
+import io.github.thebroccolibob.soulorigins.SerializableData
 import io.github.thebroccolibob.soulorigins.Soulorigins
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.particle.BlockStateParticleEffect
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.registry.Registry
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.Direction
+import net.minecraft.util.math.Vec3d
 
 private fun register(actionFactory: ActionFactory<Entity>) {
     Registry.register(ApoliRegistries.ENTITY_ACTION, actionFactory.serializerId, actionFactory)
@@ -43,4 +49,41 @@ fun registerSoulOriginsEntityActions() {
     })
 
     register(SpawnEntityAction.factory)
+
+    register(ActionFactory(
+        Identifier(Soulorigins.MOD_ID, "block_particle"),
+        SerializableData {
+            add("count", SerializableDataTypes.INT)
+            add("speed", SerializableDataTypes.FLOAT, 0.0F)
+            add("force", SerializableDataTypes.BOOLEAN, false)
+            add("spread", SerializableDataTypes.VECTOR, Vec3d(0.5, 0.25, 0.5))
+            add("offset_y", SerializableDataTypes.FLOAT, 0.5F)
+        }
+    ) {
+        data, entity ->
+
+        if (entity.world.isClient) {
+            return@ActionFactory
+        }
+        val serverWorld = entity.world as ServerWorld
+        val count = data.get<Int>("count")
+        if (count <= 0) return@ActionFactory
+        val speed = data.get<Float>("speed")
+        val spread = data.get<Vec3d>("spread")
+        val deltaX = (entity.width * spread.x).toFloat()
+        val deltaY = (entity.height * spread.y).toFloat()
+        val deltaZ = (entity.width * spread.z).toFloat()
+        val offsetY = entity.height * data.getFloat("offset_y")
+        serverWorld.spawnParticles(
+            BlockStateParticleEffect(ParticleTypes.BLOCK, serverWorld.getBlockState(entity.blockPos.offset(Direction.DOWN))),
+            entity.x,
+            entity.y + offsetY,
+            entity.z,
+            count,
+            deltaX.toDouble(),
+            deltaY.toDouble(),
+            deltaZ.toDouble(),
+            speed.toDouble()
+        )
+    })
 }
