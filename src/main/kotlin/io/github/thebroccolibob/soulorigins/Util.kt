@@ -73,3 +73,4 @@ fun SerializableData(init: SerializableData.() -> Unit) = SerializableData().app
 operator fun Item.plus(suffix: String) = "$translationKey.$suffix"
 
 inline fun <reified T : Power> Entity.hasPower() = PowerHolderComponent.hasPower(this, T::class.java)
+inline fun <reified T : Power> Entity.getPowers(): List<T> = PowerHolderComponent.getPowers(this, T::class.java)

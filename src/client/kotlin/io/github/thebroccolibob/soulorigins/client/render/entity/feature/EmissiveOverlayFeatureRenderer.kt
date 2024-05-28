@@ -1,6 +1,6 @@
 package io.github.thebroccolibob.soulorigins.client.render.entity.feature
 
-import io.github.apace100.apoli.component.PowerHolderComponent
+import io.github.thebroccolibob.soulorigins.getPowers
 import io.github.thebroccolibob.soulorigins.power.EmissiveOverlayPower
 import net.merchantpug.apugli.client.util.TextureUtilClient
 import net.minecraft.client.render.OverlayTexture
@@ -44,7 +44,7 @@ class EmissiveOverlayFeatureRenderer<T : LivingEntity, M : EntityModel<T>>(
         headYaw: Float,
         headPitch: Float
     ) {
-        PowerHolderComponent.getPowers(entity, EmissiveOverlayPower::class.java)
+        entity.getPowers<EmissiveOverlayPower>()
             .forEach { power ->
                 if (power.textureLocation != null || power.textureUrl != null) {
                     val renderLayer = RenderLayer.getEntityTranslucentEmissive(if (TextureUtilClient.getUrls().containsKey(power.urlTextureIdentifier)) power.urlTextureIdentifier else power.textureLocation)

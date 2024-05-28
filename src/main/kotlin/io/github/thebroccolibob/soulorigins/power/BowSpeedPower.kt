@@ -1,12 +1,12 @@
 package io.github.thebroccolibob.soulorigins.power
 
-import io.github.apace100.apoli.component.PowerHolderComponent
 import io.github.apace100.apoli.power.Power
 import io.github.apace100.apoli.power.PowerType
 import io.github.apace100.apoli.power.factory.PowerFactory
 import io.github.apace100.calio.data.SerializableDataTypes
 import io.github.thebroccolibob.soulorigins.SerializableData
 import io.github.thebroccolibob.soulorigins.Soulorigins
+import io.github.thebroccolibob.soulorigins.getPowers
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.util.Identifier
@@ -30,9 +30,7 @@ class BowSpeedPower(type: PowerType<BowSpeedPower>, entity: LivingEntity?, val m
         fun getMultiplier(entity: LivingEntity?): Double {
             if (entity !is PlayerEntity) return 1.0
 
-            val powers = PowerHolderComponent.getPowers(entity, BowSpeedPower::class.java)
-
-            return powers.map(BowSpeedPower::multiplier).fold(1.0, Double::times)
+            return entity.getPowers<BowSpeedPower>().map(BowSpeedPower::multiplier).fold(1.0, Double::times)
         }
 
         @JvmStatic

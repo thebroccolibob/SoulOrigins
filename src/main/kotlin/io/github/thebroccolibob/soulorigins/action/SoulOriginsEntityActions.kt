@@ -19,17 +19,21 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
+import java.util.function.BiConsumer
 
 private fun register(actionFactory: ActionFactory<Entity>) {
     Registry.register(ApoliRegistries.ENTITY_ACTION, actionFactory.serializerId, actionFactory)
 }
 
+private fun register(id: String, data: SerializableData, effect: BiConsumer<SerializableData.Instance, Entity>) {
+    register(ActionFactory(Identifier(Soulorigins.MOD_ID, id), data, effect))
+}
+
 fun registerSoulOriginsEntityActions() {
-    register(ActionFactory(
-        Identifier(Soulorigins.MOD_ID, "change_cooldown"), SerializableData()
-            .add("cooldown", ApoliDataTypes.POWER_TYPE)
-            .add("change", SerializableDataTypes.INT)
-    ) { data, entity ->
+    register("change_cooldown", SerializableData {
+        add("cooldown", ApoliDataTypes.POWER_TYPE)
+        add("change", SerializableDataTypes.INT)
+    }) { data, entity ->
         if (entity is LivingEntity) {
             val component = PowerHolderComponent.KEY[entity]
             val powerType = data.get<PowerType<*>>("cooldown")
@@ -40,34 +44,29 @@ fun registerSoulOriginsEntityActions() {
                 PowerHolderComponent.syncPower(entity, powerType)
             }
         }
-    })
+    }
 
-    register(ActionFactory(
-        Identifier(Soulorigins.MOD_ID, "despawn"), SerializableData()
-    ) { _, entity ->
+    register("despawn", SerializableData()) { _, entity ->
         entity.discard()
-    })
+    }
 
     register(SpawnEntityAction.factory)
 
-    register(ActionFactory(
-        Identifier(Soulorigins.MOD_ID, "block_particle"),
-        SerializableData {
-            add("count", SerializableDataTypes.INT)
-            add("speed", SerializableDataTypes.FLOAT, 0.0F)
-            add("force", SerializableDataTypes.BOOLEAN, false)
-            add("spread", SerializableDataTypes.VECTOR, Vec3d(0.5, 0.25, 0.5))
-            add("offset_y", SerializableDataTypes.FLOAT, 0.5F)
-        }
-    ) {
+    register("block_particle", SerializableData {
+        add("count", SerializableDataTypes.INT)
+        add("speed", SerializableDataTypes.FLOAT, 0.0F)
+        add("force", SerializableDataTypes.BOOLEAN, false)
+        add("spread", SerializableDataTypes.VECTOR, Vec3d(0.5, 0.25, 0.5))
+        add("offset_y", SerializableDataTypes.FLOAT, 0.5F)
+    }) {
         data, entity ->
 
         if (entity.world.isClient) {
-            return@ActionFactory
+            return@register
         }
         val serverWorld = entity.world as ServerWorld
         val count = data.get<Int>("count")
-        if (count <= 0) return@ActionFactory
+        if (count <= 0) return@register
         val speed = data.get<Float>("speed")
         val spread = data.get<Vec3d>("spread")
         val deltaX = (entity.width * spread.x).toFloat()
@@ -85,5 +84,5 @@ fun registerSoulOriginsEntityActions() {
             deltaZ.toDouble(),
             speed.toDouble()
         )
-    })
+    }
 }
