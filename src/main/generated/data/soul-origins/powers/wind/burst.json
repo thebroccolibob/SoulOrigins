@@ -65,9 +65,9 @@
       },
       {
         "type": "origins:spawn_particles",
-        "count": 64,
-        "particle": "minecraft:cloud",
-        "speed": 0.2
+        "count": 1,
+        "particle": "soul-origins:gust_emitter_large",
+        "speed": 0
       },
       {
         "type": "origins:if_else",
