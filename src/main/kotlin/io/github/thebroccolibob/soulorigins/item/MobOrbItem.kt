@@ -134,9 +134,10 @@ class MobOrbItem(settings: Settings) : Item(settings) {
         val ItemStack.hasEntity
             get() = nbt?.contains(ENTITY_NBT) ?: false
 
+
         fun getMobType(itemStack: ItemStack): Int {
             itemStack.nbt?.getCompound(ENTITY_NBT)?.let {
-                return when (EntityType.fromNbt(it)) {
+                return when (EntityType.fromNbt(it).toNullable()) {
                     EntityType.ZOMBIE -> 1
                     EntityType.HUSK -> 2
                     EntityType.DROWNED -> 3

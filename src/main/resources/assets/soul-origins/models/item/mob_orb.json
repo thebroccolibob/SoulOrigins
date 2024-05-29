@@ -9,6 +9,12 @@
         "soul-origins:mob_type": 1
       },
       "model": "soul-origins:item/mob_orb_zombie"
+    },
+    {
+      "predicate": {
+        "soul-origins:mob_type": 2
+      },
+      "model": "soul-origins:item/mob_orb_husk"
     }
   ]
 }

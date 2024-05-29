@@ -34,8 +34,8 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			itemModelGenerator.register(SouloriginsItems.UPDRAFT_SHARD, Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.TAILWIND_SHARD, Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.BURST_SHARD, Models.GENERATED)
-//			itemModelGenerator.register(SouloriginsItems.NEUTRAL_CRYSTAL, Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_zombie", Models.GENERATED)
+			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_husk", Models.GENERATED)
 		}
 	}
 
@@ -43,6 +43,5 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 		override fun generateAdvancement(consumer: Consumer<Advancement>) {
 			consumer.generateAdvancements()
 		}
-
 	}
 }
