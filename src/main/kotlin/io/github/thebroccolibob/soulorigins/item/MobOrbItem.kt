@@ -135,23 +135,23 @@ class MobOrbItem(settings: Settings) : Item(settings) {
             get() = nbt?.contains(ENTITY_NBT) ?: false
 
 
-        fun getMobType(itemStack: ItemStack): Int {
+        fun getMobType(itemStack: ItemStack): Float {
             itemStack.nbt?.getCompound(ENTITY_NBT)?.let {
                 return when (EntityType.fromNbt(it).toNullable()) {
-                    EntityType.ZOMBIE -> 1
-                    EntityType.HUSK -> 2
-                    EntityType.DROWNED -> 3
-                    EntityType.SKELETON -> 4
-                    EntityType.STRAY -> 5
-                    EntityType.WITHER_SKELETON -> 6
-                    EntityType.SPIDER -> 7
-                    EntityType.CREEPER -> 8
-                    EntityType.ENDERMAN -> 9
-                    EntityType.SLIME -> 10
-                    else -> 0
+                    EntityType.ZOMBIE -> 0.1f
+                    EntityType.HUSK -> 0.2f
+                    EntityType.DROWNED -> 0.3f
+                    EntityType.SKELETON -> 0.4f
+                    EntityType.STRAY -> 0.5f
+                    EntityType.WITHER_SKELETON -> 0.6f
+                    EntityType.SPIDER -> 0.7f
+                    EntityType.CREEPER -> 0.8f
+                    EntityType.ENDERMAN -> 0.9f
+                    EntityType.SLIME -> 1f
+                    else -> 0f
                 }
             }
-            return 0
+            return 0f
         }
 
         private fun getNbtRefForPreferredSlot(insertStack: ItemStack, targetStack: ItemStack): Pair<NbtList, Int> {

@@ -1,6 +1,5 @@
 package io.github.thebroccolibob.soulorigins.datagen
 
-import io.github.thebroccolibob.soulorigins.Soulorigins
 import io.github.thebroccolibob.soulorigins.datagen.power.PowerGenerator
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
@@ -12,7 +11,6 @@ import net.minecraft.advancement.Advancement
 import net.minecraft.data.client.BlockStateModelGenerator
 import net.minecraft.data.client.ItemModelGenerator
 import net.minecraft.data.client.Models
-import net.minecraft.util.Identifier
 import java.util.function.Consumer
 
 object SouloriginsDataGenerator : DataGeneratorEntrypoint {
