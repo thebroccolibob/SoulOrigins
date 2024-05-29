@@ -14,10 +14,14 @@ private fun register(powerFactory: PowerFactory<*>) {
 }
 
 class UseWindShardsPower(type: PowerType<*>, entity: LivingEntity?) : Power(type, entity)
+class UseMobOrbPower(type: PowerType<*>, entity: LivingEntity?) : Power(type, entity)
+
 
 fun registerSoulOriginsPowers() {
     register(BowSpeedPower.factory)
     register(EmissiveOverlayPower.factory)
     register(DisengagePower.factory)
     register(Power.createSimpleFactory(::UseWindShardsPower, Identifier(Soulorigins.MOD_ID, "use_wind_shards")))
+    register(Power.createSimpleFactory(::UseMobOrbPower, Identifier(Soulorigins.MOD_ID, "use_mob_orb")))
+
 }

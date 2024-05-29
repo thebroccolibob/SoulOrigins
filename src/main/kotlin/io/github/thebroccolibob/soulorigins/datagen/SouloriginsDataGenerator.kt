@@ -36,6 +36,9 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_zombie", Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_husk", Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_drowned", Models.GENERATED)
+			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_skeleton", Models.GENERATED)
+			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_stray", Models.GENERATED)
+			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_witherskeleton", Models.GENERATED)
 		}
 	}
 

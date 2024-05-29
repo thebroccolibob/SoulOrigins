@@ -3,6 +3,7 @@ package io.github.thebroccolibob.soulorigins.item
 import io.github.thebroccolibob.soulorigins.*
 import io.github.thebroccolibob.soulorigins.entity.OwnableMonster
 import io.github.thebroccolibob.soulorigins.entity.owner
+import io.github.thebroccolibob.soulorigins.power.UseMobOrbPower
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.EquipmentSlot
@@ -26,6 +27,7 @@ import net.minecraft.world.World
 class MobOrbItem(settings: Settings) : Item(settings) {
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
         val (stack, player, blockPos, world, _, side) = context
+        if (player?.hasPower<UseMobOrbPower>() == false) return ActionResult.FAIL
         val nbt = stack.nbt
 
         if (nbt?.contains(ENTITY_NBT) != true) return ActionResult.PASS
@@ -138,6 +140,7 @@ class MobOrbItem(settings: Settings) : Item(settings) {
         fun getMobType(itemStack: ItemStack): Float {
             itemStack.nbt?.getCompound(ENTITY_NBT)?.let {
                 return when (EntityType.fromNbt(it).toNullable()) {
+                    EntityType.WARDEN -> 0.05f
                     EntityType.ZOMBIE -> 0.1f
                     EntityType.HUSK -> 0.2f
                     EntityType.DROWNED -> 0.3f
@@ -145,6 +148,7 @@ class MobOrbItem(settings: Settings) : Item(settings) {
                     EntityType.STRAY -> 0.5f
                     EntityType.WITHER_SKELETON -> 0.6f
                     EntityType.SPIDER -> 0.7f
+                    EntityType.CAVE_SPIDER -> 0.75f
                     EntityType.CREEPER -> 0.8f
                     EntityType.ENDERMAN -> 0.9f
                     EntityType.SLIME -> 1f

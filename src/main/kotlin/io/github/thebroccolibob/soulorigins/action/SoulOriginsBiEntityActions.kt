@@ -9,7 +9,6 @@ import io.github.thebroccolibob.soulorigins.entity.isTamed
 import io.github.thebroccolibob.soulorigins.item.MobOrbItem.Companion.ENTITY_NBT
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import net.minecraft.entity.Entity
-import net.minecraft.entity.mob.MobEntity
 import net.minecraft.entity.mob.SkeletonHorseEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
@@ -32,17 +31,14 @@ fun registerSoulOriginsBiEntityActions() {
         // Generate orb and inject mob nbt data
         val stack = ItemStack(SouloriginsItems.MOB_ORB)
 
-        val targetEntity = (target as? OwnableMonster) ?: (target.firstPassenger as? OwnableMonster) ?: return@register
-        targetEntity as MobEntity
-
         stack.orCreateNbt.put(ENTITY_NBT, NbtCompound().apply {
             // Get mob NBT data
-            targetEntity.saveSelfNbt(this)
+            target.saveSelfNbt(this)
             remove("Pos")
             remove("UUID")
             remove("ActiveEffects")
         })
-        (targetEntity.vehicle as? SkeletonHorseEntity)?.let {
+        (target.vehicle as? SkeletonHorseEntity)?.let {
             stack.orCreateNbt.put(ENTITY_NBT, NbtCompound().apply {
                 it.saveSelfNbt(this)
                 remove("Pos")
@@ -51,12 +47,12 @@ fun registerSoulOriginsBiEntityActions() {
             })
             it.discard()
         }
-        targetEntity.customName?.let(stack::setCustomName)
-        targetEntity.discard()
+        target.customName?.let(stack::setCustomName)
+        target.discard()
 
         // Mana refund
         val user = actor as? PlayerEntity
-        if ((targetEntity as OwnableMonster).isTamed) {
+        if ((target as? OwnableMonster)?.isTamed == true) {
             if (user != null) {
                 user.soulMeter += 2
             }

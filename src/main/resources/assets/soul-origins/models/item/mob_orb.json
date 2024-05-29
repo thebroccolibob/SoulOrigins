@@ -21,6 +21,24 @@
         "soul-origins:mob_type": 0.3
       },
       "model": "soul-origins:item/mob_orb_drowned"
+    },
+    {
+      "predicate": {
+        "soul-origins:mob_type": 0.4
+      },
+      "model": "soul-origins:item/mob_orb_skeleton"
+    },
+    {
+      "predicate": {
+        "soul-origins:mob_type": 0.5
+      },
+      "model": "soul-origins:item/mob_orb_stray"
+    },
+    {
+      "predicate": {
+        "soul-origins:mob_type": 0.6
+      },
+      "model": "soul-origins:item/mob_orb_witherskeleton"
     }
   ]
 }
