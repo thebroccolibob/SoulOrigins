@@ -65,7 +65,7 @@
                         "type": "apoli:add_velocity",
                         "client": true,
                         "space": "local_horizontal_normalized",
-                        "z": 2.0
+                        "z": 2.5
                     }
                 },
                 {
@@ -129,12 +129,6 @@
                     "type": "origins:play_sound",
                     "category": "players",
                     "sound": "minecraft:entity.player.attack.sweep"
-                },
-                {
-                    "type": "origins:spawn_particles",
-                    "count": 16,
-                    "particle": "minecraft:cloud",
-                    "speed": 0.05
                 },
                 {
                     "type": "soul-origins:change_cooldown",

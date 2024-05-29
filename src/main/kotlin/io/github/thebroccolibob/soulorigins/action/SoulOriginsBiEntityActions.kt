@@ -16,53 +16,54 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
+import java.util.function.BiConsumer
 import net.minecraft.util.Pair as McPair
 
 private fun register(actionFactory: ActionFactory<McPair<Entity, Entity>>) {
     Registry.register(ApoliRegistries.BIENTITY_ACTION, actionFactory.serializerId, actionFactory)
 }
 
+private fun register(id: String, data: SerializableData, effect: BiConsumer<SerializableData.Instance, McPair<Entity, Entity>>) {
+    register(ActionFactory(Identifier(Soulorigins.MOD_ID, id), data, effect))
+}
+
 fun registerSoulOriginsBiEntityActions() {
-    register(
-        ActionFactory(
-        Identifier(Soulorigins.MOD_ID, "absorb_mob_orb"), SerializableData()
-    ) { _, (actor, target) ->
-            // Generate orb and inject mob nbt data
-            val stack = ItemStack(SouloriginsItems.MOB_ORB)
+    register("absorb_mob_orb", SerializableData()) { _, (actor, target) ->
+        // Generate orb and inject mob nbt data
+        val stack = ItemStack(SouloriginsItems.MOB_ORB)
 
-            val targetEntity = (target as? OwnableMonster) ?: (target.firstPassenger as? OwnableMonster) ?: return@ActionFactory
-            targetEntity as MobEntity
+        val targetEntity = (target as? OwnableMonster) ?: (target.firstPassenger as? OwnableMonster) ?: return@register
+        targetEntity as MobEntity
 
+        stack.orCreateNbt.put(ENTITY_NBT, NbtCompound().apply {
+            // Get mob NBT data
+            targetEntity.saveSelfNbt(this)
+            remove("Pos")
+            remove("UUID")
+            remove("ActiveEffects")
+        })
+        (targetEntity.vehicle as? SkeletonHorseEntity)?.let {
             stack.orCreateNbt.put(ENTITY_NBT, NbtCompound().apply {
-                // Get mob NBT data
-                targetEntity.saveSelfNbt(this)
+                it.saveSelfNbt(this)
                 remove("Pos")
                 remove("UUID")
                 remove("ActiveEffects")
             })
-            (targetEntity.vehicle as? SkeletonHorseEntity)?.let {
-                stack.orCreateNbt.put(ENTITY_NBT, NbtCompound().apply {
-                    it.saveSelfNbt(this)
-                    remove("Pos")
-                    remove("UUID")
-                    remove("ActiveEffects")
-                })
-                it.discard()
-            }
-            targetEntity.customName?.let(stack::setCustomName)
-            targetEntity.discard()
-
-            // Mana refund
-            val user = actor as? PlayerEntity
-            if ((targetEntity as OwnableMonster).isTamed) {
-                if (user != null) {
-                    user.soulMeter += 2
-                }
-                user?.syncSoulMeter()
-            }
-            // Give player orb with data
-            user?.giveItemStack(stack)
-            return@ActionFactory
+            it.discard()
         }
-    )
+        targetEntity.customName?.let(stack::setCustomName)
+        targetEntity.discard()
+
+        // Mana refund
+        val user = actor as? PlayerEntity
+        if ((targetEntity as OwnableMonster).isTamed) {
+            if (user != null) {
+                user.soulMeter += 2
+            }
+            user?.syncSoulMeter()
+        }
+        // Give player orb with data
+        user?.giveItemStack(stack)
+        return@register
+    }
 }

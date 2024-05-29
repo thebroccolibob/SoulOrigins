@@ -1,12 +1,12 @@
 package io.github.thebroccolibob.soulorigins.power
 
-import io.github.apace100.apoli.component.PowerHolderComponent
 import io.github.apace100.apoli.power.Power
 import io.github.apace100.apoli.power.PowerType
 import io.github.apace100.apoli.power.factory.PowerFactory
 import io.github.apace100.calio.data.SerializableDataTypes
 import io.github.thebroccolibob.soulorigins.SerializableData
 import io.github.thebroccolibob.soulorigins.Soulorigins
+import io.github.thebroccolibob.soulorigins.getPowers
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -33,7 +33,7 @@ class DisengagePower(type: PowerType<*>, entity: LivingEntity?, val distance: Do
 
             if (target !is PlayerEntity) return false
 
-            for (power in PowerHolderComponent.getPowers(target, DisengagePower::class.java)) {
+            for (power in target.getPowers<DisengagePower>()) {
                 if (entity.squaredDistanceTo(target) > power.distance.pow(2.0)) {
                     return true
                 }

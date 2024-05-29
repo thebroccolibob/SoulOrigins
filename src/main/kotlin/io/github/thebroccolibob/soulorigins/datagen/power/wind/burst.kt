@@ -74,9 +74,9 @@ val burst = JsonObject {
             },
             {
                 "type" to "origins:spawn_particles"
-                "count" to 64
-                "particle" to "minecraft:cloud"
-                "speed" to 0.2
+                "count" to 1
+                "particle" to "soul-origins:gust_emitter_large"
+                "speed" to 0
             },
             {
                 "type" to "origins:if_else"

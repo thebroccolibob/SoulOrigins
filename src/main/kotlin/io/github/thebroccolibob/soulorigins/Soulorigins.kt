@@ -26,5 +26,6 @@ object Soulorigins : ModInitializer {
 		registerSoulOriginsItemConditions()
 		registerSoulOriginsBiEntityConditions()
 		registerSoulOriginsPowers()
+		SoulOriginsParticles.register()
 	}
 }

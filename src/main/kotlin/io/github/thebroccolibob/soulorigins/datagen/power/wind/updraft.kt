@@ -39,9 +39,9 @@ fun updraft(id: String) = leveledMultiCooldown(
         },
         JsonObject {
             "type" to "origins:spawn_particles"
-            "count" to 16
-            "particle" to "minecraft:cloud"
-            "speed" to 0.05
+            "count" to 1
+            "particle" to "soul-origins:gust_emitter_small"
+            "speed" to 1
         }
     ),
     hudRender = {
