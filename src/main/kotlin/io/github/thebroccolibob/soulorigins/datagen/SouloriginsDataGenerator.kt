@@ -1,5 +1,6 @@
 package io.github.thebroccolibob.soulorigins.datagen
 
+import com.ibm.icu.text.Normalizer2.Mode
 import io.github.thebroccolibob.soulorigins.datagen.power.PowerGenerator
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
@@ -34,6 +35,7 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			itemModelGenerator.register(SouloriginsItems.BURST_SHARD, Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_zombie", Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_husk", Models.GENERATED)
+			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_drowned", Models.GENERATED)
 		}
 	}
 

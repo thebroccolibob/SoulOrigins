@@ -15,6 +15,12 @@
         "soul-origins:mob_type": 0.2
       },
       "model": "soul-origins:item/mob_orb_husk"
+    },
+    {
+      "predicate": {
+        "soul-origins:mob_type": 0.3
+      },
+      "model": "soul-origins:item/mob_orb_drowned"
     }
   ]
 }
