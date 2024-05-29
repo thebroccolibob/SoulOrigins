@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "soul-origins:item/mob_orb"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "soul-origins:mob_type": 1
+      },
+      "model": "soul-origins:item/mob_orb_zombie"
+    }
+  ]
+}

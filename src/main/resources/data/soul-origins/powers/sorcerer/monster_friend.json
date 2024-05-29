@@ -1,0 +1,10 @@
+{
+  "type": "apugli:mobs_ignore",
+  "bientity_condition": {
+    "type": "soul-origins:monster_owner"
+  },
+  "mob_condition": {
+    "type": "origins:in_tag",
+    "tag": "soul-origins:soul_sorcerer_friends"
+  }
+}

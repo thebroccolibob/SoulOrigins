@@ -1,5 +1,11 @@
 {
   "type": "origins:modify_damage_taken",
+  "bientity_condition": {
+    "type": "origins:invert",
+    "condition": {
+      "type": "soul-origins:monster_owner"
+    }
+  },
   "damage_condition": {
     "type": "origins:attacker",
     "entity_condition": {

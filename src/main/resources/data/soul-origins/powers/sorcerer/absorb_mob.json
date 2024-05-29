@@ -4,7 +4,7 @@
     "type": "origins:side",
     "action": {
       "type": "origins:raycast",
-      "distance": 16,
+      "distance": 8,
       "block": false,
       "entity": true,
       "shape_type": "collider",
@@ -13,7 +13,7 @@
         "type": "origins:target_condition",
         "condition": {
           "type": "origins:in_tag",
-          "tag": "soul-origins:mob_sorcerer_friends"
+          "tag": "soul-origins:soul_sorcerer_friends"
         }
       },
       "bientity_action": {

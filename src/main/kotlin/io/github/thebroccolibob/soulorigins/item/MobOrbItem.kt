@@ -134,6 +134,25 @@ class MobOrbItem(settings: Settings) : Item(settings) {
         val ItemStack.hasEntity
             get() = nbt?.contains(ENTITY_NBT) ?: false
 
+        fun getMobType(itemStack: ItemStack): Int {
+            itemStack.nbt?.getCompound(ENTITY_NBT)?.let {
+                return when (EntityType.fromNbt(it)) {
+                    EntityType.ZOMBIE -> 1
+                    EntityType.HUSK -> 2
+                    EntityType.DROWNED -> 3
+                    EntityType.SKELETON -> 4
+                    EntityType.STRAY -> 5
+                    EntityType.WITHER_SKELETON -> 6
+                    EntityType.SPIDER -> 7
+                    EntityType.CREEPER -> 8
+                    EntityType.ENDERMAN -> 9
+                    EntityType.SLIME -> 10
+                    else -> 0
+                }
+            }
+            return 0
+        }
+
         private fun getNbtRefForPreferredSlot(insertStack: ItemStack, targetStack: ItemStack): Pair<NbtList, Int> {
             if (insertStack.isIn(ItemTags.ARROWS) || insertStack.isOf(Items.TOTEM_OF_UNDYING))
                 return targetStack.getCreateHandItems() to 1

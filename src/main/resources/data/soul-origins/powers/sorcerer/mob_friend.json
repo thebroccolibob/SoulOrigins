@@ -1,7 +1,0 @@
-{
-  "type": "apugli:mobs_ignore",
-  "mob_condition": {
-    "type": "origins:in_tag",
-    "tag": "soul-origins:mob_sorcerer_friends"
-  }
-}

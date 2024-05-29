@@ -7,9 +7,9 @@
     },
     "impact": 1,
     "powers": [
-        "soul-origins:sorcerer/mob_friend",
-        "soul-origins:sorcerer/soul_meter",
-        "soul-origins:sorcerer/soul_extract",
+        "soul-origins:sorcerer/monster_friend",
+        "soul-origins:soul_meter",
+        "soul-origins:soul_extract",
         "soul-origins:sorcerer/anti_slime_damage"
     ]
 }
