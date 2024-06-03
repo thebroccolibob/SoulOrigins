@@ -4,11 +4,10 @@ import io.github.apace100.apoli.component.PowerHolderComponent
 import io.github.apace100.apoli.power.Power
 import io.github.apace100.calio.data.SerializableData
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
-import net.minecraft.item.ItemUsageContext
+import net.minecraft.item.*
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
@@ -74,3 +73,18 @@ operator fun Item.plus(suffix: String) = "$translationKey.$suffix"
 
 inline fun <reified T : Power> Entity.hasPower() = PowerHolderComponent.hasPower(this, T::class.java)
 inline fun <reified T : Power> Entity.getPowers(): List<T> = PowerHolderComponent.getPowers(this, T::class.java)
+
+fun ItemGroup(init: ItemGroup.Builder.() -> Unit): ItemGroup {
+    return FabricItemGroup.builder().apply(init).build()
+}
+
+fun ItemGroup.Builder.entries(vararg items: ItemConvertible) {
+    entries { _, entries ->
+        entries.addAll(items.map { it.asItem().defaultStack })
+    }
+}
+fun ItemGroup.Builder.entries(vararg items: ItemStack) {
+    entries { _, entries ->
+        entries.addAll(items.toList())
+    }
+}
