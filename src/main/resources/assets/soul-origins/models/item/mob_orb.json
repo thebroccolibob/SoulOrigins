@@ -6,39 +6,75 @@
   "overrides": [
     {
       "predicate": {
-        "soul-origins:mob_type": 0.1
+        "soul-origins:mob_type": 0.01
       },
       "model": "soul-origins:item/mob_orb_zombie"
     },
     {
       "predicate": {
-        "soul-origins:mob_type": 0.2
+        "soul-origins:mob_type": 0.02
       },
       "model": "soul-origins:item/mob_orb_husk"
     },
     {
       "predicate": {
-        "soul-origins:mob_type": 0.3
+        "soul-origins:mob_type": 0.03
       },
       "model": "soul-origins:item/mob_orb_drowned"
     },
     {
       "predicate": {
-        "soul-origins:mob_type": 0.4
+        "soul-origins:mob_type": 0.04
       },
       "model": "soul-origins:item/mob_orb_skeleton"
     },
     {
       "predicate": {
-        "soul-origins:mob_type": 0.5
+        "soul-origins:mob_type": 0.05
       },
       "model": "soul-origins:item/mob_orb_stray"
     },
     {
       "predicate": {
-        "soul-origins:mob_type": 0.6
+        "soul-origins:mob_type": 0.06
       },
       "model": "soul-origins:item/mob_orb_witherskeleton"
+    },
+    {
+      "predicate": {
+        "soul-origins:mob_type": 0.07
+      },
+      "model": "soul-origins:item/mob_orb_spider"
+    },
+    {
+      "predicate": {
+        "soul-origins:mob_type": 0.08
+      },
+      "model": "soul-origins:item/mob_orb_cavespider"
+    },
+    {
+      "predicate": {
+        "soul-origins:mob_type": 0.09
+      },
+      "model": "soul-origins:item/mob_orb_creeper"
+    },
+    {
+      "predicate": {
+        "soul-origins:mob_type": 0.10
+      },
+      "model": "soul-origins:item/mob_orb_enderman"
+    },
+    {
+      "predicate": {
+        "soul-origins:mob_type": 0.11
+      },
+      "model": "soul-origins:item/mob_orb_slime"
+    },
+    {
+      "predicate": {
+        "soul-origins:mob_type": 0.12
+      },
+      "model": "soul-origins:item/mob_orb_warden"
     }
   ]
 }

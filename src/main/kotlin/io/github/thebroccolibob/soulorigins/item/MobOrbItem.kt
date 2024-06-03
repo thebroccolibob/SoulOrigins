@@ -111,6 +111,7 @@ class MobOrbItem(settings: Settings) : Item(settings) {
         val prevItem = list.getCompound(index)
 
         list[index] = stackNbt
+        
 
         cursorStackReference.set(if (prevItem.isEmpty) ItemStack.EMPTY else ItemStack.fromNbt(prevItem))
 
@@ -140,18 +141,18 @@ class MobOrbItem(settings: Settings) : Item(settings) {
         fun getMobType(itemStack: ItemStack): Float {
             itemStack.nbt?.getCompound(ENTITY_NBT)?.let {
                 return when (EntityType.fromNbt(it).toNullable()) {
-                    EntityType.WARDEN -> 0.05f
-                    EntityType.ZOMBIE -> 0.1f
-                    EntityType.HUSK -> 0.2f
-                    EntityType.DROWNED -> 0.3f
-                    EntityType.SKELETON -> 0.4f
-                    EntityType.STRAY -> 0.5f
-                    EntityType.WITHER_SKELETON -> 0.6f
-                    EntityType.SPIDER -> 0.7f
-                    EntityType.CAVE_SPIDER -> 0.75f
-                    EntityType.CREEPER -> 0.8f
-                    EntityType.ENDERMAN -> 0.9f
-                    EntityType.SLIME -> 1f
+                    EntityType.ZOMBIE -> 0.01f
+                    EntityType.HUSK -> 0.02f
+                    EntityType.DROWNED -> 0.03f
+                    EntityType.SKELETON -> 0.04f
+                    EntityType.STRAY -> 0.05f
+                    EntityType.WITHER_SKELETON -> 0.06f
+                    EntityType.SPIDER -> 0.07f
+                    EntityType.CAVE_SPIDER -> 0.08f
+                    EntityType.CREEPER -> 0.09f
+                    EntityType.ENDERMAN -> 0.10f
+                    EntityType.SLIME -> 0.11f
+                    EntityType.WARDEN -> 0.12f
                     else -> 0f
                 }
             }
