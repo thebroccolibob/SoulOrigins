@@ -85,4 +85,5 @@ fun registerSoulOriginsEntityActions() {
             speed.toDouble()
         )
     }
+
 }

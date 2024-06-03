@@ -1,27 +1,21 @@
 package io.github.thebroccolibob.soulorigins.action
 
-import com.ibm.icu.lang.UCharacter.GraphemeClusterBreak.T
 import io.github.apace100.apoli.Apoli.SCHEDULER
 import io.github.apace100.apoli.data.ApoliDataTypes
 import io.github.apace100.apoli.power.factory.action.ActionFactory
-import io.github.apace100.apoli.power.factory.action.meta.DelayAction
 import io.github.apace100.apoli.registry.ApoliRegistries
-import io.github.apace100.apoli.util.Scheduler
 import io.github.apace100.calio.data.SerializableData
 import io.github.apace100.calio.data.SerializableDataTypes
 import io.github.thebroccolibob.soulorigins.*
 import io.github.thebroccolibob.soulorigins.entity.OwnableMonster
 import io.github.thebroccolibob.soulorigins.entity.isTamed
-import io.github.thebroccolibob.soulorigins.item.MobOrbItem.Companion.ENTITY_NBT
+import io.github.thebroccolibob.soulorigins.item.MobOrbItem
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.mob.SkeletonHorseEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.Registry
-import net.minecraft.server.MinecraftServer
 import net.minecraft.util.Identifier
 import java.util.function.BiConsumer
 import net.minecraft.util.Pair as McPair
@@ -39,22 +33,8 @@ fun registerSoulOriginsBiEntityActions() {
         // Generate orb and inject mob nbt data
         val stack = ItemStack(SouloriginsItems.MOB_ORB)
 
-        stack.orCreateNbt.put(ENTITY_NBT, NbtCompound().apply {
-            // Get mob NBT data
-            target.saveSelfNbt(this)
-            remove("Pos")
-            remove("UUID")
-            remove("ActiveEffects")
-        })
-        (target.vehicle as? SkeletonHorseEntity)?.let {
-            stack.orCreateNbt.put(ENTITY_NBT, NbtCompound().apply {
-                it.saveSelfNbt(this)
-                remove("Pos")
-                remove("UUID")
-                remove("ActiveEffects")
-            })
-            it.discard()
-        }
+        MobOrbItem.setEntity(stack, target)
+
         target.customName?.let(stack::setCustomName)
         target.discard()
 
@@ -82,7 +62,7 @@ fun registerSoulOriginsBiEntityActions() {
         SCHEDULER.queue({ _ ->
             action.accept(entityPair)
         }, (data.getFloat("multiplier") * (target as LivingEntity).maxHealth).toInt())
-        // for time = health / 5 seconds, use "multiplier": 
+        // for time = health / 5 seconds, use "multiplier":
         // all good? ready to push?
     }
 }

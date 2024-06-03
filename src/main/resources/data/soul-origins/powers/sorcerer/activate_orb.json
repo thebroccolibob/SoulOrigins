@@ -1,0 +1,19 @@
+{
+  "type": "origins:active_self",
+  "key": "key.origins.secondary_active",
+  "entity_action": {
+    "type": "origins:if_else_list",
+    "actions": [
+      {
+        "condition": {
+          "type": "soul-origins:held_mob_orb",
+          "entity_type": "minecraft:zombie"
+        },
+        "action": {
+          "type": "origins:execute_command",
+          "command": "say It is a zombie"
+        }
+      }
+    ]
+  }
+}

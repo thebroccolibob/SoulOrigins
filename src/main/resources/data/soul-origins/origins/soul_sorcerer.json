@@ -9,6 +9,7 @@
     "soul-origins:soul_meter",
     "soul-origins:soul_extract",
     "soul-origins:sorcerer/absorb_mob",
+    "soul-origins:sorcerer/activate_orb",
     "soul-origins:sorcerer/use_mob_orb",
     "soul-origins:sorcerer/monster_friend",
     "soul-origins:sorcerer/anti_slime_damage"

@@ -5,16 +5,16 @@ import io.github.thebroccolibob.soulorigins.entity.OwnableMonster
 import io.github.thebroccolibob.soulorigins.entity.owner
 import io.github.thebroccolibob.soulorigins.power.UseMobOrbPower
 import net.minecraft.client.item.TooltipContext
+import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.mob.MobEntity
+import net.minecraft.entity.mob.SkeletonHorseEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.StackReference
 import net.minecraft.item.*
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.nbt.NbtElement
-import net.minecraft.nbt.NbtList
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.screen.slot.Slot
 import net.minecraft.server.world.ServerWorld
@@ -22,6 +22,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import net.minecraft.util.ClickType
 import net.minecraft.util.Formatting
+import net.minecraft.util.collection.DefaultedList
 import net.minecraft.world.World
 
 class MobOrbItem(settings: Settings) : Item(settings) {
@@ -35,7 +36,7 @@ class MobOrbItem(settings: Settings) : Item(settings) {
         val soulMeter = player?.soulMeter
 
         // Mana check fails return
-        if ((soulMeter?.value ?: 0) < 2) return  ActionResult.PASS
+        if ((soulMeter?.value ?: 0) < 2) return ActionResult.PASS
 
         if (world !is ServerWorld) return ActionResult.SUCCESS
 
@@ -80,7 +81,7 @@ class MobOrbItem(settings: Settings) : Item(settings) {
             return
         }
 
-        EntityType.fromNbt(entityNbt).toNullable()?.name?.let(tooltip::add)
+        getEntityType(stack)?.name?.let(tooltip::add)
         stack.nbt?.getCompound(VEHICLE_NBT)?.let { EntityType.fromNbt(it).toNullable() }?.name?.let(tooltip::add)
 
         val armorItems = entityNbt.getList("ArmorItems", NbtCompound.COMPOUND_TYPE)
@@ -100,20 +101,23 @@ class MobOrbItem(settings: Settings) : Item(settings) {
         if (clickType != ClickType.RIGHT) return false
         if (!stack.hasEntity) return false
 
-        val stackNbt = if(otherStack.isEmpty) NbtCompound() else otherStack.writeNbt(NbtCompound())
+        val entity = stack.getEntity(player.world)
 
-        val reference = (if (otherStack.isEmpty) getNbtRefForRemoval(stack) else getNbtRefForPreferredSlot(otherStack, stack))
+        if (entity !is MobEntity) return false
 
-        if (reference == null) return false
+        val targetSlot = if (otherStack.isEmpty) getNextRemovalSlot(entity) else getPreferredSlot(otherStack)
 
-        val (list, index) = reference
+        if (targetSlot === null) return false
 
-        val prevItem = list.getCompound(index)
+        val prevItem = entity[targetSlot]
 
-        list[index] = stackNbt
-        
+        entity[targetSlot] = otherStack
 
-        cursorStackReference.set(if (prevItem.isEmpty) ItemStack.EMPTY else ItemStack.fromNbt(prevItem))
+        cursorStackReference.set(prevItem)
+
+        stack.setEntity(entity)
+
+        entity.discard()
 
         return true
     }
@@ -122,74 +126,101 @@ class MobOrbItem(settings: Settings) : Item(settings) {
         const val ENTITY_NBT = "EntityTag"
         const val VEHICLE_NBT = "VehicleEntityTag"
 
-        private fun ItemStack.getCreateArmorItems() =
-            orCreateNbt.getOrCreateCompound(ENTITY_NBT).getOrCreateList("ArmorItems", NbtElement.COMPOUND_TYPE)
-
-        private val ItemStack.armorItems
-            get() = nbt?.getCompound(ENTITY_NBT)?.getList("ArmorItems", NbtElement.COMPOUND_TYPE) ?: NbtList()
-
-        private fun ItemStack.getCreateHandItems() =
-            orCreateNbt.getOrCreateCompound(ENTITY_NBT).getOrCreateList("HandItems", NbtElement.COMPOUND_TYPE)
-
-        private val ItemStack.handItems
-            get() = nbt?.getCompound(ENTITY_NBT)?.getList("HandItems", NbtElement.COMPOUND_TYPE) ?: NbtList()
-
         val ItemStack.hasEntity
             get() = nbt?.contains(ENTITY_NBT) ?: false
 
+        fun getEntity(itemStack: ItemStack, world: World): Entity? {
+            return itemStack.nbt?.let {
+                EntityType.getEntityFromNbt(it.getCompound(ENTITY_NBT), world).toNullable()
+            }
+        }
+
+        fun setEntity(stack: ItemStack, entity: Entity) {
+            stack.orCreateNbt.put(ENTITY_NBT, NbtCompound().apply {
+                // Get mob NBT data
+                entity.saveSelfNbt(this)
+                remove("Pos")
+                remove("UUID")
+                remove("ActiveEffects")
+            })
+
+            (entity.vehicle as? SkeletonHorseEntity)?.let {
+                stack.orCreateNbt.put(ENTITY_NBT, NbtCompound().apply {
+                    it.saveSelfNbt(this)
+                    remove("Pos")
+                    remove("UUID")
+                    remove("ActiveEffects")
+                })
+                it.discard()
+            }
+        }
+
+        @JvmName("getEntityExt")
+        private fun ItemStack.getEntity(world: World) = getEntity(this, world)
+
+        @JvmName("setEntityExt")
+        private fun ItemStack.setEntity(entity: Entity) {
+            setEntity(this, entity)
+        }
+
+        fun getEntityType(itemStack: ItemStack): EntityType<*>? {
+            return itemStack.nbt?.getCompound(ENTITY_NBT)?.let {
+                EntityType.fromNbt(it).toNullable()
+            }
+        }
 
         fun getMobType(itemStack: ItemStack): Float {
-            itemStack.nbt?.getCompound(ENTITY_NBT)?.let {
-                return when (EntityType.fromNbt(it).toNullable()) {
-                    EntityType.ZOMBIE -> 0.01f
-                    EntityType.HUSK -> 0.02f
-                    EntityType.DROWNED -> 0.03f
-                    EntityType.SKELETON -> 0.04f
-                    EntityType.STRAY -> 0.05f
-                    EntityType.WITHER_SKELETON -> 0.06f
-                    EntityType.SPIDER -> 0.07f
-                    EntityType.CAVE_SPIDER -> 0.08f
-                    EntityType.CREEPER -> 0.09f
-                    EntityType.ENDERMAN -> 0.10f
-                    EntityType.SLIME -> 0.11f
-                    EntityType.WARDEN -> 0.12f
-                    else -> 0f
-                }
-            }
-            return 0f
-        }
-
-        private fun getNbtRefForPreferredSlot(insertStack: ItemStack, targetStack: ItemStack): Pair<NbtList, Int> {
-            if (insertStack.isIn(ItemTags.ARROWS) || insertStack.isOf(Items.TOTEM_OF_UNDYING))
-                return targetStack.getCreateHandItems() to 1
-
-            if (insertStack.isOf(Items.CARVED_PUMPKIN))
-                return targetStack.getCreateArmorItems() to 3
-
-            return when ((insertStack.item as? Equipment)?.slotType) {
-                EquipmentSlot.FEET -> targetStack.getCreateArmorItems() to 0
-                EquipmentSlot.LEGS -> targetStack.getCreateArmorItems() to 1
-                EquipmentSlot.CHEST -> targetStack.getCreateArmorItems() to 2
-                EquipmentSlot.HEAD -> targetStack.getCreateArmorItems() to 3
-                EquipmentSlot.OFFHAND -> targetStack.getCreateHandItems() to 1
-                else -> targetStack.getCreateHandItems() to 0
+            return when (getEntityType(itemStack)) {
+                EntityType.ZOMBIE -> 0.01f
+                EntityType.HUSK -> 0.02f
+                EntityType.DROWNED -> 0.03f
+                EntityType.SKELETON -> 0.04f
+                EntityType.STRAY -> 0.05f
+                EntityType.WITHER_SKELETON -> 0.06f
+                EntityType.SPIDER -> 0.07f
+                EntityType.CAVE_SPIDER -> 0.08f
+                EntityType.CREEPER -> 0.09f
+                EntityType.ENDERMAN -> 0.10f
+                EntityType.SLIME -> 0.11f
+                EntityType.WARDEN -> 0.12f
+                else -> 0f
             }
         }
 
-        private fun getNbtRefForRemoval(targetStack: ItemStack): Pair<NbtList, Int>? {
-            val handItems = targetStack.handItems
-            val armorItems = targetStack.armorItems
+        private fun getPreferredSlot(insertStack: ItemStack): EquipmentSlot  {
+            return when {
+                insertStack.isIn(ItemTags.ARROWS) || insertStack.isOf(Items.TOTEM_OF_UNDYING) -> EquipmentSlot.OFFHAND
+                insertStack.isOf(Items.CARVED_PUMPKIN) -> EquipmentSlot.HEAD
+                insertStack.item is Equipment -> (insertStack.item as Equipment).slotType
+                else -> EquipmentSlot.MAINHAND
+            }
+        }
 
+        private fun getNextRemovalSlot(entity: MobEntity): EquipmentSlot? {
             return listOf(
-                handItems to 0,
-                handItems to 1,
-                armorItems to 3,
-                armorItems to 2,
-                armorItems to 1,
-                armorItems to 0,
-            ).firstOrNull { (list, index) ->
-                !list.getCompound(index).isEmpty
+                EquipmentSlot.MAINHAND,
+                EquipmentSlot.OFFHAND,
+                EquipmentSlot.HEAD,
+                EquipmentSlot.CHEST,
+                EquipmentSlot.LEGS,
+                EquipmentSlot.FEET
+            ).firstOrNull {
+                !entity[it].isEmpty
             }
+        }
+
+        private operator fun MobEntity.get(slot: EquipmentSlot): ItemStack {
+            return if (slot.type === EquipmentSlot.Type.HAND)
+                (this.handItems as DefaultedList<ItemStack>)[slot.entitySlotId]
+            else
+                (this.armorItems as DefaultedList<ItemStack>)[slot.entitySlotId]
+        }
+
+        private operator fun MobEntity.set(slot: EquipmentSlot, stack: ItemStack) {
+            if (slot.type === EquipmentSlot.Type.HAND)
+                (this.handItems as DefaultedList<ItemStack>)[slot.entitySlotId] = stack
+            else
+                (this.armorItems as DefaultedList<ItemStack>)[slot.entitySlotId] = stack
         }
     }
 }
