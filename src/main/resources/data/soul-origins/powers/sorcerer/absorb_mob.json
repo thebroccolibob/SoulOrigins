@@ -1,28 +1,64 @@
 {
-  "type": "origins:active_self",
-  "entity_action": {
-    "type": "origins:side",
-    "action": {
-      "type": "origins:raycast",
-      "distance": 8,
-      "block": false,
-      "entity": true,
-      "shape_type": "collider",
-      "fluid_handling": "any",
-      "bientity_condition":  {
-        "type": "origins:target_condition",
-        "condition": {
-          "type": "origins:in_tag",
-          "tag": "soul-origins:soul_sorcerer_absorbable"
-        }
+  "type": "origins:multiple",
+  "activate": {
+    "type": "origins:active_self",
+    "entity_action": {
+      "type": "origins:side",
+      "action": {
+        "type": "origins:raycast",
+        "distance": 8,
+        "block": false,
+        "entity": true,
+        "shape_type": "collider",
+        "fluid_handling": "any",
+        "bientity_condition":  {
+          "type": "origins:target_condition",
+          "condition": {
+            "type": "origins:in_tag",
+            "tag": "soul-origins:soul_sorcerer_absorbable"
+          }
+        },
+        "bientity_action": {
+          "type": "soul-origins:health_delay",
+          "multiplier": 4,
+          "cooldown": "soul-origins:sorcerer/absorb_mob_cooldown",
+          "action": {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:distance",
+                "comparison": "<=",
+                "compare_to": 8
+              },
+              "if_action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "soul-origins:absorb_mob_orb"
+                  },
+                  {
+                    "type": "soul-origins:raycast_between",
+                    "particle": "minecraft:soul_fire_flame",
+                    "spacing": 1
+                  }
+                ]
+              }
+          }
+        },
+        "command_along_ray": "particle minecraft:soul_fire_flame",
+        "command_step": 1,
+        "command_along_ray_only_on_hit": true
       },
-      "bientity_action": {
-        "type": "soul-origins:absorb_mob_orb"
-      },
-      "command_along_ray": "particle minecraft:soul_fire_flame",
-      "command_step": 1,
-      "command_along_ray_only_on_hit": true
+      "side": "server"
     },
-    "side": "server"
+    "condition": {
+      "type": "origins:resource",
+      "resource": "soul-origins:sorcerer/absorb_mob_cooldown",
+      "comparison": "<=",
+      "compare_to": 0
+    }
+  },
+  "cooldown": {
+    "type": "origins:cooldown",
+    "cooldown": 2000
   }
 }

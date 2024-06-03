@@ -1,7 +1,10 @@
 package io.github.thebroccolibob.soulorigins.action
 
 import io.github.apace100.apoli.Apoli.SCHEDULER
+import io.github.apace100.apoli.component.PowerHolderComponent
 import io.github.apace100.apoli.data.ApoliDataTypes
+import io.github.apace100.apoli.power.CooldownPower
+import io.github.apace100.apoli.power.PowerTypeReference
 import io.github.apace100.apoli.power.factory.action.ActionFactory
 import io.github.apace100.apoli.registry.ApoliRegistries
 import io.github.apace100.calio.data.SerializableData
@@ -54,15 +57,27 @@ fun registerSoulOriginsBiEntityActions() {
     register("health_delay", SerializableData {
         add("action", ApoliDataTypes.BIENTITY_ACTION) // For the delayed action
         add("multiplier", SerializableDataTypes.FLOAT) // for customizability
+        add("cooldown", ApoliDataTypes.POWER_TYPE, null)
     }) {
         data, entityPair ->
-        val (_, target) = entityPair
+        val (actor, target) = entityPair
 
         val action = data.get<ActionFactory<McPair<Entity, Entity>>.Instance>("action")
+
+        val delay = (data.getFloat("multiplier") * (target as LivingEntity).maxHealth).toInt()
         SCHEDULER.queue({ _ ->
             action.accept(entityPair)
-        }, (data.getFloat("multiplier") * (target as LivingEntity).maxHealth).toInt())
-        // for time = health / 5 seconds, use "multiplier":
-        // all good? ready to push?
+        }, delay)
+
+        if (actor is LivingEntity) {
+            data.get<PowerTypeReference<*>?>("cooldown")?.let { type ->
+                (PowerHolderComponent.KEY.get(actor).getPower(type) as? CooldownPower)?.let {
+                    it.setCooldown(it.cooldownDuration - delay)
+                    PowerHolderComponent.syncPower(actor, type)
+                }
+            }
+        }
     }
+
+    register("raycast_between", RaycastBetweenCentersAction.serializableData, RaycastBetweenCentersAction::execute)
 }
