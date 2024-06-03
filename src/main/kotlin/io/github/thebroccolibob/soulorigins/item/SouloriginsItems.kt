@@ -1,11 +1,15 @@
 package io.github.thebroccolibob.soulorigins.item
 
 import io.github.thebroccolibob.soulorigins.FabricItemSettings
+import io.github.thebroccolibob.soulorigins.ItemGroup
 import io.github.thebroccolibob.soulorigins.Soulorigins
-import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder.Mob
+import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
+import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
@@ -31,6 +35,41 @@ object SouloriginsItems {
     val UPDRAFT_SHARD = registerShard("updraft", Formatting.AQUA)
     val TAILWIND_SHARD = registerShard("tailwind", Formatting.GREEN)
     val BURST_SHARD = registerShard("burst", Formatting.LIGHT_PURPLE)
+
+    val ITEM_GROUP = Registry.register(
+        Registries.ITEM_GROUP,
+        Identifier(Soulorigins.MOD_ID, "item_group"),
+        ItemGroup {
+            displayName(Text.translatable("itemGroup.soul-origins.item_group"))
+            icon { MOB_ORB.defaultStack }
+            entries { _, entries ->
+                entries.add(UPDRAFT_SHARD)
+                entries.add(TAILWIND_SHARD)
+                entries.add(BURST_SHARD)
+
+                listOf(
+                    EntityType.ZOMBIE,
+                    EntityType.HUSK,
+                    EntityType.DROWNED,
+                    EntityType.SKELETON,
+                    EntityType.STRAY,
+                    EntityType.WITHER_SKELETON,
+                    EntityType.SPIDER,
+                    EntityType.CAVE_SPIDER,
+                    EntityType.CREEPER,
+                    EntityType.ENDERMAN,
+                    EntityType.SLIME,
+                    EntityType.WARDEN,
+                ).forEach {
+                    entries.add(ItemStack(MOB_ORB, 1).apply {
+                        setSubNbt("EntityTag", NbtCompound().apply {
+                            putString("id", Registries.ENTITY_TYPE.getId(it).toString())
+                        })
+                    })
+                }
+            }
+        }
+    )
 
     fun register() {}
 }
