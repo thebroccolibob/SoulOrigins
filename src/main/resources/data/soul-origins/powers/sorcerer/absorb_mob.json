@@ -13,7 +13,7 @@
         "type": "origins:target_condition",
         "condition": {
           "type": "origins:in_tag",
-          "tag": "soul-origins:soul_sorcerer_friends"
+          "tag": "soul-origins:soul_sorcerer_absorbable"
         }
       },
       "bientity_action": {
