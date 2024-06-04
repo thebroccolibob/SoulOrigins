@@ -5,6 +5,9 @@ import io.github.apace100.apoli.power.Power
 import io.github.apace100.calio.data.SerializableData
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
+import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
+import net.minecraft.data.client.Model
+import net.minecraft.data.client.TextureKey
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.*
@@ -12,6 +15,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
 import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
@@ -19,6 +23,8 @@ import java.util.*
 import net.minecraft.util.Pair as McPair
 
 inline fun FabricItemSettings(init: FabricItemSettings.() -> Unit) = FabricItemSettings().apply(init)
+
+inline fun FabricBlockSettings(init: FabricBlockSettings.() -> Unit): FabricBlockSettings = FabricBlockSettings.create().apply(init)
 
 operator fun ItemUsageContext.component1(): ItemStack = stack
 operator fun ItemUsageContext.component2(): PlayerEntity? = player
@@ -87,4 +93,8 @@ fun ItemGroup.Builder.entries(vararg items: ItemStack) {
     entries { _, entries ->
         entries.addAll(items.toList())
     }
+}
+
+fun Model(parent: Identifier? = null, variant: String? = null, vararg requiredTextureKeys: TextureKey): Model {
+    return Model(parent.toOptional(), variant.toOptional(), *requiredTextureKeys)
 }

@@ -34,7 +34,7 @@
                 "entity": false,
                 "shape_type": "collider",
                 "fluid_handling": "none",
-                "command_at_hit": "fill ~ ~-1 ~-1 ~ ~2 ~1 netherarchives:rotten_flesh_block replace air"
+                "command_at_hit": "fill ~ ~-1 ~-1 ~ ~2 ~1 soul-origins:decaying_rotten_flesh replace air"
               },
               "else_action": {
                 "type": "origins:raycast",
@@ -43,7 +43,7 @@
                 "entity": false,
                 "shape_type": "collider",
                 "fluid_handling": "none",
-                "command_at_hit": "fill ~-1 ~-1 ~ ~1 ~2 ~ netherarchives:rotten_flesh_block replace air"
+                "command_at_hit": "fill ~-1 ~-1 ~ ~1 ~2 ~ soul-origins:decaying_rotten_flesh replace air"
               }
             }
           },

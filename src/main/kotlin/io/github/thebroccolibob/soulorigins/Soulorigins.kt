@@ -3,6 +3,7 @@ package io.github.thebroccolibob.soulorigins
 import io.github.thebroccolibob.soulorigins.action.registerSoulOriginsBiEntityActions
 import io.github.thebroccolibob.soulorigins.action.registerSoulOriginsEntityActions
 import io.github.thebroccolibob.soulorigins.action.registerSoulOriginsItemActions
+import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
 import io.github.thebroccolibob.soulorigins.condition.registerSoulOriginsBiEntityConditions
 import io.github.thebroccolibob.soulorigins.condition.registerSoulOriginsEntityConditions
 import io.github.thebroccolibob.soulorigins.condition.registerSoulOriginsItemConditions
@@ -20,6 +21,7 @@ object Soulorigins : ModInitializer {
     val logger: Logger = LoggerFactory.getLogger(MOD_ID)
 
 	override fun onInitialize() {
+		SoulOriginsBlocks.register()
 		SouloriginsItems.register()
 		registerSoulOriginsBiEntityActions()
 		registerSoulOriginsEntityActions()

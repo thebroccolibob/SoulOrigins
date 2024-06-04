@@ -1,13 +1,16 @@
 package io.github.thebroccolibob.soulorigins
 
+import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
 import io.github.thebroccolibob.soulorigins.client.particle.GustEmitterParticle
 import io.github.thebroccolibob.soulorigins.client.particle.GustParticle
 import io.github.thebroccolibob.soulorigins.item.MarigoldCardItem.Companion.hasEntity
 import io.github.thebroccolibob.soulorigins.item.MobOrbItem
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import net.fabricmc.api.ClientModInitializer
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry
 import net.minecraft.client.item.ModelPredicateProviderRegistry
+import net.minecraft.client.render.RenderLayer
 import net.minecraft.util.Identifier
 
 object SouloriginsClient : ClientModInitializer {
@@ -28,5 +31,7 @@ object SouloriginsClient : ClientModInitializer {
 			register(SoulOriginsParticles.GUST_EMITTER_LARGE, GustEmitterParticle.Factory(3.0, 12, 0))
 			register(SoulOriginsParticles.GUST_EMITTER_SMALL, GustEmitterParticle.Factory(1.0, 3, 2))
 		}
+
+		BlockRenderLayerMap.INSTANCE.putBlock(SoulOriginsBlocks.DECAYING_SLIME, RenderLayer.getTranslucent())
 	}
 }

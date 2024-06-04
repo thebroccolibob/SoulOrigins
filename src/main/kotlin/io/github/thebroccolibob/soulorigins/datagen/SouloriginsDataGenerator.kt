@@ -1,16 +1,21 @@
 package io.github.thebroccolibob.soulorigins.datagen
 
+import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
+import io.github.thebroccolibob.soulorigins.datagen.lib.*
 import io.github.thebroccolibob.soulorigins.datagen.power.PowerGenerator
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.advancement.Advancement
 import net.minecraft.data.client.BlockStateModelGenerator
 import net.minecraft.data.client.ItemModelGenerator
 import net.minecraft.data.client.Models
+import net.minecraft.item.Items
+import net.minecraft.util.Identifier
 import java.util.function.Consumer
 
 object SouloriginsDataGenerator : DataGeneratorEntrypoint {
@@ -20,12 +25,14 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			addProvider(::LangGenerator)
 			addProvider(::PowerGenerator)
 			addProvider(::AdvancementGenerator)
+			addProvider(::BlockLootTableGenerator)
 		}
 	}
 
 	class ModelGenerator(output: FabricDataOutput) : FabricModelProvider(output) {
 		override fun generateBlockStateModels(blockStateModelGenerator: BlockStateModelGenerator) {
-
+			blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(SoulOriginsBlocks.DECAYING_SLIME, Identifier("block/slime_block")))
+			blockStateModelGenerator.registerSimpleCubeAll(SoulOriginsBlocks.DECAYING_ROTTEN_FLESH)
 		}
 
 		override fun generateItemModels(itemModelGenerator: ItemModelGenerator) {
@@ -51,5 +58,34 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 		override fun generateAdvancement(consumer: Consumer<Advancement>) {
 			consumer.generateAdvancements()
 		}
+	}
+
+	class BlockLootTableGenerator(dataOutput: FabricDataOutput) : FabricBlockLootTableProvider(dataOutput) {
+		override fun generate() {
+			addTable(SoulOriginsBlocks.DECAYING_SLIME) {
+				pool {
+					item(Items.SLIME_BALL) {
+						count(constant(1))
+					}
+					conditions {
+						randomChance(0.5f)
+						survivesExplosion()
+					}
+				}
+			}
+
+			addTable(SoulOriginsBlocks.DECAYING_ROTTEN_FLESH) {
+				pool {
+					item(Items.ROTTEN_FLESH) {
+						count(constant(1))
+					}
+					conditions {
+						randomChance(0.25f)
+						survivesExplosion()
+					}
+				}
+			}
+		}
+
 	}
 }
