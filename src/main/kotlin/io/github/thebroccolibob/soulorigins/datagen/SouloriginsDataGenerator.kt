@@ -15,7 +15,7 @@ import java.util.function.Consumer
 
 object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 	override fun onInitializeDataGenerator(fabricDataGenerator: FabricDataGenerator) {
-		fabricDataGenerator.createPack().apply {
+		with (fabricDataGenerator.createPack()) {
 			addProvider(::ModelGenerator)
 			addProvider(::LangGenerator)
 			addProvider(::PowerGenerator)

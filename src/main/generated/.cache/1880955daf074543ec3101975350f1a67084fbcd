@@ -1,15 +1,15 @@
-// 1.20.1	2024-06-03T16:00:37.2679131	soul-origins/Advancements
-aa75489cdfea27c0d2419b70be12b91548f5c10c data\soul-origins\advancements\wind\tailwind\lvl3.json
-b7fcab06ad2531a0912f49cdad4d3ac63206bbd5 data\soul-origins\advancements\wind\burst\lvl1.json
-791539394dd5da7cb94101be75ea7402b55f815c data\soul-origins\advancements\wind\updraft\lvl3.json
-6707d1ddf0a320556a08137e5d43853d8e8a2e86 data\soul-origins\advancements\wind\updraft\lvl4.json
-dd7a0c0e3f95e552ed99940e356db52f90c089e1 data\soul-origins\advancements\wind\root.json
-e84de34a9f84b09641e610c9010c401bc3915c61 data\soul-origins\advancements\wind\tailwind\lvl1.json
-5d86988e55723be1328de7a5125fbd61ded67e38 data\soul-origins\advancements\wind\burst\lvl3.json
-e23c7e4528511d4ea4d95fe863771594c430392d data\soul-origins\advancements\wind\updraft\lvl1.json
-3ac9967256779d90363e20db0ba1c431b9506649 data\soul-origins\advancements\wind\updraft\lvl2.json
-34fa8cf10c4ff7203dc464b79564a711c8d151b9 data\soul-origins\advancements\wind\updraft\lvl5.json
-57caa0be897fe2f126bf7c85baf5ee998fecb8f3 data\soul-origins\advancements\wind\tailwind\lvl5.json
-245555fe69ffa0a01424a2671cb226b0a1e401ce data\soul-origins\advancements\wind\burst\lvl2.json
-f7badf0cc97bb381202da17c4868c1b47188e885 data\soul-origins\advancements\wind\tailwind\lvl4.json
-5f93711fb8823b0667c0dd4475eb18365e0b0b7f data\soul-origins\advancements\wind\tailwind\lvl2.json
+// 1.20.1	2024-06-03T19:02:40.929544185	soul-origins/Advancements
+245555fe69ffa0a01424a2671cb226b0a1e401ce data/soul-origins/advancements/wind/burst/lvl2.json
+aa75489cdfea27c0d2419b70be12b91548f5c10c data/soul-origins/advancements/wind/tailwind/lvl3.json
+3ac9967256779d90363e20db0ba1c431b9506649 data/soul-origins/advancements/wind/updraft/lvl2.json
+791539394dd5da7cb94101be75ea7402b55f815c data/soul-origins/advancements/wind/updraft/lvl3.json
+34fa8cf10c4ff7203dc464b79564a711c8d151b9 data/soul-origins/advancements/wind/updraft/lvl5.json
+dd7a0c0e3f95e552ed99940e356db52f90c089e1 data/soul-origins/advancements/wind/root.json
+6707d1ddf0a320556a08137e5d43853d8e8a2e86 data/soul-origins/advancements/wind/updraft/lvl4.json
+57caa0be897fe2f126bf7c85baf5ee998fecb8f3 data/soul-origins/advancements/wind/tailwind/lvl5.json
+e23c7e4528511d4ea4d95fe863771594c430392d data/soul-origins/advancements/wind/updraft/lvl1.json
+5f93711fb8823b0667c0dd4475eb18365e0b0b7f data/soul-origins/advancements/wind/tailwind/lvl2.json
+b7fcab06ad2531a0912f49cdad4d3ac63206bbd5 data/soul-origins/advancements/wind/burst/lvl1.json
+e84de34a9f84b09641e610c9010c401bc3915c61 data/soul-origins/advancements/wind/tailwind/lvl1.json
+f7badf0cc97bb381202da17c4868c1b47188e885 data/soul-origins/advancements/wind/tailwind/lvl4.json
+5d86988e55723be1328de7a5125fbd61ded67e38 data/soul-origins/advancements/wind/burst/lvl3.json

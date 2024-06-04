@@ -32,9 +32,7 @@ val burst = JsonObject {
         "actions" to listOfJson(
             {
                 "type" to "origins:play_sound"
-                "sound" to "minecraft:entity.wither.ambient"
-                "pitch" to 0.7
-                "volume" to 0.5
+                "sound" to "soul-origins:power.wind.burst_large"
             },
             {
                 "type" to "origins:add_velocity"
@@ -77,6 +75,11 @@ val burst = JsonObject {
                 "count" to 1
                 "particle" to "soul-origins:gust_emitter_large"
                 "speed" to 0
+                "spread" to {
+                    "x" to 0
+                    "y" to 0
+                    "z" to 0
+                }
             },
             {
                 "type" to "origins:if_else"

@@ -1,0 +1,38 @@
+{
+  "power.wind.burst": {
+    "sounds": [
+      {
+        "name": "soul-origins:wind/burst1",
+        "pitch": 1.2
+      },
+      {
+        "name": "soul-origins:wind/burst2",
+        "pitch": 1.2
+      },
+      {
+        "name": "soul-origins:wind/burst3",
+        "pitch": 1.2
+      }
+    ],
+    "subtitle": "subtitles.soul-origins.power.wind.burst"
+  },
+  "power.wind.burst_large": {
+    "sounds": [
+      { "name": "mob/wither/idle1", "pitch": 0.7, "volume": 0.5 },
+      { "name": "mob/wither/idle2", "pitch": 0.7, "volume": 0.5 },
+      { "name": "mob/wither/idle3", "pitch": 0.7, "volume": 0.5 },
+      { "name": "mob/wither/idle4", "pitch": 0.7, "volume": 0.5 }
+    ],
+    "subtitle": "subtitles.soul-origins.power.wind.burst_large"
+  },
+  "items.wind_shard.level": {
+    "sounds": [
+      {
+        "name": "random/levelup",
+        "pitch": 0.8,
+        "volume": 1.5
+      }
+    ],
+    "subtitle": "subtitles.soul-origins.items.wind_shard.level"
+  }
+}

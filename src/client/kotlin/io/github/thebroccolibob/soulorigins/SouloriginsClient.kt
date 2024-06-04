@@ -22,10 +22,10 @@ object SouloriginsClient : ClientModInitializer {
 			MobOrbItem.getMobType(itemStack).toFloat()
 		}
 
-		ParticleFactoryRegistry.getInstance().apply {
+		with (ParticleFactoryRegistry.getInstance()) {
 			register(SoulOriginsParticles.GUST, GustParticle::Factory)
 			register(SoulOriginsParticles.SMALL_GUST, GustParticle::SmallGustFactory)
-			register(SoulOriginsParticles.GUST_EMITTER_LARGE, GustEmitterParticle.Factory(3.0, 7, 0))
+			register(SoulOriginsParticles.GUST_EMITTER_LARGE, GustEmitterParticle.Factory(3.0, 12, 0))
 			register(SoulOriginsParticles.GUST_EMITTER_SMALL, GustEmitterParticle.Factory(1.0, 3, 2))
 		}
 	}
