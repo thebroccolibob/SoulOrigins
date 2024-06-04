@@ -15,6 +15,8 @@ import net.minecraft.registry.Registry
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import java.util.function.BiFunction
+import kotlin.math.max
+import kotlin.math.min
 
 private fun register(conditionFactory: ConditionFactory<Entity>) {
     Registry.register(ApoliRegistries.ENTITY_CONDITION, conditionFactory.serializerId, conditionFactory)
@@ -44,5 +46,10 @@ fun registerSoulOriginsEntityConditions() {
                     result
                 })
         } ?: false
+    }
+
+    register("facing_east_west", SerializableData {})
+    { _, entity ->
+        entity.headYaw in -135f..-45f || entity.headYaw in 45f..135f
     }
 }

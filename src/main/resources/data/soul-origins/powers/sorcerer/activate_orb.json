@@ -1,17 +1,74 @@
 {
   "type": "origins:active_self",
   "key": "key.origins.secondary_active",
+  "condition": {
+    "type": "origins:equipped_item",
+    "equipment_slot": "mainhand",
+    "item_condition": {
+      "type": "origins:ingredient",
+      "ingredient": {
+          "item": "soul-origins:mob_orb"
+      }
+    }
+  },
   "entity_action": {
-    "type": "origins:if_else_list",
+    "type": "origins:and",
     "actions": [
       {
-        "condition": {
-          "type": "soul-origins:held_mob_orb",
-          "entity_type": "minecraft:zombie"
-        },
+        "type": "origins:if_else_list",
+        "actions": [
+          {
+            "condition": {
+              "type": "soul-origins:held_mob_orb",
+              "entity_type": "minecraft:zombie"
+            },
+            "action": {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "soul-origins:facing_east_west"
+              },
+              "if_action": {
+                "type": "origins:raycast",
+                "distance": 8,
+                "block": true,
+                "entity": false,
+                "shape_type": "collider",
+                "fluid_handling": "none",
+                "command_at_hit": "fill ~ ~-1 ~-1 ~ ~2 ~1 netherarchives:rotten_flesh_block replace air"
+              },
+              "else_action": {
+                "type": "origins:raycast",
+                "distance": 8,
+                "block": true,
+                "entity": false,
+                "shape_type": "collider",
+                "fluid_handling": "none",
+                "command_at_hit": "fill ~-1 ~-1 ~ ~1 ~2 ~ netherarchives:rotten_flesh_block replace air"
+              }
+            }
+          },
+          {
+            "condition": {
+              "type": "soul-origins:held_mob_orb",
+              "entity_type": "minecraft:skeleton"
+            },
+            "action": {
+              "type": "origins:apply_effect",
+              "effect": {
+                  "effect": "minecraft:speed",
+                  "amplifier": 2,
+                  "duration": 80
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "origins:equipped_item_action",
+        "equipment_slot": "mainhand",
         "action": {
-          "type": "origins:execute_command",
-          "command": "say It is a zombie"
+          "type": "origins:consume",
+          "amount": 1
         }
       }
     ]

@@ -10,7 +10,7 @@
         "block": false,
         "entity": true,
         "shape_type": "collider",
-        "fluid_handling": "any",
+        "fluid_handling": "none",
         "bientity_condition":  {
           "type": "origins:target_condition",
           "condition": {
@@ -20,7 +20,7 @@
         },
         "bientity_action": {
           "type": "soul-origins:health_delay",
-          "multiplier": 4,
+          "multiplier": 0.5,
           "cooldown": "soul-origins:sorcerer/absorb_mob_cooldown",
           "action": {
               "type": "origins:if_else",
