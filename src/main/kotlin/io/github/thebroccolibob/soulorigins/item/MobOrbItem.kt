@@ -8,9 +8,7 @@ import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.EquipmentSlot
-import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.mob.MobEntity
-import net.minecraft.entity.mob.SkeletonHorseEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.StackReference
 import net.minecraft.item.*
@@ -40,12 +38,18 @@ class MobOrbItem(settings: Settings) : Item(settings) {
 
         if (world !is ServerWorld) return ActionResult.SUCCESS
 
+
+        val monster = stack.getEntity(world) ?: return ActionResult.FAIL
+
         val spawnPosition = if (world.getBlockState(blockPos).getCollisionShape(world, blockPos).isEmpty) blockPos else blockPos.offset(side)
 
-        val monster = EntityType.fromNbt(nbt.getCompound(ENTITY_NBT)).toNullable()?.spawnFromItemStack(world, stack, player, spawnPosition, SpawnReason.SPAWN_EGG, true, false)
+        monster.setPosition(spawnPosition.x + 0.5, spawnPosition.y.toDouble(), spawnPosition.z + 0.5)
 
         (monster as? OwnableMonster)?.owner = player
         (monster as? MobEntity)?.setPersistent()
+
+        world.spawnEntity(monster)
+
 
         // Mana Expense
         if (player?.abilities?.creativeMode != true) {
@@ -130,18 +134,7 @@ class MobOrbItem(settings: Settings) : Item(settings) {
                 entity.saveSelfNbt(this)
                 remove("Pos")
                 remove("UUID")
-                remove("ActiveEffects")
             })
-
-            (entity.vehicle as? SkeletonHorseEntity)?.let {
-                stack.orCreateNbt.put(ENTITY_NBT, NbtCompound().apply {
-                    it.saveSelfNbt(this)
-                    remove("Pos")
-                    remove("UUID")
-                    remove("ActiveEffects")
-                })
-                it.discard()
-            }
         }
 
         @JvmName("getEntityExt")
