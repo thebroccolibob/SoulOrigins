@@ -20,13 +20,13 @@ object SoulOriginsBlocks {
         strength(0.5f)
         burnable()
         sounds(BlockSoundGroup.SLIME)
-        nonOpaque()
     }))
 
     val DECAYING_SLIME = register("decaying_slime", DecayingSlimeBlock(200, 240, FabricBlockSettings {
         breakInstantly()
         strength(0f)
         sounds(BlockSoundGroup.SLIME)
+        nonOpaque()
     }))
 
     fun register() {}
