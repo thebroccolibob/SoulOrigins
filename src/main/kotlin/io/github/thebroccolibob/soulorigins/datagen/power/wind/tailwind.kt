@@ -65,13 +65,18 @@ fun tailwind(id: String) = leveledMultiCooldown(id, tailwindEntries, "key.origin
         {
             "type" to "origins:play_sound"
             "category" to "players"
-            "sound" to "minecraft:entity.player.attack.sweep"
+            "sound" to "soul-origins:power.wind.burst"
         },
         {
             "type" to "origins:spawn_particles"
             "count" to 1
             "particle" to "soul-origins:gust_emitter_small"
             "speed" to 0
+            "spread" to {
+                "x" to 0
+                "y" to 0
+                "z" to 0
+            }
         },
     ),
     hudRender = {

@@ -1,5 +1,7 @@
 package io.github.thebroccolibob.soulorigins.item
 
+import io.github.thebroccolibob.soulorigins.SoulOriginsParticles
+import io.github.thebroccolibob.soulorigins.SoulOriginsSounds
 import io.github.thebroccolibob.soulorigins.hasPower
 import io.github.thebroccolibob.soulorigins.plus
 import io.github.thebroccolibob.soulorigins.power.UseWindShardsPower
@@ -8,8 +10,10 @@ import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.sound.SoundCategory
 import net.minecraft.stat.Stats
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
@@ -35,7 +39,11 @@ class WindShardItem(tooltipColor: Formatting, settings: Settings) : Item(setting
 
         stack.decrement(1)
 
-        // TODO Add some fancy effects here
+        world.addParticle(SoulOriginsParticles.GUST_EMITTER_SMALL, user.x, user.y + 0.5, user.z, 0.0, 0.0, 0.0)
+        (world as? ServerWorld)?.spawnParticles(ParticleTypes.HAPPY_VILLAGER, user.x, user.y + 0.5, user.z, 12, 0.75, 0.75, 0.75, 0.0)
+        world.playSound(null, user.blockPos, SoulOriginsSounds.WIND_BURST, SoundCategory.PLAYERS, 2.0f, 0.8f)
+        world.playSound(null, user.blockPos, SoulOriginsSounds.WIND_BURST_LARGE, SoundCategory.PLAYERS, 1.0f, 1.0f)
+        world.playSound(null, user.blockPos, SoulOriginsSounds.WIND_LEVELUP, SoundCategory.PLAYERS)
 
         return TypedActionResult.success(stack)
     }
