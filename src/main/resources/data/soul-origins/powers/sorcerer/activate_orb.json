@@ -55,7 +55,7 @@
             "action": {
               "type": "origins:fire_projectile",
               "entity_type": "minecraft:arrow",
-              "divergence": 5.0,
+              "divergence": 8.0,
               "count": 5.0
             }
           }
