@@ -36,31 +36,22 @@ class MobOrbItem(settings: Settings) : Item(settings) {
         val soulMeter = player?.soulMeter
 
         // Mana check fails return
-        if ((soulMeter?.value ?: 0) < 2) return ActionResult.PASS
+        if (player?.abilities?.creativeMode != true && (soulMeter?.value ?: 0) < 2) return ActionResult.PASS
 
         if (world !is ServerWorld) return ActionResult.SUCCESS
 
         val spawnPosition = if (world.getBlockState(blockPos).getCollisionShape(world, blockPos).isEmpty) blockPos else blockPos.offset(side)
 
         val monster = EntityType.fromNbt(nbt.getCompound(ENTITY_NBT)).toNullable()?.spawnFromItemStack(world, stack, player, spawnPosition, SpawnReason.SPAWN_EGG, true, false)
-        if (nbt.contains(VEHICLE_NBT)) {
-            // This is an ugly hack
-            // ...but it works!
-            nbt.put(ENTITY_NBT, nbt.getCompound(VEHICLE_NBT))
-            val vehicle = EntityType.fromNbt(nbt.getCompound(ENTITY_NBT)).toNullable()?.spawnFromItemStack(world, stack, player, spawnPosition, SpawnReason.SPAWN_EGG, true, false)
-            monster?.startRiding(vehicle)
-        }
 
         (monster as? OwnableMonster)?.owner = player
         (monster as? MobEntity)?.setPersistent()
 
-        nbt.remove(ENTITY_NBT)
-        nbt.remove(VEHICLE_NBT)
-        stack.removeCustomName()
-
         // Mana Expense
-        soulMeter -= 2
-        player?.syncSoulMeter()
+        if (player?.abilities?.creativeMode != true) {
+            soulMeter -= 2
+            player?.syncSoulMeter()
+        }
 
         stack.decrement(1)
         return ActionResult.CONSUME
@@ -82,7 +73,6 @@ class MobOrbItem(settings: Settings) : Item(settings) {
         }
 
         getEntityType(stack)?.name?.let(tooltip::add)
-        stack.nbt?.getCompound(VEHICLE_NBT)?.let { EntityType.fromNbt(it).toNullable() }?.name?.let(tooltip::add)
 
         val armorItems = entityNbt.getList("ArmorItems", NbtCompound.COMPOUND_TYPE)
         val handItems = entityNbt.getList("HandItems", NbtCompound.COMPOUND_TYPE)
@@ -124,7 +114,6 @@ class MobOrbItem(settings: Settings) : Item(settings) {
 
     companion object {
         const val ENTITY_NBT = "EntityTag"
-        const val VEHICLE_NBT = "VehicleEntityTag"
 
         val ItemStack.hasEntity
             get() = nbt?.contains(ENTITY_NBT) ?: false

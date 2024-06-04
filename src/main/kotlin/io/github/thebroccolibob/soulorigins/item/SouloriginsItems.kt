@@ -62,7 +62,7 @@ object SouloriginsItems {
                     EntityType.WARDEN,
                 ).forEach {
                     entries.add(ItemStack(MOB_ORB, 1).apply {
-                        setSubNbt("EntityTag", NbtCompound().apply {
+                        setSubNbt(MobOrbItem.ENTITY_NBT, NbtCompound().apply {
                             putString("id", Registries.ENTITY_TYPE.getId(it).toString())
                         })
                     })
