@@ -60,6 +60,46 @@
           {
             "condition": {
               "type": "soul-origins:held_mob_orb",
+              "entity_type": "minecraft:husk"
+            },
+            "action": {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "soul-origins:facing_east_west"
+              },
+              "if_action": {
+                "type": "origins:raycast",
+                "distance": 8,
+                "block": true,
+                "entity": false,
+                "shape_type": "collider",
+                "fluid_handling": "none",
+                "command_at_hit": "fill ~ ~4 ~-1 ~ ~7 ~1 soul-origins:decaying_sand replace air",
+                "hit_action": {
+                  "type": "origins:play_sound",
+                  "sound": "minecraft:block.sand.place",
+                  "volume": 2
+                }
+              },
+              "else_action": {
+                "type": "origins:raycast",
+                "distance": 8,
+                "block": true,
+                "entity": false,
+                "shape_type": "collider",
+                "fluid_handling": "none",
+                "command_at_hit": "fill ~-1 ~4 ~ ~1 ~7 ~ soul-origins:decaying_sand replace air",
+                "hit_action": {
+                  "type": "origins:play_sound",
+                  "sound": "minecraft:block.sand.place",
+                  "volume": 2
+                }
+              }
+            }
+          },
+          {
+            "condition": {
+              "type": "soul-origins:held_mob_orb",
               "entity_type": "minecraft:drowned"
             },
             "action": {
@@ -77,7 +117,7 @@
                 "command_at_hit": "fill ~ ~-1 ~-1 ~ ~2 ~1 minecraft:water[level= 15] replace air",
                 "hit_action": {
                   "type": "origins:play_sound",
-                  "sound": "minecraft:block.froglight.place",
+                  "sound": "minecraft:item.bucket.empty",
                   "volume": 2
                 }
               },

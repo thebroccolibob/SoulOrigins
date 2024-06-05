@@ -30,6 +30,12 @@ object SoulOriginsBlocks {
         nonOpaque()
     }))
 
+    val DECAYING_SAND = register("decaying_sand", DecayingSandBlock(200, 240, FabricBlockSettings {
+        hardness(0.5f)
+        strength(0.5f)
+        sounds(BlockSoundGroup.SAND)
+    }))
+
     val GARDEN_SCULK = register("garden_sculk", GardenSculkBlock(FabricBlockSettings {
         strength(0.2F)
         sounds(BlockSoundGroup.SCULK)

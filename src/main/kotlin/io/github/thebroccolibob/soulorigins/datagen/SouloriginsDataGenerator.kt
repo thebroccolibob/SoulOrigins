@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.advancement.Advancement
+import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.data.client.BlockStateModelGenerator
 import net.minecraft.data.client.ItemModelGenerator
@@ -37,6 +38,7 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 	class ModelGenerator(output: FabricDataOutput) : FabricModelProvider(output) {
 		override fun generateBlockStateModels(blockStateModelGenerator: BlockStateModelGenerator) {
 			blockStateModelGenerator.registerStateWithModelReference(SoulOriginsBlocks.DECAYING_SLIME, Blocks.SLIME_BLOCK)
+			blockStateModelGenerator.registerStateWithModelReference(SoulOriginsBlocks.DECAYING_SAND, Blocks.SAND)
 			blockStateModelGenerator.registerStateWithModelReference(SoulOriginsBlocks.GARDEN_SCULK, Blocks.SCULK)
 			blockStateModelGenerator.registerSimpleCubeAll(SoulOriginsBlocks.DECAYING_ROTTEN_FLESH)
 		}
@@ -91,6 +93,18 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 					}
 				}
 			}
+
+			addTable(SoulOriginsBlocks.DECAYING_SAND) {
+				pool {
+					item(Items.SAND) {
+						count(constant(1))
+					}
+					conditions {
+						randomChance(0.5f)
+						survivesExplosion()
+					}
+				}
+			}
 		}
 	}
 
@@ -102,6 +116,9 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			getOrCreateTagBuilder(BlockTags.HOE_MINEABLE).add(
 				SoulOriginsBlocks.DECAYING_ROTTEN_FLESH,
 				SoulOriginsBlocks.GARDEN_SCULK
+			)
+			getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(
+				SoulOriginsBlocks.DECAYING_SAND
 			)
 		}
 	}
