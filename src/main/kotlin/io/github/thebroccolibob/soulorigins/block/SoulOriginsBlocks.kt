@@ -3,6 +3,7 @@ package io.github.thebroccolibob.soulorigins.block
 import io.github.thebroccolibob.soulorigins.FabricBlockSettings
 import io.github.thebroccolibob.soulorigins.Soulorigins
 import net.minecraft.block.Block
+import net.minecraft.block.Blocks
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.sound.BlockSoundGroup
@@ -19,7 +20,7 @@ object SoulOriginsBlocks {
         hardness(0.5f)
         strength(0.5f)
         burnable()
-        sounds(BlockSoundGroup.SLIME)
+        sounds(BlockSoundGroup.FROGLIGHT)
     }))
 
     val DECAYING_SLIME = register("decaying_slime", DecayingSlimeBlock(200, 240, FabricBlockSettings {
@@ -27,6 +28,17 @@ object SoulOriginsBlocks {
         strength(0f)
         sounds(BlockSoundGroup.SLIME)
         nonOpaque()
+    }))
+
+    val GARDEN_SCULK = register("garden_sculk", GardenSculkBlock(FabricBlockSettings {
+        strength(0.2F)
+        sounds(BlockSoundGroup.SCULK)
+        velocityMultiplier(0.05F)
+        allowsSpawning(Blocks::always)
+        solidBlock(Blocks::always)
+        blockVision(Blocks::always)
+        suffocates(Blocks::always)
+        dropsLike(Blocks.SCULK)
     }))
 
     fun register() {}

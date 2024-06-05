@@ -10,12 +10,16 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.advancement.Advancement
+import net.minecraft.block.Blocks
 import net.minecraft.data.client.BlockStateModelGenerator
 import net.minecraft.data.client.ItemModelGenerator
 import net.minecraft.data.client.Models
 import net.minecraft.item.Items
-import net.minecraft.util.Identifier
+import net.minecraft.registry.RegistryWrapper
+import net.minecraft.registry.tag.BlockTags
+import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
 object SouloriginsDataGenerator : DataGeneratorEntrypoint {
@@ -26,12 +30,14 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			addProvider(::PowerGenerator)
 			addProvider(::AdvancementGenerator)
 			addProvider(::BlockLootTableGenerator)
+			addProvider(::BlockTagGenerator)
 		}
 	}
 
 	class ModelGenerator(output: FabricDataOutput) : FabricModelProvider(output) {
 		override fun generateBlockStateModels(blockStateModelGenerator: BlockStateModelGenerator) {
-			blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(SoulOriginsBlocks.DECAYING_SLIME, Identifier("block/slime_block")))
+			blockStateModelGenerator.registerStateWithModelReference(SoulOriginsBlocks.DECAYING_SLIME, Blocks.SLIME_BLOCK)
+			blockStateModelGenerator.registerStateWithModelReference(SoulOriginsBlocks.GARDEN_SCULK, Blocks.SCULK)
 			blockStateModelGenerator.registerSimpleCubeAll(SoulOriginsBlocks.DECAYING_ROTTEN_FLESH)
 		}
 
@@ -86,6 +92,17 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 				}
 			}
 		}
+	}
 
+	class BlockTagGenerator(
+		output: FabricDataOutput,
+		registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>
+	) : FabricTagProvider.BlockTagProvider(output, registriesFuture) {
+		override fun configure(arg: RegistryWrapper.WrapperLookup?) {
+			getOrCreateTagBuilder(BlockTags.HOE_MINEABLE).add(
+				SoulOriginsBlocks.DECAYING_ROTTEN_FLESH,
+				SoulOriginsBlocks.GARDEN_SCULK
+			)
+		}
 	}
 }

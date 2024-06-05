@@ -15,8 +15,6 @@ import net.minecraft.registry.Registry
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import java.util.function.BiFunction
-import kotlin.math.max
-import kotlin.math.min
 
 private fun register(conditionFactory: ConditionFactory<Entity>) {
     Registry.register(ApoliRegistries.ENTITY_CONDITION, conditionFactory.serializerId, conditionFactory)

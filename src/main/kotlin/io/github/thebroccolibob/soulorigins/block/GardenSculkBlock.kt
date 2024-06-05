@@ -1,0 +1,51 @@
+@file:Suppress("OVERRIDE_DEPRECATION")
+
+package io.github.thebroccolibob.soulorigins.block
+
+import net.minecraft.block.BlockState
+import net.minecraft.block.SculkBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.entity.Entity
+import net.minecraft.entity.ai.pathing.NavigationType
+import net.minecraft.item.Item
+import net.minecraft.item.Items
+import net.minecraft.particle.BlockStateParticleEffect
+import net.minecraft.particle.ParticleTypes
+import net.minecraft.server.world.ServerWorld
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.shape.VoxelShape
+import net.minecraft.util.shape.VoxelShapes
+import net.minecraft.world.BlockView
+import net.minecraft.world.World
+
+class GardenSculkBlock(settings: Settings) : SculkBlock(settings) {
+    private val particleEffect = BlockStateParticleEffect(ParticleTypes.BLOCK, this.defaultState)
+
+    override fun getCollisionShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext) = COLLISION_SHAPE
+
+    override fun getSidesShape(state: BlockState, world: BlockView, pos: BlockPos): VoxelShape = VoxelShapes.fullCube()
+
+    override fun getCameraCollisionShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext): VoxelShape =
+        VoxelShapes.fullCube()
+
+    override fun getAmbientOcclusionLightLevel(state: BlockState, world: BlockView, pos: BlockPos) = 0.2f
+
+    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
+
+    override fun asItem(): Item = Items.SCULK
+
+    override fun onSteppedOn(world: World, pos: BlockPos, state: BlockState, entity: Entity) {
+        if (world.isClient) {
+            if (entity.isPlayer)
+                for (i in 0..<10)
+                    world.addParticle(particleEffect, entity.x, entity.y, entity.z, 0.0, 0.0, 0.0)
+        } else {
+            if (entity.isLiving && !entity.isPlayer)
+                (world as ServerWorld).spawnParticles(particleEffect, entity.x, entity.y, entity.z, 5, 0.0, 0.0, 0.0, 0.0)
+        }
+    }
+
+    companion object {
+        val COLLISION_SHAPE: VoxelShape = createCuboidShape(0.0, 0.0, 0.0, 16.0, 12.0, 16.0)
+    }
+}

@@ -5,6 +5,7 @@ import io.github.thebroccolibob.soulorigins.ItemGroup
 import io.github.thebroccolibob.soulorigins.Soulorigins
 import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
+import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.Registries
@@ -36,7 +37,7 @@ object SouloriginsItems {
     val TAILWIND_SHARD = registerShard("tailwind", Formatting.GREEN)
     val BURST_SHARD = registerShard("burst", Formatting.LIGHT_PURPLE)
 
-    val ITEM_GROUP = Registry.register(
+    val ITEM_GROUP: ItemGroup = Registry.register(
         Registries.ITEM_GROUP,
         Identifier(Soulorigins.MOD_ID, "item_group"),
         ItemGroup {

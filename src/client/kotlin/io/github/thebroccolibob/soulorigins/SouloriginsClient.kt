@@ -22,7 +22,7 @@ object SouloriginsClient : ClientModInitializer {
 		}
 		ModelPredicateProviderRegistry.register(SouloriginsItems.MOB_ORB, Identifier(Soulorigins.MOD_ID, "mob_type")) {
 				itemStack, _, _, _ ->
-			MobOrbItem.getMobType(itemStack).toFloat()
+			MobOrbItem.getMobType(itemStack)
 		}
 
 		with (ParticleFactoryRegistry.getInstance()) {

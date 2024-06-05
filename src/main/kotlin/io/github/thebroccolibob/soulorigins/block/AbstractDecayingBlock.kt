@@ -1,5 +1,3 @@
-@file:Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-
 package io.github.thebroccolibob.soulorigins.block
 
 import net.minecraft.block.Block
