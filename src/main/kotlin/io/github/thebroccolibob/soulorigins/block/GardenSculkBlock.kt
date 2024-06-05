@@ -46,6 +46,6 @@ class GardenSculkBlock(settings: Settings) : SculkBlock(settings) {
     }
 
     companion object {
-        val COLLISION_SHAPE: VoxelShape = createCuboidShape(0.0, 0.0, 0.0, 16.0, 12.0, 16.0)
+        val COLLISION_SHAPE: VoxelShape = createCuboidShape(0.0, 0.0, 0.0, 16.0, 8.0, 16.0)
     }
 }

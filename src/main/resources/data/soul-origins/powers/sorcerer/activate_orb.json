@@ -60,14 +60,87 @@
           {
             "condition": {
               "type": "soul-origins:held_mob_orb",
+              "entity_type": "minecraft:drowned"
+            },
+            "action": {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "soul-origins:facing_east_west"
+              },
+              "if_action": {
+                "type": "origins:raycast",
+                "distance": 8,
+                "block": true,
+                "entity": false,
+                "shape_type": "collider",
+                "fluid_handling": "none",
+                "command_at_hit": "fill ~ ~-1 ~-1 ~ ~2 ~1 minecraft:water[level= 15] replace air",
+                "hit_action": {
+                  "type": "origins:play_sound",
+                  "sound": "minecraft:block.froglight.place",
+                  "volume": 2
+                }
+              },
+              "else_action": {
+                "type": "origins:raycast",
+                "distance": 8,
+                "block": true,
+                "entity": false,
+                "shape_type": "collider",
+                "fluid_handling": "none",
+                "command_at_hit": "fill ~-1 ~-1 ~ ~1 ~2 ~ minecraft:water[level= 15] replace air",
+                "hit_action": {
+                  "type": "origins:play_sound",
+                  "sound": "minecraft:item.bucket.empty",
+                  "volume": 2
+                }
+              }
+            }
+          },
+          {
+            "condition": {
+              "type": "soul-origins:held_mob_orb",
               "entity_type": "minecraft:skeleton"
             },
             "action": {
-              "type": "origins:fire_projectile",
+              "type": "apugli:fire_projectile",
+              "count": 5.0,
+              "divergence": 100.0,
               "entity_type": "minecraft:arrow",
-              "tag": "{pickup:0b}",
-              "divergence": 8.0,
-              "count": 5.0
+              "tag": "{pickup:0}"
+            }
+          },
+          {
+            "condition": {
+              "type": "soul-origins:held_mob_orb",
+              "entity_type": "minecraft:stray"
+            },
+            "action": {
+              "type": "apugli:fire_projectile",
+              "count": 5.0,
+              "divergence": 100.0,
+              "entity_type": "minecraft:arrow",
+              "tag": {
+                "pickup": 0,
+                "Potion": "minecraft:slowness"
+              }
+            }
+          },
+          {
+            "condition": {
+              "type": "soul-origins:held_mob_orb",
+              "entity_type": "minecraft:wither_skeleton"
+            },
+            "action": {
+              "type": "apugli:fire_projectile",
+              "count": 5.0,
+              "divergence": 100.0,
+              "entity_type": "minecraft:arrow",
+              "tag": {
+                "pickup": 0,
+                "Fire": 200,
+                "HasVisualFire": 1
+              }
             }
           }
         ]
