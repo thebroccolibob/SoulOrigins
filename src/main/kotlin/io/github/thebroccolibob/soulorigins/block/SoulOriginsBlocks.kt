@@ -37,10 +37,10 @@ object SoulOriginsBlocks {
         sounds(BlockSoundGroup.SAND)
     }))
 
+    @JvmField
     val GARDEN_SCULK = register("garden_sculk", GardenSculkBlock(FabricBlockSettings {
         strength(0.2F)
         sounds(BlockSoundGroup.SCULK)
-        velocityMultiplier(0.05F)
         allowsSpawning(Blocks::always)
         solidBlock(Blocks::always)
         blockVision(Blocks::always)

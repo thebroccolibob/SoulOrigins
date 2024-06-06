@@ -1,0 +1,53 @@
+{
+    "type": "origins:multiple",
+    "walk": {
+        "type": "soul-origins:walk_on_sculk_garden"
+    },
+    "phase": {
+        "type": "origins:phasing",
+        "block_condition": {
+            "type": "origins:in_tag",
+            "tag": "soul-origins:sculk_garden_phaseable"
+        },
+        "render_type": "blindness",
+        "view_distance": 16
+    },
+    "swim": {
+        "type": "origins:swimming",
+        "condition": {
+            "type": "origins:in_block",
+            "block_condition": {
+                "type": "origins:in_tag",
+                "tag": "soul-origins:sculk_garden_phaseable"
+            }
+        }
+    },
+    "spread": {
+        "type": "origins:action_over_time",
+        "interval": 20,
+        "entity_action": {
+            "type": "origins:execute_command",
+            "command": "function soul-origins:spread_sculk_garden"
+        }
+    },
+    "silent": {
+        "type": "origins:prevent_game_event",
+        "events": [
+            "minecraft:step",
+            "minecraft:swim",
+            "minecraft:hit_ground"
+        ]
+    },
+    "remove": {
+        "type": "origins:action_on_callback",
+        "entity_action_added": {
+            "type": "origins:delay",
+            "ticks": 600,
+            "action": {
+                "type": "origins:revoke_power",
+                "power": "soul-origins:sorcerer/sculk_garden",
+                "source": "soul-origins:activate_orb"
+            }
+        }
+    }
+}
