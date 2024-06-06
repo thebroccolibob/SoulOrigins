@@ -7,12 +7,12 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 
-class DecayingSlimeBlock(override val minDelay: Int, override val maxDelay: Int, settings: Settings) : SlimeBlock(settings), AbstractDecayingBlock {
+class DecayingSlimeBlock(override val minDelay: Int, override val maxDelay: Int, settings: Settings) : SlimeBlock(settings), Decaying {
     override fun onBlockAdded(state: BlockState, world: World, pos: BlockPos, oldState: BlockState, notify: Boolean) {
-        super<AbstractDecayingBlock>.onBlockAdded(state, world, pos, oldState, notify)
+        super<Decaying>.onBlockAdded(state, world, pos, oldState, notify)
     }
 
     override fun scheduledTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random) {
-        super<AbstractDecayingBlock>.scheduledTick(state, world, pos, random)
+        super<Decaying>.scheduledTick(state, world, pos, random)
     }
 }

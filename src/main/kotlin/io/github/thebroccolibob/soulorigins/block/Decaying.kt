@@ -7,7 +7,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 
-interface AbstractDecayingBlock {
+interface Decaying {
     fun onBlockAdded(
         state: BlockState,
         world: World,

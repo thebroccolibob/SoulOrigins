@@ -4,6 +4,7 @@ import io.github.thebroccolibob.soulorigins.FabricBlockSettings
 import io.github.thebroccolibob.soulorigins.Soulorigins
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
+import net.minecraft.block.FallingBlock
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.sound.BlockSoundGroup
@@ -30,7 +31,7 @@ object SoulOriginsBlocks {
         nonOpaque()
     }))
 
-    val DECAYING_SAND = register("decaying_sand", DecayingSandBlock(200, 240, FabricBlockSettings {
+    val HUSK_SAND = register("decaying_sand", FallingBlock(FabricBlockSettings {
         hardness(0.5f)
         strength(0.5f)
         sounds(BlockSoundGroup.SAND)
