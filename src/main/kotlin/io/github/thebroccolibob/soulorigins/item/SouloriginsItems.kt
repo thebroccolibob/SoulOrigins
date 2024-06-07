@@ -3,6 +3,7 @@ package io.github.thebroccolibob.soulorigins.item
 import io.github.thebroccolibob.soulorigins.FabricItemSettings
 import io.github.thebroccolibob.soulorigins.ItemGroup
 import io.github.thebroccolibob.soulorigins.Soulorigins
+import io.github.thebroccolibob.soulorigins.add
 import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
@@ -37,6 +38,10 @@ object SouloriginsItems {
     val TAILWIND_SHARD = registerShard("tailwind", Formatting.GREEN)
     val BURST_SHARD = registerShard("burst", Formatting.LIGHT_PURPLE)
 
+    val TEST_GUN = register("test_gun", CooldownGunItem(3, 60, FabricItemSettings {
+        maxCount(1)
+    }))
+
     val ITEM_GROUP: ItemGroup = Registry.register(
         Registries.ITEM_GROUP,
         Identifier(Soulorigins.MOD_ID, "item_group"),
@@ -44,9 +49,12 @@ object SouloriginsItems {
             displayName(Text.translatable("itemGroup.soul-origins.item_group"))
             icon { MOB_ORB.defaultStack }
             entries { _, entries ->
-                entries.add(UPDRAFT_SHARD)
-                entries.add(TAILWIND_SHARD)
-                entries.add(BURST_SHARD)
+                entries.add(
+                    UPDRAFT_SHARD,
+                    TAILWIND_SHARD,
+                    BURST_SHARD,
+                    TEST_GUN
+                )
 
                 listOf(
                     EntityType.ZOMBIE,

@@ -18,6 +18,7 @@ import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import java.util.*
 import net.minecraft.util.Pair as McPair
@@ -84,17 +85,14 @@ fun ItemGroup(init: ItemGroup.Builder.() -> Unit): ItemGroup {
     return FabricItemGroup.builder().apply(init).build()
 }
 
-fun ItemGroup.Builder.entries(vararg items: ItemConvertible) {
-    entries { _, entries ->
-        entries.addAll(items.map { it.asItem().defaultStack })
-    }
-}
-fun ItemGroup.Builder.entries(vararg items: ItemStack) {
-    entries { _, entries ->
-        entries.addAll(items.toList())
-    }
+fun ItemGroup.Entries.add(vararg items: ItemConvertible) {
+    items.forEach(::add)
 }
 
 fun Model(parent: Identifier? = null, variant: String? = null, vararg requiredTextureKeys: TextureKey): Model {
     return Model(parent.toOptional(), variant.toOptional(), *requiredTextureKeys)
 }
+
+operator fun Vec3d.times(value: Double): Vec3d = this.multiply(value)
+operator fun Vec3d.times(other: Vec3d): Vec3d = this.multiply(other)
+operator fun Vec3d.plus(other: Vec3d): Vec3d = this.add(other)
