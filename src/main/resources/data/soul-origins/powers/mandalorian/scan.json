@@ -1,0 +1,58 @@
+{
+    "type": "origins:multiple",
+    "toggle": {
+        "type": "origins:toggle",
+        "retain_state": false,
+        "key": "key.origins.primary_active",
+        "active_by_default": false,
+        "condition": {
+            "type": "origins:equipped_item",
+            "equipment_slot": "head",
+            "item_condition": {
+                "type": "origins:ingredient",
+                "ingredient": {
+                    "item": "soul-origins:mandalorian_helmet"
+                }
+            }
+        }
+    },
+    "shader": {
+        "type": "origins:shader",
+        "shader": "soul-origins:shaders/post/scanner.json",
+        "condition": {
+            "type": "origins:power_active",
+            "power": "soul-origins:mandalorian/scan_toggle"
+        }
+    },
+    "glow": {
+        "type": "origins:entity_glow",
+        "bientity_condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:distance",
+                    "comparison": "<=",
+                    "compare_to": 16
+                }
+            ]
+        },
+        "entity_condition": {
+            "type": "origins:living"
+        },
+        "condition": {
+            "type": "origins:power_active",
+            "power": "soul-origins:mandalorian/scan_toggle"
+        },
+        "red": 1,
+        "green": 0,
+        "blue": 0,
+        "use_teams": false
+    },
+    "night_vision": {
+        "type": "origins:night_vision",
+        "condition": {
+            "type": "origins:power_active",
+            "power": "soul-origins:mandalorian/scan_toggle"
+        }
+    }
+}

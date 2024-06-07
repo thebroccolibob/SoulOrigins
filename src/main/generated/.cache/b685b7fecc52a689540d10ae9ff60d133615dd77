@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-05T22:13:33.662109324	soul-origins/Model Definitions
+// 1.20.1	2024-06-07T15:05:57.79993971	soul-origins/Model Definitions
 51aefa3d7c5e8692f49c35289025f4f41739b88c assets/soul-origins/blockstates/decaying_slime.json
 84d7bbc12032a661009a8cc1efc810ab648a98a1 assets/soul-origins/models/item/mob_orb_spider.json
 90ae49338b8c9b1153ce16aaa2eb6731d959860d assets/soul-origins/models/item/mob_orb_drowned.json
@@ -10,6 +10,7 @@
 74bc67b70850d3f73a79afea66bb3563348c64eb assets/soul-origins/models/item/mob_orb_stray.json
 49a234a2bae6b4887904b3149f03838c3b488928 assets/soul-origins/blockstates/decaying_sand.json
 5782da44e82e316f2b4a6a419183ade9e72f2b83 assets/soul-origins/models/item/mob_orb_slime.json
+1dc6e0fd41e2997f4522f39b5f5b75c0dc8fd39e assets/soul-origins/models/item/mandalorian_helmet.json
 600d173e514d40d194d42f49bcbf70225da85947 assets/soul-origins/models/item/mob_orb_zombie.json
 d53fa742f279d284de6970b17ace176b2559de24 assets/soul-origins/models/item/mob_orb_witherskeleton.json
 c6113de0f1cbe49061c6b631c6a27b54199c9f0d assets/soul-origins/models/item/mob_orb_enderman.json

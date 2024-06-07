@@ -5,9 +5,7 @@ import io.github.thebroccolibob.soulorigins.ItemGroup
 import io.github.thebroccolibob.soulorigins.Soulorigins
 import io.github.thebroccolibob.soulorigins.add
 import net.minecraft.entity.EntityType
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
-import net.minecraft.item.ItemStack
+import net.minecraft.item.*
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -42,6 +40,12 @@ object SouloriginsItems {
         maxCount(1)
     }))
 
+    val MANDALORIAN_HELMET = register("mandalorian_helmet", ArmorItem(object : ArmorMaterial by ArmorMaterials.NETHERITE {
+        override fun getName() = "beskar"
+    }, ArmorItem.Type.HELMET, FabricItemSettings {
+        maxCount(1)
+    }))
+
     val ITEM_GROUP: ItemGroup = Registry.register(
         Registries.ITEM_GROUP,
         Identifier(Soulorigins.MOD_ID, "item_group"),
@@ -53,7 +57,8 @@ object SouloriginsItems {
                     UPDRAFT_SHARD,
                     TAILWIND_SHARD,
                     BURST_SHARD,
-                    TEST_GUN
+                    TEST_GUN,
+                    MANDALORIAN_HELMET
                 )
 
                 listOf(

@@ -1,0 +1,9 @@
+{
+    "name": "Mandalorian",
+    "description": ", The",
+    "icon": "soul-origins:mandalorian_helmet",
+    "impact": 1,
+    "powers": [
+        "soul-origins:mandalorian/scan"
+    ]
+}

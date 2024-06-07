@@ -1,0 +1,37 @@
+{
+    "targets": [
+        "swap1",
+        "swap2"
+    ],
+    "passes": [
+        {
+            "name": "color_convolve",
+            "intarget": "minecraft:main",
+            "outtarget": "swap1",
+            "uniforms": [
+                {
+                    "name": "RedMatrix",
+                    "values": [ 0.3, 0.0, 0.0 ]
+                },
+                {
+                    "name": "GreenMatrix",
+                    "values": [ 0.0, 0.3, 0.0 ]
+                },
+                {
+                    "name": "BlueMatrix",
+                    "values": [ 0.1, 0.2, 1.0 ]
+                }
+            ]
+        },
+        {
+            "name": "scan_pincushion",
+            "intarget": "swap1",
+            "outtarget": "swap2"
+        },
+        {
+            "name": "blit",
+            "intarget": "swap2",
+            "outtarget": "minecraft:main"
+        }
+    ]
+}

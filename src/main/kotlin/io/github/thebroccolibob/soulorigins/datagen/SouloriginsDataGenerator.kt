@@ -45,6 +45,7 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			itemModelGenerator.register(SouloriginsItems.UPDRAFT_SHARD, Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.TAILWIND_SHARD, Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.BURST_SHARD, Models.GENERATED)
+			itemModelGenerator.register(SouloriginsItems.MANDALORIAN_HELMET, Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_zombie", Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_husk", Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_drowned", Models.GENERATED)
