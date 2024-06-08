@@ -12,13 +12,13 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.advancement.Advancement
+import net.minecraft.block.Block
 import net.minecraft.block.Blocks
-import net.minecraft.data.client.BlockStateModelGenerator
-import net.minecraft.data.client.ItemModelGenerator
-import net.minecraft.data.client.Models
+import net.minecraft.data.client.*
 import net.minecraft.item.Items
 import net.minecraft.registry.RegistryWrapper
 import net.minecraft.registry.tag.BlockTags
+import net.minecraft.util.Identifier
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
@@ -37,7 +37,9 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 	class ModelGenerator(output: FabricDataOutput) : FabricModelProvider(output) {
 		override fun generateBlockStateModels(blockStateModelGenerator: BlockStateModelGenerator) {
 			blockStateModelGenerator.registerStateWithModelReference(SoulOriginsBlocks.DECAYING_SLIME, Blocks.SLIME_BLOCK)
-			blockStateModelGenerator.registerStateWithModelReference(SoulOriginsBlocks.HUSK_SAND, Blocks.SAND)
+			blockStateModelGenerator.registerRotatableWithReference(SoulOriginsBlocks.GARDEN_SCULK, Blocks.SCULK)
+			blockStateModelGenerator.registerRotatableWithReference(SoulOriginsBlocks.DECAYING_SAND, Blocks.SAND)
+			blockStateModelGenerator.registerRotatableWithReference(SoulOriginsBlocks.FALLING_DECAYING_SAND, Blocks.SAND)
 			blockStateModelGenerator.registerSimpleCubeAll(SoulOriginsBlocks.DECAYING_ROTTEN_FLESH)
 		}
 
@@ -57,6 +59,14 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_enderman", Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_slime", Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_warden", Models.GENERATED)
+		}
+
+		fun BlockStateModelGenerator.registerRotatable(block: Block, modelId: Identifier) {
+			blockStateCollector.accept(VariantsBlockStateSupplier.create(block, *BlockStateModelGenerator.createModelVariantWithRandomHorizontalRotations(modelId)))
+		}
+
+		fun BlockStateModelGenerator.registerRotatableWithReference(block: Block, modelReference: Block) {
+			registerRotatable(block, ModelIds.getBlockModelId(modelReference))
 		}
 	}
 
@@ -92,7 +102,7 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 				}
 			}
 
-			addTable(SoulOriginsBlocks.HUSK_SAND) {
+			addTable(SoulOriginsBlocks.DECAYING_SAND) {
 				pool {
 					item(Items.SAND) {
 						count(constant(1))
@@ -116,7 +126,7 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 				SoulOriginsBlocks.GARDEN_SCULK
 			)
 			getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(
-				SoulOriginsBlocks.HUSK_SAND
+				SoulOriginsBlocks.DECAYING_SAND
 			)
 		}
 	}

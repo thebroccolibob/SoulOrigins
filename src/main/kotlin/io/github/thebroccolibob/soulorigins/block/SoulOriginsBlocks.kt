@@ -4,7 +4,6 @@ import io.github.thebroccolibob.soulorigins.FabricBlockSettings
 import io.github.thebroccolibob.soulorigins.Soulorigins
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
-import net.minecraft.block.FallingBlock
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.sound.BlockSoundGroup
@@ -31,10 +30,17 @@ object SoulOriginsBlocks {
         nonOpaque()
     }))
 
-    val HUSK_SAND = register("decaying_sand", FallingBlock(FabricBlockSettings {
+    val DECAYING_SAND = register("decaying_sand", DecayingBlock(200, 240, FabricBlockSettings {
         hardness(0.5f)
         strength(0.5f)
         sounds(BlockSoundGroup.SAND)
+    }))
+
+    val FALLING_DECAYING_SAND = register("falling_decaying_sand", TransformingFallingBlock(DECAYING_SAND.defaultState, FabricBlockSettings {
+        hardness(0.5f)
+        strength(0.5f)
+        sounds(BlockSoundGroup.SAND)
+        dropsLike(DECAYING_SAND)
     }))
 
     @JvmField

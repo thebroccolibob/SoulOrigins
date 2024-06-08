@@ -92,7 +92,7 @@
           "entity": false,
           "shape_type": "collider",
           "fluid_handling": "none",
-          "command_at_hit": "fill ~-1 ~4 ~-1 ~1 ~6 ~1 soul-origins:decaying_sand replace air",
+          "command_at_hit": "fill ~-1 ~4 ~-1 ~1 ~6 ~1 soul-origins:falling_decaying_sand replace air",
           "hit_action": {
             "type": "origins:and",
             "actions": [
