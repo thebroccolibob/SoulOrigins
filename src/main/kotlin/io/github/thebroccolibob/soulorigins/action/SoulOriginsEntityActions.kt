@@ -86,4 +86,5 @@ fun registerSoulOriginsEntityActions() {
         )
     }
 
+    register("apugli_raycast", FixedRaycastAction.serializableData, FixedRaycastAction::execute)
 }

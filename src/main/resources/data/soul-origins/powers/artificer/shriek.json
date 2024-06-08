@@ -1,0 +1,46 @@
+{
+    "type": "origins:active_self",
+    "key": "key.origins.primary_active",
+    "condition": {
+        "type": "origins:resource",
+        "resource": "soul-origins:soul_meter",
+        "comparison": ">=",
+        "compare_to": 2
+    },
+    "cooldown": 100,
+    "entity_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "soul-origins:apugli_raycast",
+                "distance": 8,
+                "particle": "minecraft:sonic_boom",
+                "spacing": 1,
+                "pierce": true,
+                "bientity_action": {
+                    "type": "origins:add_velocity",
+                    "reference": "rotation",
+                    "z": 2
+                },
+                "space": "local",
+                "direction": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 1
+                }
+            },
+            {
+                "type": "origins:change_resource",
+                "resource": "soul-origins:soul_meter",
+                "operation": "add",
+                "change": -2
+            },
+            {
+                "type": "origins:play_sound",
+                "sound": "minecraft:block.sculk_shrieker.shriek",
+                "volume": 2,
+                "pitch": 0.9
+            }
+        ]
+    }
+}
