@@ -81,7 +81,7 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			addTable(SoulOriginsBlocks.DECAYING_SLIME) {
 				pool {
 					item(Items.SLIME_BALL) {
-						count(constant(1))
+						count(1)
 					}
 					conditions {
 						randomChance(0.5f)
@@ -93,7 +93,7 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			addTable(SoulOriginsBlocks.DECAYING_ROTTEN_FLESH) {
 				pool {
 					item(Items.ROTTEN_FLESH) {
-						count(constant(1))
+						count(1)
 					}
 					conditions {
 						randomChance(0.25f)
@@ -105,7 +105,7 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			addTable(SoulOriginsBlocks.DECAYING_SAND) {
 				pool {
 					item(Items.SAND) {
-						count(constant(1))
+						count(1)
 					}
 					conditions {
 						randomChance(0.5f)
