@@ -86,63 +86,30 @@
           "entity_type": "minecraft:husk"
         },
         "action": {
-          "type": "origins:if_else",
-          "condition": {
-            "type": "soul-origins:facing_east_west"
-          },
-          "if_action": {
-            "type": "origins:raycast",
-            "distance": 8,
-            "block": true,
-            "entity": false,
-            "shape_type": "collider",
-            "fluid_handling": "none",
-            "command_at_hit": "fill ~-1 ~4 ~-1 ~1 ~6 ~1 soul-origins:decaying_sand replace air",
-            "hit_action": {
-              "type": "origins:and",
-              "actions": [
-                {
-                  "type": "origins:play_sound",
-                  "sound": "minecraft:block.sand.place",
-                  "volume": 2
-                },
-                {
-                  "type": "origins:equipped_item_action",
-                  "equipment_slot": "mainhand",
-                  "action": {
-                    "type": "origins:consume",
-                    "amount": 1
-                  }
+          "type": "origins:raycast",
+          "distance": 8,
+          "block": true,
+          "entity": false,
+          "shape_type": "collider",
+          "fluid_handling": "none",
+          "command_at_hit": "fill ~-1 ~4 ~-1 ~1 ~6 ~1 soul-origins:decaying_sand replace air",
+          "hit_action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:play_sound",
+                "sound": "minecraft:block.sand.place",
+                "volume": 2
+              },
+              {
+                "type": "origins:equipped_item_action",
+                "equipment_slot": "mainhand",
+                "action": {
+                  "type": "origins:consume",
+                  "amount": 1
                 }
-              ]
-            }
-          },
-          "else_action": {
-            "type": "origins:raycast",
-            "distance": 8,
-            "block": true,
-            "entity": false,
-            "shape_type": "collider",
-            "fluid_handling": "none",
-            "command_at_hit": "fill ~-1 ~4 ~-1 ~1 ~6 ~1 soul-origins:decaying_sand replace air",
-            "hit_action": {
-              "type": "origins:and",
-              "actions": [
-                {
-                  "type": "origins:play_sound",
-                  "sound": "minecraft:block.sand.place",
-                  "volume": 2
-                },
-                {
-                  "type": "origins:equipped_item_action",
-                  "equipment_slot": "mainhand",
-                  "action": {
-                    "type": "origins:consume",
-                    "amount": 1
-                  }
-                }
-              ]
-            }
+              }
+            ]
           }
         }
       },
