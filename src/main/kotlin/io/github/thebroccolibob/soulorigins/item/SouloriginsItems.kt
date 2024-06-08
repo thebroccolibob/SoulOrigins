@@ -3,6 +3,7 @@ package io.github.thebroccolibob.soulorigins.item
 import io.github.thebroccolibob.soulorigins.FabricItemSettings
 import io.github.thebroccolibob.soulorigins.ItemGroup
 import io.github.thebroccolibob.soulorigins.Soulorigins
+import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
 import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
@@ -36,6 +37,13 @@ object SouloriginsItems {
     val UPDRAFT_SHARD = registerShard("updraft", Formatting.AQUA)
     val TAILWIND_SHARD = registerShard("tailwind", Formatting.GREEN)
     val BURST_SHARD = registerShard("burst", Formatting.LIGHT_PURPLE)
+
+    val ARTIFICER_PLATFORM_BUILDER = register("artificer_platform_builder", SurfaceBuilderProjectileItem(SoulOriginsBlocks.ARTIFICER_PLATFORM_BUILDER, 0, FabricItemSettings {
+        maxCount(16)
+    }))
+    val ARTIFICER_WALL_BUILDER = register("artificer_wall_builder", DirectionalSurfaceBuilderProjectileItem(SoulOriginsBlocks.ARTIFICER_NS_WALL_BUILDER, SoulOriginsBlocks.ARTIFICER_EW_WALL_BUILDER, 1, FabricItemSettings {
+        maxCount(16)
+    }))
 
     val ITEM_GROUP: ItemGroup = Registry.register(
         Registries.ITEM_GROUP,

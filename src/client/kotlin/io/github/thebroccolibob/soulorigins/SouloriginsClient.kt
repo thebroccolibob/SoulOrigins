@@ -3,14 +3,17 @@ package io.github.thebroccolibob.soulorigins
 import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
 import io.github.thebroccolibob.soulorigins.client.particle.GustEmitterParticle
 import io.github.thebroccolibob.soulorigins.client.particle.GustParticle
+import io.github.thebroccolibob.soulorigins.entity.SoulOriginsEntities
 import io.github.thebroccolibob.soulorigins.item.MarigoldCardItem.Companion.hasEntity
 import io.github.thebroccolibob.soulorigins.item.MobOrbItem
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 import net.minecraft.client.item.ModelPredicateProviderRegistry
 import net.minecraft.client.render.RenderLayer
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer
 import net.minecraft.util.Identifier
 
 object SouloriginsClient : ClientModInitializer {
@@ -33,5 +36,7 @@ object SouloriginsClient : ClientModInitializer {
 		}
 
 		BlockRenderLayerMap.INSTANCE.putBlock(SoulOriginsBlocks.DECAYING_SLIME, RenderLayer.getTranslucent())
+
+		EntityRendererRegistry.register(SoulOriginsEntities.SURFACE_BUILDER_PROJECTILE, ::FlyingItemEntityRenderer)
 	}
 }

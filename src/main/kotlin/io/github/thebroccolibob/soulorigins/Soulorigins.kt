@@ -8,6 +8,7 @@ import io.github.thebroccolibob.soulorigins.block.entity.SoulOriginsBlockEntitie
 import io.github.thebroccolibob.soulorigins.condition.registerSoulOriginsBiEntityConditions
 import io.github.thebroccolibob.soulorigins.condition.registerSoulOriginsEntityConditions
 import io.github.thebroccolibob.soulorigins.condition.registerSoulOriginsItemConditions
+import io.github.thebroccolibob.soulorigins.entity.SoulOriginsEntities
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import io.github.thebroccolibob.soulorigins.power.registerSoulOriginsPowers
 import net.fabricmc.api.ModInitializer
@@ -25,6 +26,7 @@ object Soulorigins : ModInitializer {
 		SoulOriginsBlocks.register()
 		SouloriginsItems.register()
 		SoulOriginsBlockEntities.register()
+		SoulOriginsEntities.register()
 		registerSoulOriginsBiEntityActions()
 		registerSoulOriginsEntityActions()
 		registerSoulOriginsItemActions()

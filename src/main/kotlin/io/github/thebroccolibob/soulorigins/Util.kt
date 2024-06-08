@@ -10,6 +10,7 @@ import net.minecraft.block.Block
 import net.minecraft.data.client.Model
 import net.minecraft.data.client.TextureKey
 import net.minecraft.entity.Entity
+import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.*
 import net.minecraft.nbt.NbtCompound
@@ -18,12 +19,14 @@ import net.minecraft.nbt.NbtList
 import net.minecraft.registry.Registries
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
+import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
+import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.Vec3i
 import net.minecraft.world.World
-import org.apache.commons.compress.compressors.lz77support.LZ77Compressor
 import java.util.*
+import kotlin.reflect.KProperty
 import net.minecraft.util.Pair as McPair
 
 inline fun FabricItemSettings(init: FabricItemSettings.() -> Unit) = FabricItemSettings().apply(init)
@@ -36,6 +39,10 @@ operator fun ItemUsageContext.component3(): BlockPos = blockPos
 operator fun ItemUsageContext.component4(): World = world
 operator fun ItemUsageContext.component5(): Hand = hand
 operator fun ItemUsageContext.component6(): Direction = side
+
+operator fun BlockHitResult.component1(): Vec3d = this.pos
+operator fun BlockHitResult.component2(): Direction = this.side
+operator fun BlockHitResult.component3(): BlockPos = this.blockPos
 
 fun NbtCompound.getOrCreateCompound(key: String): NbtCompound {
     if (key in this) return getCompound(key)
@@ -112,3 +119,12 @@ val Block.id
     get() = Registries.BLOCK.getId(this)
 
 fun BlockPos.copy() = BlockPos(x, y, z)
+
+operator fun <T> TrackedData<T>.getValue(thisRef: Entity, property: KProperty<*>): T {
+    return thisRef.dataTracker.get(this)
+}
+
+operator fun <T> TrackedData<T>.setValue(thisRef: Entity, property: KProperty<*>, value: T) {
+    thisRef.dataTracker.set(this, value)
+}
+
