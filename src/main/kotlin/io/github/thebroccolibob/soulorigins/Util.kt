@@ -6,6 +6,7 @@ import io.github.apace100.calio.data.SerializableData
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
+import net.minecraft.block.Block
 import net.minecraft.data.client.Model
 import net.minecraft.data.client.TextureKey
 import net.minecraft.entity.Entity
@@ -14,11 +15,14 @@ import net.minecraft.item.*
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
+import net.minecraft.registry.Registries
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
+import net.minecraft.util.math.Vec3i
 import net.minecraft.world.World
+import org.apache.commons.compress.compressors.lz77support.LZ77Compressor
 import java.util.*
 import net.minecraft.util.Pair as McPair
 
@@ -98,3 +102,13 @@ fun ItemGroup.Builder.entries(vararg items: ItemStack) {
 fun Model(parent: Identifier? = null, variant: String? = null, vararg requiredTextureKeys: TextureKey): Model {
     return Model(parent.toOptional(), variant.toOptional(), *requiredTextureKeys)
 }
+
+operator fun Vec3i.plus(other: Vec3i): Vec3i = this.add(other)
+operator fun BlockPos.plus(other: Vec3i): BlockPos = this.add(other)
+operator fun Vec3i.minus(other: Vec3i): Vec3i = this.subtract(other)
+operator fun BlockPos.minus(other: Vec3i): BlockPos = this.subtract(other)
+
+val Block.id
+    get() = Registries.BLOCK.getId(this)
+
+fun BlockPos.copy() = BlockPos(x, y, z)

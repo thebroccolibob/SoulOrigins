@@ -2,6 +2,8 @@ package io.github.thebroccolibob.soulorigins.block
 
 import io.github.thebroccolibob.soulorigins.FabricBlockSettings
 import io.github.thebroccolibob.soulorigins.Soulorigins
+import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
+import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.FallingBlock
@@ -9,6 +11,8 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.util.Identifier
+import kotlin.properties.ReadOnlyProperty
+import kotlin.reflect.KProperty
 
 object SoulOriginsBlocks {
     private fun register(id: Identifier, block: Block): Block {
@@ -16,6 +20,15 @@ object SoulOriginsBlocks {
     }
 
     private fun register(path: String, block: Block) = register(Identifier(Soulorigins.MOD_ID, path), block)
+
+    private operator fun Block.provideDelegate(thisRef: Any, property: KProperty<*>): ReadOnlyProperty<Any, Block> {
+        register(property.name.lowercase(), this)
+        return ReadOnlyProperty { _, _ -> this@provideDelegate }
+    }
+
+    private inline operator fun ((settings: AbstractBlock.Settings) -> Block).invoke(init: FabricBlockSettings.() -> Unit): Block {
+        return this(FabricBlockSettings(init))
+    }
 
     val DECAYING_ROTTEN_FLESH = register("decaying_rotten_flesh", DecayingBlock(100, 200, FabricBlockSettings {
         hardness(0.5f)
@@ -46,6 +59,30 @@ object SoulOriginsBlocks {
         blockVision(Blocks::always)
         suffocates(Blocks::always)
         dropsLike(Blocks.SCULK)
+    }))
+
+    val ARTIFICER_SURFACE = register("artificer_surface", ::SurfaceBlock {
+        hardness(5f)
+        strength(6f)
+        sounds(BlockSoundGroup.METAL)
+    })
+
+    val ARTIFICER_EW_WALL_BUILDER = register("artificer_ew_wall_builder", SurfaceBuilderBlock(5, 1, 0, ARTIFICER_SURFACE, FabricBlockSettings {
+        hardness(10f)
+        strength(12f)
+        sounds(BlockSoundGroup.METAL)
+    }))
+
+    val ARTIFICER_NS_WALL_BUILDER = register("artificer_ns_wall_builder", SurfaceBuilderBlock(0, 1, 5, ARTIFICER_SURFACE, FabricBlockSettings {
+        hardness(10f)
+        strength(12f)
+        sounds(BlockSoundGroup.METAL)
+    }))
+
+    val ARTIFICER_PLATFORM_BUILDER = register("artificer_platform_builder", SurfaceBuilderBlock(2, 0, 2, ARTIFICER_SURFACE, FabricBlockSettings {
+        hardness(10f)
+        strength(12f)
+        sounds(BlockSoundGroup.METAL)
     }))
 
     fun register() {}
