@@ -8,11 +8,8 @@ import io.github.apace100.apoli.power.Power
 import io.github.apace100.apoli.power.PowerType
 import io.github.apace100.apoli.power.ResourcePower
 import io.github.apace100.apoli.power.factory.PowerFactory
-import io.github.apace100.calio.data.SerializableData
-import io.github.thebroccolibob.soulorigins.PropertyDelegate
-import io.github.thebroccolibob.soulorigins.Soulorigins
-import io.github.thebroccolibob.soulorigins.get
-import io.github.thebroccolibob.soulorigins.toInventory
+import io.github.apace100.calio.data.SerializableDataTypes
+import io.github.thebroccolibob.soulorigins.*
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -39,8 +36,13 @@ class BrewingStandPower(
     entity: LivingEntity?,
     private var key: Key,
     private val fuelPowerType: PowerType<*>?,
+    private val dropOnDeath: Boolean,
+    private val recoverable: Boolean,
     private val inventory: DefaultedList<ItemStack> = DefaultedList.ofSize(5, ItemStack.EMPTY)
 ) : Power(type, entity), Active, Inventory by inventory.toInventory() {
+    init {
+        setTicking(false)
+    }
 
     private var brewTime: Int = 0
     private var fuel: Int = 0
@@ -66,12 +68,19 @@ class BrewingStandPower(
     }
 
     override fun onLost() {
+        if (!recoverable) return
+
         (entity as? PlayerEntity)?.let {
             inventory.forEach(it.inventory::offerOrDrop)
         }
     }
 
-    fun dropItemsOnDeath() {
+    /**
+     * Called by [PlayerEntityMixin][io.github.thebroccolibob.soulorigins.mixin.PlayerEntityMixin]
+     */
+    fun onDeath() {
+        if (!dropOnDeath) return
+
         for (i in 0 until containerSize) {
             val currentItemStack = getStack(i)
 
@@ -112,8 +121,6 @@ class BrewingStandPower(
     override fun canPlayerUse(player: PlayerEntity): Boolean {
         return player === this.entity
     }
-
-    override fun shouldTick() = true
 
     override fun tick() {
         inventory[4].let {
@@ -198,16 +205,21 @@ class BrewingStandPower(
         fun createFactory(): PowerFactory<BrewingStandPower> {
             return PowerFactory<BrewingStandPower>(
                 Identifier(Soulorigins.MOD_ID, "brewing_stand"),
-                SerializableData()
-                    .add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, Key())
-                    .add("fuel_resource", ApoliDataTypes.POWER_TYPE, null)
+                SerializableData {
+                    add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, Key())
+                    add("fuel_resource", ApoliDataTypes.POWER_TYPE, null)
+                    add("drop_on_death", SerializableDataTypes.BOOLEAN, true)
+                    add("recoverable", SerializableDataTypes.BOOLEAN, true)
+                }
             ) { data ->
                 BiFunction { powerType, livingEntity ->
                     BrewingStandPower(
                         powerType,
                         livingEntity,
                         data.get("key"),
-                        data.get("fuel_resource")
+                        data.get("fuel_resource"),
+                        data.get("drop_on_death"),
+                        data.get("recoverable")
                     )
                 }
             }.allowCondition()

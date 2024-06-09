@@ -19,6 +19,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(method = "dropInventory", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerInventory;dropAll()V"))
     private void dropBrewingStandInventory(CallbackInfo ci) {
-        PowerHolderComponent.getPowers(this, BrewingStandPower.class).forEach(BrewingStandPower::dropItemsOnDeath);
+        PowerHolderComponent.getPowers(this, BrewingStandPower.class).forEach(BrewingStandPower::onDeath);
     }
 }
