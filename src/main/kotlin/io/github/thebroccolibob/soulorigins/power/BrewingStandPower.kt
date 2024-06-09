@@ -39,25 +39,17 @@ class BrewingStandPower(
     private val dropOnDeath: Boolean,
     private val recoverable: Boolean,
     private val inventory: DefaultedList<ItemStack> = DefaultedList.ofSize(5, ItemStack.EMPTY)
-) : Power(type, entity), Active, Inventory by inventory.toInventory() {
+) : Power(type, entity), Active, Inventory by inventory.toInventory(), NamedScreenHandlerFactory {
     init {
         setTicking(false)
     }
 
-    private var brewTime: Int = 0
-    private var fuel: Int = 0
+    private var brewTime = 0
+    private var fuel = 0
 
     private var itemBrewing: Item? = null
 
     private val propertyDelegate = PropertyDelegate(::brewTime, ::fuel)
-
-    private val containerScreen = object : NamedScreenHandlerFactory {
-        override fun createMenu(syncId: Int, playerInventory: PlayerInventory?, player: PlayerEntity?): ScreenHandler {
-            return BrewingStandScreenHandler(syncId, playerInventory, this@BrewingStandPower, propertyDelegate)
-        }
-
-        override fun getDisplayName(): Text = Text.translatable("container.brewing")
-    }
 
     private val containerSize = inventory.size
 
@@ -66,6 +58,12 @@ class BrewingStandPower(
             PowerHolderComponent.KEY.get(this.entity).getPower(it) as? ResourcePower
         }
     }
+
+    override fun createMenu(syncId: Int, playerInventory: PlayerInventory?, player: PlayerEntity?): ScreenHandler {
+        return BrewingStandScreenHandler(syncId, playerInventory, this@BrewingStandPower, propertyDelegate)
+    }
+
+    override fun getDisplayName(): Text = Text.translatable("container.brewing")
 
     override fun onLost() {
         if (!recoverable) return
@@ -100,7 +98,7 @@ class BrewingStandPower(
             return
         }
         if (!entity.world.isClient && entity is PlayerEntity) {
-            (entity as PlayerEntity).openHandledScreen(containerScreen)
+            (entity as PlayerEntity).openHandledScreen(this)
         }
     }
 
