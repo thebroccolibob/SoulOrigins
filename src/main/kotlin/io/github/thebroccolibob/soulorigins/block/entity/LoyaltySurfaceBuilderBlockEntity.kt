@@ -7,13 +7,13 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.math.BlockPos
 import java.util.*
 
-class SurfaceBuilderBlockEntity(pos: BlockPos, state: BlockState) :
+class LoyaltySurfaceBuilderBlockEntity(pos: BlockPos, state: BlockState) :
     BlockEntity(SoulOriginsBlockEntities.SURFACE_BUILDER, pos, state) {
 
     private var ownerUUID: UUID? = null
 
     var owner: PlayerEntity?
-        get() = world?.getPlayerByUuid(ownerUUID)
+        get() = ownerUUID?.let { world?.getPlayerByUuid(ownerUUID) }
         set(player) {
             ownerUUID = player?.uuid
         }

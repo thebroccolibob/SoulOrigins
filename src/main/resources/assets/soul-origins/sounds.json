@@ -34,5 +34,23 @@
       }
     ],
     "subtitle": "subtitles.soul-origins.items.wind_shard.level"
+  },
+  "block.artificer_surface.place": {
+    "sounds": [
+      {
+        "name": "tile/piston/out",
+        "volume": 0.15
+      }
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.artificer_surface.destroy": {
+    "sounds": [
+      {
+        "name": "tile/piston/in",
+        "volume": 0.15
+      }
+    ],
+    "subtitle": "subtitles.block.generic.destroy"
   }
 }

@@ -115,6 +115,10 @@ operator fun BlockPos.plus(other: Vec3i): BlockPos = this.add(other)
 operator fun Vec3i.minus(other: Vec3i): Vec3i = this.subtract(other)
 operator fun BlockPos.minus(other: Vec3i): BlockPos = this.subtract(other)
 
+operator fun Vec3d.plus(other: Vec3d): Vec3d = this.add(other)
+operator fun Vec3d.minus(other: Vec3d): Vec3d = this.subtract(other)
+operator fun Vec3d.times(scalar: Double): Vec3d = this.multiply(scalar)
+
 val Block.id
     get() = Registries.BLOCK.getId(this)
 
@@ -126,5 +130,15 @@ operator fun <T> TrackedData<T>.getValue(thisRef: Entity, property: KProperty<*>
 
 operator fun <T> TrackedData<T>.setValue(thisRef: Entity, property: KProperty<*>, value: T) {
     thisRef.dataTracker.set(this, value)
+}
+
+@JvmName("getValueOptional")
+operator fun <T: Any> TrackedData<Optional<T>>.getValue(thisRef: Entity, property: KProperty<*>): T? {
+    return thisRef.dataTracker.get(this).toNullable()
+}
+
+@JvmName("setValueOptional")
+operator fun <T : Any> TrackedData<Optional<T>>.setValue(thisRef: Entity, property: KProperty<*>, value: T?) {
+    thisRef.dataTracker.set(this, value.toOptional())
 }
 

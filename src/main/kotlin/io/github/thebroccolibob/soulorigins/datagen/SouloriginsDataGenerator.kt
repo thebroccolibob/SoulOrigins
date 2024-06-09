@@ -115,7 +115,9 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 				}
 			}
 
-//			addDrop(SoulOriginsBlocks.ARTIFICER_EW_WALL_BUILDER, TODO() as Item)
+			addDrop(SoulOriginsBlocks.ARTIFICER_PLATFORM_BUILDER, SouloriginsItems.ARTIFICER_PLATFORM_BUILDER)
+			addDrop(SoulOriginsBlocks.ARTIFICER_EW_WALL_BUILDER, SouloriginsItems.ARTIFICER_WALL_BUILDER)
+			addDrop(SoulOriginsBlocks.ARTIFICER_NS_WALL_BUILDER, SouloriginsItems.ARTIFICER_WALL_BUILDER)
 		}
 	}
 

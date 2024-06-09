@@ -16,6 +16,7 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.LootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.predicate.NumberRange
+import net.minecraft.predicate.StatePredicate
 import net.minecraft.predicate.item.EnchantmentPredicate
 import net.minecraft.predicate.item.ItemPredicate
 
@@ -71,6 +72,10 @@ class Conditions(private val parentBuilder: LootConditionConsumingBuilder<*>) {
 
     fun randomChance(chance: Float) {
         parentBuilder.conditionally(RandomChanceLootCondition.builder(chance))
+    }
+
+    fun blockState(block: Block, init: StatePredicate.Builder.() -> Unit) {
+        parentBuilder.conditionally(BlockStatePropertyLootCondition.builder(block).properties(StatePredicate.Builder.create().apply(init)))
     }
 }
 

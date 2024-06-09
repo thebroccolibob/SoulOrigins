@@ -38,5 +38,6 @@ object SouloriginsClient : ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(SoulOriginsBlocks.DECAYING_SLIME, RenderLayer.getTranslucent())
 
 		EntityRendererRegistry.register(SoulOriginsEntities.SURFACE_BUILDER_PROJECTILE, ::FlyingItemEntityRenderer)
+		EntityRendererRegistry.register(SoulOriginsEntities.LOYALTY_ITEM, ::FlyingItemEntityRenderer)
 	}
 }

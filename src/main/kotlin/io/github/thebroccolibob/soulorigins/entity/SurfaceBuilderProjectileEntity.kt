@@ -1,6 +1,7 @@
 package io.github.thebroccolibob.soulorigins.entity
 
 import io.github.thebroccolibob.soulorigins.*
+import io.github.thebroccolibob.soulorigins.block.entity.LoyaltySurfaceBuilderBlockEntity
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityType
@@ -8,6 +9,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity
 import net.minecraft.item.Item
 import net.minecraft.item.Items
@@ -27,6 +29,8 @@ class SurfaceBuilderProjectileEntity : ThrownItemEntity {
 
     var blockToPlace by BLOCK
     var offsetY by OFFSET_Y
+
+    private var lastInAir = false
 
     override fun initDataTracker() {
         super.initDataTracker()
@@ -55,15 +59,27 @@ class SurfaceBuilderProjectileEntity : ThrownItemEntity {
         tryPlaceAt(entityHitResult.entity.blockPos)
     }
 
+    override fun tick() {
+        super.tick()
+        if (lastInAir && world.getFluidState(blockPos).isStill) {
+            tryPlaceAt(blockPos)
+        }
+        lastInAir = world.getFluidState(blockPos).isEmpty
+    }
+
     private fun tryPlaceAt(basePos: BlockPos) {
         val placePos = basePos.up(offsetY)
 
         if (world.getBlockState(placePos).isReplaceable) {
             world.setBlockState(placePos, blockToPlace)
+            (owner as? PlayerEntity)?.let {
+                (world.getBlockEntity(placePos) as? LoyaltySurfaceBuilderBlockEntity)?.owner = it
+            }
             world.playSound(null, placePos, blockToPlace.soundGroup.placeSound, SoundCategory.BLOCKS, 1.0f, 1.0f)
         } else {
             dropStack(item)
         }
+
         this.discard()
     }
 

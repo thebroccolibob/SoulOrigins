@@ -18,5 +18,10 @@ object SoulOriginsEntities {
         trackRangeChunks(8)
     }.build())
 
+    val LOYALTY_ITEM = register("loyalty_item", FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::LoyaltyItemEntity).apply {
+        dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+        trackRangeChunks(8)
+    }.build())
+
     fun register() {}
 }

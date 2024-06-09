@@ -1,6 +1,7 @@
 package io.github.thebroccolibob.soulorigins.block
 
 import io.github.thebroccolibob.soulorigins.FabricBlockSettings
+import io.github.thebroccolibob.soulorigins.SoulOriginsSounds
 import io.github.thebroccolibob.soulorigins.Soulorigins
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.AbstractBlock
@@ -64,22 +65,22 @@ object SoulOriginsBlocks {
     val ARTIFICER_SURFACE = register("artificer_surface", ::SurfaceBlock {
         hardness(5f)
         strength(6f)
-        sounds(BlockSoundGroup.METAL)
+        sounds(SoulOriginsSounds.ARTIFICER_SURFACE_GROUP)
     })
 
-    val ARTIFICER_EW_WALL_BUILDER = register("artificer_ew_wall_builder", SurfaceBuilderBlock(5, 1, 0, ARTIFICER_SURFACE, FabricBlockSettings {
+    val ARTIFICER_EW_WALL_BUILDER = register("artificer_ew_wall_builder", LoyaltySurfaceBuilderBlock(5, 1, 0, ARTIFICER_SURFACE, 400, FabricBlockSettings {
         hardness(10f)
         strength(12f)
         sounds(BlockSoundGroup.METAL)
     }))
 
-    val ARTIFICER_NS_WALL_BUILDER = register("artificer_ns_wall_builder", SurfaceBuilderBlock(0, 1, 5, ARTIFICER_SURFACE, FabricBlockSettings {
+    val ARTIFICER_NS_WALL_BUILDER = register("artificer_ns_wall_builder", LoyaltySurfaceBuilderBlock(0, 1, 5, ARTIFICER_SURFACE, 400, FabricBlockSettings {
         hardness(10f)
         strength(12f)
         sounds(BlockSoundGroup.METAL)
     }))
 
-    val ARTIFICER_PLATFORM_BUILDER = register("artificer_platform_builder", SurfaceBuilderBlock(2, 0, 2, ARTIFICER_SURFACE, FabricBlockSettings {
+    val ARTIFICER_PLATFORM_BUILDER = register("artificer_platform_builder", LoyaltySurfaceBuilderBlock(2, 0, 2, ARTIFICER_SURFACE, 300, FabricBlockSettings {
         hardness(10f)
         strength(12f)
         sounds(BlockSoundGroup.METAL)
