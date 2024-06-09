@@ -14,12 +14,14 @@ import net.minecraft.item.*
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
+import net.minecraft.screen.PropertyDelegate
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 import java.util.*
+import kotlin.reflect.KMutableProperty0
 import net.minecraft.util.Pair as McPair
 
 inline fun FabricItemSettings(init: FabricItemSettings.() -> Unit) = FabricItemSettings().apply(init)
@@ -97,4 +99,14 @@ fun ItemGroup.Builder.entries(vararg items: ItemStack) {
 
 fun Model(parent: Identifier? = null, variant: String? = null, vararg requiredTextureKeys: TextureKey): Model {
     return Model(parent.toOptional(), variant.toOptional(), *requiredTextureKeys)
+}
+
+fun PropertyDelegate(vararg properties: KMutableProperty0<Int>) = object : PropertyDelegate {
+    override fun get(index: Int) = properties[index].get()
+
+    override fun set(index: Int, value: Int) {
+        properties[index].set(value)
+    }
+
+    override fun size() = properties.size
 }
