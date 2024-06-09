@@ -53,10 +53,8 @@ class BrewingStandPower(
 
     private val containerSize = inventory.size
 
-    private val fuelPower by lazy {
-        fuelPowerType?.let {
-            PowerHolderComponent.KEY.get(this.entity).getPower(it) as? ResourcePower
-        }
+    private val fuelPower = fuelPowerType?.let {
+        PowerHolderComponent.KEY.get(this.entity).getPower(it) as? ResourcePower
     }
 
     override fun createMenu(syncId: Int, playerInventory: PlayerInventory?, player: PlayerEntity?): ScreenHandler {
