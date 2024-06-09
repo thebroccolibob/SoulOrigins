@@ -108,7 +108,7 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 						count(1)
 					}
 					conditions {
-						randomChance(0.5f)
+						randomChance(0.125f)
 						survivesExplosion()
 					}
 				}

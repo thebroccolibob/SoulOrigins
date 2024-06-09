@@ -30,7 +30,7 @@ object SoulOriginsBlocks {
         nonOpaque()
     }))
 
-    val DECAYING_SAND = register("decaying_sand", DecayingBlock(200, 240, FabricBlockSettings {
+    val DECAYING_SAND = register("decaying_sand", DecayingBlock(100, 200, FabricBlockSettings {
         hardness(0.5f)
         strength(0.5f)
         sounds(BlockSoundGroup.SAND)
