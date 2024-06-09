@@ -90,6 +90,9 @@ class BrewingStandPower(
                 setStack(i, ItemStack.EMPTY)
             }
         }
+
+        brewTime = 0
+        fuel = 0
     }
 
     override fun onUse() {
