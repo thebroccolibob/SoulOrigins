@@ -8,6 +8,7 @@
     "CreeperEntityMixin",
     "EndermanEntityMixin",
     "HostileEntityMixin",
+    "PlayerEntityMixin",
     "RevengeGoalMixin",
     "SculkVeinGrowCheckerMixin",
     "SlimeEntityMixin",

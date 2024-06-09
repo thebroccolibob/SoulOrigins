@@ -1,14 +1,18 @@
 package io.github.thebroccolibob.soulorigins.power
 
+import io.github.apace100.apoli.component.PowerHolderComponent
 import io.github.apace100.apoli.data.ApoliDataTypes
 import io.github.apace100.apoli.power.Active
 import io.github.apace100.apoli.power.Active.Key
 import io.github.apace100.apoli.power.Power
 import io.github.apace100.apoli.power.PowerType
+import io.github.apace100.apoli.power.ResourcePower
 import io.github.apace100.apoli.power.factory.PowerFactory
 import io.github.apace100.calio.data.SerializableData
 import io.github.thebroccolibob.soulorigins.PropertyDelegate
 import io.github.thebroccolibob.soulorigins.Soulorigins
+import io.github.thebroccolibob.soulorigins.get
+import io.github.thebroccolibob.soulorigins.toInventory
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -27,14 +31,16 @@ import net.minecraft.screen.ScreenHandler
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import net.minecraft.util.collection.DefaultedList
+import net.minecraft.world.WorldEvents
 import java.util.function.BiFunction
 
 class BrewingStandPower(
     type: PowerType<BrewingStandPower>,
     entity: LivingEntity?,
     private var key: Key,
-) : Power(type, entity), Active, Inventory {
+    private val fuelPowerType: PowerType<*>?,
     private val inventory: DefaultedList<ItemStack> = DefaultedList.ofSize(5, ItemStack.EMPTY)
+) : Power(type, entity), Active, Inventory by inventory.toInventory() {
 
     private var brewTime: Int = 0
     private var fuel: Int = 0
@@ -53,8 +59,28 @@ class BrewingStandPower(
 
     private val containerSize = inventory.size
 
+    private val fuelPower by lazy {
+        fuelPowerType?.let {
+            PowerHolderComponent.KEY.get(this.entity).getPower(it) as? ResourcePower
+        }
+    }
+
     override fun onLost() {
-        dropItemsOnLost()
+        (entity as? PlayerEntity)?.let {
+            inventory.forEach(it.inventory::offerOrDrop)
+        }
+    }
+
+    fun dropItemsOnDeath() {
+        for (i in 0 until containerSize) {
+            val currentItemStack = getStack(i)
+
+            if (!currentItemStack.isEmpty && EnchantmentHelper.hasVanishingCurse(currentItemStack)) removeStack(i)
+            else {
+                (entity as PlayerEntity).dropItem(currentItemStack, true, false)
+                setStack(i, ItemStack.EMPTY)
+            }
+        }
     }
 
     override fun onUse() {
@@ -83,69 +109,81 @@ class BrewingStandPower(
         fuel = tag.getInt("Fuel")
     }
 
-    override fun size(): Int {
-        return containerSize
-    }
-
-    override fun isEmpty(): Boolean {
-        return inventory.isEmpty()
-    }
-
-    override fun getStack(slot: Int): ItemStack {
-        return inventory[slot]
-    }
-
-    override fun removeStack(slot: Int, amount: Int): ItemStack {
-        return inventory[slot].split(amount)
-    }
-
-    override fun removeStack(slot: Int): ItemStack {
-        val stack = inventory[slot]
-        setStack(slot, ItemStack.EMPTY)
-        return stack
-    }
-
-    override fun setStack(slot: Int, stack: ItemStack) {
-        inventory[slot] = stack
-    }
-
-    override fun markDirty() {}
-
     override fun canPlayerUse(player: PlayerEntity): Boolean {
         return player === this.entity
-    }
-
-    override fun clear() {
-        for (i in 0 until containerSize) {
-            setStack(i, ItemStack.EMPTY)
-        }
     }
 
     override fun shouldTick() = true
 
     override fun tick() {
-        tick(this)
-    }
-
-    fun dropItemsOnDeath() {
-        val playerEntity = entity as PlayerEntity
-        for (i in 0 until containerSize) {
-            val currentItemStack = getStack(i)
-
-            if (!currentItemStack.isEmpty && EnchantmentHelper.hasVanishingCurse(currentItemStack)) removeStack(i)
-            else {
-                playerEntity.dropItem(currentItemStack, true, false)
-                setStack(i, ItemStack.EMPTY)
+        inventory[4].let {
+            if (fuel <= 0 && it.isOf(Items.BLAZE_POWDER)) {
+                fuel = 20
+                it.decrement(1)
             }
         }
+
+        val canCraft = canCraft()
+        val brewing = brewTime > 0
+        val ingredient = inventory[3]
+
+        if (brewing) {
+            --brewTime
+            val finishedBrewing = brewTime == 0
+            if (finishedBrewing && canCraft) {
+                craft()
+            } else if (!canCraft || !ingredient.isOf(itemBrewing)) {
+                brewTime = 0
+            }
+        } else if (canCraft && hasFuel()) {
+            consumeFuel()
+            brewTime = 400
+            itemBrewing = ingredient.item
+        }
     }
 
-    fun dropItemsOnLost() {
-        val playerEntity = entity as PlayerEntity
-        for (i in 0 until containerSize) {
-            val currentItemStack = getStack(i)
-            playerEntity.inventory.offerOrDrop(currentItemStack)
+    private fun canCraft(): Boolean {
+        val ingredient = inventory[3]
+
+        if (ingredient.isEmpty || !BrewingRecipeRegistry.isValidIngredient(ingredient)) {
+            return false
         }
+
+        return inventory[0..2].any {
+            !it.isEmpty && BrewingRecipeRegistry.hasRecipe(it, ingredient)
+        }
+    }
+
+    private fun craft() {
+        val ingredient = inventory[3]
+
+        for (i in 0..2) {
+            inventory[i] = BrewingRecipeRegistry.craft(ingredient, inventory[i])
+        }
+
+        val ingredientItem = ingredient.item
+        ingredient.decrement(1)
+        if (ingredientItem.hasRecipeRemainder()) {
+            val remainder = ItemStack(ingredientItem.recipeRemainder)
+            if (ingredient.isEmpty) {
+                inventory[3] = remainder
+            } else {
+                if ((entity as? PlayerEntity)?.giveItemStack(remainder) != true) {
+                    entity.dropStack(remainder)
+                }
+            }
+        }
+        entity.world.syncWorldEvent(WorldEvents.BREWING_STAND_BREWS, entity.blockPos, 0)
+    }
+
+    private fun hasFuel() = fuel > 0 || (fuelPower?.value ?: 0) > 0
+
+    private fun consumeFuel() {
+        if (fuel > 0)
+            fuel--
+        else
+            fuelPower?.decrement()
+        PowerHolderComponent.syncPower(entity, fuelPowerType)
     }
 
     override fun getKey(): Key {
@@ -162,81 +200,17 @@ class BrewingStandPower(
                 Identifier(Soulorigins.MOD_ID, "brewing_stand"),
                 SerializableData()
                     .add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, Key())
+                    .add("fuel_resource", ApoliDataTypes.POWER_TYPE, null)
             ) { data ->
                 BiFunction { powerType, livingEntity ->
                     BrewingStandPower(
                         powerType,
                         livingEntity,
-                        data.get("key")
+                        data.get("key"),
+                        data.get("fuel_resource")
                     )
                 }
             }.allowCondition()
         }
-
-        fun tick(power: BrewingStandPower) {
-            val fuelItem = power.inventory[4]
-            if (power.fuel <= 0 && fuelItem.isOf(Items.BLAZE_POWDER)) {
-                power.fuel = 20
-                fuelItem.decrement(1)
-            }
-
-            val canCraft = canCraft(power.inventory)
-            val brewing = power.brewTime > 0
-            val ingredient = power.inventory[3]
-
-            if (brewing) {
-                --power.brewTime
-                val finishedBrewing = power.brewTime == 0
-                if (finishedBrewing && canCraft) {
-                    craft(power.inventory)
-                } else if (!canCraft || !ingredient.isOf(power.itemBrewing)) {
-                    power.brewTime = 0
-                }
-            } else if (canCraft && power.fuel > 0) {
-                --power.fuel
-                power.brewTime = 400
-                power.itemBrewing = ingredient.item
-            }
-        }
-
-
-        private fun canCraft(slots: DefaultedList<ItemStack>): Boolean {
-            val ingredient = slots[3]
-            if (ingredient.isEmpty) {
-                return false
-            } else if (!BrewingRecipeRegistry.isValidIngredient(ingredient)) {
-                return false
-            } else {
-                for (i in 0..2) {
-                    val itemStack2 = slots[i]
-                    if (!itemStack2.isEmpty && BrewingRecipeRegistry.hasRecipe(itemStack2, ingredient)) {
-                        return true
-                    }
-                }
-
-                return false
-            }
-        }
-
-        private fun craft(slots: DefaultedList<ItemStack>) {
-            var ingredient = slots[3]
-
-            for (i in 0..2) {
-                slots[i] = BrewingRecipeRegistry.craft(ingredient, slots[i])
-            }
-
-            ingredient.decrement(1)
-            if (ingredient.item.hasRecipeRemainder()) {
-                val remainder = ItemStack(ingredient.item.recipeRemainder)
-                if (ingredient.isEmpty) {
-                    ingredient = remainder
-                } //else {
-//                    ItemScatterer.spawn(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), itemStack2)
-//                }
-            }
-
-            slots[3] = ingredient
-        }
-
     }
 }

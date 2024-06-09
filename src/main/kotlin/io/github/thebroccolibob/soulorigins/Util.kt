@@ -10,6 +10,7 @@ import net.minecraft.data.client.Model
 import net.minecraft.data.client.TextureKey
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.inventory.Inventory
 import net.minecraft.item.*
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
@@ -17,6 +18,7 @@ import net.minecraft.nbt.NbtList
 import net.minecraft.screen.PropertyDelegate
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
+import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
@@ -110,3 +112,34 @@ fun PropertyDelegate(vararg properties: KMutableProperty0<Int>) = object : Prope
 
     override fun size() = properties.size
 }
+
+fun DefaultedList<ItemStack>.toInventory(): Inventory {
+    val list = this
+    return object : Inventory {
+        override fun clear() {
+            list.clear()
+        }
+
+        override fun size() = list.size
+
+        override fun isEmpty() = list.isEmpty()
+
+        override fun getStack(slot: Int) = list[slot]
+
+        override fun removeStack(slot: Int, amount: Int) = list[slot].split(amount)
+
+        override fun removeStack(slot: Int) = list[slot].also {
+            setStack(slot, ItemStack.EMPTY)
+        }
+
+        override fun setStack(slot: Int, stack: ItemStack) {
+            list[slot] = stack
+        }
+
+        override fun markDirty() {}
+
+        override fun canPlayerUse(player: PlayerEntity) = true
+    }
+}
+
+operator fun <T> List<T>.get(range: IntRange): List<T> = range.map(this::get)

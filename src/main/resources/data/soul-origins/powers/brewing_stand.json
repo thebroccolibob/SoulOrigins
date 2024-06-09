@@ -1,4 +1,5 @@
 {
   "type": "soul-origins:brewing_stand",
-  "key": "key.origins.primary_active"
+  "key": "key.origins.primary_active",
+  "fuel_resource": "soul-origins:soul_meter"
 }
