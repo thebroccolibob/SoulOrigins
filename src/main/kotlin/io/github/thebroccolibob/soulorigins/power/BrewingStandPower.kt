@@ -31,7 +31,7 @@ import net.minecraft.util.collection.DefaultedList
 import net.minecraft.world.WorldEvents
 import java.util.function.BiFunction
 
-class BrewingStandPower(
+open class BrewingStandPower(
     type: PowerType<BrewingStandPower>,
     entity: LivingEntity?,
     private var key: Key,
@@ -164,7 +164,9 @@ class BrewingStandPower(
         val ingredient = inventory[3]
 
         for (i in 0..2) {
-            inventory[i] = BrewingRecipeRegistry.craft(ingredient, inventory[i])
+            inventory[i] = BrewingRecipeRegistry.craft(ingredient, inventory[i]).let {
+                if (it.isEmpty) it else processResult(it)
+            }
         }
 
         val ingredientItem = ingredient.item
@@ -181,6 +183,8 @@ class BrewingStandPower(
         }
         entity.world.syncWorldEvent(WorldEvents.BREWING_STAND_BREWS, entity.blockPos, 0)
     }
+
+    open fun processResult(stack: ItemStack) = stack
 
     private fun hasFuel() = fuel > 0 || (fuelPower?.value ?: 0) > 0
 

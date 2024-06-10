@@ -69,5 +69,10 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
         translationBuilder.add(SouloriginsItems.TAILWIND_SHARD, "Tailwind Shard")
         translationBuilder.add(SouloriginsItems.TAILWIND_SHARD + "flavor", "A shard resonating with a turbulent power")
         translationBuilder.add("item.soul-origins.wind_shard.origin_exclusive", "Only usable by wind spirits")
+
+        translationBuilder.add(SouloriginsItems.SUSPICIOUS_BREW, "Suspicious Brew")
+        translationBuilder.add(SouloriginsItems.SPLASH_SUSPICIOUS_BREW, "Splash Suspicious Brew")
+        translationBuilder.add(SouloriginsItems.LINGERING_SUSPICIOUS_BREW, "Lingering Suspicious Brew")
+        translationBuilder.add("item.soul-origins.suspicious_brew.tooltip", "Effects Unknown")
     }
 }

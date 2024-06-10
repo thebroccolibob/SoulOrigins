@@ -59,6 +59,10 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_enderman", Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_slime", Models.GENERATED)
 			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_warden", Models.GENERATED)
+
+			itemModelGenerator.register(SouloriginsItems.SUSPICIOUS_BREW, Models.GENERATED)
+			itemModelGenerator.register(SouloriginsItems.SPLASH_SUSPICIOUS_BREW, Models.GENERATED)
+			itemModelGenerator.register(SouloriginsItems.LINGERING_SUSPICIOUS_BREW, Models.GENERATED)
 		}
 
 		fun BlockStateModelGenerator.registerRotatable(block: Block, modelId: Identifier) {
