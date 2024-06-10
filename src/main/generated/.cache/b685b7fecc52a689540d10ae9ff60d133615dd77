@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-09T00:06:28.0500187	soul-origins/Model Definitions
+// 1.20.1	2024-06-09T22:49:48.4387643	soul-origins/Model Definitions
 1fd31aef6bf5e6dce77f6f0e56b068829017f56b assets\soul-origins\models\item\tailwind_shard.json
 84d7bbc12032a661009a8cc1efc810ab648a98a1 assets\soul-origins\models\item\mob_orb_spider.json
 7901d303a0bd8471d761d20935a06867795b7284 assets\soul-origins\models\item\burst_shard.json
@@ -19,5 +19,5 @@ dd19bf15ba2f45fb868fa530a8b2f94caf12e86d assets\soul-origins\models\item\updraft
 af3a605b968d770ed9ee7dc8225151c9b4774788 assets\soul-origins\blockstates\decaying_rotten_flesh.json
 2190a96f800254e31e5e6d18659998b5abed4874 assets\soul-origins\models\item\mob_orb_warden.json
 90ae49338b8c9b1153ce16aaa2eb6731d959860d assets\soul-origins\models\item\mob_orb_drowned.json
-35ad214a979201d8a7c2d8dfc74ab5214d294493 assets\soul-origins\blockstates\decaying_sand.json
 35ad214a979201d8a7c2d8dfc74ab5214d294493 assets\soul-origins\blockstates\falling_decaying_sand.json
+35ad214a979201d8a7c2d8dfc74ab5214d294493 assets\soul-origins\blockstates\decaying_sand.json

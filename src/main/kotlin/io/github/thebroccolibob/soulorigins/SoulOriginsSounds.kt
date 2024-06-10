@@ -15,6 +15,7 @@ object SoulOriginsSounds {
     val WIND_BURST = register("power.wind.burst")
     val WIND_BURST_LARGE = register("power.wind.burst_large")
     val WIND_LEVELUP = register("items.wind_shard.level")
+    val SORCERER_TP = register("power.sorcerer.teleport")
 
     fun register() {}
 }

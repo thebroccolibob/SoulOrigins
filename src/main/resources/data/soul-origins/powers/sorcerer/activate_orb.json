@@ -44,6 +44,11 @@
                       "volume": 2
                     },
                     {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:particle.soul_escape",
+                      "volume": 3
+                    },
+                    {
                       "type": "origins:equipped_item_action",
                       "equipment_slot": "mainhand",
                       "action": {
@@ -69,6 +74,11 @@
                       "type": "origins:play_sound",
                       "sound": "minecraft:block.froglight.place",
                       "volume": 2
+                    },
+                    {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:particle.soul_escape",
+                      "volume": 3
                     },
                     {
                       "type": "origins:equipped_item_action",
@@ -103,6 +113,11 @@
                     "type": "origins:play_sound",
                     "sound": "minecraft:block.sand.place",
                     "volume": 2
+                  },
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:particle.soul_escape",
+                    "volume": 3
                   },
                   {
                     "type": "origins:equipped_item_action",
@@ -143,6 +158,11 @@
                       "volume": 2
                     },
                     {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:particle.soul_escape",
+                      "volume": 3
+                    },
+                    {
                       "type": "origins:equipped_item_action",
                       "equipment_slot": "mainhand",
                       "action": {
@@ -168,6 +188,11 @@
                       "type": "origins:play_sound",
                       "sound": "minecraft:item.bucket.empty",
                       "volume": 2
+                    },
+                    {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:particle.soul_escape",
+                      "volume": 3
                     },
                     {
                       "type": "origins:equipped_item_action",
@@ -204,6 +229,11 @@
                     "volume": 2
                   },
                   {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:particle.soul_escape",
+                    "volume": 3
+                  },
+                  {
                     "type": "origins:equipped_item_action",
                     "equipment_slot": "mainhand",
                     "action": {
@@ -235,6 +265,11 @@
                     "type": "origins:play_sound",
                     "sound": "minecraft:block.stone.place",
                     "volume": 2
+                  },
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:particle.soul_escape",
+                    "volume": 3
                   },
                   {
                     "type": "origins:equipped_item_action",
@@ -272,6 +307,11 @@
                     "type": "origins:play_sound",
                     "sound": "minecraft:block.stone.place",
                     "volume": 2
+                  },
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:particle.soul_escape",
+                    "volume": 3
                   },
                   {
                     "type": "origins:equipped_item_action",
@@ -312,6 +352,11 @@
                   "type": "origins:play_sound",
                   "sound": "minecraft:entity.ender_eye.launch",
                   "volume": 2
+                },
+                {
+                  "type": "origins:play_sound",
+                  "sound": "minecraft:particle.soul_escape",
+                  "volume": 3
                 }
               ]
             }
@@ -346,6 +391,11 @@
                   "type": "origins:play_sound",
                   "sound": "minecraft:entity.ender_eye.launch",
                   "volume": 2
+                },
+                {
+                  "type": "origins:play_sound",
+                  "sound": "minecraft:particle.soul_escape",
+                  "volume": 3
                 }
               ]
             }
@@ -381,16 +431,51 @@
                   "type": "origins:play_sound",
                   "sound": "minecraft:entity.ender_eye.launch",
                   "volume": 2
+                },
+                {
+                  "type": "origins:play_sound",
+                  "sound": "minecraft:particle.soul_escape",
+                  "volume": 3
                 }
               ]
             }
+          },
+          {
+            "condition": {
+              "type": "soul-origins:held_mob_orb",
+              "entity_type": "minecraft:enderman"
+            },
+            "action": {
+              "type": "origins:raycast",
+              "distance": 16,
+              "block": true,
+              "entity": false,
+              "shape_type": "collider",
+              "fluid_handling": "none",
+              "hit_action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:trigger_cooldown",
+                    "power": "soul-origins:sorcerer/activate_enderman_orb_cooldown"
+                  },
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "soul-origins:power.sorcerer.teleport"
+                  },
+                  {
+                    "type": "origins:equipped_item_action",
+                    "equipment_slot": "mainhand",
+                    "action": {
+                      "type": "origins:consume",
+                      "amount": 1
+                    }
+                  }
+                ]
+              }
+            }
           }
         ]
-      },
-      {
-        "type": "origins:play_sound",
-        "sound": "minecraft:particle.soul_escape",
-        "volume": 3
       }
     ]
   }

@@ -25,6 +25,15 @@
     ],
     "subtitle": "subtitles.soul-origins.power.wind.burst_large"
   },
+  "power.sorcerer.teleport": {
+    "sounds": [
+      {
+        "name": "soul-origins:sorcerer/teleport",
+        "pitch": 2.0,
+        "volume": 0.5
+      }
+    ]
+  },
   "items.wind_shard.level": {
     "sounds": [
       {
