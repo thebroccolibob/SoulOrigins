@@ -33,5 +33,6 @@ object SouloriginsClient : ClientModInitializer {
 		}
 
 		BlockRenderLayerMap.INSTANCE.putBlock(SoulOriginsBlocks.DECAYING_SLIME, RenderLayer.getTranslucent())
+		BlockRenderLayerMap.INSTANCE.putBlock(SoulOriginsBlocks.DECAYING_COBWEB_BLOCK, RenderLayer.getCutout())
 	}
 }

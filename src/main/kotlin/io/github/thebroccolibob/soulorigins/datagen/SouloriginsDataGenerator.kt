@@ -37,6 +37,7 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 	class ModelGenerator(output: FabricDataOutput) : FabricModelProvider(output) {
 		override fun generateBlockStateModels(blockStateModelGenerator: BlockStateModelGenerator) {
 			blockStateModelGenerator.registerStateWithModelReference(SoulOriginsBlocks.DECAYING_SLIME, Blocks.SLIME_BLOCK)
+			blockStateModelGenerator.registerStateWithModelReference(SoulOriginsBlocks.DECAYING_COBWEB_BLOCK, Blocks.COBWEB)
 			blockStateModelGenerator.registerRotatableWithReference(SoulOriginsBlocks.GARDEN_SCULK, Blocks.SCULK)
 			blockStateModelGenerator.registerRotatableWithReference(SoulOriginsBlocks.DECAYING_SAND, Blocks.SAND)
 			blockStateModelGenerator.registerRotatableWithReference(SoulOriginsBlocks.FALLING_DECAYING_SAND, Blocks.SAND)
@@ -109,6 +110,18 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 					}
 					conditions {
 						randomChance(0.125f)
+						survivesExplosion()
+					}
+				}
+			}
+
+			addTable(SoulOriginsBlocks.DECAYING_COBWEB_BLOCK) {
+				pool {
+					item(Items.STRING) {
+						count(1)
+					}
+					conditions {
+						randomChance(0.25f)
 						survivesExplosion()
 					}
 				}

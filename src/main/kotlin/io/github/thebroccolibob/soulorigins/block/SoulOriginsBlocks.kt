@@ -43,6 +43,14 @@ object SoulOriginsBlocks {
         dropsLike(DECAYING_SAND)
     }))
 
+    val DECAYING_COBWEB_BLOCK = register("decaying_cobweb_block", DecayingCobwebBlock(80, 100, FabricBlockSettings {
+        noCollision()
+        hardness(0.5f)
+        strength(0.5f)
+        sounds(BlockSoundGroup.STONE)
+        nonOpaque()
+    }))
+
     @JvmField
     val GARDEN_SCULK = register("garden_sculk", GardenSculkBlock(FabricBlockSettings {
         strength(0.2F)
