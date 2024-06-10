@@ -3,11 +3,14 @@ package io.github.thebroccolibob.soulorigins.mixin.client;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import io.github.thebroccolibob.soulorigins.power.BowSpeedPower;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+@Environment(EnvType.CLIENT)
 @Mixin(ModelPredicateProviderRegistry.class)
 public class ModelPredicateProviderRegistryMixin {
     @ModifyReturnValue(

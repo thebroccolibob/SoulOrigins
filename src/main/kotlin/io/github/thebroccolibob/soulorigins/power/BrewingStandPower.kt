@@ -49,7 +49,7 @@ open class BrewingStandPower(
 
     private var itemBrewing: Item? = null
 
-    private val propertyDelegate = PropertyDelegate(::brewTime, ::fuel)
+    protected val propertyDelegate = PropertyDelegate(::brewTime, ::fuel)
 
     private val containerSize = inventory.size
 
@@ -148,25 +148,31 @@ open class BrewingStandPower(
         }
     }
 
-    private fun canCraft(): Boolean {
+    fun canCraft(): Boolean {
         val ingredient = inventory[3]
 
-        if (ingredient.isEmpty || !BrewingRecipeRegistry.isValidIngredient(ingredient)) {
+        if (ingredient.isEmpty || !isValidIngredient(ingredient)) {
             return false
         }
 
         return inventory[0..2].any {
-            !it.isEmpty && BrewingRecipeRegistry.hasRecipe(it, ingredient)
+            !it.isEmpty && hasRecipe(it, ingredient)
         }
+    }
+
+    protected open fun isValidIngredient(stack: ItemStack): Boolean {
+        return BrewingRecipeRegistry.isValidIngredient(stack)
+    }
+
+    protected open fun hasRecipe(input: ItemStack, ingredient: ItemStack): Boolean {
+        return BrewingRecipeRegistry.hasRecipe(input, ingredient)
     }
 
     private fun craft() {
         val ingredient = inventory[3]
 
         for (i in 0..2) {
-            inventory[i] = BrewingRecipeRegistry.craft(ingredient, inventory[i]).let {
-                if (it.isEmpty) it else processResult(it)
-            }
+            inventory[i] = craft(ingredient, inventory[i])
         }
 
         val ingredientItem = ingredient.item
@@ -184,7 +190,9 @@ open class BrewingStandPower(
         entity.world.syncWorldEvent(WorldEvents.BREWING_STAND_BREWS, entity.blockPos, 0)
     }
 
-    open fun processResult(stack: ItemStack) = stack
+    protected open fun craft(ingredient: ItemStack, input: ItemStack): ItemStack {
+        return BrewingRecipeRegistry.craft(ingredient, input)
+    }
 
     private fun hasFuel() = fuel > 0 || (fuelPower?.value ?: 0) > 0
 

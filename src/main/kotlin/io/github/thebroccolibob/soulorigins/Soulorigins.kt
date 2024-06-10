@@ -7,7 +7,9 @@ import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
 import io.github.thebroccolibob.soulorigins.condition.registerSoulOriginsBiEntityConditions
 import io.github.thebroccolibob.soulorigins.condition.registerSoulOriginsEntityConditions
 import io.github.thebroccolibob.soulorigins.condition.registerSoulOriginsItemConditions
+import io.github.thebroccolibob.soulorigins.effect.SoulOriginsEffects
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
+import io.github.thebroccolibob.soulorigins.potion.SoulOriginsPotions
 import io.github.thebroccolibob.soulorigins.power.registerSoulOriginsPowers
 import net.fabricmc.api.ModInitializer
 import org.slf4j.Logger
@@ -32,5 +34,7 @@ object Soulorigins : ModInitializer {
 		registerSoulOriginsPowers()
 		SoulOriginsParticles.register()
 		SoulOriginsSounds.register()
+		SoulOriginsEffects.register()
+		SoulOriginsPotions.register()
 	}
 }

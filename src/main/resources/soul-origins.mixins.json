@@ -5,6 +5,7 @@
   "mixins": [
     "AbstractSkeletonEntityMixin",
     "BowItemMixin",
+    "BrewingStandScreenHandlerMixin",
     "CreeperEntityMixin",
     "EndermanEntityMixin",
     "HostileEntityMixin",
