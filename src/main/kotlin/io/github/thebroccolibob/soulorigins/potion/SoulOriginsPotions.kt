@@ -22,10 +22,14 @@ object SoulOriginsPotions {
         return register(path, Potion(*effects))
     }
 
-    private fun registerSet(name: String, effect: StatusEffect, baseDuration: Int, longDuration: Int) = PotionSet(
-        register(name, StatusEffectInstance(effect, baseDuration, 0)),
-        register("long_$name", StatusEffectInstance(effect, longDuration, 0)),
-        register("strong_$name", StatusEffectInstance(effect, baseDuration, 1)),
+    private fun register(path: String, baseName: String, vararg effects: StatusEffectInstance): Potion {
+        return register(path, Potion(baseName, *effects))
+    }
+
+    private fun registerSet(name: String, effect: StatusEffect, baseDuration: Int, longDuration: Int, strongAmplify: Int = 1) = PotionSet(
+        register(name, name, StatusEffectInstance(effect, baseDuration, 0)),
+        register("long_$name", name, StatusEffectInstance(effect, longDuration, 0)),
+        register("strong_$name", name, StatusEffectInstance(effect, baseDuration, strongAmplify)),
     ).also {
         BrewingRecipeRegistry.registerPotionRecipe(it.base, Items.REDSTONE, it.long)
         BrewingRecipeRegistry.registerPotionRecipe(it.base, Items.GLOWSTONE_DUST, it.strong)

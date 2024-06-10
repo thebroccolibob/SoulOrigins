@@ -41,7 +41,7 @@ open class BrewingStandPower(
     private val inventory: DefaultedList<ItemStack> = DefaultedList.ofSize(5, ItemStack.EMPTY)
 ) : Power(type, entity), Active, Inventory by inventory.toInventory(), NamedScreenHandlerFactory {
     init {
-        setTicking(false)
+        this.setTicking(false)
     }
 
     private var brewTime = 0
@@ -53,9 +53,8 @@ open class BrewingStandPower(
 
     private val containerSize = inventory.size
 
-    private val fuelPower = fuelPowerType?.let {
-        PowerHolderComponent.KEY.get(this.entity).getPower(it) as? ResourcePower
-    }
+    private val fuelPower = if (entity == null || fuelPowerType == null) null else
+        PowerHolderComponent.KEY.get(entity).getPower(fuelPowerType) as? ResourcePower
 
     override fun createMenu(syncId: Int, playerInventory: PlayerInventory?, player: PlayerEntity?): ScreenHandler {
         return BrewingStandScreenHandler(syncId, playerInventory, this@BrewingStandPower, propertyDelegate)

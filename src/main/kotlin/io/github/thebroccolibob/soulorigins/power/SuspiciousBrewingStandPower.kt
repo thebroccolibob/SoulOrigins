@@ -22,6 +22,7 @@ import net.minecraft.recipe.BrewingRecipeRegistry
 import net.minecraft.screen.BrewingStandScreenHandler
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.slot.Slot
+import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import java.util.function.BiFunction
 
@@ -39,6 +40,10 @@ class SuspiciousBrewingStandPower(
             override fun replaceIngredientSlot(original: Slot): Slot =
                 IngredientSlot(original.inventory, original.index, original.x, original.y)
         }
+    }
+
+    override fun getDisplayName(): Text {
+        return Text.translatable("container.soul-origins.suspicious_brewing")
     }
 
     override fun isValidIngredient(stack: ItemStack): Boolean {
