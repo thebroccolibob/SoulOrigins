@@ -9,11 +9,13 @@
     "EndermanEntityMixin",
     "HostileEntityMixin",
     "PlayerEntityMixin",
+    "PotionEntityMixin",
     "PotionSlotMixin",
     "RevengeGoalMixin",
     "SculkVeinGrowCheckerMixin",
     "SlimeEntityMixin",
     "SpiderEntityMixin",
+    "TippedArrowRecipeMixin",
     "ZombieEntityMixin"
   ],
   "injectors": {

@@ -94,6 +94,6 @@ object SouloriginsItems {
         BrewingRecipeRegistry.registerPotionType(SPLASH_SUSPICIOUS_BREW)
         BrewingRecipeRegistry.registerPotionType(LINGERING_SUSPICIOUS_BREW)
         FabricBrewingRecipeRegistry.registerItemRecipe(SUSPICIOUS_BREW, Ingredient.ofItems(Items.GUNPOWDER), SPLASH_SUSPICIOUS_BREW)
-        FabricBrewingRecipeRegistry.registerItemRecipe(SPLASH_SUSPICIOUS_BREW, Ingredient.ofItems(Items.GUNPOWDER), LINGERING_SUSPICIOUS_BREW)
+        FabricBrewingRecipeRegistry.registerItemRecipe(SPLASH_SUSPICIOUS_BREW, Ingredient.ofItems(Items.DRAGON_BREATH), LINGERING_SUSPICIOUS_BREW)
     }
 }
