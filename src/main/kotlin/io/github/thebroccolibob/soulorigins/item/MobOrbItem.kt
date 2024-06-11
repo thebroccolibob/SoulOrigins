@@ -16,6 +16,8 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.screen.slot.Slot
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import net.minecraft.util.ClickType
@@ -49,7 +51,7 @@ class MobOrbItem(settings: Settings) : Item(settings) {
         (monster as? MobEntity)?.setPersistent()
 
         world.spawnEntity(monster)
-
+        world.playSound(null, blockPos, SoundEvents.ENTITY_ENDER_EYE_DEATH, SoundCategory.PLAYERS, 2.0f, 1.0f)
 
         // Mana Expense
         if (player?.abilities?.creativeMode != true) {
