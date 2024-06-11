@@ -72,28 +72,28 @@ object SoulOriginsBlocks {
     }
 
     val ARTIFICER_EW_WALL_BUILDER = register("artificer_ew_wall_builder", LoyaltySurfaceBuilderBlock(5, 1, 0, ARTIFICER_SURFACE.rotationZ, 400, FabricBlockSettings {
-        hardness(10f)
+        hardness(20f)
         strength(12f)
         sounds(BlockSoundGroup.METAL)
         luminance(9)
     }))
 
     val ARTIFICER_NS_WALL_BUILDER = register("artificer_ns_wall_builder", LoyaltySurfaceBuilderBlock(0, 1, 5, ARTIFICER_SURFACE.rotationX, 400, FabricBlockSettings {
-        hardness(10f)
+        hardness(20f)
         strength(12f)
         sounds(BlockSoundGroup.METAL)
         luminance(9)
     }))
 
     val ARTIFICER_PLATFORM_BUILDER = register("artificer_platform_builder", LoyaltySurfaceBuilderBlock(2, 0, 2, ARTIFICER_SURFACE.rotationY, 300, FabricBlockSettings {
-        hardness(10f)
+        hardness(20f)
         strength(12f)
         sounds(BlockSoundGroup.METAL)
         luminance(9)
     }))
 
     val ARTIFICER_COLUMN_BUILDER = register("artificer_column_builder", LoyaltySurfaceBuilderBlock(0, 4, 0, ARTIFICER_COLUMN, 300, FabricBlockSettings {
-        hardness(10f)
+        hardness(20f)
         strength(12f)
         sounds(BlockSoundGroup.METAL)
         luminance(9)

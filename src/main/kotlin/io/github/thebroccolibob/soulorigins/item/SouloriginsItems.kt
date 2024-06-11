@@ -8,7 +8,9 @@ import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.NbtList
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.text.Text
@@ -59,6 +61,10 @@ object SouloriginsItems {
                 entries.add(TAILWIND_SHARD)
                 entries.add(BURST_SHARD)
 
+                entries.add(ARTIFICER_PLATFORM_BUILDER)
+                entries.add(ARTIFICER_WALL_BUILDER)
+                entries.add(ARTIFICER_COLUMN_BUILDER)
+
                 listOf(
                     EntityType.ZOMBIE,
                     EntityType.HUSK,
@@ -76,6 +82,15 @@ object SouloriginsItems {
                     entries.add(ItemStack(MOB_ORB, 1).apply {
                         setSubNbt(MobOrbItem.ENTITY_NBT, NbtCompound().apply {
                             putString("id", Registries.ENTITY_TYPE.getId(it).toString())
+                            when (it) {
+                                EntityType.SKELETON, EntityType.STRAY -> Items.BOW
+                                EntityType.WITHER_SKELETON -> Items.STONE_SWORD
+                                else -> null
+                            }?.let { handItem ->
+                                put("HandItems", NbtList().apply {
+                                    add(handItem.defaultStack.writeNbt(NbtCompound()))
+                                })
+                            }
                         })
                     })
                 }
