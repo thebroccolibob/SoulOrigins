@@ -2,14 +2,25 @@
   "type": "origins:active_self",
   "key": "key.origins.secondary_active",
   "condition": {
-    "type": "origins:equipped_item",
-    "equipment_slot": "mainhand",
-    "item_condition": {
-      "type": "origins:ingredient",
-      "ingredient": {
-        "item": "soul-origins:mob_orb"
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:equipped_item",
+        "equipment_slot": "mainhand",
+        "item_condition": {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "item": "soul-origins:mob_orb"
+          }
+        }
+      },
+      {
+        "type": "origins:resource",
+        "resource": "soul-origins:soul_meter",
+        "comparison": ">=",
+        "compare_to": 1
       }
-    }
+    ]
   },
   "entity_action": {
     "type": "origins:and",
@@ -55,6 +66,11 @@
                         "type": "origins:consume",
                         "amount": 1
                       }
+                    },
+                    {
+                      "type": "origins:change_resource",
+                      "resource": "soul-origins:soul_meter",
+                      "change": -1
                     }
                   ]
                 }
@@ -87,6 +103,11 @@
                         "type": "origins:consume",
                         "amount": 1
                       }
+                    },
+                    {
+                      "type": "origins:change_resource",
+                      "resource": "soul-origins:soul_meter",
+                      "change": -1
                     }
                   ]
                 }
@@ -126,6 +147,11 @@
                       "type": "origins:consume",
                       "amount": 1
                     }
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "soul-origins:soul_meter",
+                    "change": -1
                   }
                 ]
               }
@@ -169,6 +195,11 @@
                         "type": "origins:consume",
                         "amount": 1
                       }
+                    },
+                    {
+                      "type": "origins:change_resource",
+                      "resource": "soul-origins:soul_meter",
+                      "change": -1
                     }
                   ]
                 }
@@ -201,6 +232,11 @@
                         "type": "origins:consume",
                         "amount": 1
                       }
+                    },
+                    {
+                      "type": "origins:change_resource",
+                      "resource": "soul-origins:soul_meter",
+                      "change": -1
                     }
                   ]
                 }
@@ -240,6 +276,11 @@
                       "type": "origins:consume",
                       "amount": 1
                     }
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "soul-origins:soul_meter",
+                    "change": -1
                   }
                 ]
               }
@@ -278,6 +319,11 @@
                       "type": "origins:consume",
                       "amount": 1
                     }
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "soul-origins:soul_meter",
+                    "change": -1
                   }
                 ]
               }
@@ -320,6 +366,11 @@
                       "type": "origins:consume",
                       "amount": 1
                     }
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "soul-origins:soul_meter",
+                    "change": -1
                   }
                 ]
               }
@@ -357,6 +408,11 @@
                   "type": "origins:play_sound",
                   "sound": "minecraft:particle.soul_escape",
                   "volume": 3
+                },
+                {
+                  "type": "origins:change_resource",
+                  "resource": "soul-origins:soul_meter",
+                  "change": -1
                 }
               ]
             }
@@ -396,6 +452,11 @@
                   "type": "origins:play_sound",
                   "sound": "minecraft:particle.soul_escape",
                   "volume": 3
+                },
+                {
+                  "type": "origins:change_resource",
+                  "resource": "soul-origins:soul_meter",
+                  "change": -1
                 }
               ]
             }
@@ -436,6 +497,11 @@
                   "type": "origins:play_sound",
                   "sound": "minecraft:particle.soul_escape",
                   "volume": 3
+                },
+                {
+                  "type": "origins:change_resource",
+                  "resource": "soul-origins:soul_meter",
+                  "change": -1
                 }
               ]
             }
@@ -470,6 +536,11 @@
                       "type": "origins:consume",
                       "amount": 1
                     }
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "soul-origins:soul_meter",
+                    "change": -1
                   }
                 ]
               }
