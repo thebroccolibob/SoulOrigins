@@ -142,3 +142,4 @@ operator fun <T : Any> TrackedData<Optional<T>>.setValue(thisRef: Entity, proper
     thisRef.dataTracker.set(this, value.toOptional())
 }
 
+infix fun Double.floorMod(other: Double) = (this % other + other) % other

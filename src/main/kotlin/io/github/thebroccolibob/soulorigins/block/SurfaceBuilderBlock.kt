@@ -3,6 +3,7 @@
 package io.github.thebroccolibob.soulorigins.block
 
 import io.github.thebroccolibob.soulorigins.copy
+import io.github.thebroccolibob.soulorigins.floorMod
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
@@ -38,7 +39,7 @@ open class SurfaceBuilderBlock(private val rangeX: Int, private val rangeY: Int,
         for (areaPos in BlockPos.iterateOutwards(pos, rangeX, rangeY, rangeZ)) {
             if (world.isOutOfHeightLimit(areaPos)) continue
             val areaState = world.getBlockState(areaPos)
-            if (!areaState.isReplaceable || areaState.isOf(surfaceBlock.block) || DIRECTIONS.none { world.getBlockState(areaPos.offset(it)).isOf(surfaceBlock.block) || areaPos.offset(it) == pos }) continue
+            if (!areaState.isReplaceable || areaState.block is SurfaceBlock || DIRECTIONS.none { world.getBlockState(areaPos.offset(it)).block is SurfaceBlock || areaPos.offset(it) == pos }) continue
             positions.add(areaPos.copy())
 
             world.getOtherEntities(null, Box.from(BlockBox(areaPos))).forEach(entities::add)
@@ -51,7 +52,7 @@ open class SurfaceBuilderBlock(private val rangeX: Int, private val rangeY: Int,
                 world.playSound(null, areaPos, surfaceSounds.placeSound, SoundCategory.BLOCKS, surfaceSounds.volume, surfaceSounds.pitch)
             }
             for (entity in entities) {
-                entity.move(MovementType.SELF, Vec3d(0.0, 1 - (entity.y % 1.0), 0.0))
+                entity.move(MovementType.SHULKER, Vec3d(0.0, 1 - (entity.y floorMod 1.0), 0.0))
             }
             world.scheduleBlockTick(pos, this, 5)
         }

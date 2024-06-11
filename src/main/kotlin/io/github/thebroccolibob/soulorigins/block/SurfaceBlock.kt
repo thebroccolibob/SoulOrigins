@@ -66,9 +66,9 @@ open class SurfaceBlock(settings: Settings) : Block(settings) {
 
     private fun getDistanceFromBuilder(world: WorldAccess, pos: BlockPos): Int {
         return Direction.entries.map { world.getBlockState(pos.offset(it)) }.minOf {
-            when {
-                it.block is SurfaceBuilderBlock -> 1
-                it.isOf(this) -> (it[DISTANCE] + 1).coerceAtMost(16)
+            when (it.block) {
+                is SurfaceBuilderBlock -> 1
+                is SurfaceBlock -> (it[DISTANCE] + 1).coerceAtMost(16)
                 else -> 16
             }
         }
