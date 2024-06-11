@@ -12,7 +12,7 @@ import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 
-open class SurfaceBuilderProjectileItem(val block: Block, val offsetY: Int, settings: Settings) : Item(settings) {
+open class SurfaceBuilderProjectileItem(val block: Block, private val offsetY: Int, settings: Settings) : Item(settings) {
 
     override fun use(world: World, user: PlayerEntity, hand: Hand?): TypedActionResult<ItemStack> {
         val itemStack = user.getStackInHand(hand)

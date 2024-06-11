@@ -12,23 +12,20 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.util.Identifier
-import kotlin.properties.ReadOnlyProperty
-import kotlin.reflect.KProperty
 
 object SoulOriginsBlocks {
-    private fun register(id: Identifier, block: Block): Block {
+    private fun <T: Block> register(id: Identifier, block: T): T {
         return Registry.register(Registries.BLOCK, id, block)
     }
 
-    private fun register(path: String, block: Block) = register(Identifier(Soulorigins.MOD_ID, path), block)
+    private fun <T: Block> register(path: String, block: T) = register(Identifier(Soulorigins.MOD_ID, path), block)
 
-    private operator fun Block.provideDelegate(thisRef: Any, property: KProperty<*>): ReadOnlyProperty<Any, Block> {
-        register(property.name.lowercase(), this)
-        return ReadOnlyProperty { _, _ -> this@provideDelegate }
+    private inline operator fun <T: Block> ((settings: AbstractBlock.Settings) -> T).invoke(init: FabricBlockSettings.() -> Unit): T {
+        return this(FabricBlockSettings(init))
     }
 
-    private inline operator fun ((settings: AbstractBlock.Settings) -> Block).invoke(init: FabricBlockSettings.() -> Unit): Block {
-        return this(FabricBlockSettings(init))
+    private inline fun <T: Block> register(path: String, noinline constructor: (AbstractBlock.Settings) -> T, settings: FabricBlockSettings.() -> Unit): T {
+        return register(path, constructor(FabricBlockSettings(settings)))
     }
 
     val DECAYING_ROTTEN_FLESH = register("decaying_rotten_flesh", DecayingBlock(100, 200, FabricBlockSettings {
@@ -45,14 +42,14 @@ object SoulOriginsBlocks {
         nonOpaque()
     }))
 
-    val HUSK_SAND = register("decaying_sand", FallingBlock(FabricBlockSettings {
+    val HUSK_SAND = register("decaying_sand", ::FallingBlock) {
         hardness(0.5f)
         strength(0.5f)
         sounds(BlockSoundGroup.SAND)
-    }))
+    }
 
     @JvmField
-    val GARDEN_SCULK = register("garden_sculk", GardenSculkBlock(FabricBlockSettings {
+    val GARDEN_SCULK = register("garden_sculk", ::GardenSculkBlock) {
         strength(0.2F)
         sounds(BlockSoundGroup.SCULK)
         allowsSpawning(Blocks::always)
@@ -60,30 +57,46 @@ object SoulOriginsBlocks {
         blockVision(Blocks::always)
         suffocates(Blocks::always)
         dropsLike(Blocks.SCULK)
-    }))
+    }
 
-    val ARTIFICER_SURFACE = register("artificer_surface", ::SurfaceBlock {
+    val ARTIFICER_SURFACE = register("artificer_surface", ::PillarSurfaceBlock) {
         hardness(5f)
         strength(6f)
         sounds(SoulOriginsSounds.ARTIFICER_SURFACE_GROUP)
-    })
+    }
 
-    val ARTIFICER_EW_WALL_BUILDER = register("artificer_ew_wall_builder", LoyaltySurfaceBuilderBlock(5, 1, 0, ARTIFICER_SURFACE, 400, FabricBlockSettings {
+    val ARTIFICER_COLUMN = register("artificer_column", ::SurfaceBlock) {
+        hardness(5f)
+        strength(6f)
+        sounds(SoulOriginsSounds.ARTIFICER_SURFACE_GROUP)
+    }
+
+    val ARTIFICER_EW_WALL_BUILDER = register("artificer_ew_wall_builder", LoyaltySurfaceBuilderBlock(5, 1, 0, ARTIFICER_SURFACE.rotationZ, 400, FabricBlockSettings {
         hardness(10f)
         strength(12f)
         sounds(BlockSoundGroup.METAL)
+        luminance(9)
     }))
 
-    val ARTIFICER_NS_WALL_BUILDER = register("artificer_ns_wall_builder", LoyaltySurfaceBuilderBlock(0, 1, 5, ARTIFICER_SURFACE, 400, FabricBlockSettings {
+    val ARTIFICER_NS_WALL_BUILDER = register("artificer_ns_wall_builder", LoyaltySurfaceBuilderBlock(0, 1, 5, ARTIFICER_SURFACE.rotationX, 400, FabricBlockSettings {
         hardness(10f)
         strength(12f)
         sounds(BlockSoundGroup.METAL)
+        luminance(9)
     }))
 
-    val ARTIFICER_PLATFORM_BUILDER = register("artificer_platform_builder", LoyaltySurfaceBuilderBlock(2, 0, 2, ARTIFICER_SURFACE, 300, FabricBlockSettings {
+    val ARTIFICER_PLATFORM_BUILDER = register("artificer_platform_builder", LoyaltySurfaceBuilderBlock(2, 0, 2, ARTIFICER_SURFACE.rotationY, 300, FabricBlockSettings {
         hardness(10f)
         strength(12f)
         sounds(BlockSoundGroup.METAL)
+        luminance(9)
+    }))
+
+    val ARTIFICER_COLUMN_BUILDER = register("artificer_column_builder", LoyaltySurfaceBuilderBlock(0, 4, 0, ARTIFICER_COLUMN, 300, FabricBlockSettings {
+        hardness(10f)
+        strength(12f)
+        sounds(BlockSoundGroup.METAL)
+        luminance(9)
     }))
 
     fun register() {}

@@ -6,6 +6,7 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.sound.SoundCategory
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.IntProperty
 import net.minecraft.util.math.BlockPos
@@ -14,12 +15,13 @@ import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 
-class SurfaceBlock(settings: Settings) : Block(settings) {
+open class SurfaceBlock(settings: Settings) : Block(settings) {
     init {
         defaultState = defaultState.with(DISTANCE, 1)
     }
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
+        super.appendProperties(builder)
         builder.add(DISTANCE)
     }
 
@@ -53,7 +55,9 @@ class SurfaceBlock(settings: Settings) : Block(settings) {
     }
 
     override fun scheduledTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random) {
-        world.breakBlock(pos, false)
+        world.setBlockState(pos, world.getFluidState(pos).blockState)
+        val soundGroup = state.soundGroup
+        world.playSound(null, pos, soundGroup.breakSound, SoundCategory.BLOCKS, soundGroup.volume, soundGroup.pitch)
     }
 
     override fun onLandedUpon(world: World, state: BlockState, pos: BlockPos, entity: Entity, fallDistance: Float) {
@@ -70,12 +74,11 @@ class SurfaceBlock(settings: Settings) : Block(settings) {
         }
     }
 
-    fun getStateForLocation(world: World, pos: BlockPos): BlockState {
-        return defaultState.with(DISTANCE, getDistanceFromBuilder(world, pos))
+    fun getStateForLocation(state: BlockState, world: World, pos: BlockPos): BlockState {
+        return state.with(DISTANCE, getDistanceFromBuilder(world, pos))
     }
 
     companion object {
         val DISTANCE: IntProperty = IntProperty.of("distance", 1, 16)
-
     }
 }

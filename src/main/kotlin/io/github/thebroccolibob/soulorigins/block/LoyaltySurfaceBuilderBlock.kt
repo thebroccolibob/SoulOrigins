@@ -14,8 +14,11 @@ import net.minecraft.state.property.BooleanProperty
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.random.Random
 
-class LoyaltySurfaceBuilderBlock(rangeX: Int, rangeY: Int, rangeZ: Int, surfaceBlock: Block, private val breakDelay: Int, settings: Settings) :
+class LoyaltySurfaceBuilderBlock(rangeX: Int, rangeY: Int, rangeZ: Int, surfaceBlock: BlockState, private val breakDelay: Int, settings: Settings) :
     SurfaceBuilderBlock(rangeX, rangeY, rangeZ, surfaceBlock, settings), BlockEntityProvider {
+
+    constructor(rangeX: Int, rangeY: Int, rangeZ: Int, surfaceBlock: Block, breakDelay: Int, settings: Settings) : this(rangeX, rangeY, rangeZ, surfaceBlock.defaultState, breakDelay, settings)
+
         init {
             defaultState = defaultState.with(COMPLETE, false)
         }

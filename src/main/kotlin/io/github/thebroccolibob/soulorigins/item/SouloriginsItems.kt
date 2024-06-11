@@ -44,6 +44,9 @@ object SouloriginsItems {
     val ARTIFICER_WALL_BUILDER = register("artificer_wall_builder", DirectionalSurfaceBuilderProjectileItem(SoulOriginsBlocks.ARTIFICER_NS_WALL_BUILDER, SoulOriginsBlocks.ARTIFICER_EW_WALL_BUILDER, 1, FabricItemSettings {
         maxCount(16)
     }))
+    val ARTIFICER_COLUMN_BUILDER = register("artificer_column_builder", SurfaceBuilderProjectileItem(SoulOriginsBlocks.ARTIFICER_COLUMN_BUILDER, 0, FabricItemSettings {
+        maxCount(16)
+    }))
 
     val ITEM_GROUP: ItemGroup = Registry.register(
         Registries.ITEM_GROUP,

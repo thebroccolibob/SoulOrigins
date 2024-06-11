@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "soul-origins:block/artificer_column_top",
+    "side": "soul-origins:block/artificer_column_side"
+  }
+}

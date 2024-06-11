@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "soul-origins:block/artificer_ns_wall_builder"
+      "model": "soul-origins:block/artificer_builder"
     }
   }
 }

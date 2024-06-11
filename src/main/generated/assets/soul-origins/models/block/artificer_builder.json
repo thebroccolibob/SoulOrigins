@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "soul-origins:artificer_builder"
+    "all": "soul-origins:block/artificer_builder"
   }
 }
