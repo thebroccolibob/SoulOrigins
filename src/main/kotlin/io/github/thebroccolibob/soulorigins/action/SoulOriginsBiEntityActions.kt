@@ -58,6 +58,7 @@ fun registerSoulOriginsBiEntityActions() {
         add("action", ApoliDataTypes.BIENTITY_ACTION) // For the delayed action
         add("multiplier", SerializableDataTypes.FLOAT) // for customizability
         add("cooldown", ApoliDataTypes.POWER_TYPE, null)
+        add("bonus_cooldown", SerializableDataTypes.INT, 20)
     }) {
         data, entityPair ->
         val (actor, target) = entityPair
@@ -72,7 +73,7 @@ fun registerSoulOriginsBiEntityActions() {
         if (actor is LivingEntity) {
             data.get<PowerTypeReference<*>?>("cooldown")?.let { type ->
                 (PowerHolderComponent.KEY.get(actor).getPower(type) as? CooldownPower)?.let {
-                    it.setCooldown(it.cooldownDuration - delay)
+                    it.setCooldown(it.cooldownDuration - (delay + data.getInt("bonus_cooldown")))
                     PowerHolderComponent.syncPower(actor, type)
                 }
             }

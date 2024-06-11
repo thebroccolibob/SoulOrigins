@@ -22,6 +22,7 @@
           "type": "soul-origins:health_delay",
           "multiplier": 0.5,
           "cooldown": "soul-origins:sorcerer/absorb_mob_cooldown",
+          "bonus_cooldown": 20,
           "action": {
               "type": "origins:if_else",
               "condition": {
