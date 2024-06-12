@@ -38,36 +38,48 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
     }
 
     private fun TranslationBuilder.cooldownDescriptions(id: String, name: String, entries: Iterable<LeveledCooldownEntry>, description: (Int) -> String?) {
-        entries.forEach {
-            val level = it.level
+        for (entry in entries) {
+            val level = entry.level
             add("advancements.$modId.wind.$id.lvl$level", "$name ${romanNumerals[level]}")
-            add("advancements.$modId.wind.$id.lvl$level.description", (description(level)?.let {desc->"$desc\n"} ?: "") + "${it.charges} charge${if (it.charges == 1) "" else "s"}\n${it.recharge / 20}s")
+            add("advancements.$modId.wind.$id.lvl$level.description", (description(level)?.let {desc->"$desc\n"} ?: "") + "${entry.charges} charge${if (entry.charges == 1) "" else "s"}\n${entry.recharge / 20}s")
         }
     }
 
     override fun generateTranslations(translationBuilder: TranslationBuilder) {
-        translationBuilder.add(SouloriginsItems.MARIGOLD_CARD, "Marigold Card")
-        translationBuilder.add("${SouloriginsItems.MARIGOLD_CARD.translationKey}.empty", "Empty")
-        translationBuilder.add("${SouloriginsItems.MARIGOLD_CARD.translationKey}.multiple_items", "%s x%s")
-        translationBuilder.add("container.$modId.inventory.deck", "Deck")
+        with(translationBuilder) {
+            add(SouloriginsItems.MARIGOLD_CARD, "Marigold Card")
+            add("${SouloriginsItems.MARIGOLD_CARD.translationKey}.empty", "Empty")
+            add("${SouloriginsItems.MARIGOLD_CARD.translationKey}.multiple_items", "%s x%s")
+            add("container.$modId.inventory.deck", "Deck")
 
-        translationBuilder.add("advancements.$modId.wind.root", "Wind Spirit")
-        translationBuilder.add("advancements.$modId.wind.root.description", "Level up your skills by finding wind crystals!")
-        translationBuilder.cooldownDescriptions("updraft", "Updraft", updraftEntries, updraftDescription)
-        translationBuilder.cooldownDescriptions("tailwind", "Tailwind", tailwindEntries, tailwindDescription)
-        (1..3).forEach {
-            translationBuilder.add("advancements.$modId.wind.burst.lvl$it", "Burst ${romanNumerals[it]}")
+            add("advancements.$modId.wind.root", "Wind Spirit")
+            add("advancements.$modId.wind.root.description", "Level up your skills by finding wind crystals!")
+            cooldownDescriptions("updraft", "Updraft", updraftEntries, updraftDescription)
+            cooldownDescriptions("tailwind", "Tailwind", tailwindEntries, tailwindDescription)
+
+            for (lvl in 1..3) {
+                translationBuilder.add("advancements.$modId.wind.burst.lvl$lvl", "Burst ${romanNumerals[lvl]}")
+            }
+
+            add("advancements.$modId.wind.burst.lvl1.description", "Unlocks burst\nSpeed & invis 30s\n100% Soul")
+            add("advancements.$modId.wind.burst.lvl2.description", "Adds proj prot 30s\nRecharges updraft & tailwind")
+            add("advancements.$modId.wind.burst.lvl3.description", "Increases to 1min")
+
+            add("itemGroup.soul-origins.item_group", "Soul Origins")
+
+            add(SouloriginsItems.BURST_SHARD, "Burst Shard")
+            add(SouloriginsItems.BURST_SHARD + "flavor", "A shard resonating with an eruptive power")
+            add(SouloriginsItems.UPDRAFT_SHARD, "Updraft Shard")
+            add(SouloriginsItems.UPDRAFT_SHARD + "flavor", "A shard resonating with an uplifting power")
+            add(SouloriginsItems.TAILWIND_SHARD, "Tailwind Shard")
+            add(SouloriginsItems.TAILWIND_SHARD + "flavor", "A shard resonating with a turbulent power")
+            add("item.soul-origins.wind_shard.origin_exclusive", "Only usable by wind spirits")
+
+            add(SouloriginsItems.ARTIFICER_PLATFORM_BUILDER, "Brass Platform Builder")
+            add(SouloriginsItems.ARTIFICER_WALL_BUILDER, "Brass Wall Builder")
+            add(SouloriginsItems.ARTIFICER_COLUMN_BUILDER, "Brass Column Builder")
+
+            add(SouloriginsItems.MOB_ORB, "Mob Orb")
         }
-        translationBuilder.add("advancements.$modId.wind.burst.lvl1.description", "Unlocks burst\nSpeed & invis 30s\n100% Soul")
-        translationBuilder.add("advancements.$modId.wind.burst.lvl2.description", "Adds proj prot 30s\nRecharges updraft & tailwind")
-        translationBuilder.add("advancements.$modId.wind.burst.lvl3.description", "Increases to 1min")
-
-        translationBuilder.add(SouloriginsItems.BURST_SHARD, "Burst Shard")
-        translationBuilder.add(SouloriginsItems.BURST_SHARD + "flavor", "A shard resonating with an eruptive power")
-        translationBuilder.add(SouloriginsItems.UPDRAFT_SHARD, "Updraft Shard")
-        translationBuilder.add(SouloriginsItems.UPDRAFT_SHARD + "flavor", "A shard resonating with an uplifting power")
-        translationBuilder.add(SouloriginsItems.TAILWIND_SHARD, "Tailwind Shard")
-        translationBuilder.add(SouloriginsItems.TAILWIND_SHARD + "flavor", "A shard resonating with a turbulent power")
-        translationBuilder.add("item.soul-origins.wind_shard.origin_exclusive", "Only usable by wind spirits")
     }
 }

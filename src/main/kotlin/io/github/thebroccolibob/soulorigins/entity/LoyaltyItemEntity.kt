@@ -1,7 +1,10 @@
 package io.github.thebroccolibob.soulorigins.entity
 
 import io.github.thebroccolibob.soulorigins.*
-import net.minecraft.entity.*
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.FlyingItemEntity
+import net.minecraft.entity.Ownable
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
@@ -60,7 +63,7 @@ class LoyaltyItemEntity(type: EntityType<LoyaltyItemEntity>, world: World) : Ent
         if (!world.isClient) {
             val owner = this.owner
 
-            if (owner?.isAlive != true) {
+            if (owner?.isAlive != true || owner.isRemoved) {
                 dropStack(item, 0.1f)
                 discard()
                 return
@@ -71,7 +74,7 @@ class LoyaltyItemEntity(type: EntityType<LoyaltyItemEntity>, world: World) : Ent
             velocity = velocity * 0.95 + diff.normalize() * 0.02
         }
 
-        move(MovementType.SELF, velocity)
+        setPosition(x + velocity.x, y + velocity.y, z + velocity.z)
 
         super.tick()
 

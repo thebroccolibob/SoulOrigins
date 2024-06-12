@@ -19,7 +19,9 @@ import net.minecraft.registry.RegistryKeys
 import net.minecraft.sound.SoundCategory
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
+import net.minecraft.world.RaycastContext
 import net.minecraft.world.World
 
 class SurfaceBuilderProjectileEntity : ThrownItemEntity {
@@ -52,7 +54,7 @@ class SurfaceBuilderProjectileEntity : ThrownItemEntity {
 
     override fun onBlockHit(blockHitResult: BlockHitResult) {
         val (_, side, blockPos) = blockHitResult
-        tryPlaceAt(blockPos.offset(side))
+        tryPlaceAt(if (world.getBlockState(blockPos).isReplaceable) blockPos else blockPos.offset(side))
     }
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {
@@ -61,10 +63,27 @@ class SurfaceBuilderProjectileEntity : ThrownItemEntity {
 
     override fun tick() {
         super.tick()
-        if (lastInAir && world.getFluidState(blockPos).isStill) {
-            tryPlaceAt(blockPos)
+
+        if (this.isRemoved) return
+
+        val fluidHit = world.raycast(
+            RaycastContext(
+                pos,
+                pos + velocity,
+                RaycastContext.ShapeType.COLLIDER,
+                RaycastContext.FluidHandling.ANY,
+                this
+            )
+        )
+
+        if (fluidHit.type == HitResult.Type.BLOCK) {
+            fluidHit as BlockHitResult
+            if (world.getBlockState(fluidHit.blockPos).let {
+                !it.fluidState.isEmpty && it.isReplaceable
+            }) {
+                onBlockHit(fluidHit)
+            }
         }
-        lastInAir = world.getFluidState(blockPos).isEmpty
     }
 
     private fun tryPlaceAt(basePos: BlockPos) {
