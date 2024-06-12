@@ -2,6 +2,8 @@ package io.github.thebroccolibob.soulorigins.client.render.entity.feature
 
 import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.entity.isTamed
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.feature.FeatureRenderer
 import net.minecraft.client.render.entity.feature.FeatureRendererContext
@@ -9,6 +11,7 @@ import net.minecraft.client.render.entity.model.SkeletonEntityModel
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.mob.AbstractSkeletonEntity
 
+@Environment(EnvType.CLIENT)
 class SkeletonPaintFeatureRenderer(context: FeatureRendererContext<AbstractSkeletonEntity, SkeletonEntityModel<AbstractSkeletonEntity>>) :
     FeatureRenderer<AbstractSkeletonEntity, SkeletonEntityModel<AbstractSkeletonEntity>>(context) {
 

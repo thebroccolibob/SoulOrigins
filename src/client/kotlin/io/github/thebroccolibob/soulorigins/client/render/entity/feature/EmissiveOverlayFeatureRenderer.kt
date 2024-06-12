@@ -2,6 +2,8 @@ package io.github.thebroccolibob.soulorigins.client.render.entity.feature
 
 import io.github.thebroccolibob.soulorigins.getPowers
 import io.github.thebroccolibob.soulorigins.power.EmissiveOverlayPower
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.merchantpug.apugli.client.util.TextureUtilClient
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.RenderLayer
@@ -15,6 +17,7 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.LivingEntity
 
+@Environment(EnvType.CLIENT)
 class EmissiveOverlayFeatureRenderer<T : LivingEntity, M : EntityModel<T>>(
     context: FeatureRendererContext<T, M>,
     slim: Boolean,

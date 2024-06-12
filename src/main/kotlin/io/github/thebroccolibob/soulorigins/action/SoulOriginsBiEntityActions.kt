@@ -82,4 +82,26 @@ fun registerSoulOriginsBiEntityActions() {
     register("raycast_between", RaycastBetweenCentersAction.serializableData, RaycastBetweenCentersAction::execute)
 
     register(EntityStorePower.setAction)
+
+    register("proportional_velocity", SerializableData {
+        add("multiplier", SerializableDataTypes.FLOAT, 1.0f)
+        add("client", SerializableDataTypes.BOOLEAN, true)
+        add("server", SerializableDataTypes.BOOLEAN, true)
+        add("set", SerializableDataTypes.BOOLEAN, false)
+    }) { data, (actor, target) ->
+
+        if (target is PlayerEntity && (if (target.getWorld().isClient) !data.getBoolean("client") else !data.getBoolean("server"))) return@register
+
+        val diff = actor.pos - target.pos
+
+        val change = diff / diff.length() * data.getFloat("multiplier").toDouble()
+
+        if (data.getBoolean("set")) {
+            target.velocity = change
+        } else {
+            target.addVelocity(change)
+        }
+
+        target.velocityModified = true
+    }
 }

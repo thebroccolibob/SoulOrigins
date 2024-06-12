@@ -3,6 +3,7 @@ package io.github.thebroccolibob.soulorigins
 import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
 import io.github.thebroccolibob.soulorigins.client.particle.GustEmitterParticle
 import io.github.thebroccolibob.soulorigins.client.particle.GustParticle
+import io.github.thebroccolibob.soulorigins.client.particle.VineParticle
 import io.github.thebroccolibob.soulorigins.entity.SoulOriginsEntities
 import io.github.thebroccolibob.soulorigins.item.MarigoldCardItem.Companion.hasEntity
 import io.github.thebroccolibob.soulorigins.item.MobOrbItem
@@ -32,6 +33,7 @@ object SoulOriginsClient : ClientModInitializer {
 			register(SoulOriginsParticles.SMALL_GUST, GustParticle::SmallGustFactory)
 			register(SoulOriginsParticles.GUST_EMITTER_LARGE, GustEmitterParticle.Factory(3.0, 12, 0))
 			register(SoulOriginsParticles.GUST_EMITTER_SMALL, GustEmitterParticle.Factory(1.0, 3, 2))
+			register(SoulOriginsParticles.VINE, VineParticle::Factory)
 		}
 
 		BlockRenderLayerMap.INSTANCE.putBlock(SoulOriginsBlocks.DECAYING_SLIME, RenderLayer.getTranslucent())

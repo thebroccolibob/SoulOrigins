@@ -127,6 +127,7 @@ operator fun BlockPos.minus(other: Vec3i): BlockPos = this.subtract(other)
 operator fun Vec3d.plus(other: Vec3d): Vec3d = this.add(other)
 operator fun Vec3d.minus(other: Vec3d): Vec3d = this.subtract(other)
 operator fun Vec3d.times(scalar: Double): Vec3d = this.multiply(scalar)
+operator fun Vec3d.div(scalar: Double): Vec3d = this * (1.0 / scalar)
 
 val Block.id
     get() = Registries.BLOCK.getId(this)
