@@ -12,6 +12,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity
 import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtHelper
@@ -27,12 +28,16 @@ import net.minecraft.world.World
 class SurfaceBuilderProjectileEntity : ThrownItemEntity {
     constructor(type: EntityType<SurfaceBuilderProjectileEntity>, world: World) : super(type, world)
     constructor(world: World, user: LivingEntity) : super(SoulOriginsEntities.SURFACE_BUILDER_PROJECTILE, user, world)
-//    constructor(world: World, x: Double, y: Double, z: Double) : super(SoulOriginsEntities.SURFACE_BUILDER_PROJECTILE, x, y, z, world)
+    constructor(world: World, user: LivingEntity, item: ItemStack, blockToPlace: BlockState, offsetY: Int) : this(world, user) {
+        setItem(item)
+        this.blockToPlace = blockToPlace
+        this.offsetY = offsetY
+    }
 
     var blockToPlace by BLOCK
     var offsetY by OFFSET_Y
 
-    private var lastInAir = false
+    private var lastInAir = world.getFluidState(blockPos).isEmpty
 
     override fun initDataTracker() {
         super.initDataTracker()
@@ -53,11 +58,13 @@ class SurfaceBuilderProjectileEntity : ThrownItemEntity {
     }
 
     override fun onBlockHit(blockHitResult: BlockHitResult) {
+        if (world.isClient) return
         val (_, side, blockPos) = blockHitResult
         tryPlaceAt(if (world.getBlockState(blockPos).isReplaceable) blockPos else blockPos.offset(side))
     }
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {
+        if (world.isClient) return
         tryPlaceAt(entityHitResult.entity.blockPos)
     }
 
@@ -66,24 +73,28 @@ class SurfaceBuilderProjectileEntity : ThrownItemEntity {
 
         if (this.isRemoved) return
 
-        val fluidHit = world.raycast(
-            RaycastContext(
-                pos,
-                pos + velocity,
-                RaycastContext.ShapeType.COLLIDER,
-                RaycastContext.FluidHandling.ANY,
-                this
+        if (lastInAir) {
+            val fluidHit = world.raycast(
+                RaycastContext(
+                    pos,
+                    pos + velocity,
+                    RaycastContext.ShapeType.COLLIDER,
+                    RaycastContext.FluidHandling.ANY,
+                    this
+                )
             )
-        )
 
-        if (fluidHit.type == HitResult.Type.BLOCK) {
-            fluidHit as BlockHitResult
-            if (world.getBlockState(fluidHit.blockPos).let {
-                !it.fluidState.isEmpty && it.isReplaceable
-            }) {
-                onBlockHit(fluidHit)
+            if (fluidHit.type == HitResult.Type.BLOCK) {
+                fluidHit as BlockHitResult
+                if (world.getBlockState(fluidHit.blockPos).let {
+                        !it.fluidState.isEmpty && it.isReplaceable
+                    }) {
+                    onBlockHit(fluidHit)
+                }
             }
         }
+
+        lastInAir = world.getFluidState(blockPos).isEmpty
     }
 
     private fun tryPlaceAt(basePos: BlockPos) {

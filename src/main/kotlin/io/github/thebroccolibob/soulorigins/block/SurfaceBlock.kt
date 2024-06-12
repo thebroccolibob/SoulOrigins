@@ -17,12 +17,14 @@ import net.minecraft.world.WorldAccess
 
 open class SurfaceBlock(settings: Settings) : Block(settings) {
     init {
-        defaultState = defaultState.with(DISTANCE, 1)
+        defaultState = defaultState
+            .with(DISTANCE, 1)
+            .with(COMPLETE, false)
     }
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
-        builder.add(DISTANCE)
+        builder.add(DISTANCE, COMPLETE)
     }
 
     override fun onBlockAdded(
@@ -45,12 +47,14 @@ open class SurfaceBlock(settings: Settings) : Block(settings) {
         pos: BlockPos,
         neighborPos: BlockPos
     ): BlockState {
+        if (neighborState.contains(COMPLETE) && neighborState[COMPLETE])
+            world.setBlockState(pos, state.with(COMPLETE, true), NOTIFY_ALL)
+
         val distance = state[DISTANCE]
         val newDistance = getDistanceFromBuilder(world, pos)
 
         if (newDistance > distance) world.scheduleBlockTick(pos, this, 10)
 
-//        return if (newDistance > distance) state else state.with(DISTANCE, newDistance)
         return state
     }
 
@@ -80,5 +84,6 @@ open class SurfaceBlock(settings: Settings) : Block(settings) {
 
     companion object {
         val DISTANCE: IntProperty = IntProperty.of("distance", 1, 16)
+        val COMPLETE = SoulOriginsBlocks.COMPLETE
     }
 }

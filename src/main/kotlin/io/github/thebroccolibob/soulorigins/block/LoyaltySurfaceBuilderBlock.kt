@@ -10,8 +10,6 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.state.StateManager
-import net.minecraft.state.property.BooleanProperty
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
@@ -23,15 +21,6 @@ class LoyaltySurfaceBuilderBlock(rangeX: Int, rangeY: Int, rangeZ: Int, surfaceB
     SurfaceBuilderBlock(rangeX, rangeY, rangeZ, surfaceBlock, settings), BlockEntityProvider {
 
     constructor(rangeX: Int, rangeY: Int, rangeZ: Int, surfaceBlock: Block, breakDelay: Int, settings: Settings) : this(rangeX, rangeY, rangeZ, surfaceBlock.defaultState, breakDelay, settings)
-
-        init {
-            defaultState = defaultState.with(COMPLETE, false)
-        }
-
-    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
-        super.appendProperties(builder)
-        builder.add(COMPLETE)
-    }
 
     override fun scheduledTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random) {
         if (!state[COMPLETE]) {
@@ -45,7 +34,6 @@ class LoyaltySurfaceBuilderBlock(rangeX: Int, rangeY: Int, rangeZ: Int, surfaceB
     }
 
     override fun onCompleteBuild(state: BlockState, world: ServerWorld, pos: BlockPos) {
-        world.setBlockState(pos, state.with(COMPLETE, true))
         world.scheduleBlockTick(pos, this, breakDelay)
     }
 
@@ -92,9 +80,5 @@ class LoyaltySurfaceBuilderBlock(rangeX: Int, rangeY: Int, rangeZ: Int, surfaceB
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return LoyaltySurfaceBuilderBlockEntity(pos, state)
-    }
-
-    companion object {
-        val COMPLETE: BooleanProperty = BooleanProperty.of("complete")
     }
 }

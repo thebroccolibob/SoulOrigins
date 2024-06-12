@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.MovementType
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
+import net.minecraft.state.StateManager
 import net.minecraft.util.math.BlockBox
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
@@ -21,6 +22,16 @@ open class SurfaceBuilderBlock(private val rangeX: Int, private val rangeY: Int,
     private val surfaceSounds = surfaceBlock.soundGroup
 
     constructor(rangeX: Int, rangeY: Int, rangeZ: Int, surfaceBlock: Block, settings: Settings) : this(rangeX, rangeY, rangeZ, surfaceBlock.defaultState, settings)
+
+    init {
+        defaultState = defaultState.with(COMPLETE, false)
+    }
+
+
+    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
+        super.appendProperties(builder)
+        builder.add(COMPLETE)
+    }
 
     override fun onBlockAdded(
         state: BlockState,
@@ -39,12 +50,18 @@ open class SurfaceBuilderBlock(private val rangeX: Int, private val rangeY: Int,
         for (areaPos in BlockPos.iterateOutwards(pos, rangeX, rangeY, rangeZ)) {
             if (world.isOutOfHeightLimit(areaPos)) continue
             val areaState = world.getBlockState(areaPos)
-            if (!areaState.isReplaceable || areaState.block is SurfaceBlock || DIRECTIONS.none { world.getBlockState(areaPos.offset(it)).block is SurfaceBlock || areaPos.offset(it) == pos }) continue
+            if (!areaState.isReplaceable || areaState.block is SurfaceBlock || DIRECTIONS.none {
+                val offset = areaPos.offset(it)
+                offset == pos || world.getBlockState(offset).let { state ->
+                    state.block is SurfaceBlock && !state[COMPLETE]
+                }
+            }) continue
             positions.add(areaPos.copy())
 
             world.getOtherEntities(null, Box.from(BlockBox(areaPos))).forEach(entities::add)
         }
         if (positions.isEmpty()) {
+            world.setBlockState(pos, state.with(COMPLETE, true))
             onCompleteBuild(state, world, pos)
         } else {
             for (areaPos in positions) {
@@ -63,4 +80,9 @@ open class SurfaceBuilderBlock(private val rangeX: Int, private val rangeY: Int,
     }
 
     protected open fun onCompleteBuild(state: BlockState, world: ServerWorld, pos: BlockPos) {}
+
+    companion object {
+        val COMPLETE = SoulOriginsBlocks.COMPLETE
+    }
 }
+

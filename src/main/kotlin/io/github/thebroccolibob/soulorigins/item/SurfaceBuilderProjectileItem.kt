@@ -28,10 +28,7 @@ open class SurfaceBuilderProjectileItem(val block: Block, private val offsetY: I
             0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f)
         )
         if (!world.isClient) {
-            val projectile = SurfaceBuilderProjectileEntity(world, user)
-            projectile.setItem(itemStack)
-            projectile.blockToPlace = getBlock(user).defaultState
-            projectile.offsetY = offsetY
+            val projectile = SurfaceBuilderProjectileEntity(world, user, itemStack, getBlock(user).defaultState, offsetY)
             projectile.setVelocity(user, user.pitch, user.yaw, 0.0f, 1.5f, 1.0f)
             world.spawnEntity(projectile)
         }

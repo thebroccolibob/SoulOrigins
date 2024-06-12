@@ -14,6 +14,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import java.util.*
 
@@ -69,7 +70,12 @@ class LoyaltyItemEntity(type: EntityType<LoyaltyItemEntity>, world: World) : Ent
                 return
             }
 
-            val diff = owner.eyePos - pos
+            val targetPos = if (squaredDistanceTo(owner) < 12 * 12)
+                Vec3d(owner.x, owner.y + owner.standingEyeHeight / 2, owner.z)
+            else
+                Vec3d(owner.x, owner.y + 6, owner.z)
+
+            val diff = targetPos - pos
 
             velocity = velocity * 0.95 + diff.normalize() * 0.02
         }
