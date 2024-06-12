@@ -32,7 +32,6 @@ object SoulOriginsBlocks {
     val COMPLETE: BooleanProperty = BooleanProperty.of("complete")
 
     val DECAYING_ROTTEN_FLESH = register("decaying_rotten_flesh", DecayingBlock(100, 200, FabricBlockSettings {
-        hardness(0.5f)
         strength(0.5f)
         burnable()
         sounds(BlockSoundGroup.FROGLIGHT)
@@ -46,13 +45,11 @@ object SoulOriginsBlocks {
     }))
 
     val DECAYING_SAND = register("decaying_sand", DecayingBlock(100, 200, FabricBlockSettings {
-        hardness(0.5f)
         strength(0.5f)
         sounds(BlockSoundGroup.SAND)
     }))
 
     val FALLING_DECAYING_SAND = register("falling_decaying_sand", TransformingFallingBlock(DECAYING_SAND.defaultState, FabricBlockSettings {
-        hardness(0.5f)
         strength(0.5f)
         sounds(BlockSoundGroup.SAND)
         dropsLike(DECAYING_SAND)
@@ -60,7 +57,6 @@ object SoulOriginsBlocks {
 
     val DECAYING_COBWEB_BLOCK = register("decaying_cobweb_block", DecayingCobwebBlock(80, 100, FabricBlockSettings {
         noCollision()
-        hardness(0.5f)
         strength(0.5f)
         sounds(BlockSoundGroup.STONE)
         nonOpaque()
@@ -79,19 +75,19 @@ object SoulOriginsBlocks {
 
     val ARTIFICER_SURFACE = register("artificer_surface", ::PillarSurfaceBlock) {
         hardness(5f)
-        strength(6f)
+        resistance(6f)
         sounds(SoulOriginsSounds.ARTIFICER_SURFACE_GROUP)
     }
 
     val ARTIFICER_COLUMN = register("artificer_column", ::SurfaceBlock) {
         hardness(5f)
-        strength(6f)
+        resistance(6f)
         sounds(SoulOriginsSounds.ARTIFICER_SURFACE_GROUP)
     }
 
     val ARTIFICER_EW_WALL_BUILDER = register("artificer_ew_wall_builder", LoyaltySurfaceBuilderBlock(5, 1, 0, ARTIFICER_SURFACE.rotationZ, 400, FabricBlockSettings {
         hardness(20f)
-        strength(12f)
+        resistance(12f)
         sounds(BlockSoundGroup.METAL)
         luminance(9)
         pistonBehavior(PistonBehavior.BLOCK)
@@ -99,7 +95,7 @@ object SoulOriginsBlocks {
 
     val ARTIFICER_NS_WALL_BUILDER = register("artificer_ns_wall_builder", LoyaltySurfaceBuilderBlock(0, 1, 5, ARTIFICER_SURFACE.rotationX, 400, FabricBlockSettings {
         hardness(20f)
-        strength(12f)
+        resistance(12f)
         sounds(BlockSoundGroup.METAL)
         luminance(9)
         pistonBehavior(PistonBehavior.BLOCK)
@@ -107,7 +103,7 @@ object SoulOriginsBlocks {
 
     val ARTIFICER_PLATFORM_BUILDER = register("artificer_platform_builder", LoyaltySurfaceBuilderBlock(2, 0, 2, ARTIFICER_SURFACE.rotationY, 300, FabricBlockSettings {
         hardness(20f)
-        strength(12f)
+        resistance(12f)
         sounds(BlockSoundGroup.METAL)
         luminance(9)
         pistonBehavior(PistonBehavior.BLOCK)
@@ -115,7 +111,7 @@ object SoulOriginsBlocks {
 
     val ARTIFICER_COLUMN_BUILDER = register("artificer_column_builder", LoyaltySurfaceBuilderBlock(0, 4, 0, ARTIFICER_COLUMN, 300, FabricBlockSettings {
         hardness(20f)
-        strength(12f)
+        resistance(12f)
         sounds(BlockSoundGroup.METAL)
         luminance(9)
         pistonBehavior(PistonBehavior.BLOCK)
