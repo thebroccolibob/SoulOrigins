@@ -4,6 +4,7 @@ import io.github.thebroccolibob.soulorigins.FabricItemSettings
 import io.github.thebroccolibob.soulorigins.ItemGroup
 import io.github.thebroccolibob.soulorigins.Soulorigins
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistry
+import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
 import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
@@ -12,6 +13,7 @@ import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.recipe.BrewingRecipeRegistry
 import net.minecraft.recipe.Ingredient
+import net.minecraft.nbt.NbtList
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.text.Text
@@ -54,6 +56,16 @@ object SouloriginsItems {
         maxCount(1)
     }))
 
+    val ARTIFICER_PLATFORM_BUILDER = register("artificer_platform_builder", SurfaceBuilderProjectileItem(SoulOriginsBlocks.ARTIFICER_PLATFORM_BUILDER, 0, FabricItemSettings {
+        maxCount(16)
+    }))
+    val ARTIFICER_WALL_BUILDER = register("artificer_wall_builder", DirectionalSurfaceBuilderProjectileItem(SoulOriginsBlocks.ARTIFICER_NS_WALL_BUILDER, SoulOriginsBlocks.ARTIFICER_EW_WALL_BUILDER, 1, FabricItemSettings {
+        maxCount(16)
+    }))
+    val ARTIFICER_COLUMN_BUILDER = register("artificer_column_builder", SurfaceBuilderProjectileItem(SoulOriginsBlocks.ARTIFICER_COLUMN_BUILDER, 0, FabricItemSettings {
+        maxCount(16)
+    }))
+
     val ITEM_GROUP: ItemGroup = Registry.register(
         Registries.ITEM_GROUP,
         Identifier(Soulorigins.MOD_ID, "item_group"),
@@ -64,6 +76,10 @@ object SouloriginsItems {
                 entries.add(UPDRAFT_SHARD)
                 entries.add(TAILWIND_SHARD)
                 entries.add(BURST_SHARD)
+
+                entries.add(ARTIFICER_PLATFORM_BUILDER)
+                entries.add(ARTIFICER_WALL_BUILDER)
+                entries.add(ARTIFICER_COLUMN_BUILDER)
 
                 listOf(
                     EntityType.ZOMBIE,
@@ -82,6 +98,15 @@ object SouloriginsItems {
                     entries.add(ItemStack(MOB_ORB, 1).apply {
                         setSubNbt(MobOrbItem.ENTITY_NBT, NbtCompound().apply {
                             putString("id", Registries.ENTITY_TYPE.getId(it).toString())
+                            when (it) {
+                                EntityType.SKELETON, EntityType.STRAY -> Items.BOW
+                                EntityType.WITHER_SKELETON -> Items.STONE_SWORD
+                                else -> null
+                            }?.let { handItem ->
+                                put("HandItems", NbtList().apply {
+                                    add(handItem.defaultStack.writeNbt(NbtCompound()))
+                                })
+                            }
                         })
                     })
                 }

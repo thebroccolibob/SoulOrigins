@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "soul-origins:artificer_surface",
+    "soul-origins:artificer_column",
+    "soul-origins:artificer_platform_builder",
+    "soul-origins:artificer_ns_wall_builder",
+    "soul-origins:artificer_ew_wall_builder",
+    "soul-origins:artificer_column_builder"
+  ]
+}

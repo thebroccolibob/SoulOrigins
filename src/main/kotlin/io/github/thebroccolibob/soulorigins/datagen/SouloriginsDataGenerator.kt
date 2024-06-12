@@ -1,24 +1,15 @@
 package io.github.thebroccolibob.soulorigins.datagen
 
 import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
-import io.github.thebroccolibob.soulorigins.datagen.lib.*
 import io.github.thebroccolibob.soulorigins.datagen.power.PowerGenerator
-import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.advancement.Advancement
-import net.minecraft.block.Block
-import net.minecraft.block.Blocks
-import net.minecraft.data.client.*
-import net.minecraft.item.Items
 import net.minecraft.registry.RegistryWrapper
 import net.minecraft.registry.tag.BlockTags
-import net.minecraft.util.Identifier
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
@@ -34,102 +25,9 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 		}
 	}
 
-	class ModelGenerator(output: FabricDataOutput) : FabricModelProvider(output) {
-		override fun generateBlockStateModels(blockStateModelGenerator: BlockStateModelGenerator) {
-			blockStateModelGenerator.registerStateWithModelReference(SoulOriginsBlocks.DECAYING_SLIME, Blocks.SLIME_BLOCK)
-			blockStateModelGenerator.registerStateWithModelReference(SoulOriginsBlocks.DECAYING_COBWEB_BLOCK, Blocks.COBWEB)
-			blockStateModelGenerator.registerRotatableWithReference(SoulOriginsBlocks.GARDEN_SCULK, Blocks.SCULK)
-			blockStateModelGenerator.registerRotatableWithReference(SoulOriginsBlocks.DECAYING_SAND, Blocks.SAND)
-			blockStateModelGenerator.registerRotatableWithReference(SoulOriginsBlocks.FALLING_DECAYING_SAND, Blocks.SAND)
-			blockStateModelGenerator.registerSimpleCubeAll(SoulOriginsBlocks.DECAYING_ROTTEN_FLESH)
-		}
-
-		override fun generateItemModels(itemModelGenerator: ItemModelGenerator) {
-			itemModelGenerator.register(SouloriginsItems.UPDRAFT_SHARD, Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.TAILWIND_SHARD, Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.BURST_SHARD, Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_zombie", Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_husk", Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_drowned", Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_skeleton", Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_stray", Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_witherskeleton", Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_spider", Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_cavespider", Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_creeper", Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_enderman", Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_slime", Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.MOB_ORB, "_warden", Models.GENERATED)
-
-			itemModelGenerator.register(SouloriginsItems.SUSPICIOUS_BREW, Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.SPLASH_SUSPICIOUS_BREW, Models.GENERATED)
-			itemModelGenerator.register(SouloriginsItems.LINGERING_SUSPICIOUS_BREW, Models.GENERATED)
-		}
-
-		fun BlockStateModelGenerator.registerRotatable(block: Block, modelId: Identifier) {
-			blockStateCollector.accept(VariantsBlockStateSupplier.create(block, *BlockStateModelGenerator.createModelVariantWithRandomHorizontalRotations(modelId)))
-		}
-
-		fun BlockStateModelGenerator.registerRotatableWithReference(block: Block, modelReference: Block) {
-			registerRotatable(block, ModelIds.getBlockModelId(modelReference))
-		}
-	}
-
 	class AdvancementGenerator(output: FabricDataOutput) : FabricAdvancementProvider(output) {
 		override fun generateAdvancement(consumer: Consumer<Advancement>) {
 			consumer.generateAdvancements()
-		}
-	}
-
-	class BlockLootTableGenerator(dataOutput: FabricDataOutput) : FabricBlockLootTableProvider(dataOutput) {
-		override fun generate() {
-			addTable(SoulOriginsBlocks.DECAYING_SLIME) {
-				pool {
-					item(Items.SLIME_BALL) {
-						count(1)
-					}
-					conditions {
-						randomChance(0.5f)
-						survivesExplosion()
-					}
-				}
-			}
-
-			addTable(SoulOriginsBlocks.DECAYING_ROTTEN_FLESH) {
-				pool {
-					item(Items.ROTTEN_FLESH) {
-						count(1)
-					}
-					conditions {
-						randomChance(0.25f)
-						survivesExplosion()
-					}
-				}
-			}
-
-			addTable(SoulOriginsBlocks.DECAYING_SAND) {
-				pool {
-					item(Items.SAND) {
-						count(1)
-					}
-					conditions {
-						randomChance(0.125f)
-						survivesExplosion()
-					}
-				}
-			}
-
-			addTable(SoulOriginsBlocks.DECAYING_COBWEB_BLOCK) {
-				pool {
-					item(Items.STRING) {
-						count(1)
-					}
-					conditions {
-						randomChance(0.25f)
-						survivesExplosion()
-					}
-				}
-			}
 		}
 	}
 
@@ -144,6 +42,14 @@ object SouloriginsDataGenerator : DataGeneratorEntrypoint {
 			)
 			getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(
 				SoulOriginsBlocks.DECAYING_SAND
+			)
+			getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(
+				SoulOriginsBlocks.ARTIFICER_SURFACE,
+				SoulOriginsBlocks.ARTIFICER_COLUMN,
+				SoulOriginsBlocks.ARTIFICER_PLATFORM_BUILDER,
+				SoulOriginsBlocks.ARTIFICER_NS_WALL_BUILDER,
+				SoulOriginsBlocks.ARTIFICER_EW_WALL_BUILDER,
+				SoulOriginsBlocks.ARTIFICER_COLUMN_BUILDER,
 			)
 		}
 	}

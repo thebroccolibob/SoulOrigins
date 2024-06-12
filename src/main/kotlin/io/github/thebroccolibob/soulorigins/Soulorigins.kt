@@ -4,10 +4,12 @@ import io.github.thebroccolibob.soulorigins.action.registerSoulOriginsBiEntityAc
 import io.github.thebroccolibob.soulorigins.action.registerSoulOriginsEntityActions
 import io.github.thebroccolibob.soulorigins.action.registerSoulOriginsItemActions
 import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
+import io.github.thebroccolibob.soulorigins.block.entity.SoulOriginsBlockEntities
 import io.github.thebroccolibob.soulorigins.condition.registerSoulOriginsBiEntityConditions
 import io.github.thebroccolibob.soulorigins.condition.registerSoulOriginsEntityConditions
 import io.github.thebroccolibob.soulorigins.condition.registerSoulOriginsItemConditions
 import io.github.thebroccolibob.soulorigins.effect.SoulOriginsEffects
+import io.github.thebroccolibob.soulorigins.entity.SoulOriginsEntities
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import io.github.thebroccolibob.soulorigins.potion.SoulOriginsPotions
 import io.github.thebroccolibob.soulorigins.power.registerSoulOriginsPowers
@@ -25,6 +27,8 @@ object Soulorigins : ModInitializer {
 	override fun onInitialize() {
 		SoulOriginsBlocks.register()
 		SouloriginsItems.register()
+		SoulOriginsBlockEntities.register()
+		SoulOriginsEntities.register()
 		registerSoulOriginsBiEntityActions()
 		registerSoulOriginsEntityActions()
 		registerSoulOriginsItemActions()

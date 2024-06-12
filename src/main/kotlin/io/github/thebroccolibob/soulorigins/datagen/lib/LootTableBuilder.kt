@@ -21,6 +21,7 @@ import net.minecraft.loot.provider.number.LootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.predicate.NumberRange
 import net.minecraft.predicate.entity.LocationPredicate
+import net.minecraft.predicate.StatePredicate
 import net.minecraft.predicate.item.EnchantmentPredicate
 import net.minecraft.predicate.item.ItemPredicate
 import net.minecraft.util.Identifier
@@ -150,6 +151,10 @@ class Conditions(private val addCondition: (condition: LootCondition.Builder) ->
 
     inline fun weatherCheck(init: WeatherCheckLootCondition.Builder.() -> Unit) {
         +WeatherCheckLootCondition.create().apply(init)
+    }
+
+    fun blockState(block: Block, init: StatePredicate.Builder.() -> Unit) {
+        +BlockStatePropertyLootCondition.builder(block).properties(StatePredicate.Builder.create().apply(init))
     }
 }
 

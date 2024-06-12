@@ -49,12 +49,16 @@
   "item.minecraft.tipped_arrow.effect.perception": "Arrow of Perception",
   "item.minecraft.tipped_arrow.effect.precision": "Arrow of Precision",
   "item.minecraft.tipped_arrow.effect.throngled": "Arrow of Throngling",
+  "item.soul-origins.artificer_column_builder": "Brass Column Builder",
+  "item.soul-origins.artificer_platform_builder": "Brass Platform Builder",
+  "item.soul-origins.artificer_wall_builder": "Brass Wall Builder",
   "item.soul-origins.burst_shard": "Burst Shard",
   "item.soul-origins.burst_shard.flavor": "A shard resonating with an eruptive power",
   "item.soul-origins.lingering_suspicious_brew": "Lingering Suspicious Brew",
   "item.soul-origins.marigold_card": "Marigold Card",
   "item.soul-origins.marigold_card.empty": "Empty",
   "item.soul-origins.marigold_card.multiple_items": "%s x%s",
+  "item.soul-origins.mob_orb": "Mob Orb",
   "item.soul-origins.splash_suspicious_brew": "Splash Suspicious Brew",
   "item.soul-origins.suspicious_brew": "Suspicious Brew",
   "item.soul-origins.suspicious_brew.tooltip": "Effects Unknown",
@@ -62,5 +66,6 @@
   "item.soul-origins.tailwind_shard.flavor": "A shard resonating with a turbulent power",
   "item.soul-origins.updraft_shard": "Updraft Shard",
   "item.soul-origins.updraft_shard.flavor": "A shard resonating with an uplifting power",
-  "item.soul-origins.wind_shard.origin_exclusive": "Only usable by wind spirits"
+  "item.soul-origins.wind_shard.origin_exclusive": "Only usable by wind spirits",
+  "itemGroup.soul-origins.item_group": "Soul Origins"
 }
