@@ -1,7 +1,22 @@
 {
     "type": "origins:multiple",
+    "cooldown": {
+        "type": "origins:cooldown",
+        "cooldown": 600,
+        "hud_render": {
+            "inverted": true,
+            "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+            "bar_index": 0
+        }
+    },
     "walk": {
-        "type": "soul-origins:walk_on_sculk_garden"
+        "type": "soul-origins:walk_on_sculk_garden",
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+            "comparison": ">",
+            "compare_to": 0
+        }
     },
     "phase": {
         "type": "origins:phasing",
@@ -10,16 +25,58 @@
             "tag": "soul-origins:sculk_garden_phaseable"
         },
         "render_type": "blindness",
-        "view_distance": 16
+        "view_distance": 16,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+            "comparison": ">",
+            "compare_to": 0
+        }
     },
     "swim": {
         "type": "origins:swimming",
         "condition": {
-            "type": "origins:in_block",
-            "block_condition": {
-                "type": "origins:in_tag",
-                "tag": "soul-origins:sculk_garden_phaseable"
-            }
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:in_block",
+                    "block_condition": {
+                        "type": "origins:in_tag",
+                        "tag": "soul-origins:sculk_garden_phaseable"
+                    }
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+                    "comparison": ">",
+                    "compare_to": 0
+                }
+            ]
+        }
+    },
+    "climb": {
+        "type": "origins:climbing",
+        "allow_holding": true,
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:in_block",
+                    "block_condition": {
+                        "type": "origins:block",
+                        "block": "minecraft:sculk_vein"
+                    }
+                },
+                {
+                    "type": "origins:collided_horizontally"
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+                    "comparison": ">",
+                    "compare_to": 0
+                }
+            ]
         }
     },
     "spread": {
@@ -28,6 +85,12 @@
         "entity_action": {
             "type": "origins:execute_command",
             "command": "function soul-origins:spread_sculk_garden"
+        },
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+            "comparison": ">",
+            "compare_to": 0
         }
     },
     "silent": {
@@ -36,17 +99,35 @@
             "minecraft:step",
             "minecraft:swim",
             "minecraft:hit_ground"
-        ]
+        ],
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+            "comparison": ">",
+            "compare_to": 0
+        }
     },
-    "remove": {
-        "type": "origins:action_on_callback",
-        "entity_action_added": {
-            "type": "origins:delay",
-            "ticks": 600,
-            "action": {
-                "type": "origins:revoke_power",
-                "power": "soul-origins:sorcerer/sculk_garden",
-                "source": "soul-origins:activate_orb"
+    "hide_name": {
+        "type": "apugli:prevent_label_render",
+        "bientity_condition": {
+            "type": "apoli:actor_condition",
+            "condition": {
+                "type": "origins:and",
+                "conditions": [
+                    {
+                        "type": "origins:in_block",
+                        "block_condition": {
+                            "type": "origins:in_tag",
+                            "tag": "soul-origins:sculk_garden_phaseable"
+                        }
+                    },
+                    {
+                        "type": "origins:resource",
+                        "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+                        "comparison": ">",
+                        "compare_to": 0
+                    }
+                ]
             }
         }
     }

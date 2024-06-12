@@ -211,27 +211,25 @@ open class BrewingStandPower(
     }
 
     companion object {
-        fun createFactory(): PowerFactory<BrewingStandPower> {
-            return PowerFactory<BrewingStandPower>(
-                SoulOrigins.id("brewing_stand"),
-                SerializableData {
-                    add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, Key())
-                    add("fuel_resource", ApoliDataTypes.POWER_TYPE, null)
-                    add("drop_on_death", SerializableDataTypes.BOOLEAN, true)
-                    add("recoverable", SerializableDataTypes.BOOLEAN, true)
-                }
-            ) { data ->
-                BiFunction { powerType, livingEntity ->
-                    BrewingStandPower(
-                        powerType,
-                        livingEntity,
-                        data.get("key"),
-                        data.get("fuel_resource"),
-                        data.get("drop_on_death"),
-                        data.get("recoverable")
-                    )
-                }
-            }.allowCondition()
-        }
+        val factory: PowerFactory<BrewingStandPower> = PowerFactory<BrewingStandPower>(
+            SoulOrigins.id("brewing_stand"),
+            SerializableData {
+                add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, Key())
+                add("fuel_resource", ApoliDataTypes.POWER_TYPE, null)
+                add("drop_on_death", SerializableDataTypes.BOOLEAN, true)
+                add("recoverable", SerializableDataTypes.BOOLEAN, true)
+            }
+        ) { data ->
+            BiFunction { powerType, livingEntity ->
+                BrewingStandPower(
+                    powerType,
+                    livingEntity,
+                    data.get("key"),
+                    data.get("fuel_resource"),
+                    data.get("drop_on_death"),
+                    data.get("recoverable")
+                )
+            }
+        }.allowCondition()
     }
 }

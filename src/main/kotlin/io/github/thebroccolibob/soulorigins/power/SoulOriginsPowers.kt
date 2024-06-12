@@ -24,7 +24,6 @@ fun registerSoulOriginsPowers() {
     register(Power.createSimpleFactory(::UseWindShardsPower, SoulOrigins.id("use_wind_shards")))
     register(Power.createSimpleFactory(::UseMobOrbPower, SoulOrigins.id("use_mob_orb")))
     register(Power.createSimpleFactory(::GardenWalker, SoulOrigins.id("walk_on_sculk_garden")))
-    register(BrewingStandPower.createFactory())
-    register(SuspiciousBrewingStandPower.createFactory())
-
+    register(BrewingStandPower.factory)
+    register(SuspiciousBrewingStandPower.factory)
 }

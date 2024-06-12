@@ -83,28 +83,26 @@ class SuspiciousBrewingStandPower(
     }
 
     companion object {
-        fun createFactory(): PowerFactory<BrewingStandPower> {
-            return PowerFactory<BrewingStandPower>(
-                SoulOrigins.id("suspicious_brewing_stand"),
-                SerializableData {
-                    add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, Key())
-                    add("fuel_resource", ApoliDataTypes.POWER_TYPE, null)
-                    add("drop_on_death", SerializableDataTypes.BOOLEAN, true)
-                    add("recoverable", SerializableDataTypes.BOOLEAN, true)
-                }
-            ) { data ->
-                BiFunction { powerType, livingEntity ->
-                    SuspiciousBrewingStandPower(
-                        powerType,
-                        livingEntity,
-                        data.get("key"),
-                        data.get("fuel_resource"),
-                        data.get("drop_on_death"),
-                        data.get("recoverable")
-                    )
-                }
-            }.allowCondition()
-        }
+        val factory: PowerFactory<BrewingStandPower> = PowerFactory<BrewingStandPower>(
+            SoulOrigins.id("suspicious_brewing_stand"),
+            SerializableData {
+                add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, Key())
+                add("fuel_resource", ApoliDataTypes.POWER_TYPE, null)
+                add("drop_on_death", SerializableDataTypes.BOOLEAN, true)
+                add("recoverable", SerializableDataTypes.BOOLEAN, true)
+            }
+        ) { data ->
+            BiFunction { powerType, livingEntity ->
+                SuspiciousBrewingStandPower(
+                    powerType,
+                    livingEntity,
+                    data.get("key"),
+                    data.get("fuel_resource"),
+                    data.get("drop_on_death"),
+                    data.get("recoverable")
+                )
+            }
+        }.allowCondition()
 
         fun isValidIngredient(stack: ItemStack): Boolean {
             return SoulOriginsPotions.SUSPICIOUS_RECIPES.any { stack.isOf(it.ingredient) } || BrewingRecipeRegistry.isValidIngredient(stack)
