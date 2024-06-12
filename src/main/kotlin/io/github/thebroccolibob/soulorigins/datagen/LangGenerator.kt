@@ -3,10 +3,14 @@ package io.github.thebroccolibob.soulorigins.datagen
 import io.github.thebroccolibob.soulorigins.datagen.power.LeveledCooldownEntry
 import io.github.thebroccolibob.soulorigins.datagen.power.wind.tailwindEntries
 import io.github.thebroccolibob.soulorigins.datagen.power.wind.updraftEntries
+import io.github.thebroccolibob.soulorigins.effect.SoulOriginsEffects
 import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
 import io.github.thebroccolibob.soulorigins.plus
+import io.github.thebroccolibob.soulorigins.potion.SoulOriginsPotions
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
+import net.minecraft.item.Items
+import net.minecraft.potion.Potion
 
 class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataOutput) {
     private val modId = dataOutput.modId
@@ -45,6 +49,17 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
         }
     }
 
+    private fun TranslationBuilder.addPotionVariants(potion: Potion, name: String) {
+        for ((item, translation) in listOf(
+            Items.POTION to "Potion of ",
+            Items.SPLASH_POTION to "Splash Potion of ",
+            Items.LINGERING_POTION to "Lingering Potion of ",
+            Items.TIPPED_ARROW to "Arrow of ",
+        )) {
+            add(potion.finishTranslationKey("${item.translationKey}.effect."), "$translation$name")
+        }
+    }
+
     override fun generateTranslations(translationBuilder: TranslationBuilder) {
         translationBuilder.add(SouloriginsItems.MARIGOLD_CARD, "Marigold Card")
         translationBuilder.add("${SouloriginsItems.MARIGOLD_CARD.translationKey}.empty", "Empty")
@@ -69,5 +84,22 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
         translationBuilder.add(SouloriginsItems.TAILWIND_SHARD, "Tailwind Shard")
         translationBuilder.add(SouloriginsItems.TAILWIND_SHARD + "flavor", "A shard resonating with a turbulent power")
         translationBuilder.add("item.soul-origins.wind_shard.origin_exclusive", "Only usable by wind spirits")
+
+        translationBuilder.add("container.soul-origins.suspicious_brewing", "Suspicious Brewing")
+
+        translationBuilder.add(SouloriginsItems.SUSPICIOUS_BREW, "Suspicious Brew")
+        translationBuilder.add(SouloriginsItems.SPLASH_SUSPICIOUS_BREW, "Splash Suspicious Brew")
+        translationBuilder.add(SouloriginsItems.LINGERING_SUSPICIOUS_BREW, "Lingering Suspicious Brew")
+        translationBuilder.add("item.soul-origins.suspicious_brew.tooltip", "Effects Unknown")
+
+        translationBuilder.add(SoulOriginsEffects.PRECISION, "Precision")
+        translationBuilder.add(SoulOriginsEffects.NECROSIS, "Necrosis")
+        translationBuilder.add(SoulOriginsEffects.PERCEPTION, "Perception")
+        translationBuilder.add(SoulOriginsEffects.THRONGLED, "Throngled")
+
+        translationBuilder.addPotionVariants(SoulOriginsPotions.PRECISION.base, "Precision")
+        translationBuilder.addPotionVariants(SoulOriginsPotions.NECROSIS.base, "Necrosis")
+        translationBuilder.addPotionVariants(SoulOriginsPotions.PERCEPTION.base, "Perception")
+        translationBuilder.addPotionVariants(SoulOriginsPotions.THRONGLED.base, "Throngling")
     }
 }

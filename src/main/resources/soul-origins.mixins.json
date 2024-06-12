@@ -5,13 +5,18 @@
   "mixins": [
     "AbstractSkeletonEntityMixin",
     "BowItemMixin",
+    "BrewingStandScreenHandlerMixin",
     "CreeperEntityMixin",
     "EndermanEntityMixin",
     "HostileEntityMixin",
+    "PlayerEntityMixin",
+    "PotionEntityMixin",
+    "PotionSlotMixin",
     "RevengeGoalMixin",
     "SculkVeinGrowCheckerMixin",
     "SlimeEntityMixin",
     "SpiderEntityMixin",
+    "TippedArrowRecipeMixin",
     "ZombieEntityMixin"
   ],
   "injectors": {
