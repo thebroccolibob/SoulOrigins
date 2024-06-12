@@ -1,6 +1,5 @@
 package io.github.thebroccolibob.soulorigins.action
 
-import io.github.apace100.apoli.component.PowerHolderComponent
 import io.github.apace100.apoli.data.ApoliDataTypes
 import io.github.apace100.apoli.power.CooldownPower
 import io.github.apace100.apoli.power.PowerType
@@ -10,6 +9,9 @@ import io.github.apace100.calio.data.SerializableData
 import io.github.apace100.calio.data.SerializableDataTypes
 import io.github.thebroccolibob.soulorigins.SerializableData
 import io.github.thebroccolibob.soulorigins.SoulOrigins
+import io.github.thebroccolibob.soulorigins.getPower
+import io.github.thebroccolibob.soulorigins.power.EntityStorePower
+import io.github.thebroccolibob.soulorigins.syncPower
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.particle.BlockStateParticleEffect
@@ -34,13 +36,11 @@ fun registerSoulOriginsEntityActions() {
         add("change", SerializableDataTypes.INT)
     }) { data, entity ->
         if (entity is LivingEntity) {
-            val component = PowerHolderComponent.KEY[entity]
             val powerType = data.get<PowerType<*>>("cooldown")
-            val p = component.getPower(powerType)
-            val change = data.getInt("change")
-            if (p is CooldownPower) {
-                p.setCooldown((p.cooldownDuration - p.remainingTicks) - change)
-                PowerHolderComponent.syncPower(entity, powerType)
+            (entity.getPower(powerType) as? CooldownPower)?.run {
+                val change = data.getInt("change")
+                setCooldown((cooldownDuration - remainingTicks) - change)
+                entity.syncPower(powerType)
             }
         }
     }
@@ -86,4 +86,13 @@ fun registerSoulOriginsEntityActions() {
     }
 
     register("apugli_raycast", FixedRaycastAction.serializableData, FixedRaycastAction::execute)
+
+    register("discard", SerializableData()) { _, entity ->
+        if (!entity.isPlayer) {
+            entity.discard()
+        }
+    }
+
+    register(EntityStorePower.storeAction)
+    register(EntityStorePower.clearAction)
 }

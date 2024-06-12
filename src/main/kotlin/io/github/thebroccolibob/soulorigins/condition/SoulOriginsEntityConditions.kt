@@ -8,6 +8,7 @@ import io.github.apace100.calio.data.SerializableDataTypes
 import io.github.thebroccolibob.soulorigins.SerializableData
 import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.item.MobOrbItem
+import io.github.thebroccolibob.soulorigins.power.EntityStorePower
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -45,8 +46,9 @@ fun registerSoulOriginsEntityConditions() {
         } ?: false
     }
 
-    register("facing_east_west", SerializableData {})
-    { _, entity ->
+    register("facing_east_west", SerializableData()) { _, entity ->
         entity.headYaw in -135f..-45f || entity.headYaw in 45f..135f
     }
+
+    register(EntityStorePower.condition)
 }

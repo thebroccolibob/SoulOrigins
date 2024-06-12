@@ -1,7 +1,6 @@
 package io.github.thebroccolibob.soulorigins.action
 
 import io.github.apace100.apoli.Apoli.SCHEDULER
-import io.github.apace100.apoli.component.PowerHolderComponent
 import io.github.apace100.apoli.data.ApoliDataTypes
 import io.github.apace100.apoli.power.CooldownPower
 import io.github.apace100.apoli.power.PowerTypeReference
@@ -14,6 +13,7 @@ import io.github.thebroccolibob.soulorigins.entity.OwnableMonster
 import io.github.thebroccolibob.soulorigins.entity.isTamed
 import io.github.thebroccolibob.soulorigins.item.MobOrbItem
 import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
+import io.github.thebroccolibob.soulorigins.power.EntityStorePower
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -71,13 +71,15 @@ fun registerSoulOriginsBiEntityActions() {
 
         if (actor is LivingEntity) {
             data.get<PowerTypeReference<*>?>("cooldown")?.let { type ->
-                (PowerHolderComponent.KEY.get(actor).getPower(type) as? CooldownPower)?.let {
+                (actor.getPower(type) as? CooldownPower)?.let {
                     it.setCooldown(it.cooldownDuration - (delay + data.getInt("bonus_cooldown")))
-                    PowerHolderComponent.syncPower(actor, type)
+                    actor.syncPower(type)
                 }
             }
         }
     }
 
     register("raycast_between", RaycastBetweenCentersAction.serializableData, RaycastBetweenCentersAction::execute)
+
+    register(EntityStorePower.setAction)
 }

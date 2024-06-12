@@ -1,6 +1,5 @@
 package io.github.thebroccolibob.soulorigins
 
-import io.github.apace100.apoli.component.PowerHolderComponent
 import io.github.apace100.apoli.power.PowerType
 import io.github.apace100.apoli.power.PowerTypeRegistry
 import io.github.apace100.apoli.power.VariableIntPower
@@ -13,7 +12,7 @@ val soulMeterType
 
 val PlayerEntity.soulMeter: VariableIntPower
     get() {
-        return PowerHolderComponent.KEY[this].getPower(soulMeterType)
+        return getPower(soulMeterType)
     }
 
 operator fun VariableIntPower?.plusAssign(change: Int) {
@@ -24,5 +23,5 @@ operator fun VariableIntPower?.minusAssign(change: Int) {
 }
 
 fun PlayerEntity.syncSoulMeter() {
-    PowerHolderComponent.syncPower(this, soulMeterType)
+    syncPower(soulMeterType)
 }

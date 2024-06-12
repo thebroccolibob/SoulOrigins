@@ -2,6 +2,7 @@ package io.github.thebroccolibob.soulorigins
 
 import io.github.apace100.apoli.component.PowerHolderComponent
 import io.github.apace100.apoli.power.Power
+import io.github.apace100.apoli.power.PowerType
 import io.github.apace100.calio.data.SerializableData
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
@@ -17,8 +18,8 @@ import net.minecraft.item.*
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
-import net.minecraft.screen.PropertyDelegate
 import net.minecraft.registry.Registries
+import net.minecraft.screen.PropertyDelegate
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.util.collection.DefaultedList
@@ -94,6 +95,10 @@ operator fun Item.plus(suffix: String) = "$translationKey.$suffix"
 
 inline fun <reified T : Power> Entity.hasPower() = PowerHolderComponent.hasPower(this, T::class.java)
 inline fun <reified T : Power> Entity.getPowers(): List<T> = PowerHolderComponent.getPowers(this, T::class.java)
+fun <T: Power> Entity.getPower(type: PowerType<T>): T = PowerHolderComponent.KEY[this].getPower(type)
+fun Entity.syncPower(type: PowerType<*>) {
+    PowerHolderComponent.syncPower(this, type)
+}
 
 fun ItemGroup(init: ItemGroup.Builder.() -> Unit): ItemGroup {
     return FabricItemGroup.builder().apply(init).build()

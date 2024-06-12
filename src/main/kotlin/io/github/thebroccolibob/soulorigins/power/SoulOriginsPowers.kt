@@ -26,4 +26,5 @@ fun registerSoulOriginsPowers() {
     register(Power.createSimpleFactory(::GardenWalker, SoulOrigins.id("walk_on_sculk_garden")))
     register(BrewingStandPower.factory)
     register(SuspiciousBrewingStandPower.factory)
+    register(EntityStorePower.factory)
 }
