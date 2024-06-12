@@ -2,7 +2,7 @@ package io.github.thebroccolibob.soulorigins.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import io.github.thebroccolibob.soulorigins.item.SouloriginsItems;
+import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.TippedArrowRecipe;
@@ -16,7 +16,7 @@ public class TippedArrowRecipeMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z", ordinal = 0)
     )
     private boolean matchSuspiciousBrew(ItemStack instance, Item item, Operation<Boolean> original) {
-        return original.call(instance, item) || instance.isOf(SouloriginsItems.LINGERING_SUSPICIOUS_BREW);
+        return original.call(instance, item) || instance.isOf(SoulOriginsItems.LINGERING_SUSPICIOUS_BREW);
     }
 
     @WrapOperation(
@@ -24,6 +24,6 @@ public class TippedArrowRecipeMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z")
     )
     private boolean craftSuspiciousBrew(ItemStack instance, Item item, Operation<Boolean> original) {
-        return original.call(instance, item) || instance.isOf(SouloriginsItems.LINGERING_SUSPICIOUS_BREW);
+        return original.call(instance, item) || instance.isOf(SoulOriginsItems.LINGERING_SUSPICIOUS_BREW);
     }
 }

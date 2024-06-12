@@ -17,19 +17,19 @@
 	"entrypoints": {
 		"main": [
 			{
-				"value": "io.github.thebroccolibob.soulorigins.Soulorigins",
+				"value": "io.github.thebroccolibob.soulorigins.SoulOrigins",
 				"adapter": "kotlin"
 			}
 		],
 		"client": [
 			{
-				"value": "io.github.thebroccolibob.soulorigins.SouloriginsClient",
+				"value": "io.github.thebroccolibob.soulorigins.SoulOriginsClient",
 				"adapter": "kotlin"
 			}
 		],
 		"fabric-datagen": [
 			{
-				"value": "io.github.thebroccolibob.soulorigins.datagen.SouloriginsDataGenerator",
+				"value": "io.github.thebroccolibob.soulorigins.datagen.SoulOriginsDataGenerator",
 				"adapter": "kotlin"
 			}
 		]

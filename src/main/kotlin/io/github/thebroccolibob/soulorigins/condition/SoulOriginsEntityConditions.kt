@@ -6,14 +6,13 @@ import io.github.apace100.apoli.registry.ApoliRegistries
 import io.github.apace100.calio.data.SerializableData
 import io.github.apace100.calio.data.SerializableDataTypes
 import io.github.thebroccolibob.soulorigins.SerializableData
-import io.github.thebroccolibob.soulorigins.Soulorigins
+import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.item.MobOrbItem
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.registry.Registry
 import net.minecraft.util.Hand
-import net.minecraft.util.Identifier
 import java.util.function.BiFunction
 
 private fun register(conditionFactory: ConditionFactory<Entity>) {
@@ -21,7 +20,7 @@ private fun register(conditionFactory: ConditionFactory<Entity>) {
 }
 
 private fun register(id: String, data: SerializableData, condition: BiFunction<SerializableData.Instance, Entity, Boolean>) {
-    register(ConditionFactory(Identifier(Soulorigins.MOD_ID, id), data, condition))
+    register(ConditionFactory(SoulOrigins.id(id), data, condition))
 }
 
 

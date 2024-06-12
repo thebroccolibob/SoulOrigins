@@ -1,13 +1,12 @@
 package io.github.thebroccolibob.soulorigins.block
 
 import io.github.thebroccolibob.soulorigins.FabricBlockSettings
+import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.SoulOriginsSounds
-import io.github.thebroccolibob.soulorigins.Soulorigins
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
-import net.minecraft.block.FallingBlock
 import net.minecraft.block.piston.PistonBehavior
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -20,7 +19,7 @@ object SoulOriginsBlocks {
         return Registry.register(Registries.BLOCK, id, block)
     }
 
-    private fun <T: Block> register(path: String, block: T) = register(Identifier(Soulorigins.MOD_ID, path), block)
+    private fun <T: Block> register(path: String, block: T) = register(SoulOrigins.id(path), block)
 
     private inline operator fun <T: Block> ((settings: AbstractBlock.Settings) -> T).invoke(init: FabricBlockSettings.() -> Unit): T {
         return this(FabricBlockSettings(init))

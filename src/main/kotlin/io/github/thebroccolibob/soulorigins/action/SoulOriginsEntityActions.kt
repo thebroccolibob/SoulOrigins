@@ -9,14 +9,13 @@ import io.github.apace100.apoli.registry.ApoliRegistries
 import io.github.apace100.calio.data.SerializableData
 import io.github.apace100.calio.data.SerializableDataTypes
 import io.github.thebroccolibob.soulorigins.SerializableData
-import io.github.thebroccolibob.soulorigins.Soulorigins
+import io.github.thebroccolibob.soulorigins.SoulOrigins
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.particle.BlockStateParticleEffect
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.registry.Registry
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.util.Identifier
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
 import java.util.function.BiConsumer
@@ -26,7 +25,7 @@ private fun register(actionFactory: ActionFactory<Entity>) {
 }
 
 private fun register(id: String, data: SerializableData, effect: BiConsumer<SerializableData.Instance, Entity>) {
-    register(ActionFactory(Identifier(Soulorigins.MOD_ID, id), data, effect))
+    register(ActionFactory(SoulOrigins.id(id), data, effect))
 }
 
 fun registerSoulOriginsEntityActions() {

@@ -1,6 +1,6 @@
 package io.github.thebroccolibob.soulorigins.block.entity
 
-import io.github.thebroccolibob.soulorigins.Soulorigins
+import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
 import io.github.thebroccolibob.soulorigins.id
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
@@ -19,7 +19,7 @@ object SoulOriginsBlockEntities {
     }
 
     private fun <T: BlockEntity> register(path: String, blockEntity: BlockEntityFactory<T>, vararg blocks: Block): BlockEntityType<T> {
-        return register(Identifier(Soulorigins.MOD_ID, path), blockEntity, *blocks)
+        return register(SoulOrigins.id(path), blockEntity, *blocks)
     }
 
     private fun <T: BlockEntity> register(block: Block, blockEntity: BlockEntityFactory<T>): BlockEntityType<T> {

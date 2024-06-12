@@ -12,7 +12,7 @@ object SoulOriginsSounds {
         return Registry.register(Registries.SOUND_EVENT, identifier, SoundEvent.of(identifier))
     }
 
-    fun register(path: String) = register(Identifier(Soulorigins.MOD_ID, path))
+    fun register(path: String) = register(SoulOrigins.id(path))
 
     val WIND_BURST = register("power.wind.burst")
     val WIND_BURST_LARGE = register("power.wind.burst_large")

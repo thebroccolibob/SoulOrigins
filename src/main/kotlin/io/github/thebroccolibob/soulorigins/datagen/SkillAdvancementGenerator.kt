@@ -1,9 +1,9 @@
 package io.github.thebroccolibob.soulorigins.datagen
 
 import io.github.apace100.origins.util.ChoseOriginCriterion
-import io.github.thebroccolibob.soulorigins.Soulorigins
+import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.datagen.lib.*
-import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
+import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
 import net.minecraft.advancement.Advancement
 import net.minecraft.advancement.AdvancementFrame
 import net.minecraft.item.Item
@@ -12,12 +12,11 @@ import net.minecraft.loot.condition.EntityPropertiesLootCondition
 import net.minecraft.loot.context.LootContext
 import net.minecraft.predicate.entity.LootContextPredicate
 import net.minecraft.text.Text
-import net.minecraft.util.Identifier
 import java.util.function.Consumer
 
-val chose_wind = ChoseOriginCriterion.Conditions(LootContextPredicate.EMPTY, Identifier(Soulorigins.MOD_ID, "wind_spirit"))
+val chose_wind = ChoseOriginCriterion.Conditions(LootContextPredicate.EMPTY, SoulOrigins.id("wind_spirit"))
 
-private fun Consumer<Advancement>.advancement(path: String, init: Advancement.Builder.() -> Unit) = advancement(Identifier(Soulorigins.MOD_ID, path), init)
+private fun Consumer<Advancement>.advancement(path: String, init: Advancement.Builder.() -> Unit) = advancement(SoulOrigins.id(path), init)
 
 fun Consumer<Advancement>.windLevels(root: Advancement, id: String, item: Item, levels: Int, lvl1Unlocked: Boolean = false) {
     (1..levels).fold(root) { prev, index ->
@@ -62,7 +61,7 @@ fun Consumer<Advancement>.generateAdvancements() {
             Items.FEATHER,
             Text.translatable("advancements.soul-origins.wind.root"),
             Text.translatable("advancements.soul-origins.wind.root.description"),
-            Identifier(Soulorigins.MOD_ID, "textures/gui/advancements/backgrounds/wind.png"),
+            SoulOrigins.id("textures/gui/advancements/backgrounds/wind.png"),
             AdvancementFrame.GOAL,
             false,
             false,
@@ -72,8 +71,8 @@ fun Consumer<Advancement>.generateAdvancements() {
         criterion("wind_origin", chose_wind)
     }
 
-    windLevels(root, "tailwind", SouloriginsItems.TAILWIND_SHARD, 5, true)
-    windLevels(root, "updraft", SouloriginsItems.UPDRAFT_SHARD, 5, true)
-    windLevels(root, "burst", SouloriginsItems.BURST_SHARD, 3)
+    windLevels(root, "tailwind", SoulOriginsItems.TAILWIND_SHARD, 5, true)
+    windLevels(root, "updraft", SoulOriginsItems.UPDRAFT_SHARD, 5, true)
+    windLevels(root, "burst", SoulOriginsItems.BURST_SHARD, 3)
 //    windLevels(root, "neutral", SouloriginsItems.NEUTRAL_CRYSTAL, 3, true)
 }

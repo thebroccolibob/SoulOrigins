@@ -7,8 +7,8 @@ import io.github.apace100.apoli.power.factory.PowerFactory
 import io.github.apace100.calio.data.SerializableDataTypes
 import io.github.thebroccolibob.soulorigins.IngredientSlotProvider
 import io.github.thebroccolibob.soulorigins.SerializableData
-import io.github.thebroccolibob.soulorigins.Soulorigins
-import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
+import io.github.thebroccolibob.soulorigins.SoulOrigins
+import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
 import io.github.thebroccolibob.soulorigins.potion.SoulOriginsPotions
 import io.github.thebroccolibob.soulorigins.power.SuspiciousBrewingStandPower.IngredientSlot
 import net.minecraft.entity.LivingEntity
@@ -23,7 +23,6 @@ import net.minecraft.screen.BrewingStandScreenHandler
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.slot.Slot
 import net.minecraft.text.Text
-import net.minecraft.util.Identifier
 import java.util.function.BiFunction
 
 class SuspiciousBrewingStandPower(
@@ -72,9 +71,9 @@ class SuspiciousBrewingStandPower(
         if (stack.isEmpty || PotionUtil.getPotion(stack).effects.isEmpty()) return stack
 
         val suspiciousItem = when(stack.item) {
-            Items.POTION -> SouloriginsItems.SUSPICIOUS_BREW
-            Items.SPLASH_POTION -> SouloriginsItems.SPLASH_SUSPICIOUS_BREW
-            Items.LINGERING_POTION -> SouloriginsItems.LINGERING_SUSPICIOUS_BREW
+            Items.POTION -> SoulOriginsItems.SUSPICIOUS_BREW
+            Items.SPLASH_POTION -> SoulOriginsItems.SPLASH_SUSPICIOUS_BREW
+            Items.LINGERING_POTION -> SoulOriginsItems.LINGERING_SUSPICIOUS_BREW
             else -> return stack
         }
 
@@ -86,7 +85,7 @@ class SuspiciousBrewingStandPower(
     companion object {
         fun createFactory(): PowerFactory<BrewingStandPower> {
             return PowerFactory<BrewingStandPower>(
-                Identifier(Soulorigins.MOD_ID, "suspicious_brewing_stand"),
+                SoulOrigins.id("suspicious_brewing_stand"),
                 SerializableData {
                     add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, Key())
                     add("fuel_resource", ApoliDataTypes.POWER_TYPE, null)

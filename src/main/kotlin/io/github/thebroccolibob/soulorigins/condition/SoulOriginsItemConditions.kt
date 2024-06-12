@@ -7,10 +7,9 @@ import io.github.apace100.apoli.util.Comparison
 import io.github.apace100.calio.data.SerializableData
 import io.github.apace100.calio.data.SerializableDataTypes
 import io.github.thebroccolibob.soulorigins.SerializableData
-import io.github.thebroccolibob.soulorigins.Soulorigins
+import io.github.thebroccolibob.soulorigins.SoulOrigins
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
 import java.util.function.BiFunction
 
 private fun register(conditionFactory: ConditionFactory<ItemStack>) {
@@ -18,7 +17,7 @@ private fun register(conditionFactory: ConditionFactory<ItemStack>) {
 }
 
 private fun register(id: String, data: SerializableData, condition: BiFunction<SerializableData.Instance, ItemStack, Boolean>) {
-    register(ConditionFactory(Identifier(Soulorigins.MOD_ID, id), data, condition))
+    register(ConditionFactory(SoulOrigins.id(id), data, condition))
 }
 
 fun registerSoulOriginsItemConditions() {

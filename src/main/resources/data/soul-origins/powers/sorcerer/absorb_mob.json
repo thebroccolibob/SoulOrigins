@@ -60,7 +60,7 @@
           "volume": 0.1,
           "pitch": 0.5
         },
-        "command_at_hit": "particle minecraft:sculk_soul ~ ~0.5 ~ 0.25 1 0.25 0.01 20 force @a",
+        "command_at_hit": "particle minecraft:sculk_soul ~ ~0.5 ~ 0.25 0.5 0.25 0.01 20 force @a",
         "command_along_ray": "particle minecraft:soul_fire_flame",
         "command_step": 1,
         "command_along_ray_only_on_hit": true

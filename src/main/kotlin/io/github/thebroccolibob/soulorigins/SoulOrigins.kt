@@ -10,15 +10,18 @@ import io.github.thebroccolibob.soulorigins.condition.registerSoulOriginsEntityC
 import io.github.thebroccolibob.soulorigins.condition.registerSoulOriginsItemConditions
 import io.github.thebroccolibob.soulorigins.effect.SoulOriginsEffects
 import io.github.thebroccolibob.soulorigins.entity.SoulOriginsEntities
-import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
+import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
 import io.github.thebroccolibob.soulorigins.potion.SoulOriginsPotions
 import io.github.thebroccolibob.soulorigins.power.registerSoulOriginsPowers
 import net.fabricmc.api.ModInitializer
+import net.minecraft.util.Identifier
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-object Soulorigins : ModInitializer {
+object SoulOrigins : ModInitializer {
 	const val MOD_ID = "soul-origins"
+
+	fun id(path: String) = Identifier(MOD_ID, path)
 
 	@JvmField
 	@Suppress("unused")
@@ -26,7 +29,7 @@ object Soulorigins : ModInitializer {
 
 	override fun onInitialize() {
 		SoulOriginsBlocks.register()
-		SouloriginsItems.register()
+		SoulOriginsItems.register()
 		SoulOriginsBlockEntities.register()
 		SoulOriginsEntities.register()
 		registerSoulOriginsBiEntityActions()

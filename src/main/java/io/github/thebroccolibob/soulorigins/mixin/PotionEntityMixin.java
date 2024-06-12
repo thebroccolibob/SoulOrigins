@@ -2,7 +2,7 @@ package io.github.thebroccolibob.soulorigins.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import io.github.thebroccolibob.soulorigins.item.SouloriginsItems;
+import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems;
 import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,6 +16,6 @@ public class PotionEntityMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z")
     )
     boolean checkSuspiciousBrew(ItemStack instance, Item item, Operation<Boolean> original) {
-        return original.call(instance, item) || instance.isOf(SouloriginsItems.LINGERING_SUSPICIOUS_BREW);
+        return original.call(instance, item) || instance.isOf(SoulOriginsItems.LINGERING_SUSPICIOUS_BREW);
     }
 }

@@ -1,6 +1,6 @@
 package io.github.thebroccolibob.soulorigins.potion
 
-import io.github.thebroccolibob.soulorigins.Soulorigins
+import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.effect.SoulOriginsEffects
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectInstance
@@ -11,11 +11,10 @@ import net.minecraft.potion.Potions
 import net.minecraft.recipe.BrewingRecipeRegistry
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
 
 object SoulOriginsPotions {
     private fun register(path: String, potion: Potion): Potion {
-        return Registry.register(Registries.POTION, Identifier(Soulorigins.MOD_ID, path), potion)
+        return Registry.register(Registries.POTION, SoulOrigins.id(path), potion)
     }
 
     private fun register(path: String, vararg effects: StatusEffectInstance): Potion {

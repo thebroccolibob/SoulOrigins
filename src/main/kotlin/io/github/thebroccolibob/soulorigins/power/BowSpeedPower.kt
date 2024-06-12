@@ -5,18 +5,17 @@ import io.github.apace100.apoli.power.PowerType
 import io.github.apace100.apoli.power.factory.PowerFactory
 import io.github.apace100.calio.data.SerializableDataTypes
 import io.github.thebroccolibob.soulorigins.SerializableData
-import io.github.thebroccolibob.soulorigins.Soulorigins
+import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.getPowers
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.util.Identifier
 import java.util.function.BiFunction
 import kotlin.math.roundToInt
 
 class BowSpeedPower(type: PowerType<BowSpeedPower>, entity: LivingEntity?, val multiplier: Double) : Power(type, entity) {
     companion object {
         val factory: PowerFactory<BowSpeedPower> = PowerFactory(
-            Identifier(Soulorigins.MOD_ID, "bow_speed"),
+            SoulOrigins.id("bow_speed"),
             SerializableData {
                 add("multiplier", SerializableDataTypes.DOUBLE, 1.0)
             }

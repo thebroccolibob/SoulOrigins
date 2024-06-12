@@ -2,7 +2,7 @@ package io.github.thebroccolibob.soulorigins.datagen
 
 import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
 import io.github.thebroccolibob.soulorigins.datagen.lib.*
-import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
+import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.minecraft.item.Items
@@ -69,9 +69,9 @@ class BlockLootTableGenerator(dataOutput: FabricDataOutput) : FabricBlockLootTab
             }
         }
 
-        addDrop(SoulOriginsBlocks.ARTIFICER_PLATFORM_BUILDER, SouloriginsItems.ARTIFICER_PLATFORM_BUILDER)
-        addDrop(SoulOriginsBlocks.ARTIFICER_EW_WALL_BUILDER, SouloriginsItems.ARTIFICER_WALL_BUILDER)
-        addDrop(SoulOriginsBlocks.ARTIFICER_NS_WALL_BUILDER, SouloriginsItems.ARTIFICER_WALL_BUILDER)
-        addDrop(SoulOriginsBlocks.ARTIFICER_COLUMN_BUILDER, SouloriginsItems.ARTIFICER_COLUMN_BUILDER)
+        addDrop(SoulOriginsBlocks.ARTIFICER_PLATFORM_BUILDER, SoulOriginsItems.ARTIFICER_PLATFORM_BUILDER)
+        addDrop(SoulOriginsBlocks.ARTIFICER_EW_WALL_BUILDER, SoulOriginsItems.ARTIFICER_WALL_BUILDER)
+        addDrop(SoulOriginsBlocks.ARTIFICER_NS_WALL_BUILDER, SoulOriginsItems.ARTIFICER_WALL_BUILDER)
+        addDrop(SoulOriginsBlocks.ARTIFICER_COLUMN_BUILDER, SoulOriginsItems.ARTIFICER_COLUMN_BUILDER)
     }
 }

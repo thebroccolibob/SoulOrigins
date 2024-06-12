@@ -2,27 +2,26 @@ package io.github.thebroccolibob.soulorigins.item
 
 import io.github.thebroccolibob.soulorigins.FabricItemSettings
 import io.github.thebroccolibob.soulorigins.ItemGroup
-import io.github.thebroccolibob.soulorigins.Soulorigins
-import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistry
+import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
+import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistry
 import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.NbtList
 import net.minecraft.recipe.BrewingRecipeRegistry
 import net.minecraft.recipe.Ingredient
-import net.minecraft.nbt.NbtList
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
-import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
 
-object SouloriginsItems {
-    private fun <T: Item> register(id: String, item: T): T = Registry.register(Registries.ITEM, Identifier(Soulorigins.MOD_ID, id), item)
+object SoulOriginsItems {
+    private fun <T: Item> register(id: String, item: T): T = Registry.register(Registries.ITEM, SoulOrigins.id(id), item)
 
     private fun registerShard(type: String, color: Formatting) = register("${type}_shard", WindShardItem(color, FabricItemSettings {
         maxCount(1)
@@ -68,7 +67,7 @@ object SouloriginsItems {
 
     val ITEM_GROUP: ItemGroup = Registry.register(
         Registries.ITEM_GROUP,
-        Identifier(Soulorigins.MOD_ID, "item_group"),
+        SoulOrigins.id("item_group"),
         ItemGroup {
             displayName(Text.translatable("itemGroup.soul-origins.item_group"))
             icon { MOB_ORB.defaultStack }

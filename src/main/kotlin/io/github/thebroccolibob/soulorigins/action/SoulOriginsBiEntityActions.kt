@@ -13,13 +13,12 @@ import io.github.thebroccolibob.soulorigins.*
 import io.github.thebroccolibob.soulorigins.entity.OwnableMonster
 import io.github.thebroccolibob.soulorigins.entity.isTamed
 import io.github.thebroccolibob.soulorigins.item.MobOrbItem
-import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
+import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
 import java.util.function.BiConsumer
 import net.minecraft.util.Pair as McPair
 
@@ -28,13 +27,13 @@ private fun register(actionFactory: ActionFactory<McPair<Entity, Entity>>) {
 }
 
 private fun register(id: String, data: SerializableData, effect: BiConsumer<SerializableData.Instance, McPair<Entity, Entity>>) {
-    register(ActionFactory(Identifier(Soulorigins.MOD_ID, id), data, effect))
+    register(ActionFactory(SoulOrigins.id(id), data, effect))
 }
 
 fun registerSoulOriginsBiEntityActions() {
     register("absorb_mob_orb", SerializableData()) { _, (actor, target) ->
         // Generate orb and inject mob nbt data
-        val stack = ItemStack(SouloriginsItems.MOB_ORB)
+        val stack = ItemStack(SoulOriginsItems.MOB_ORB)
 
         MobOrbItem.setEntity(stack, target)
 

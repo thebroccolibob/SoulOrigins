@@ -13,7 +13,7 @@ import net.minecraft.registry.tag.BlockTags
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
-object SouloriginsDataGenerator : DataGeneratorEntrypoint {
+object SoulOriginsDataGenerator : DataGeneratorEntrypoint {
 	override fun onInitializeDataGenerator(fabricDataGenerator: FabricDataGenerator) {
 		with (fabricDataGenerator.createPack()) {
 			addProvider(::ModelGenerator)

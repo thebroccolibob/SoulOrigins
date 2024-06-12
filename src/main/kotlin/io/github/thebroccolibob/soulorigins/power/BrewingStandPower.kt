@@ -26,7 +26,6 @@ import net.minecraft.screen.BrewingStandScreenHandler
 import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.text.Text
-import net.minecraft.util.Identifier
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.world.WorldEvents
 import java.util.function.BiFunction
@@ -214,7 +213,7 @@ open class BrewingStandPower(
     companion object {
         fun createFactory(): PowerFactory<BrewingStandPower> {
             return PowerFactory<BrewingStandPower>(
-                Identifier(Soulorigins.MOD_ID, "brewing_stand"),
+                SoulOrigins.id("brewing_stand"),
                 SerializableData {
                     add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, Key())
                     add("fuel_resource", ApoliDataTypes.POWER_TYPE, null)

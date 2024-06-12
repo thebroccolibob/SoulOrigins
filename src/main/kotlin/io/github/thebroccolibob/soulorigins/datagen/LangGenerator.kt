@@ -4,7 +4,7 @@ import io.github.thebroccolibob.soulorigins.datagen.power.LeveledCooldownEntry
 import io.github.thebroccolibob.soulorigins.datagen.power.wind.tailwindEntries
 import io.github.thebroccolibob.soulorigins.datagen.power.wind.updraftEntries
 import io.github.thebroccolibob.soulorigins.effect.SoulOriginsEffects
-import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
+import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
 import io.github.thebroccolibob.soulorigins.plus
 import io.github.thebroccolibob.soulorigins.potion.SoulOriginsPotions
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -62,9 +62,9 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
 
     override fun generateTranslations(translationBuilder: TranslationBuilder) {
         with(translationBuilder) {
-            add(SouloriginsItems.MARIGOLD_CARD, "Marigold Card")
-            add("${SouloriginsItems.MARIGOLD_CARD.translationKey}.empty", "Empty")
-            add("${SouloriginsItems.MARIGOLD_CARD.translationKey}.multiple_items", "%s x%s")
+            add(SoulOriginsItems.MARIGOLD_CARD, "Marigold Card")
+            add("${SoulOriginsItems.MARIGOLD_CARD.translationKey}.empty", "Empty")
+            add("${SoulOriginsItems.MARIGOLD_CARD.translationKey}.multiple_items", "%s x%s")
             add("container.$modId.inventory.deck", "Deck")
 
             add("advancements.$modId.wind.root", "Wind Spirit")
@@ -82,25 +82,25 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
 
             add("itemGroup.soul-origins.item_group", "Soul Origins")
 
-            add(SouloriginsItems.BURST_SHARD, "Burst Shard")
-            add(SouloriginsItems.BURST_SHARD + "flavor", "A shard resonating with an eruptive power")
-            add(SouloriginsItems.UPDRAFT_SHARD, "Updraft Shard")
-            add(SouloriginsItems.UPDRAFT_SHARD + "flavor", "A shard resonating with an uplifting power")
-            add(SouloriginsItems.TAILWIND_SHARD, "Tailwind Shard")
-            add(SouloriginsItems.TAILWIND_SHARD + "flavor", "A shard resonating with a turbulent power")
+            add(SoulOriginsItems.BURST_SHARD, "Burst Shard")
+            add(SoulOriginsItems.BURST_SHARD + "flavor", "A shard resonating with an eruptive power")
+            add(SoulOriginsItems.UPDRAFT_SHARD, "Updraft Shard")
+            add(SoulOriginsItems.UPDRAFT_SHARD + "flavor", "A shard resonating with an uplifting power")
+            add(SoulOriginsItems.TAILWIND_SHARD, "Tailwind Shard")
+            add(SoulOriginsItems.TAILWIND_SHARD + "flavor", "A shard resonating with a turbulent power")
             add("item.soul-origins.wind_shard.origin_exclusive", "Only usable by wind spirits")
 
-            add(SouloriginsItems.ARTIFICER_PLATFORM_BUILDER, "Brass Platform Builder")
-            add(SouloriginsItems.ARTIFICER_WALL_BUILDER, "Brass Wall Builder")
-            add(SouloriginsItems.ARTIFICER_COLUMN_BUILDER, "Brass Column Builder")
+            add(SoulOriginsItems.ARTIFICER_PLATFORM_BUILDER, "Brass Platform Builder")
+            add(SoulOriginsItems.ARTIFICER_WALL_BUILDER, "Brass Wall Builder")
+            add(SoulOriginsItems.ARTIFICER_COLUMN_BUILDER, "Brass Column Builder")
 
-            add(SouloriginsItems.MOB_ORB, "Mob Orb")
+            add(SoulOriginsItems.MOB_ORB, "Mob Orb")
 
             add("container.soul-origins.suspicious_brewing", "Suspicious Brewing")
 
-            add(SouloriginsItems.SUSPICIOUS_BREW, "Suspicious Brew")
-            add(SouloriginsItems.SPLASH_SUSPICIOUS_BREW, "Splash Suspicious Brew")
-            add(SouloriginsItems.LINGERING_SUSPICIOUS_BREW, "Lingering Suspicious Brew")
+            add(SoulOriginsItems.SUSPICIOUS_BREW, "Suspicious Brew")
+            add(SoulOriginsItems.SPLASH_SUSPICIOUS_BREW, "Splash Suspicious Brew")
+            add(SoulOriginsItems.LINGERING_SUSPICIOUS_BREW, "Lingering Suspicious Brew")
             add("item.soul-origins.suspicious_brew.tooltip", "Effects Unknown")
 
             add(SoulOriginsEffects.PRECISION, "Precision")

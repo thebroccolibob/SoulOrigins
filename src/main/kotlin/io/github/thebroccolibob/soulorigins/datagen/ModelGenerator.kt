@@ -1,9 +1,9 @@
 package io.github.thebroccolibob.soulorigins.datagen
 
-import io.github.thebroccolibob.soulorigins.Soulorigins
+import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
 import io.github.thebroccolibob.soulorigins.datagen.lib.upload
-import io.github.thebroccolibob.soulorigins.item.SouloriginsItems
+import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.block.Block
@@ -26,7 +26,7 @@ class ModelGenerator(output: FabricDataOutput) : FabricModelProvider(output) {
             registerAxisRotated(SoulOriginsBlocks.ARTIFICER_SURFACE, TexturedModel.CUBE_COLUMN, TexturedModel.CUBE_COLUMN_HORIZONTAL)
             registerSingleton(SoulOriginsBlocks.ARTIFICER_COLUMN, TexturedModel.CUBE_COLUMN)
 
-            val artificerBuilder = upload(Models.CUBE_ALL, Identifier(Soulorigins.MOD_ID, "block/artificer_builder"), TextureMap.all(Identifier(Soulorigins.MOD_ID, "block/artificer_builder")))
+            val artificerBuilder = upload(Models.CUBE_ALL, SoulOrigins.id("block/artificer_builder"), TextureMap.all(SoulOrigins.id("block/artificer_builder")))
 
             blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(SoulOriginsBlocks.ARTIFICER_PLATFORM_BUILDER, artificerBuilder))
             blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(SoulOriginsBlocks.ARTIFICER_NS_WALL_BUILDER, artificerBuilder))
@@ -45,27 +45,27 @@ class ModelGenerator(output: FabricDataOutput) : FabricModelProvider(output) {
 
     override fun generateItemModels(itemModelGenerator: ItemModelGenerator) {
         with(itemModelGenerator) {
-            register(SouloriginsItems.UPDRAFT_SHARD)
-            register(SouloriginsItems.TAILWIND_SHARD)
-            register(SouloriginsItems.BURST_SHARD)
-            register(SouloriginsItems.ARTIFICER_PLATFORM_BUILDER)
-            register(SouloriginsItems.ARTIFICER_WALL_BUILDER)
-            register(SouloriginsItems.ARTIFICER_COLUMN_BUILDER)
-            register(SouloriginsItems.MOB_ORB, "_zombie")
-            register(SouloriginsItems.MOB_ORB, "_husk")
-            register(SouloriginsItems.MOB_ORB, "_drowned")
-            register(SouloriginsItems.MOB_ORB, "_skeleton")
-            register(SouloriginsItems.MOB_ORB, "_stray")
-            register(SouloriginsItems.MOB_ORB, "_witherskeleton")
-            register(SouloriginsItems.MOB_ORB, "_spider")
-            register(SouloriginsItems.MOB_ORB, "_cavespider")
-            register(SouloriginsItems.MOB_ORB, "_creeper")
-            register(SouloriginsItems.MOB_ORB, "_enderman")
-            register(SouloriginsItems.MOB_ORB, "_slime")
-            register(SouloriginsItems.MOB_ORB, "_warden")
-            register(SouloriginsItems.SUSPICIOUS_BREW)
-            register(SouloriginsItems.SPLASH_SUSPICIOUS_BREW)
-            register(SouloriginsItems.LINGERING_SUSPICIOUS_BREW)
+            register(SoulOriginsItems.UPDRAFT_SHARD)
+            register(SoulOriginsItems.TAILWIND_SHARD)
+            register(SoulOriginsItems.BURST_SHARD)
+            register(SoulOriginsItems.ARTIFICER_PLATFORM_BUILDER)
+            register(SoulOriginsItems.ARTIFICER_WALL_BUILDER)
+            register(SoulOriginsItems.ARTIFICER_COLUMN_BUILDER)
+            register(SoulOriginsItems.MOB_ORB, "_zombie")
+            register(SoulOriginsItems.MOB_ORB, "_husk")
+            register(SoulOriginsItems.MOB_ORB, "_drowned")
+            register(SoulOriginsItems.MOB_ORB, "_skeleton")
+            register(SoulOriginsItems.MOB_ORB, "_stray")
+            register(SoulOriginsItems.MOB_ORB, "_witherskeleton")
+            register(SoulOriginsItems.MOB_ORB, "_spider")
+            register(SoulOriginsItems.MOB_ORB, "_cavespider")
+            register(SoulOriginsItems.MOB_ORB, "_creeper")
+            register(SoulOriginsItems.MOB_ORB, "_enderman")
+            register(SoulOriginsItems.MOB_ORB, "_slime")
+            register(SoulOriginsItems.MOB_ORB, "_warden")
+            register(SoulOriginsItems.SUSPICIOUS_BREW)
+            register(SoulOriginsItems.SPLASH_SUSPICIOUS_BREW)
+            register(SoulOriginsItems.LINGERING_SUSPICIOUS_BREW)
         }
     }
 
