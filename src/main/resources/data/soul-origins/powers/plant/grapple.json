@@ -19,7 +19,7 @@
                         "type": "soul-origins:stored_entity_action",
                         "store": "soul-origins:plant/grapple_target",
                         "entity_action": {
-                            "type": "soul-origins:discard"
+                            "type": "soul-origins:despawn"
                         }
                     },
                     {
@@ -132,7 +132,7 @@
                                     "type": "soul-origins:stored_entity_action",
                                     "store": "soul-origins:plant/grapple_target",
                                     "entity_action": {
-                                        "type": "soul-origins:discard"
+                                        "type": "soul-origins:despawn"
                                     }
                                 },
                                 {
@@ -168,7 +168,7 @@
                     "type": "soul-origins:stored_entity_action",
                     "store": "soul-origins:plant/grapple_target",
                     "entity_action": {
-                        "type": "soul-origins:discard"
+                        "type": "soul-origins:despawn"
                     }
                 },
                 {

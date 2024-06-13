@@ -87,12 +87,6 @@ fun registerSoulOriginsEntityActions() {
 
     register("apugli_raycast", FixedRaycastAction.serializableData, FixedRaycastAction::execute)
 
-    register("discard", SerializableData()) { _, entity ->
-        if (!entity.isPlayer) {
-            entity.discard()
-        }
-    }
-
     register(EntityStorePower.storeAction)
     register(EntityStorePower.clearAction)
 }
