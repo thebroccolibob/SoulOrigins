@@ -29,6 +29,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.Vec3i
 import net.minecraft.world.World
+import org.apache.commons.lang3.tuple.Triple
 import java.util.*
 import kotlin.reflect.KMutableProperty0
 import kotlin.reflect.KProperty
@@ -80,6 +81,9 @@ fun <T, R> Iterable<T>.mapWithNext(transform: (current: T, next: T?) -> R): List
 
 operator fun <T> McPair<T, *>.component1(): T = left
 operator fun <T> McPair<*, T>.component2(): T = right
+operator fun <T> Triple<T, *, *>.component1(): T = left
+operator fun <T> Triple<*, T, *>.component2(): T = middle
+operator fun <T> Triple<*, *, T>.component3(): T = right
 
 fun <T> Iterable<T>.forEachWithNext(transform: (current: T, next: T?) -> Unit) {
     toList().let {
@@ -95,7 +99,7 @@ operator fun Item.plus(suffix: String) = "$translationKey.$suffix"
 
 inline fun <reified T : Power> Entity.hasPower() = PowerHolderComponent.hasPower(this, T::class.java)
 inline fun <reified T : Power> Entity.getPowers(): List<T> = PowerHolderComponent.getPowers(this, T::class.java)
-fun <T: Power> Entity.getPower(type: PowerType<T>): T = PowerHolderComponent.KEY[this].getPower(type)
+fun <T: Power> Entity.getPower(type: PowerType<T>): T? = PowerHolderComponent.KEY[this].getPower(type)
 fun Entity.syncPower(type: PowerType<*>) {
     PowerHolderComponent.syncPower(this, type)
 }

@@ -1,0 +1,83 @@
+{
+    "type": "origins:multiple",
+    "stored": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 3,
+        "hud_render": {
+            "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png",
+            "bar_index": 5,
+            "should_render": true,
+            "condition": {
+                "type": "origins:resource",
+                "resource": "soul-origins:plant/bonemeal_cooldown",
+                "comparison": "==",
+                "compare_to": 0
+            }
+        },
+        "max_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:change_resource",
+                    "resource": "soul-origins:plant/bonemeal_stored",
+                    "operation": "set",
+                    "change": 0
+                },
+                {
+                    "type": "origins:trigger_cooldown",
+                    "power": "soul-origins:plant/bonemeal_cooldown"
+                }
+            ]
+        }
+    },
+    "cooldown": {
+        "type": "origins:cooldown",
+        "cooldown": 600,
+        "hud_render": {
+            "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png",
+            "should_render": true,
+            "bar_index": 5,
+            "inverted": true
+        }
+    },
+    "eat": {
+        "type": "apugli:edible_item",
+        "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+                "item": "minecraft:bone_meal"
+            }
+        },
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "soul-origins:plant/bonemeal_stored",
+            "operation": "add",
+            "change": 1
+        },
+        "food_component": {
+            "always_edible": true,
+            "hunger": 2,
+            "saturation": 3
+        }
+    },
+    "grow": {
+        "type": "origins:action_over_time",
+        "interval": 20,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:plant/bonemeal_cooldown",
+            "comparison": ">",
+            "compare_to": 0
+        },
+        "entity_action": {
+            "type": "origins:block_action_at",
+            "block_action": {
+                "type": "soul-origins:bonemeal_around",
+                "rangeX": 2,
+                "rangeY": 1,
+                "rangeZ": 2
+            }
+        }
+    }
+}
