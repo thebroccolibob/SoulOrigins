@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier
 val soulMeterType
     get() = PowerTypeRegistry.get(Identifier("soul-origins", "soul_meter")) as PowerType<VariableIntPower>
 
-val PlayerEntity.soulMeter: VariableIntPower
+val PlayerEntity.soulMeter: VariableIntPower?
     get() {
         return getPower(soulMeterType)
     }

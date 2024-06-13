@@ -10,6 +10,8 @@ import io.github.apace100.calio.data.SerializableData
 import io.github.thebroccolibob.soulorigins.*
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.NbtElement
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Pair
 import java.util.*
@@ -38,9 +40,23 @@ class EntityStorePower(type: PowerType<EntityStorePower>, entity: LivingEntity?)
             entityUUID = value?.uuid
         }
 
-    val isEmpty get() = entityUUID != null
+    val isEmpty get() = entityUUID == null
 
     val isNotEmpty get() = !isEmpty
+
+    override fun toTag(): NbtElement {
+        return NbtCompound().apply {
+            if (entityUUID != null) {
+                putUuid("Stored", entityUUID)
+            }
+        }
+    }
+
+    override fun fromTag(tag: NbtElement) {
+        (tag as? NbtCompound)?.let {
+            entityUUID = if (it.containsUuid("Stored")) it.getUuid("Stored") else null
+        }
+    }
 
     companion object {
         val factory: PowerFactory<EntityStorePower> = PowerFactory(SoulOrigins.id("entity_store"), SerializableData()) {
@@ -59,7 +75,7 @@ class EntityStorePower(type: PowerType<EntityStorePower>, entity: LivingEntity?)
             (entity.getPower(data.get<PowerType<*>>("store")) as? EntityStorePower)?.storedEntity = null
         }
 
-        val storeAction: ActionFactory<Entity> = ActionFactory(SoulOrigins.id("stored_entity"), SerializableData {
+        val storeAction: ActionFactory<Entity> = ActionFactory(SoulOrigins.id("stored_entity_action"), SerializableData {
             add("store", ApoliDataTypes.POWER_TYPE)
             add("entity_action", ApoliDataTypes.ENTITY_ACTION, null)
             add("bientity_action", ApoliDataTypes.BIENTITY_ACTION, null)
@@ -70,11 +86,27 @@ class EntityStorePower(type: PowerType<EntityStorePower>, entity: LivingEntity?)
             }
         }
 
-        val condition: ConditionFactory<Entity> = ConditionFactory(SoulOrigins.id("entity_store"), SerializableData {
+        /**
+         * Works on client
+         */
+        val notEmptyCondition: ConditionFactory<Entity> = ConditionFactory(SoulOrigins.id("entity_stored"), SerializableData {
+            add("store", ApoliDataTypes.POWER_TYPE)
+        }) { data, entity ->
+            val power = entity.getPower(data.get<PowerType<*>>("store"))
+            if (power !is EntityStorePower) return@ConditionFactory false
+
+            power.isNotEmpty
+        }
+
+        /**
+         * Does not work on client
+         */
+        val entityCondition: ConditionFactory<Entity> = ConditionFactory(SoulOrigins.id("stored_entity"), SerializableData {
             add("store", ApoliDataTypes.POWER_TYPE)
             add("entity_condition", ApoliDataTypes.ENTITY_CONDITION, null)
             add("bientity_condition", ApoliDataTypes.BIENTITY_CONDITION, null)
         }) { data, entity ->
+            if (entity.world.isClient) return@ConditionFactory false
             val power = entity.getPower(data.get<PowerType<*>>("store"))
             if (power !is EntityStorePower) return@ConditionFactory false
 
@@ -83,10 +115,14 @@ class EntityStorePower(type: PowerType<EntityStorePower>, entity: LivingEntity?)
                     && (data.get<ConditionFactory<Pair<Entity, Entity>>.Instance?>("bientity_condition")?.test(Pair(entity, power.storedEntity)) ?: true)
         }
 
-        val isStoredCondition: ConditionFactory<Pair<Entity, Entity>> = ConditionFactory(SoulOrigins.id("stored_entity"), SerializableData {
+        /**
+         * Works on client
+         */
+        val isStoredCondition: ConditionFactory<Pair<Entity, Entity>> = ConditionFactory(SoulOrigins.id("is_stored_entity"), SerializableData {
             add("store", ApoliDataTypes.POWER_TYPE)
         }) { data, (actor, target) ->
-            (actor.getPower(data.get<PowerType<*>>("store")) as? EntityStorePower)?.entityUUID == target.uuid
+            val power = (actor.getPower(data.get<PowerType<*>>("store")) as? EntityStorePower)
+            power?.entity == target || power?.entityUUID == target.uuid
         }
     }
 }

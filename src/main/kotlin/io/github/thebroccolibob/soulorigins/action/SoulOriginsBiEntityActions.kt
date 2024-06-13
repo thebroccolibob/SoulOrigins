@@ -19,6 +19,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registry
+import net.minecraft.util.math.Vec3d
 import java.util.function.BiConsumer
 import net.minecraft.util.Pair as McPair
 
@@ -84,7 +85,7 @@ fun registerSoulOriginsBiEntityActions() {
     register(EntityStorePower.setAction)
 
     register("proportional_velocity", SerializableData {
-        add("multiplier", SerializableDataTypes.FLOAT, 1.0f)
+        add("multiplier", SerializableDataTypes.VECTOR, Vec3d(1.0, 1.0, 1.0))
         add("client", SerializableDataTypes.BOOLEAN, true)
         add("server", SerializableDataTypes.BOOLEAN, true)
         add("set", SerializableDataTypes.BOOLEAN, false)
@@ -94,7 +95,7 @@ fun registerSoulOriginsBiEntityActions() {
 
         val diff = actor.pos - target.pos
 
-        val change = diff / diff.length() * data.getFloat("multiplier").toDouble()
+        val change = diff / diff.length() * data.get<Vec3d>("multiplier")
 
         if (data.getBoolean("set")) {
             target.velocity = change

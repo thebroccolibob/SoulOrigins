@@ -30,6 +30,7 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.Vec3i
 import net.minecraft.world.World
 import org.apache.commons.lang3.tuple.Triple
+import org.joml.Vector3f
 import java.util.*
 import kotlin.reflect.KMutableProperty0
 import kotlin.reflect.KProperty
@@ -129,9 +130,11 @@ operator fun Vec3i.minus(other: Vec3i): Vec3i = this.subtract(other)
 operator fun BlockPos.minus(other: Vec3i): BlockPos = this.subtract(other)
 
 operator fun Vec3d.plus(other: Vec3d): Vec3d = this.add(other)
+operator fun Vec3d.plus(other: Vector3f): Vec3d = this.add(other.x.toDouble(), other.y.toDouble(), other.z.toDouble())
 operator fun Vec3d.minus(other: Vec3d): Vec3d = this.subtract(other)
 operator fun Vec3d.times(scalar: Double): Vec3d = this.multiply(scalar)
 operator fun Vec3d.div(scalar: Double): Vec3d = this * (1.0 / scalar)
+operator fun Vec3d.times(other: Vec3d): Vec3d = this.multiply(other)
 
 val Block.id
     get() = Registries.BLOCK.getId(this)

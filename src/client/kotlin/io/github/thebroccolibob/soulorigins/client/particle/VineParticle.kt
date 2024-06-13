@@ -12,11 +12,10 @@ class VineParticle(clientWorld: ClientWorld?, d: Double, e: Double, f: Double) :
 
         init {
             gravityStrength = 0f
-            maxAge = 1
+            maxAge = 0
             collidesWithWorld = false
+            scale = 0.125f
         }
-
-    override fun getSize(tickDelta: Float) = 0.25f
 
     override fun getType(): ParticleTextureSheet = ParticleTextureSheet.PARTICLE_SHEET_OPAQUE
 

@@ -50,5 +50,6 @@ fun registerSoulOriginsEntityConditions() {
         entity.headYaw in -135f..-45f || entity.headYaw in 45f..135f
     }
 
-    register(EntityStorePower.condition)
+    register(EntityStorePower.notEmptyCondition)
+    register(EntityStorePower.entityCondition)
 }

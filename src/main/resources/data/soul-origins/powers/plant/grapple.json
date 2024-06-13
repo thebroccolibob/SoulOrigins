@@ -9,14 +9,14 @@
         "entity_action": {
             "type": "origins:if_else",
             "condition": {
-                "type": "soul-origins:entity_store",
+                "type": "soul-origins:entity_stored",
                 "store": "soul-origins:plant/grapple_target"
             },
             "if_action": {
                 "type": "origins:and",
                 "actions": [
                     {
-                        "type": "soul-origins:stored_entity",
+                        "type": "soul-origins:stored_entity_action",
                         "store": "soul-origins:plant/grapple_target",
                         "entity_action": {
                             "type": "soul-origins:discard"
@@ -76,7 +76,7 @@
         "type": "origins:action_over_time",
         "interval": 1,
         "condition": {
-            "type": "soul-origins:entity_store",
+            "type": "soul-origins:entity_stored",
             "store": "soul-origins:plant/grapple_target"
         },
         "entity_action": {
@@ -88,7 +88,7 @@
                     {
                         "type": "origins:if_else",
                         "condition": {
-                            "type": "soul-origins:entity_store",
+                            "type": "soul-origins:stored_entity",
                             "store": "soul-origins:plant/grapple_target",
                             "bientity_condition": {
                                 "type": "origins:distance",
@@ -97,7 +97,7 @@
                             }
                         },
                         "if_action": {
-                            "type": "soul-origins:stored_entity",
+                            "type": "soul-origins:stored_entity_action",
                             "store": "soul-origins:plant/grapple_target",
                             "bientity_action": {
                                 "type": "origins:invert",
@@ -105,7 +105,11 @@
                                     "type": "soul-origins:proportional_velocity",
                                     "server": true,
                                     "client": false,
-                                    "multiplier": 0.1
+                                    "multiplier": {
+                                        "x": 0.06,
+                                        "y": 0.1,
+                                        "z": 0.06
+                                    }
                                 }
                             }
                         }
@@ -113,7 +117,7 @@
                     {
                         "type": "origins:if_else",
                         "condition": {
-                            "type": "soul-origins:entity_store",
+                            "type": "soul-origins:stored_entity",
                             "store": "soul-origins:plant/grapple_target",
                             "bientity_condition": {
                                 "type": "origins:distance",
@@ -125,7 +129,7 @@
                             "type": "origins:and",
                             "actions": [
                                 {
-                                    "type": "soul-origins:stored_entity",
+                                    "type": "soul-origins:stored_entity_action",
                                     "store": "soul-origins:plant/grapple_target",
                                     "entity_action": {
                                         "type": "soul-origins:discard"
@@ -139,11 +143,16 @@
                         }
                     },
                     {
-                        "type": "soul-origins:stored_entity",
+                        "type": "soul-origins:stored_entity_action",
                         "store": "soul-origins:plant/grapple_target",
                         "bientity_action": {
                             "type": "soul-origins:raycast_between",
-                            "particle": "soul-origins:vine"
+                            "particle": "soul-origins:vine",
+                            "offset": {
+                                "x": -0.3,
+                                "y": -0.2,
+                                "z": 0
+                            }
                         }
                     }
                 ]
@@ -152,11 +161,11 @@
     },
     "death": {
         "type": "origins:action_on_callback",
-        "entity_action_respawned": {
+        "entity_action_removed": {
             "type": "origins:and",
             "actions": [
                 {
-                    "type": "soul-origins:stored_entity",
+                    "type": "soul-origins:stored_entity_action",
                     "store": "soul-origins:plant/grapple_target",
                     "entity_action": {
                         "type": "soul-origins:discard"

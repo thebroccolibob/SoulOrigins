@@ -3,7 +3,7 @@
     "stored": {
         "type": "origins:resource",
         "min": 0,
-        "max": 3,
+        "max": 8,
         "hud_render": {
             "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png",
             "bar_index": 5,
@@ -58,7 +58,7 @@
         "food_component": {
             "always_edible": true,
             "hunger": 2,
-            "saturation": 3
+            "saturation": 0.5
         }
     },
     "grow": {
