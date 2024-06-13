@@ -106,9 +106,9 @@
                                     "server": true,
                                     "client": false,
                                     "multiplier": {
-                                        "x": 0.06,
+                                        "x": 0.07,
                                         "y": 0.1,
-                                        "z": 0.06
+                                        "z": 0.07
                                     }
                                 }
                             }
