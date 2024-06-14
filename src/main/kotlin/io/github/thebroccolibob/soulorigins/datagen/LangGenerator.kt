@@ -62,8 +62,6 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
 
     override fun generateTranslations(translationBuilder: TranslationBuilder) {
         with(translationBuilder) {
-            add("container.$modId.inventory.deck", "Deck")
-
             add("advancements.$modId.wind.root", "Wind Spirit")
             add("advancements.$modId.wind.root.description", "Level up your skills by finding wind crystals!")
             cooldownDescriptions("updraft", "Updraft", updraftEntries, updraftDescription)
@@ -90,6 +88,8 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
             add(SoulOriginsItems.ARTIFICER_PLATFORM_BUILDER, "Brass Platform Builder")
             add(SoulOriginsItems.ARTIFICER_WALL_BUILDER, "Brass Wall Builder")
             add(SoulOriginsItems.ARTIFICER_COLUMN_BUILDER, "Brass Column Builder")
+            add("item.soul-origins.artificer_builder.place_distance", "Place Distance: %s")
+            add("item.soul-origins.artificer_builder.place_distance.none", "Unset")
 
             add(SoulOriginsItems.MOB_ORB, "Mob Orb")
             add(SoulOriginsItems.MOB_ORB + "empty", "Empty")

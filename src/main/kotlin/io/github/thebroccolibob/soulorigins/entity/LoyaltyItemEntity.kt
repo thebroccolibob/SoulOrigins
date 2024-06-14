@@ -5,8 +5,6 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.FlyingItemEntity
 import net.minecraft.entity.Ownable
-import net.minecraft.entity.data.DataTracker
-import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
@@ -16,7 +14,6 @@ import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
-import java.util.*
 
 class LoyaltyItemEntity(type: EntityType<LoyaltyItemEntity>, world: World) : Entity(type, world), FlyingItemEntity, Ownable {
     private var item by ITEM
@@ -39,7 +36,6 @@ class LoyaltyItemEntity(type: EntityType<LoyaltyItemEntity>, world: World) : Ent
 
     override fun initDataTracker() {
         dataTracker.startTracking(ITEM, ItemStack.EMPTY)
-        dataTracker.startTracking(OWNER, Optional.empty())
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
@@ -101,8 +97,7 @@ class LoyaltyItemEntity(type: EntityType<LoyaltyItemEntity>, world: World) : Ent
         }
     }
 
-    companion object {
-        val ITEM: TrackedData<ItemStack> = DataTracker.registerData(LoyaltyItemEntity::class.java, TrackedDataHandlerRegistry.ITEM_STACK)
-        val OWNER: TrackedData<Optional<UUID>> = DataTracker.registerData(LoyaltyItemEntity::class.java, TrackedDataHandlerRegistry.OPTIONAL_UUID)
+    companion object : TrackedDataRegister<LoyaltyItemEntity> {
+        val ITEM = registerData(TrackedDataHandlerRegistry.ITEM_STACK)
     }
 }

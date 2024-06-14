@@ -47,7 +47,7 @@ open class SurfaceBlock(settings: Settings) : Block(settings) {
         pos: BlockPos,
         neighborPos: BlockPos
     ): BlockState {
-        if (neighborState.contains(COMPLETE) && neighborState[COMPLETE])
+        if (!state[COMPLETE] && neighborState.contains(COMPLETE) && neighborState[COMPLETE])
             world.setBlockState(pos, state.with(COMPLETE, true), NOTIFY_ALL)
 
         val distance = state[DISTANCE]
