@@ -1,8 +1,7 @@
 package io.github.thebroccolibob.soulorigins.item
 
 import io.github.thebroccolibob.soulorigins.*
-import io.github.thebroccolibob.soulorigins.entity.OwnableMonster
-import io.github.thebroccolibob.soulorigins.entity.owner
+import io.github.thebroccolibob.soulorigins.cca.OwnerComponent.Companion.owner
 import io.github.thebroccolibob.soulorigins.power.UseMobOrbPower
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.Entity
@@ -47,8 +46,13 @@ class MobOrbItem(settings: Settings) : Item(settings) {
 
         monster.setPosition(spawnPosition.x + 0.5, spawnPosition.y.toDouble(), spawnPosition.z + 0.5)
 
-        (monster as? OwnableMonster)?.owner = player
-        (monster as? MobEntity)?.setPersistent()
+        if (monster.type.isIn(SoulOriginsTags.SOUL_SORCERER_FRIENDS)) {
+            (monster as? MobEntity)?.apply {
+                owner = player
+                setPersistent()
+                (this as OwnedGoalAdder).`soulOrigins$addOwnedGoals`()
+            }
+        }
 
         world.spawnEntity(monster)
         world.playSound(null, blockPos, SoundEvents.ENTITY_ENDER_EYE_DEATH, SoundCategory.PLAYERS, 2.0f, 1.0f)
@@ -101,13 +105,12 @@ class MobOrbItem(settings: Settings) : Item(settings) {
 
         if (entity !is MobEntity) return false
 
-        val targetSlot = if (otherStack.isEmpty) getNextRemovalSlot(entity) else getPreferredSlot(otherStack)
-
-        if (targetSlot === null) return false
+        val targetSlot = if (otherStack.isEmpty) getNextRemovalSlot(entity) ?: return false else getPreferredSlot(otherStack)
 
         val prevItem = entity[targetSlot]
 
         entity[targetSlot] = otherStack
+        entity.setEquipmentDropChance(targetSlot, 2f)
 
         cursorStackReference.set(prevItem)
 

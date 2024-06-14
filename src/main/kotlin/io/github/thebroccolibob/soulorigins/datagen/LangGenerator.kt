@@ -62,9 +62,6 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
 
     override fun generateTranslations(translationBuilder: TranslationBuilder) {
         with(translationBuilder) {
-            add(SoulOriginsItems.MARIGOLD_CARD, "Marigold Card")
-            add("${SoulOriginsItems.MARIGOLD_CARD.translationKey}.empty", "Empty")
-            add("${SoulOriginsItems.MARIGOLD_CARD.translationKey}.multiple_items", "%s x%s")
             add("container.$modId.inventory.deck", "Deck")
 
             add("advancements.$modId.wind.root", "Wind Spirit")

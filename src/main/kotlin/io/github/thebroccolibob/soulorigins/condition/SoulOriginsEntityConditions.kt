@@ -19,10 +19,13 @@ private fun register(conditionFactory: ConditionFactory<Entity>) {
     Registry.register(ApoliRegistries.ENTITY_CONDITION, conditionFactory.serializerId, conditionFactory)
 }
 
-private fun register(id: String, data: SerializableData, condition: BiFunction<SerializableData.Instance, Entity, Boolean>) {
+private fun register(id: String, data: SerializableData = SerializableData(), condition: BiFunction<SerializableData.Instance, Entity, Boolean>) {
     register(ConditionFactory(SoulOrigins.id(id), data, condition))
 }
 
+private inline fun register(id: String, crossinline condition: (Entity) -> Boolean) {
+    register(id) { _, entity -> condition(entity) }
+}
 
 fun registerSoulOriginsEntityConditions() {
     register("held_mob_orb", SerializableData {
@@ -45,8 +48,11 @@ fun registerSoulOriginsEntityConditions() {
         } ?: false
     }
 
-    register("facing_east_west", SerializableData {})
-    { _, entity ->
-        entity.headYaw in -135f..-45f || entity.headYaw in 45f..135f
+    register("facing_east_west") {
+        it.headYaw in -135f..-45f || it.headYaw in 45f..135f
+    }
+
+    register("exists") {
+        it.isAlive && !it.isRemoved
     }
 }

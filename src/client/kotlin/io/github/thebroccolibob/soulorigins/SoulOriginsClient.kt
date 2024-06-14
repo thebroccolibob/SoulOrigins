@@ -4,7 +4,6 @@ import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
 import io.github.thebroccolibob.soulorigins.client.particle.GustEmitterParticle
 import io.github.thebroccolibob.soulorigins.client.particle.GustParticle
 import io.github.thebroccolibob.soulorigins.entity.SoulOriginsEntities
-import io.github.thebroccolibob.soulorigins.item.MarigoldCardItem.Companion.hasEntity
 import io.github.thebroccolibob.soulorigins.item.MobOrbItem
 import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
 import net.fabricmc.api.ClientModInitializer
@@ -18,10 +17,6 @@ import net.minecraft.client.render.entity.FlyingItemEntityRenderer
 object SoulOriginsClient : ClientModInitializer {
 	override fun onInitializeClient() {
 		// This entrypoint is suitable for setting up client-specific logic, such as rendering.
-		ModelPredicateProviderRegistry.register(SoulOriginsItems.MARIGOLD_CARD, SoulOrigins.id("has_entity")) {
-			itemStack, _, _, _ ->
-			if (itemStack.hasEntity) 1f else 0f
-		}
 		ModelPredicateProviderRegistry.register(SoulOriginsItems.MOB_ORB, SoulOrigins.id("mob_type")) {
 				itemStack, _, _, _ ->
 			MobOrbItem.getMobType(itemStack)
