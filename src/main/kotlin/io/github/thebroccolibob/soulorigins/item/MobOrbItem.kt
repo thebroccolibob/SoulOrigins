@@ -76,7 +76,7 @@ class MobOrbItem(settings: Settings) : Item(settings) {
         val entityNbt = stack.nbt?.getCompound(ENTITY_NBT)
 
         if (entityNbt == null || entityNbt.isEmpty) {
-            tooltip.add(Text.translatable("item.soul-origins.marigold_card.empty").apply {
+            tooltip.add(Text.translatable("item.soul-origins.mob_orb.empty").apply {
                 formatted(Formatting.GRAY)
             })
             return
@@ -90,7 +90,7 @@ class MobOrbItem(settings: Settings) : Item(settings) {
             if (!(it as NbtCompound).isEmpty) {
                 val gearStack = ItemStack.fromNbt(it)
                 if (gearStack.count > 1)
-                    tooltip.add(Text.translatable("item.soul-origins.marigold_card.multiple_items", gearStack.name, gearStack.count))
+                    tooltip.add(Text.translatable("item.soul-origins.mob_orb.multiple_items", gearStack.name, gearStack.count))
                 else
                     tooltip.add(gearStack.name)
             }
@@ -113,6 +113,8 @@ class MobOrbItem(settings: Settings) : Item(settings) {
         entity.setEquipmentDropChance(targetSlot, 2f)
 
         cursorStackReference.set(prevItem)
+        if (player.world.isClient && !otherStack.isEmpty)
+            player.playSound(Equipment.fromStack(otherStack)?.equipSound ?: SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.NEUTRAL, 1.0f, 1.0f)
 
         stack.setEntity(entity)
 
@@ -139,6 +141,15 @@ class MobOrbItem(settings: Settings) : Item(settings) {
                 entity.saveSelfNbt(this)
                 remove("Pos")
                 remove("UUID")
+                remove("HurtTime")
+                remove("Air")
+                remove("FallDistance")
+                remove("Fire")
+                remove("Motion")
+                remove("OnGround")
+                remove("PortalCooldown")
+                remove("Rotation")
+                remove("TicksFrozen")
             })
         }
 

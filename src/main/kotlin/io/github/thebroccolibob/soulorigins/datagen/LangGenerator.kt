@@ -92,6 +92,8 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
             add(SoulOriginsItems.ARTIFICER_COLUMN_BUILDER, "Brass Column Builder")
 
             add(SoulOriginsItems.MOB_ORB, "Mob Orb")
+            add(SoulOriginsItems.MOB_ORB + "empty", "Empty")
+            add(SoulOriginsItems.MOB_ORB + "multiple_items", "%s x%s")
 
             add("container.soul-origins.suspicious_brewing", "Suspicious Brewing")
 
