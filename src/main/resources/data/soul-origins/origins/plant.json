@@ -1,0 +1,11 @@
+{
+    "name": "Plant",
+    "description": "",
+    "icon": "minecraft:small_dripleaf",
+    "impact": 1,
+    "powers": [
+        "soul-origins:plant/bonemeal",
+        "soul-origins:plant/grapple",
+        "soul-origins:plant/tunnel"
+    ]
+}
