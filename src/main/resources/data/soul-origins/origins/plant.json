@@ -6,6 +6,7 @@
     "powers": [
         "soul-origins:plant/bonemeal",
         "soul-origins:plant/grapple",
-        "soul-origins:plant/phase_dirt"
+        "soul-origins:plant/phase_dirt",
+        "soul-origins:plant/potion_spore"
     ]
 }

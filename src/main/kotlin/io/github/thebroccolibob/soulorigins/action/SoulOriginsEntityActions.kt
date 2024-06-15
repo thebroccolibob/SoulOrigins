@@ -12,12 +12,19 @@ import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.getPower
 import io.github.thebroccolibob.soulorigins.power.EntityStorePower
 import io.github.thebroccolibob.soulorigins.syncPower
+import net.minecraft.entity.AreaEffectCloudEntity
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.item.ItemStack
+import net.minecraft.item.PotionItem
+import net.minecraft.nbt.NbtElement
 import net.minecraft.particle.BlockStateParticleEffect
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.potion.PotionUtil
 import net.minecraft.registry.Registry
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.util.Hand
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
 import java.util.function.BiConsumer
@@ -93,4 +100,33 @@ fun registerSoulOriginsEntityActions() {
 
     register(EntityStorePower.storeAction)
     register(EntityStorePower.clearAction)
+
+    register("effect_cloud_from_item") { entity ->
+        if (entity.world.isClient || entity !is LivingEntity) return@register
+
+        val potionCheck = { stack: ItemStack ->
+            if (stack.item is PotionItem) stack else null
+        }
+
+        val stack = entity.getStackInHand(Hand.MAIN_HAND).let(potionCheck) ?: entity.getStackInHand(Hand.OFF_HAND).let(potionCheck) ?: return@register
+
+        AreaEffectCloudEntity(entity.world, entity.x, entity.y, entity.z).apply {
+            owner = entity
+            radius = 3.0f
+            radiusOnUse = -0.5f
+            waitTime = 10
+            radiusGrowth = -radius / duration.toFloat()
+            potion = PotionUtil.getPotion(stack)
+
+            for (statusEffectInstance in PotionUtil.getCustomPotionEffects(stack)) {
+                addEffect(StatusEffectInstance(statusEffectInstance))
+            }
+
+            stack.nbt?.run {
+                if (contains("CustomPotionColor", NbtElement.NUMBER_TYPE.toInt())) {
+                    color = getInt("CustomPotionColor")
+                }
+            }
+        }.let(entity.world::spawnEntity)
+    }
 }
