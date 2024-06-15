@@ -1,8 +1,7 @@
 package io.github.thebroccolibob.soulorigins.item
 
 import io.github.thebroccolibob.soulorigins.*
-import io.github.thebroccolibob.soulorigins.entity.OwnableMonster
-import io.github.thebroccolibob.soulorigins.entity.owner
+import io.github.thebroccolibob.soulorigins.cca.OwnerComponent.Companion.owner
 import io.github.thebroccolibob.soulorigins.power.UseMobOrbPower
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.Entity
@@ -47,8 +46,13 @@ class MobOrbItem(settings: Settings) : Item(settings) {
 
         monster.setPosition(spawnPosition.x + 0.5, spawnPosition.y.toDouble(), spawnPosition.z + 0.5)
 
-        (monster as? OwnableMonster)?.owner = player
-        (monster as? MobEntity)?.setPersistent()
+        if (monster.type.isIn(SoulOriginsTags.SOUL_SORCERER_FRIENDS)) {
+            (monster as? MobEntity)?.apply {
+                owner = player
+                setPersistent()
+                (this as OwnedGoalAdder).`soulOrigins$addOwnedGoals`()
+            }
+        }
 
         world.spawnEntity(monster)
         world.playSound(null, blockPos, SoundEvents.ENTITY_ENDER_EYE_DEATH, SoundCategory.PLAYERS, 2.0f, 1.0f)
@@ -72,7 +76,7 @@ class MobOrbItem(settings: Settings) : Item(settings) {
         val entityNbt = stack.nbt?.getCompound(ENTITY_NBT)
 
         if (entityNbt == null || entityNbt.isEmpty) {
-            tooltip.add(Text.translatable("item.soul-origins.marigold_card.empty").apply {
+            tooltip.add(Text.translatable("item.soul-origins.mob_orb.empty").apply {
                 formatted(Formatting.GRAY)
             })
             return
@@ -86,7 +90,7 @@ class MobOrbItem(settings: Settings) : Item(settings) {
             if (!(it as NbtCompound).isEmpty) {
                 val gearStack = ItemStack.fromNbt(it)
                 if (gearStack.count > 1)
-                    tooltip.add(Text.translatable("item.soul-origins.marigold_card.multiple_items", gearStack.name, gearStack.count))
+                    tooltip.add(Text.translatable("item.soul-origins.mob_orb.multiple_items", gearStack.name, gearStack.count))
                 else
                     tooltip.add(gearStack.name)
             }
@@ -101,15 +105,16 @@ class MobOrbItem(settings: Settings) : Item(settings) {
 
         if (entity !is MobEntity) return false
 
-        val targetSlot = if (otherStack.isEmpty) getNextRemovalSlot(entity) else getPreferredSlot(otherStack)
-
-        if (targetSlot === null) return false
+        val targetSlot = if (otherStack.isEmpty) getNextRemovalSlot(entity) ?: return false else getPreferredSlot(otherStack)
 
         val prevItem = entity[targetSlot]
 
         entity[targetSlot] = otherStack
+        entity.setEquipmentDropChance(targetSlot, 2f)
 
         cursorStackReference.set(prevItem)
+        if (player.world.isClient && !otherStack.isEmpty)
+            player.playSound(Equipment.fromStack(otherStack)?.equipSound ?: SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.NEUTRAL, 1.0f, 1.0f)
 
         stack.setEntity(entity)
 
@@ -136,6 +141,15 @@ class MobOrbItem(settings: Settings) : Item(settings) {
                 entity.saveSelfNbt(this)
                 remove("Pos")
                 remove("UUID")
+                remove("HurtTime")
+                remove("Air")
+                remove("FallDistance")
+                remove("Fire")
+                remove("Motion")
+                remove("OnGround")
+                remove("PortalCooldown")
+                remove("Rotation")
+                remove("TicksFrozen")
             })
         }
 

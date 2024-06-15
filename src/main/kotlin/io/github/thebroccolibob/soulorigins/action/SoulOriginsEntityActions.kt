@@ -26,8 +26,12 @@ private fun register(actionFactory: ActionFactory<Entity>) {
     Registry.register(ApoliRegistries.ENTITY_ACTION, actionFactory.serializerId, actionFactory)
 }
 
-private fun register(id: String, data: SerializableData, effect: BiConsumer<SerializableData.Instance, Entity>) {
+private fun register(id: String, data: SerializableData = SerializableData(), effect: BiConsumer<SerializableData.Instance, Entity>) {
     register(ActionFactory(SoulOrigins.id(id), data, effect))
+}
+
+private inline fun register(id: String, crossinline effect: (Entity) -> Unit) {
+    register(id) { _, entity -> effect(entity) }
 }
 
 fun registerSoulOriginsEntityActions() {
@@ -45,8 +49,8 @@ fun registerSoulOriginsEntityActions() {
         }
     }
 
-    register("despawn", SerializableData()) { _, entity ->
-        entity.discard()
+    register("despawn") {
+        it.discard()
     }
 
     register(SpawnEntityAction.factory)

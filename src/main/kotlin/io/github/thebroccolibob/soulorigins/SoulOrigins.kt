@@ -45,5 +45,6 @@ object SoulOrigins : ModInitializer {
 		SoulOriginsSounds.register()
 		SoulOriginsEffects.register()
 		SoulOriginsPotions.register()
+		SoulOriginsTags.register()
 	}
 }

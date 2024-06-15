@@ -28,11 +28,6 @@ object SoulOriginsItems {
         rarity(Rarity.RARE)
     }))
 
-    val MARIGOLD_CARD = register("marigold_card", MarigoldCardItem(FabricItemSettings {
-        maxCount(1)
-        rarity(Rarity.UNCOMMON)
-    }))
-
     val MOB_ORB = register("mob_orb", MobOrbItem(FabricItemSettings {
         maxCount(1)
         rarity(Rarity.EPIC)

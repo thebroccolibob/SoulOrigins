@@ -3,21 +3,16 @@
   "package": "io.github.thebroccolibob.soulorigins.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "AbstractSkeletonEntityMixin",
     "BowItemMixin",
     "BrewingStandScreenHandlerMixin",
-    "CreeperEntityMixin",
-    "EndermanEntityMixin",
     "HostileEntityMixin",
+    "MobEntityMixin",
     "PlayerEntityMixin",
     "PotionEntityMixin",
     "PotionSlotMixin",
     "RevengeGoalMixin",
     "SculkVeinGrowCheckerMixin",
-    "SlimeEntityMixin",
-    "SpiderEntityMixin",
-    "TippedArrowRecipeMixin",
-    "ZombieEntityMixin"
+    "TippedArrowRecipeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

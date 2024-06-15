@@ -26,13 +26,39 @@
           "action": {
               "type": "origins:if_else",
               "condition": {
-                "type": "origins:distance",
-                "comparison": "<=",
-                "compare_to": 8
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:distance",
+                    "comparison": "<=",
+                    "compare_to": 8
+                  },
+                  {
+                    "type": "origins:target_condition",
+                    "condition": {
+                      "type": "soul-origins:exists"
+                    }
+                  }
+                ]
               },
               "if_action": {
                 "type": "origins:and",
                 "actions": [
+                  {
+                    "type": "origins:if_else",
+                    "condition": {
+                        "type": "soul-origins:monster_owner"
+                    },
+                    "if_action": {
+                        "type": "origins:actor_action",
+                        "action": {
+                            "type": "origins:change_resource",
+                            "resource": "soul-origins:soul_meter",
+                            "change": 2,
+                            "operation": "add"
+                        }
+                    }
+                  },
                   {
                     "type": "soul-origins:absorb_mob_orb"
                   },
@@ -44,10 +70,15 @@
                   {
                     "type": "origins:actor_action",
                     "action": {
-                      "type": "origins:play_sound",
-                      "sound": "minecraft:block.fire.extinguish",
-                      "volume": 0.05,
-                      "pitch": 0.5
+                      "type": "origins:and",
+                      "actions": [
+                        {
+                          "type": "origins:play_sound",
+                          "sound": "minecraft:block.fire.extinguish",
+                          "volume": 0.05,
+                          "pitch": 0.5
+                        }
+                      ]
                     }
                   }
                 ]

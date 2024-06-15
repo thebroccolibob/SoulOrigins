@@ -32,6 +32,12 @@
 				"value": "io.github.thebroccolibob.soulorigins.datagen.SoulOriginsDataGenerator",
 				"adapter": "kotlin"
 			}
+		],
+		"cardinal-components": [
+			{
+				"value": "io.github.thebroccolibob.soulorigins.cca.SoulOriginsComponents",
+				"adapter": "kotlin"
+			}
 		]
 	},
 	"mixins": [
@@ -50,5 +56,10 @@
 	},
 	"suggests": {
 		"another-mod": "*"
+	},
+	"custom": {
+		"cardinal-components": [
+			"soul-origins:owner"
+		]
 	}
 }
