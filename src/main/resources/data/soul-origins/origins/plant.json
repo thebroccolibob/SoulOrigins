@@ -7,6 +7,9 @@
         "soul-origins:plant/bonemeal",
         "soul-origins:plant/grapple",
         "soul-origins:plant/phase_dirt",
-        "soul-origins:plant/potion_spore"
+        "soul-origins:plant/potion_spore",
+        "soul-origins:plant/water",
+        "soul-origins:plant/base_health",
+        "soul-origins:plant/poison_resistance"
     ]
 }

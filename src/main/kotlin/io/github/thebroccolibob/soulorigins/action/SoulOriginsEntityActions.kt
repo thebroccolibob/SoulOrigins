@@ -25,7 +25,6 @@ import net.minecraft.potion.PotionUtil
 import net.minecraft.registry.Registry
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Hand
-import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
 import java.util.function.BiConsumer
 
@@ -83,8 +82,14 @@ fun registerSoulOriginsEntityActions() {
         val deltaY = (entity.height * spread.y).toFloat()
         val deltaZ = (entity.width * spread.z).toFloat()
         val offsetY = entity.height * data.getFloat("offset_y")
+
+        val state = serverWorld.getBlockState(entity.blockPos).let {
+            @Suppress("DEPRECATION")
+            if (it.isAir || it.isLiquid) serverWorld.getBlockState(entity.blockPos.down()) else it
+        }
+
         serverWorld.spawnParticles(
-            BlockStateParticleEffect(ParticleTypes.BLOCK, serverWorld.getBlockState(entity.blockPos.offset(Direction.DOWN))),
+            BlockStateParticleEffect(ParticleTypes.BLOCK, state),
             entity.x,
             entity.y + offsetY,
             entity.z,

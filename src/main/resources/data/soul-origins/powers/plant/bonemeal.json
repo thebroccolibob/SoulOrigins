@@ -79,5 +79,14 @@
                 "rangeZ": 2
             }
         }
+    },
+    "reset": {
+        "type": "origins:action_on_callback",
+        "entity_action_respawned": {
+            "type": "origins:change_resource",
+            "resource": "soul-origins:plant/bonemeal_stored",
+            "operation": "set",
+            "change": 0
+        }
     }
 }

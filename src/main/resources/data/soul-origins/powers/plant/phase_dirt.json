@@ -44,7 +44,7 @@
     },
     "particle": {
         "type": "origins:action_over_time",
-        "interval": 5,
+        "interval": 1,
         "condition": {
             "type": "origins:and",
             "conditions": [
@@ -54,23 +54,15 @@
                         "type": "origins:in_tag",
                         "tag": "soul-origins:plant_phaseable"
                     }
+                },
+                {
+                    "type": "origins:moving"
                 }
             ]
         },
-        "rising_action": {
+        "entity_action": {
             "type": "soul-origins:block_particle",
-            "count": 16,
-            "speed": 0,
-            "offset_y": 0.5,
-            "spread": {
-                "x": 0.25,
-                "y": 0,
-                "z": 0.25
-            }
-        },
-        "falling_action": {
-            "type": "soul-origins:block_particle",
-            "count": 16,
+            "count": 4,
             "speed": 0,
             "offset_y": 0.5,
             "spread": {

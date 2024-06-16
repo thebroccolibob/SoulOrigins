@@ -1,0 +1,9 @@
+{
+    "type": "origins:attribute",
+    "modifier": {
+        "name": "Plant Base Health",
+        "attribute": "minecraft:generic.max_health",
+        "operation": "addition",
+        "value": -4
+    }
+}
