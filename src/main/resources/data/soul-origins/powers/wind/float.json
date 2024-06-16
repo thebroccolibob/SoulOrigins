@@ -25,5 +25,24 @@
                 "continuous": true
             }
         }
+    },
+    "swirl": {
+        "type": "apugli:energy_swirl",
+        "texture_location": "minecraft:textures/entity/wither/wither_armor.png",
+        "speed": 0.01,
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:power_active",
+                    "power": "soul-origins:wind/float_fall"
+                },
+                {
+                    "type": "origins:fall_distance",
+                    "comparison": ">=",
+                    "compare_to": 0.1
+                }
+            ]
+        }
     }
 }

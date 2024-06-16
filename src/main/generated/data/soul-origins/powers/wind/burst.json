@@ -4,9 +4,6 @@
     "type": "origins:and",
     "conditions": [
       {
-        "type": "origins:sneaking"
-      },
-      {
         "type": "origins:resource",
         "compare_to": 10,
         "comparison": ">=",
@@ -200,5 +197,5 @@
       }
     ]
   },
-  "key": "key.origins.secondary_active"
+  "key": "key.origins.ternary_active"
 }

@@ -1,0 +1,28 @@
+{
+  "type": "origins:multiple",
+
+  "overlay": {
+    "type": "origins:overlay",
+    "hidden": true,
+    "texture": "soul-origins:textures/entity/wind/over_air.png",
+    "strength": 1.0,
+    "red": 1.0,
+    "green": 1.0,
+    "blue": 1.0,
+    "draw_mode": "nausea",
+    "draw_phase": "below_hud",
+    "hide_with_hud": false,
+    "visible_in_third_person": false,
+    "condition": {
+      "type": "origins:invisible"
+    }
+  },
+  "swirl": {
+    "type": "apugli:energy_swirl",
+    "texture_location": "minecraft:textures/entity/wither/wither_armor.png",
+    "speed": 0.01,
+    "condition": {
+      "type": "origins:invisible"
+    }
+  }
+}

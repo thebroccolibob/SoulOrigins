@@ -8,13 +8,10 @@ private val advancement = {lvl: Int -> "soul-origins:wind/burst/lvl$lvl"}
 
 val burst = JsonObject {
     "type" to "origins:active_self"
-    "key" to "key.origins.secondary_active"
+    "key" to "key.origins.ternary_active"
     "condition" to {
         "type" to "origins:and"
         "conditions".to [
-            {
-                "type" to "origins:sneaking"
-            },
             {
                 "type" to "origins:resource"
                 "resource" to "soul-origins:soul_meter"

@@ -1,13 +1,14 @@
 {
     "powers": [
+        "soul-origins:soul_meter",
         "soul-origins:wind/tailwind",
         "soul-origins:wind/updraft",
         "soul-origins:wind/float",
         "soul-origins:wind/neutral",
         "soul-origins:wind/burst",
+        "soul-origins:wind/burst_overlay",
         "soul-origins:wind/compressed_air",
         "soul-origins:wind/use_shards",
-        "soul-origins:soul_meter",
         "soul-origins:soul_extract"
     ]
 }
