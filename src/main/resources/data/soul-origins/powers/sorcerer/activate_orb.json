@@ -1,5 +1,7 @@
 {
   "type": "origins:active_self",
+  "name": "Soul Sacrifice",
+  "description": "(Bind secondary key in settings). Using your secondary key, sacrifice a Soul Orb to activate an ability associated to the monster.",
   "key": "key.origins.secondary_active",
   "condition": {
     "type": "origins:and",

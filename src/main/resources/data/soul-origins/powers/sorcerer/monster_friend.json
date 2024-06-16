@@ -1,5 +1,6 @@
 {
   "type": "apugli:mobs_ignore",
+  "hidden": true,
   "bientity_condition": {
     "type": "soul-origins:monster_owner"
   },

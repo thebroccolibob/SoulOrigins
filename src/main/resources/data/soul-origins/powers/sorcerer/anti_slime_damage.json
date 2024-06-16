@@ -1,5 +1,6 @@
 {
   "type": "origins:modify_damage_taken",
+  "hidden": true,
   "bientity_condition": {
     "type": "origins:invert",
     "condition": {

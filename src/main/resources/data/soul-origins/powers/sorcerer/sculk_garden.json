@@ -1,5 +1,7 @@
 {
     "type": "origins:multiple",
+    "name": "Sacred Treasure",
+    "description": "With your 'Monster Manipulation' you can capture a Warden. This Warden will not be tamed. 'Soul Sacrifice' the Warden to create a garden of sculk that others sink into. Although this ability gives you weakness, you can swim freely through the sculk.",
     "cooldown": {
         "type": "origins:cooldown",
         "cooldown": 600,

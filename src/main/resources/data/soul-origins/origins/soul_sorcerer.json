@@ -4,7 +4,7 @@
   "icon": {
        "item": "origins:orb_of_origin"
   },
-  "impact": 1,
+  "impact": 3,
   "powers": [
     "soul-origins:soul_meter",
     "soul-origins:soul_extract",

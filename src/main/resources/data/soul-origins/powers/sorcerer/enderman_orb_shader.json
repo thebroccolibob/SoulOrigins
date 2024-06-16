@@ -1,5 +1,6 @@
 {
   "type": "origins:shader",
+  "hidden": true,
   "shader": "minecraft:shaders/post/deconverge.json",
   "condition": {
     "type": "origins:resource",
