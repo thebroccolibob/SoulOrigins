@@ -72,13 +72,30 @@
             }
         }
     },
-    "hidename": {
+    "hide_name": {
         "type": "apugli:prevent_label_render",
+        "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+                "type": "origins:in_block",
+                "block_condition": {
+                    "type": "origins:in_tag",
+                    "tag": "soul-origins:plant_phaseable"
+                }
+            }
+        }
+    },
+    "air": {
+        "type": "soul-origins:drowning",
         "condition": {
             "type": "origins:in_block",
             "block_condition": {
-                "type": "origins:in_tag",
-                "tag": "soul-origins:plant_phaseable"
+                "type": "origins:offset",
+                "y": 1,
+                "condition": {
+                    "type": "origins:in_tag",
+                    "tag": "soul-origins:plant_phaseable"
+                }
             }
         }
     }

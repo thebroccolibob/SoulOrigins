@@ -18,20 +18,54 @@
                     {
                         "type": "soul-origins:stored_entity_action",
                         "store": "soul-origins:plant/grapple_target",
-                        "entity_action": {
+                        "bientity_action": {
                             "type": "origins:if_else",
                             "condition": {
-                                "type": "origins:entity_type",
-                                "entity_type": "minecraft:marker"
+                                "type": "origins:target_condition",
+                                "condition": {
+                                    "type": "origins:entity_type",
+                                    "entity_type": "minecraft:marker"
+                                }
                             },
                             "if_action": {
-                                "type": "soul-origins:despawn"
+                                "type": "origins:target_action",
+                                "action": {
+                                    "type": "soul-origins:despawn"
+                                }
+                            },
+                            "else_action": {
+                                "type": "origins:and",
+                                "actions": [
+                                    {
+                                        "type": "origins:target_action",
+                                        "action": {
+                                            "type": "origins:add_velocity",
+                                            "reference": "world",
+                                            "y": 0.3
+                                        }
+                                    },
+                                    {
+                                        "type": "soul-origins:proportional_velocity",
+                                        "server": true,
+                                        "client": false,
+                                        "multiplier": {
+                                            "x": 1.0,
+                                            "y": 1.0,
+                                            "z": 1.0
+                                        }
+                                    }
+                                ]
                             }
                         }
                     },
                     {
                         "type": "soul-origins:clear_entity_store",
                         "store": "soul-origins:plant/grapple_target"
+                    },
+                    {
+                        "type": "origins:play_sound",
+                        "sound": "minecraft:entity.arrow.shoot",
+                        "pitch": 0.9
                     }
                 ]
             },
@@ -54,8 +88,8 @@
                                     "type": "origins:living"
                                 },
                                 {
-                                    "type": "origins:entity_type",
-                                    "entity_type": "minecraft:item"
+                                    "type": "origins:in_tag",
+                                    "tag": "soul-origins:vine_grabbable"
                                 }
                             ]
                         }
@@ -72,26 +106,8 @@
                         "type": "origins:and",
                         "actions": [
                             {
-                                "type": "origins:area_of_effect",
-                                "radius": 16,
-                                "bientity_condition": {
-                                    "type": "origins:target_condition",
-                                    "condition": {
-                                        "type": "origins:and",
-                                        "conditions": [
-                                            {
-                                                "type": "origins:entity_type",
-                                                "entity_type": "minecraft:marker"
-                                            },
-                                            {
-                                                "type": "origins:command",
-                                                "command": "execute if entity @s[tag=grapple_target]",
-                                                "comparison": ">",
-                                                "compare_to": 0
-                                            }
-                                        ]
-                                    }
-                                },
+                                "type": "origins:selector_action",
+                                "selector": "@e[type=marker,distance=..24,limit=1]",
                                 "bientity_action": {
                                     "type": "soul-origins:set_entity_store",
                                     "store": "soul-origins:plant/grapple_target"
@@ -188,16 +204,6 @@
                                                 }
                                             }
                                         ]
-                                    }
-                                },
-                                "else_action": {
-                                    "type": "soul-origins:proportional_velocity",
-                                    "server": true,
-                                    "client": false,
-                                    "multiplier": {
-                                        "x": 0.1,
-                                        "y": 0.1,
-                                        "z": 0.1
                                     }
                                 }
                             }
