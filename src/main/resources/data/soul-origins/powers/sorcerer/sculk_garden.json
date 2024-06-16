@@ -1,14 +1,14 @@
 {
     "type": "origins:multiple",
     "name": "Sacred Treasure",
-    "description": "With your 'Monster Manipulation' you can capture a Warden. This Warden will not be tamed. 'Soul Sacrifice' the Warden to create a garden of sculk that others sink into. Although this ability gives you weakness, you can swim freely through the sculk.",
+    "description": "With your 'Monster Manipulation' you can capture a Warden. This Warden will not be tamed.",
     "cooldown": {
         "type": "origins:cooldown",
         "cooldown": 600,
         "hud_render": {
             "inverted": true,
             "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
-            "bar_index": 0
+            "bar_index": 15
         }
     },
     "walk": {
@@ -95,6 +95,39 @@
             "compare_to": 0
         }
     },
+    "health": {
+        "type": "origins:conditioned_attribute",
+        "modifier": {
+            "attribute": "minecraft:generic.max_health",
+            "operation": "addition",
+            "value": -6
+        },
+        "tick_rate": 1,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+            "comparison": ">",
+            "compare_to": 0
+        }
+    },
+    "weakness": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "rising_action": {
+            "type": "origins:apply_effect",
+            "effect": {
+                "effect": "minecraft:weakness",
+                "duration": 600,
+                "amplifier": 0
+            }
+        },
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+            "comparison": ">",
+            "compare_to": 0
+        }
+    },
     "silent": {
         "type": "origins:prevent_game_event",
         "events": [
@@ -131,6 +164,35 @@
                     }
                 ]
             }
+        }
+    },
+    "swirl": {
+        "type": "apugli:energy_swirl",
+        "texture_location": "soul-origins:textures/entity/sorcerer/sculk_garden_texture.png",
+        "speed": 0.01,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+            "comparison": ">",
+            "compare_to": 0
+        }
+    },
+    "overlay": {
+        "type": "origins:overlay",
+        "texture": "minecraft:textures/misc/vignette.png",
+        "strength": 1.0,
+        "red": 1.0,
+        "green": 0.22,
+        "blue": 0.2,
+        "draw_mode": "nausea",
+        "draw_phase": "below_hud",
+        "hide_with_hud": false,
+        "visible_in_third_person": false,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+            "comparison": ">",
+            "compare_to": 0
         }
     }
 }

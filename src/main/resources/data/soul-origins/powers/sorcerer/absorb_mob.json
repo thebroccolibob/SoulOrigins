@@ -1,7 +1,7 @@
 {
   "type": "origins:multiple",
   "name": "Monster Manipulation",
-  "description": "Press your primary key to convert monsters into Soul Orbs. When using the Soul Orb, the monster you captured will be summoned. This monster will be tamed and fight for you. (Absorbable Monsters: Zombies, Skeletons, Spiders, Creeper, Enderman, Slime)",
+  "description": "Convert monsters into Soul Orbs. When using the Soul Orb, the monster you captured will be summoned. This monster will be tamed and fight for you. (Absorbable Monsters: Zombies, Skeletons, Spiders, Creeper, Enderman, Slime)",
   "activate": {
     "type": "origins:active_self",
     "entity_action": {

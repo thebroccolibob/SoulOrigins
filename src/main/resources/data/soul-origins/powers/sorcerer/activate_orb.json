@@ -1,7 +1,7 @@
 {
   "type": "origins:active_self",
   "name": "Soul Sacrifice",
-  "description": "(Bind secondary key in settings). Using your secondary key, sacrifice a Soul Orb to activate an ability associated to the monster.",
+  "description": "Sacrifice a Soul Orb to activate an ability associated to the monster in the orb.",
   "key": "key.origins.secondary_active",
   "condition": {
     "type": "origins:and",
@@ -664,6 +664,34 @@
                 "operation": "multiply_base_multiplicative",
                 "value": -0.25
               }
+            }
+          },
+          {
+            "condition": {
+              "type": "soul-origins:held_mob_orb",
+              "entity_type": "minecraft:warden"
+            },
+            "action": {
+              "type": "origins:and",
+              "actions": [
+                {
+                  "type": "origins:trigger_cooldown",
+                  "power": "soul-origins:sorcerer/sculk_garden_cooldown"
+                },
+                {
+                  "type": "origins:play_sound",
+                  "sound": "soul-origins:power.sorcerer.sculk",
+                  "volume": 3
+                },
+                {
+                  "type": "origins:equipped_item_action",
+                  "equipment_slot": "mainhand",
+                  "action": {
+                    "type": "origins:consume",
+                    "amount": 1
+                  }
+                }
+              ]
             }
           }
         ]

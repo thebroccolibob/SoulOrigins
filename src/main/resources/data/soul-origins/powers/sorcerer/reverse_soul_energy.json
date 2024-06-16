@@ -1,0 +1,166 @@
+{
+  "type": "origins:multiple",
+  "name": "Reverse Soul Energy",
+  "description": "Heal your wounds at the cost of rapidly burning Soul Meter overtime.",
+
+  "toggle": {
+    "type": "origins:toggle",
+    "hidden": true,
+    "active_by_default": false,
+    "key": {
+      "key": "key.origins.quaternary_active"
+    }
+  },
+
+  "heal": {
+    "type": "origins:action_over_time",
+    "entity_action": {
+      "type": "origins:heal",
+      "amount": 2.5
+    },
+    "rising_action": {
+      "type": "origins:heal",
+      "amount": 2.5
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "soul-origins:soul_meter",
+          "comparison": ">=",
+          "compare_to": 2
+        }
+      ]
+    }
+  },
+
+  "swirl": {
+    "type": "apugli:energy_swirl",
+    "texture_location": "soul-origins:textures/entity/sorcerer/reverse_energy_texture.png",
+    "speed": 0.01,
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "soul-origins:soul_meter",
+          "comparison": ">=",
+          "compare_to": 2
+        }
+      ]
+    }
+  },
+
+  "overlay": {
+    "type": "origins:overlay",
+    "texture": "minecraft:textures/misc/vignette.png",
+    "strength": 1.0,
+    "red": 1.0,
+    "green": 1.0,
+    "blue": 1.0,
+    "draw_mode": "nausea",
+    "draw_phase": "below_hud",
+    "hide_with_hud": false,
+    "visible_in_third_person": false,
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "soul-origins:soul_meter",
+          "comparison": ">=",
+          "compare_to": 2
+        }
+      ]
+    }
+  },
+
+  "sound": {
+    "type": "origins:active_self",
+    "key": {
+      "key": "key.origins.quaternary_active"
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "soul-origins:soul_meter",
+          "comparison": ">=",
+          "compare_to": 2
+        }
+      ]
+    },
+    "entity_action": {
+      "type": "origins:play_sound",
+      "sound": "minecraft:block.enchantment_table.use",
+      "volume": 0.5
+    }
+  },
+
+  "exhaust": {
+    "type": "origins:action_over_time",
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "soul-origins:soul_meter",
+      "change": -2
+    },
+    "interval": 20,
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "soul-origins:soul_meter",
+          "comparison": ">=",
+          "compare_to": 2
+        }
+      ]
+    }
+  },
+
+  "untoggle": {
+    "type": "origins:action_over_time",
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "soul-origins:soul_meter",
+          "comparison": "<=",
+          "compare_to": 1
+        }
+      ]
+    },
+    "entity_action": {
+      "type": "origins:toggle",
+      "power": "soul-origins:sorcerer/reverse_soul_energy_toggle"
+    },
+    "interval": 1
+  }
+}

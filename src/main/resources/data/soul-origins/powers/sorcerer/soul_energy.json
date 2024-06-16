@@ -1,0 +1,163 @@
+{
+  "type": "origins:multiple",
+  "name": "Soul Energy",
+  "description": "Enhance your physical attributes at the cost of burning Soul Meter overtime.",
+
+  "toggle": {
+    "type": "origins:toggle",
+    "hidden": true,
+    "active_by_default": false,
+    "key": {
+      "key": "key.origins.ternary_active"
+    }
+  },
+
+  "strength": {
+    "type": "origins:modify_damage_dealt",
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "soul-origins:soul_meter",
+          "comparison": ">=",
+          "compare_to": 1
+        }
+      ]
+    },
+    "modifier": {
+      "operation": "multiply_base_multiplicative",
+      "value": 1
+    }
+  },
+
+  "swirl": {
+    "type": "apugli:energy_swirl",
+    "texture_location": "minecraft:textures/entity/creeper/creeper_armor.png",
+    "speed": 0.01,
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "soul-origins:soul_meter",
+          "comparison": ">=",
+          "compare_to": 1
+        }
+      ]
+    }
+  },
+
+  "overlay": {
+    "type": "origins:overlay",
+    "texture": "minecraft:textures/misc/vignette.png",
+    "strength": 1.0,
+    "red": 0.0,
+    "green": 0.718,
+    "blue": 1.0,
+    "draw_mode": "nausea",
+    "draw_phase": "below_hud",
+    "hide_with_hud": false,
+    "visible_in_third_person": false,
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "soul-origins:soul_meter",
+          "comparison": ">=",
+          "compare_to": 1
+        }
+      ]
+    }
+  },
+
+  "sound": {
+    "type": "origins:active_self",
+    "key": {
+      "key": "key.origins.ternary_active"
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "soul-origins:soul_meter",
+          "comparison": ">=",
+          "compare_to": 1
+        }
+      ]
+    },
+    "entity_action": {
+      "type": "origins:play_sound",
+      "sound": "minecraft:item.firecharge.use",
+      "volume": 0.1,
+      "pitch": 1.0
+    }
+  },
+
+  "exhaust": {
+    "type": "origins:action_over_time",
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "soul-origins:soul_meter",
+      "change": -1
+    },
+    "interval": 20,
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "soul-origins:soul_meter",
+          "comparison": ">=",
+          "compare_to": 1
+        }
+      ]
+    }
+  },
+
+  "untoggle": {
+    "type": "origins:action_over_time",
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "soul-origins:soul_meter",
+          "comparison": "<",
+          "compare_to": 1
+        }
+      ]
+    },
+    "entity_action": {
+      "type": "origins:toggle",
+      "power": "soul-origins:sorcerer/soul_energy_toggle"
+    },
+    "interval": 1
+  }
+}

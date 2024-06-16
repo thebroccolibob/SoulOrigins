@@ -34,6 +34,15 @@
       }
     ]
   },
+  "power.sorcerer.sculk": {
+    "sounds": [
+      {
+        "name":"soul-origins:sorcerer/sculk_garden_summon",
+        "pitch": 1.0,
+        "volume": 1.0
+      }
+    ]
+  },
   "items.wind_shard.level": {
     "sounds": [
       {
