@@ -2,7 +2,7 @@
   "name": "Soul Sorcerer",
   "description": "A human born with a connection to soul energy. With this connection you can manipulate the souls of monsters, and even strengthen your own soul.",
   "icon": {
-       "item": "origins:orb_of_origin"
+       "item": "soul-origins:mob_orb"
   },
   "impact": 3,
   "powers": [
