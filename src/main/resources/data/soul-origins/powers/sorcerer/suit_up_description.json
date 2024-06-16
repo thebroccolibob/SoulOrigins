@@ -1,0 +1,5 @@
+{
+  "type": "origins:simple",
+  "name": "Suit Up!",
+  "description": "While in your inventory, hover a tool or armor over a monster orb and right click to equip it onto a monster. Right click the orb to un-equip tools and armor. (Works on any monster but is only visual on Zombies and Skeletons)"
+}
