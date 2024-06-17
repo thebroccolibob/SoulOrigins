@@ -11,7 +11,7 @@
             "compare_to": 0
         }
     },
-    "use_soul_meter": {
+    "consume": {
         "type": "origins:action_over_time",
         "entity_action": {
             "type": "origins:change_resource",
@@ -19,7 +19,7 @@
             "operation": "add",
             "change": -1
         },
-        "interval": 100,
+        "interval": 500,
         "condition": {
             "type": "origins:power_active",
             "power": "*:*_toggle"
@@ -56,6 +56,17 @@
         },
         "offset_y": 1,
         "speed": 0,
+        "condition": {
+            "type": "origins:power_active",
+            "power": "*:*_toggle"
+        }
+    },
+    "reset": {
+        "type": "origins:action_on_callback",
+        "entity_action_respawned": {
+            "type": "origins:toggle",
+            "power": "*:*_toggle"
+        },
         "condition": {
             "type": "origins:power_active",
             "power": "*:*_toggle"

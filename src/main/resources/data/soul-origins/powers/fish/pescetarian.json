@@ -1,0 +1,30 @@
+{
+    "type": "origins:multiple",
+    "always": {
+        "type": "origins:modify_food",
+        "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+                "tag": "minecraft:fishes"
+            }
+        },
+        "always_edible": true
+    },
+    "increase": {
+        "type": "origins:modify_food",
+        "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+                "tag": "soul-origins:raw_fishes"
+            }
+        },
+        "food_modifier": {
+            "operation": "multiply_base",
+            "value": 1
+        },
+        "saturation_modifier": {
+            "operation": "multiply_base",
+            "value": 1
+        }
+    }
+}
