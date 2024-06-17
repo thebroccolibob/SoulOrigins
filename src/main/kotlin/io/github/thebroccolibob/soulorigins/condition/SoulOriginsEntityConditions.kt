@@ -3,22 +3,18 @@ package io.github.thebroccolibob.soulorigins.condition
 import io.github.apace100.apoli.data.ApoliDataTypes
 import io.github.apace100.apoli.power.factory.condition.ConditionFactory
 import io.github.apace100.apoli.registry.ApoliRegistries
-import io.github.apace100.apoli.util.Comparison
 import io.github.apace100.calio.data.SerializableData
 import io.github.apace100.calio.data.SerializableDataTypes
 import io.github.thebroccolibob.soulorigins.SerializableData
 import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.item.MobOrbItem
-import io.github.thebroccolibob.soulorigins.minus
 import io.github.thebroccolibob.soulorigins.power.EntityStorePower
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.registry.Registry
 import net.minecraft.util.Hand
-import net.minecraft.util.math.Vec3d
 import java.util.function.BiFunction
-import kotlin.math.pow
 
 private fun register(conditionFactory: ConditionFactory<Entity>) {
     Registry.register(ApoliRegistries.ENTITY_CONDITION, conditionFactory.serializerId, conditionFactory)
@@ -59,16 +55,6 @@ fun registerSoulOriginsEntityConditions() {
 
     register("exists") {
         it.isAlive && !it.isRemoved
-    }
-
-    register("total_velocity", SerializableData {
-        add("comparison", ApoliDataTypes.COMPARISON, Comparison.GREATER_THAN)
-        add("compare_to", SerializableDataTypes.DOUBLE, 0.0)
-    }) { data, entity ->
-        data.get<Comparison>("comparison").compare(
-            (entity.pos - Vec3d(entity.lastRenderX, entity.lastRenderY, entity.lastRenderZ)).lengthSquared(),
-            data.get<Double>("compare_to").pow(2)
-        )
     }
 
     register(EntityStorePower.notEmptyCondition)

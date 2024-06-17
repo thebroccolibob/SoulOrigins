@@ -134,4 +134,6 @@ fun registerSoulOriginsEntityActions() {
             }
         }.let(entity.world::spawnEntity)
     }
+
+    register(SpawnEntityRaycastAction.factory)
 }

@@ -73,52 +73,40 @@
                 "type": "origins:side",
                 "side": "server",
                 "action": {
-                    "type": "origins:raycast",
-                    "entity": true,
-                    "block": true,
+                    "type": "soul-origins:spawn_entity_raycast",
+                    "entities_intercept": true,
                     "distance": 16,
                     "fluid_handling": "none",
                     "shape_type": "collider",
-                    "bientity_condition": {
-                        "type": "origins:target_condition",
-                        "condition": {
-                            "type": "origins:or",
-                            "conditions": [
-                                {
-                                    "type": "origins:living"
-                                },
-                                {
-                                    "type": "origins:in_tag",
-                                    "tag": "soul-origins:vine_grabbable"
-                                }
-                            ]
-                        }
+                    "in_block": true,
+                    "offset": {
+                        "y": 0.5
                     },
+                    "entity_type": "minecraft:marker",
                     "bientity_action": {
                         "type": "soul-origins:set_entity_store",
                         "store": "soul-origins:plant/grapple_target"
                     },
-                    "block_action": {
-                        "type": "origins:execute_command",
-                        "command": "summon minecraft:marker ~ ~ ~ {Tags:[\"grapple_target\"]}"
-                    },
-                    "hit_action": {
-                        "type": "origins:and",
-                        "actions": [
+                    "intercept_entity_condition": {
+                        "type": "origins:or",
+                        "conditions": [
                             {
-                                "type": "origins:selector_action",
-                                "selector": "@e[type=marker,distance=..24,limit=1]",
-                                "bientity_action": {
-                                    "type": "soul-origins:set_entity_store",
-                                    "store": "soul-origins:plant/grapple_target"
-                                }
+                                "type": "origins:living"
                             },
                             {
-                                "type": "origins:play_sound",
-                                "sound": "minecraft:entity.arrow.shoot",
-                                "pitch": 1.3
+                                "type": "origins:in_tag",
+                                "tag": "soul-origins:vine_grabbable"
                             }
                         ]
+                    },
+                    "intercept_bientity_action": {
+                        "type": "soul-origins:set_entity_store",
+                        "store": "soul-origins:plant/grapple_target"
+                    },
+                    "hit_action": {
+                        "type": "origins:play_sound",
+                        "sound": "minecraft:entity.arrow.shoot",
+                        "pitch": 1.3
                     }
                 }
             }
