@@ -1,7 +1,7 @@
 {
   "type": "origins:resource",
   "name": "Soul Meter",
-  "description": "A meter that shows how much soul energy you have stored. Soul energy drops on ability usage and refills when you kill entities.",
+  "description": "A meter that shows how much soul energy you have stored. Soul energy is expended on most ability usage.",
   "min": 0,
   "max": 10,
   "hud_render": {

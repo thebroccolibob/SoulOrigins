@@ -1,6 +1,7 @@
 {
   "type": "origins:self_action_on_kill",
-  "hidden": true,
+  "name": "Soul Extract",
+  "description": "Increases Soul Meter whenever you kill an entity.",
   "entity_action": {
     "type": "origins:change_resource",
     "resource": "soul-origins:soul_meter",
