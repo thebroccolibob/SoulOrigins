@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-16T06:52:42.7336779	soul-origins/Model Definitions
+// 1.20.1	2024-06-16T20:36:35.3395601	soul-origins/Model Definitions
 4f1eb48199b7942d5430995922d01a62fe6e507c assets\soul-origins\models\item\artificer_wall_builder.json
 1fd31aef6bf5e6dce77f6f0e56b068829017f56b assets\soul-origins\models\item\tailwind_shard.json
 635db06656a1ce3e4e85ddd77afd6a1f356ee6d6 assets\soul-origins\blockstates\artificer_ns_wall_builder.json
@@ -25,8 +25,8 @@ e21d6428677b491103f8fc15a0911c8938f7f73a assets\soul-origins\blockstates\artific
 90ae49338b8c9b1153ce16aaa2eb6731d959860d assets\soul-origins\models\item\mob_orb_drowned.json
 35ad214a979201d8a7c2d8dfc74ab5214d294493 assets\soul-origins\blockstates\falling_decaying_sand.json
 39d35a61c79f442a9ed1bb8549cc6d8ac7641bcf assets\soul-origins\models\item\artificer_column_builder.json
-7c7b15f315e7f51efed4dd19409e4d06685795c0 assets\soul-origins\models\block\artificer_surface_horizontal.json
 c6113de0f1cbe49061c6b631c6a27b54199c9f0d assets\soul-origins\models\item\mob_orb_enderman.json
+7c7b15f315e7f51efed4dd19409e4d06685795c0 assets\soul-origins\models\block\artificer_surface_horizontal.json
 c0c47b8470d6e5d25e66017baa9e88e662e4ac25 assets\soul-origins\models\block\artificer_builder.json
 c0fcbd16c4a5b1ba60cea59348836d0f155a355a assets\soul-origins\models\item\mob_orb_cavespider.json
 a96301e77dc469428fe18f51b305f59cb329724e assets\soul-origins\models\block\artificer_column.json

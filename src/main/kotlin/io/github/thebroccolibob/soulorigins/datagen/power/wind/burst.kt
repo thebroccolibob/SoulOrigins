@@ -108,7 +108,7 @@ val burst = JsonObject {
                     "type" to "origins:apply_effect"
                     "effect" to {
                         "effect" to "minecraft:speed"
-                        "duration" to if (it == 3) 1200 else 600
+                        "duration" to if (it == 3) 600 else 300
                         "is_ambient" to true
                     }
                 },
@@ -116,7 +116,7 @@ val burst = JsonObject {
                     "type" to "origins:apply_effect"
                     "effect" to {
                         "effect" to "minecraft:invisibility"
-                        "duration" to if (it == 3) 1200 else 600
+                        "duration" to if (it == 3) 600 else 300
                         "is_ambient" to true
                     }
                 },

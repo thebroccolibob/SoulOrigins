@@ -63,11 +63,11 @@
   "overlay": {
     "type": "origins:overlay",
     "texture": "minecraft:textures/misc/vignette.png",
-    "strength": 1.0,
+    "strength": 0.3,
     "red": 1.0,
     "green": 1.0,
     "blue": 1.0,
-    "draw_mode": "nausea",
+    "draw_mode": "texture",
     "draw_phase": "below_hud",
     "hide_with_hud": false,
     "visible_in_third_person": false,

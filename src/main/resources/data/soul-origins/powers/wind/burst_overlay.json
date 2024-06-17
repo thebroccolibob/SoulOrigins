@@ -5,24 +5,51 @@
     "type": "origins:overlay",
     "hidden": true,
     "texture": "soul-origins:textures/entity/wind/over_air.png",
-    "strength": 1.0,
+    "strength": 0.3,
     "red": 1.0,
     "green": 1.0,
     "blue": 1.0,
-    "draw_mode": "nausea",
+    "draw_mode": "texture",
     "draw_phase": "below_hud",
     "hide_with_hud": false,
     "visible_in_third_person": false,
     "condition": {
-      "type": "origins:invisible"
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:invisible"
+        },
+        {
+          "type": "origins:status_effect",
+          "effect": "minecraft:speed"
+        }
+      ]
     }
   },
   "swirl": {
-    "type": "apugli:energy_swirl",
-    "texture_location": "minecraft:textures/entity/wither/wither_armor.png",
-    "speed": 0.01,
+    "type": "origins:action_over_time",
     "condition": {
-      "type": "origins:invisible"
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:invisible"
+        },
+        {
+          "type": "origins:status_effect",
+          "effect": "minecraft:speed"
+        }
+      ]
+    },
+    "interval": 20,
+    "rising_action": {
+      "type": "origins:play_sound",
+      "sound": "soul-origins:power.wind.afterburst",
+      "volume": 1.5
+    },
+    "falling_action": {
+      "type": "origins:play_sound",
+      "sound": "soul-origins:power.wind.afterburst",
+      "volume": 1.5
     }
   }
 }

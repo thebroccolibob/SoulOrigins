@@ -53,6 +53,20 @@
     ],
     "subtitle": "subtitles.soul-origins.items.wind_shard.level"
   },
+  "power.wind.afterburst": {
+    "sounds": [
+      {
+        "name": "soul-origins:wind/wind1",
+        "pitch": 1.0,
+        "volume": 1.0
+      },
+      {
+        "name": "soul-origins:wind/wind2",
+        "pitch": 1.0,
+        "volume": 1.0
+      }
+    ]
+  },
   "block.artificer_surface.place": {
     "sounds": [
       {
