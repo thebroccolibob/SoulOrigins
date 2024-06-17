@@ -140,7 +140,7 @@
     "hide_name": {
         "type": "apugli:prevent_label_render",
         "bientity_condition": {
-            "type": "apoli:actor_condition",
+            "type": "apoli:target_condition",
             "condition": {
                 "type": "origins:and",
                 "conditions": [

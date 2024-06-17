@@ -35,7 +35,9 @@
         "type": "origins:prevent_feature_render",
         "features": [
             "armor",
-            "held_item"
+            "held_item",
+            "head",
+            "elytra"
         ]
     },
     "overlay": {

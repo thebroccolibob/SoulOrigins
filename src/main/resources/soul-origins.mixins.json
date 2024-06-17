@@ -6,6 +6,7 @@
     "BowItemMixin",
     "BrewingStandScreenHandlerMixin",
     "HostileEntityMixin",
+    "LivingEntityMixin",
     "MobEntityMixin",
     "PlayerEntityMixin",
     "PotionEntityMixin",

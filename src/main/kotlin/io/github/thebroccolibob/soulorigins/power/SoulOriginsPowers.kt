@@ -15,7 +15,7 @@ private fun register(powerFactory: PowerFactory<*>) {
 class UseWindShardsPower(type: PowerType<*>, entity: LivingEntity?) : Power(type, entity)
 class UseMobOrbPower(type: PowerType<*>, entity: LivingEntity?) : Power(type, entity)
 class GardenWalker(type: PowerType<*>, entity: LivingEntity?) : Power(type, entity)
-
+class DrowningPower(type: PowerType<*>, entity: LivingEntity?): Power(type, entity)
 
 fun registerSoulOriginsPowers() {
     register(BowSpeedPower.factory)
@@ -24,6 +24,8 @@ fun registerSoulOriginsPowers() {
     register(Power.createSimpleFactory(::UseWindShardsPower, SoulOrigins.id("use_wind_shards")))
     register(Power.createSimpleFactory(::UseMobOrbPower, SoulOrigins.id("use_mob_orb")))
     register(Power.createSimpleFactory(::GardenWalker, SoulOrigins.id("walk_on_sculk_garden")))
+    register(Power.createSimpleFactory(::DrowningPower, SoulOrigins.id("drowning")))
     register(BrewingStandPower.factory)
     register(SuspiciousBrewingStandPower.factory)
+    register(EntityStorePower.factory)
 }

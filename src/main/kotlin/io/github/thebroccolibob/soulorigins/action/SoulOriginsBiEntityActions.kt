@@ -1,7 +1,6 @@
 package io.github.thebroccolibob.soulorigins.action
 
 import io.github.apace100.apoli.Apoli.SCHEDULER
-import io.github.apace100.apoli.component.PowerHolderComponent
 import io.github.apace100.apoli.data.ApoliDataTypes
 import io.github.apace100.apoli.power.CooldownPower
 import io.github.apace100.apoli.power.PowerTypeReference
@@ -9,17 +8,16 @@ import io.github.apace100.apoli.power.factory.action.ActionFactory
 import io.github.apace100.apoli.registry.ApoliRegistries
 import io.github.apace100.calio.data.SerializableData
 import io.github.apace100.calio.data.SerializableDataTypes
-import io.github.thebroccolibob.soulorigins.SerializableData
-import io.github.thebroccolibob.soulorigins.SoulOrigins
-import io.github.thebroccolibob.soulorigins.component1
-import io.github.thebroccolibob.soulorigins.component2
+import io.github.thebroccolibob.soulorigins.*
 import io.github.thebroccolibob.soulorigins.item.MobOrbItem
 import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
+import io.github.thebroccolibob.soulorigins.power.EntityStorePower
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registry
+import net.minecraft.util.math.Vec3d
 import java.util.function.BiConsumer
 import net.minecraft.util.Pair as McPair
 
@@ -75,13 +73,37 @@ fun registerSoulOriginsBiEntityActions() {
 
         if (actor is LivingEntity) {
             data.get<PowerTypeReference<*>?>("cooldown")?.let { type ->
-                (PowerHolderComponent.KEY.get(actor).getPower(type) as? CooldownPower)?.let {
+                (actor.getPower(type) as? CooldownPower)?.let {
                     it.setCooldown(it.cooldownDuration - (delay + data.getInt("bonus_cooldown")))
-                    PowerHolderComponent.syncPower(actor, type)
+                    actor.syncPower(type)
                 }
             }
         }
     }
 
     register("raycast_between", RaycastBetweenCentersAction.serializableData, RaycastBetweenCentersAction::execute)
+
+    register(EntityStorePower.setAction)
+
+    register("proportional_velocity", SerializableData {
+        add("multiplier", SerializableDataTypes.VECTOR, Vec3d(1.0, 1.0, 1.0))
+        add("client", SerializableDataTypes.BOOLEAN, true)
+        add("server", SerializableDataTypes.BOOLEAN, true)
+        add("set", SerializableDataTypes.BOOLEAN, false)
+    }) { data, (actor, target) ->
+
+        if (target is PlayerEntity && (if (target.getWorld().isClient) !data.getBoolean("client") else !data.getBoolean("server"))) return@register
+
+        val diff = actor.pos - target.pos
+
+        val change = diff / diff.length() * data.get<Vec3d>("multiplier")
+
+        if (data.getBoolean("set")) {
+            target.velocity = change
+        } else {
+            target.addVelocity(change)
+        }
+
+        target.velocityModified = true
+    }
 }

@@ -16,5 +16,7 @@ object SoulOriginsParticles {
     val GUST_EMITTER_LARGE = register("gust_emitter_large")
     val GUST_EMITTER_SMALL = register("gust_emitter_small")
 
+    val VINE = register("vine")
+
     fun register() {}
 }

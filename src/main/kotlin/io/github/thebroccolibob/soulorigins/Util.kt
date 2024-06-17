@@ -2,6 +2,7 @@ package io.github.thebroccolibob.soulorigins
 
 import io.github.apace100.apoli.component.PowerHolderComponent
 import io.github.apace100.apoli.power.Power
+import io.github.apace100.apoli.power.PowerType
 import io.github.apace100.calio.data.SerializableData
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
@@ -17,8 +18,8 @@ import net.minecraft.item.*
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
-import net.minecraft.screen.PropertyDelegate
 import net.minecraft.registry.Registries
+import net.minecraft.screen.PropertyDelegate
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.util.collection.DefaultedList
@@ -28,6 +29,8 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.Vec3i
 import net.minecraft.world.World
+import org.apache.commons.lang3.tuple.Triple
+import org.joml.Vector3f
 import java.util.*
 import kotlin.reflect.KMutableProperty0
 import kotlin.reflect.KProperty
@@ -79,6 +82,9 @@ fun <T, R> Iterable<T>.mapWithNext(transform: (current: T, next: T?) -> R): List
 
 operator fun <T> McPair<T, *>.component1(): T = left
 operator fun <T> McPair<*, T>.component2(): T = right
+operator fun <T> Triple<T, *, *>.component1(): T = left
+operator fun <T> Triple<*, T, *>.component2(): T = middle
+operator fun <T> Triple<*, *, T>.component3(): T = right
 
 fun <T> Iterable<T>.forEachWithNext(transform: (current: T, next: T?) -> Unit) {
     toList().let {
@@ -94,6 +100,10 @@ operator fun Item.plus(suffix: String) = "$translationKey.$suffix"
 
 inline fun <reified T : Power> Entity.hasPower() = PowerHolderComponent.hasPower(this, T::class.java)
 inline fun <reified T : Power> Entity.getPowers(): List<T> = PowerHolderComponent.getPowers(this, T::class.java)
+fun <T: Power> Entity.getPower(type: PowerType<T>): T? = PowerHolderComponent.KEY[this].getPower(type)
+fun Entity.syncPower(type: PowerType<*>) {
+    PowerHolderComponent.syncPower(this, type)
+}
 
 fun ItemGroup(init: ItemGroup.Builder.() -> Unit): ItemGroup {
     return FabricItemGroup.builder().apply(init).build()
@@ -120,8 +130,11 @@ operator fun Vec3i.minus(other: Vec3i): Vec3i = this.subtract(other)
 operator fun BlockPos.minus(other: Vec3i): BlockPos = this.subtract(other)
 
 operator fun Vec3d.plus(other: Vec3d): Vec3d = this.add(other)
+operator fun Vec3d.plus(other: Vector3f): Vec3d = this.add(other.x.toDouble(), other.y.toDouble(), other.z.toDouble())
 operator fun Vec3d.minus(other: Vec3d): Vec3d = this.subtract(other)
 operator fun Vec3d.times(scalar: Double): Vec3d = this.multiply(scalar)
+operator fun Vec3d.div(scalar: Double): Vec3d = this * (1.0 / scalar)
+operator fun Vec3d.times(other: Vec3d): Vec3d = this.multiply(other)
 
 val Block.id
     get() = Registries.BLOCK.getId(this)

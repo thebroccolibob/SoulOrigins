@@ -1,5 +1,8 @@
 {
     "type": "origins:multiple",
+    "store": {
+        "type": "soul-origins:entity_store"
+    },
     "activate": {
         "type": "origins:active_self",
         "condition": {
@@ -9,50 +12,61 @@
         "key": "key.origins.secondary_active",
         "cooldown": 60,
         "entity_action": {
-            "type": "apoli:if_else",
-            "condition": {
-                "type": "origins:command",
-                "command": "execute if entity @e[tag=okami_summon]",
-                "comparison": ">=",
-                "compare_to": 1
-            },
-            "if_action": {
-                "type": "origins:selector_action",
-                "selector": "@e[tag=okami_summon]",
-                "bientity_action": {
-                    "type": "origins:target_action",
-                    "action": {
-                        "type": "soul-origins:despawn"
-                    }
-                }
-            },
-            "else_action": {
-                "type": "soul-origins:spawn_entity",
-                "entity_type": "minecraft:wolf",
-                "tag": {
-                    "CustomName": "{\"text\":\"Moro\"}",
-                    "Tags": ["okami_summon"],
-                    "CollarColor": 15
+            "type": "origins:side",
+            "side": "server",
+            "action": {
+                "type": "apoli:if_else",
+                "condition": {
+                    "type": "soul-origins:stored_entity",
+                    "store": "soul-origins:okami/wolf_summon_store"
                 },
-                "bientity_action": {
-                    "type": "origins:and",
-                    "actions": [
-                        { "type": "origins:tame" },
-                        { "type": "origins:mount" }
-                    ]
-                },
-                "entity_action": {
+                "if_action": {
                     "type": "origins:and",
                     "actions": [
                         {
-                            "type": "origins:execute_command",
-                            "command": "scale set 2"
+                            "type": "soul-origins:stored_entity_action",
+                            "store": "soul-origins:okami/wolf_summon_store",
+                            "entity_action": {
+                                "type": "soul-origins:despawn"
+                            }
                         },
                         {
-                            "type": "origins:execute_command",
-                            "command": "scale delay set 0"
+                            "type": "soul-origins:clear_entity_store",
+                            "store": "soul-origins:okami/wolf_summon_store"
                         }
                     ]
+                },
+                "else_action": {
+                    "type": "soul-origins:spawn_entity",
+                    "entity_type": "minecraft:wolf",
+                    "tag": {
+                        "CustomName": "{\"text\":\"Moro\"}",
+                        "CollarColor": 15
+                    },
+                    "bientity_action": {
+                        "type": "origins:and",
+                        "actions": [
+                            {
+                                "type": "soul-origins:set_entity_store",
+                                "store": "soul-origins:okami/wolf_summon_store"
+                            },
+                            { "type": "origins:tame" },
+                            { "type": "origins:mount" }
+                        ]
+                    },
+                    "entity_action": {
+                        "type": "origins:and",
+                        "actions": [
+                            {
+                                "type": "origins:execute_command",
+                                "command": "scale set 2"
+                            },
+                            {
+                                "type": "origins:execute_command",
+                                "command": "scale delay set 0"
+                            }
+                        ]
+                    }
                 }
             }
         }
