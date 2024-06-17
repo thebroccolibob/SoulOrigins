@@ -18,6 +18,8 @@ object SoulOriginsSounds {
     val WIND_BURST_LARGE = register("power.wind.burst_large")
     val WIND_LEVELUP = register("items.wind_shard.level")
     val WIND_BURST_AMBIENCE = register("power.wind.afterburst")
+    val WIND_FLOAT = register("power.wind.float")
+    val WIND_LAND = register("power.wind.land")
 
     val SORCERER_TP = register("power.sorcerer.teleport")
     val SORCERER_SCULK_GARDEN = register("power.sorcerer.sculk")
