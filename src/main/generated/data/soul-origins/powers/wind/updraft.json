@@ -104,10 +104,6 @@
               ]
             }
           ]
-        },
-        {
-          "type": "origins:sneaking",
-          "inverted": true
         }
       ]
     },

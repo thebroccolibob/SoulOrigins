@@ -56,12 +56,12 @@
   "power.wind.afterburst": {
     "sounds": [
       {
-        "name": "soul-origins:wind/wind1",
+        "name": "minecraft:ambient/nether/soulsand_valley/wind1",
         "pitch": 1.0,
         "volume": 1.0
       },
       {
-        "name": "soul-origins:wind/wind2",
+        "name": "minecraft:ambient/nether/soulsand_valley/wind2",
         "pitch": 1.0,
         "volume": 1.0
       }
