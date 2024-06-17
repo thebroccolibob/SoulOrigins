@@ -11,6 +11,7 @@
         "soul-origins:fish/pescetarian",
         "soul-origins:fish/blub",
         "soul-origins:soul_meter",
-        "soul-origins:soul_extract"
+        "soul-origins:soul_extract",
+        "origins:swim_speed"
     ]
 }
