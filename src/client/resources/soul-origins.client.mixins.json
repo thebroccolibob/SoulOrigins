@@ -4,8 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "client": [
     "MinecraftClientMixin",
-    "ModelPredicateProviderRegistryMixin",
-    "SkeletonEntityRendererMixin"
+    "ModelPredicateProviderRegistryMixin"
   ],
   "injectors": {
     "defaultRequire": 1

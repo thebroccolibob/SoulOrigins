@@ -64,8 +64,8 @@
                     },
                     {
                         "type": "origins:play_sound",
-                        "sound": "minecraft:entity.arrow.shoot",
-                        "pitch": 0.9
+                        "sound": "minecraft:block.big_dripleaf.tilt_down",
+                        "pitch": 1.2
                     }
                 ]
             },
@@ -105,7 +105,7 @@
                     },
                     "hit_action": {
                         "type": "origins:play_sound",
-                        "sound": "minecraft:entity.arrow.shoot",
+                        "sound": "minecraft:block.big_dripleaf.tilt_up",
                         "pitch": 1.3
                     }
                 }

@@ -1,9 +1,6 @@
 {
     "type": "origins:active_self",
-    "condition": {
-        "type": "origins:sneaking"
-    },
-    "key": "key.origins.secondary_active",
+    "key": "key.origins.ternary_active",
     "entity_action": {
         "type": "apoli:if_else",
         "condition": {

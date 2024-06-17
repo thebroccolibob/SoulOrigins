@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-16T23:19:44.0188727	soul-origins/Model Definitions
+// 1.20.1	2024-06-17T01:11:29.7838739	soul-origins/Model Definitions
 4f1eb48199b7942d5430995922d01a62fe6e507c assets\soul-origins\models\item\artificer_wall_builder.json
 1fd31aef6bf5e6dce77f6f0e56b068829017f56b assets\soul-origins\models\item\tailwind_shard.json
 635db06656a1ce3e4e85ddd77afd6a1f356ee6d6 assets\soul-origins\blockstates\artificer_ns_wall_builder.json
@@ -10,8 +10,8 @@
 1cf65cb105d3dbe8e88e81244ca79dc0428aabdb assets\soul-origins\models\item\mob_orb_skeleton.json
 1e37f2226f760ce44552efc298d54efc356664a9 assets\soul-origins\models\item\mob_orb_husk.json
 d53fa742f279d284de6970b17ace176b2559de24 assets\soul-origins\models\item\mob_orb_witherskeleton.json
-a9d38023ee0f5f025a94fdd845fcbda15cec32e6 assets\soul-origins\models\block\artificer_surface.json
 600d173e514d40d194d42f49bcbf70225da85947 assets\soul-origins\models\item\mob_orb_zombie.json
+a9d38023ee0f5f025a94fdd845fcbda15cec32e6 assets\soul-origins\models\block\artificer_surface.json
 f3d42feabd42cc165b106b7624ed74f9c5d95a50 assets\soul-origins\blockstates\garden_sculk.json
 74bc67b70850d3f73a79afea66bb3563348c64eb assets\soul-origins\models\item\mob_orb_stray.json
 dd19bf15ba2f45fb868fa530a8b2f94caf12e86d assets\soul-origins\models\item\updraft_shard.json

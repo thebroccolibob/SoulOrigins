@@ -24,6 +24,8 @@ object SoulOriginsSounds {
     val SORCERER_TP = register("power.sorcerer.teleport")
     val SORCERER_SCULK_GARDEN = register("power.sorcerer.sculk")
 
+    val WOLF_SUMMON = register("power.wolf.summon")
+
     val ARTIFICER_SURFACE_PLACE = register("block.artificer_surface.place")
     val ARTIFICER_SURFACE_DESTROY = register("block.artificer_surface.destroy")
 

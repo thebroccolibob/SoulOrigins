@@ -122,5 +122,24 @@
       }
     ],
     "subtitle": "subtitles.block.generic.destroy"
+  },
+  "power.wolf.summon": {
+    "sounds": [
+      {
+        "name": "minecraft:ambient/nether/crimson_forest/shine1",
+        "pitch": 1.0,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:ambient/nether/crimson_forest/shine2",
+        "pitch": 1.0,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:ambient/nether/crimson_forest/shine3",
+        "pitch": 1.0,
+        "volume": 1.0
+      }
+    ]
   }
 }

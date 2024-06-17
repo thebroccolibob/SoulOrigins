@@ -90,9 +90,24 @@
                 "type": "origins:target_action",
                 "action": {
                     "type": "origins:execute_command",
-                    "command": "say PLACEHOLDER TEXT"
+                    "command": "say ..."
                 }
             }
+        }
+    },
+    "gui_overlay": {
+        "type": "origins:overlay",
+        "texture": "minecraft:textures/misc/vignette.png",
+        "strength": 0.3,
+        "red": 1.0,
+        "green": 0.22,
+        "blue": 0.2,
+        "draw_mode": "texture",
+        "draw_phase": "below_hud",
+        "hide_with_hud": false,
+        "visible_in_third_person": false,
+        "condition": {
+            "type": "origins:invisible"
         }
     }
 }

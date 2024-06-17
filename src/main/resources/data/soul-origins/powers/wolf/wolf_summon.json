@@ -5,12 +5,12 @@
     },
     "activate": {
         "type": "origins:active_self",
-        "condition": {
-            "type": "origins:sneaking",
-            "inverted": true
-        },
         "key": "key.origins.secondary_active",
         "cooldown": 60,
+        "hud_render": {
+            "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png",
+            "bar_index": 5
+        },
         "entity_action": {
             "type": "origins:side",
             "side": "server",
@@ -18,21 +18,45 @@
                 "type": "apoli:if_else",
                 "condition": {
                     "type": "soul-origins:stored_entity",
-                    "store": "soul-origins:okami/wolf_summon_store"
+                    "store": "soul-origins:wolf/wolf_summon_store"
                 },
                 "if_action": {
                     "type": "origins:and",
                     "actions": [
                         {
                             "type": "soul-origins:stored_entity_action",
-                            "store": "soul-origins:okami/wolf_summon_store",
+                            "store": "soul-origins:wolf/wolf_summon_store",
                             "entity_action": {
                                 "type": "soul-origins:despawn"
                             }
                         },
                         {
                             "type": "soul-origins:clear_entity_store",
-                            "store": "soul-origins:okami/wolf_summon_store"
+                            "store": "soul-origins:wolf/wolf_summon_store"
+                        },
+                        {
+                            "type": "origins:play_sound",
+                            "sound": "soul-origins:power.wolf.summon",
+                            "volume": 0.5
+                        },
+                        {
+                            "type": "origins:spawn_particles",
+                            "particle": {
+                                "type": "minecraft:soul_fire_flame"
+                            },
+                            "count": 20,
+                            "speed": 0.01,
+                            "force": true,
+                            "spread": {
+                                "x": 3.0,
+                                "y": 0.0,
+                                "z": 3.0
+                            }
+                        },
+                        {
+                            "type": "origins:play_sound",
+                            "sound": "minecraft:entity.wolf.ambient",
+                            "pitch": 0.8
                         }
                     ]
                 },
@@ -48,7 +72,7 @@
                         "actions": [
                             {
                                 "type": "soul-origins:set_entity_store",
-                                "store": "soul-origins:okami/wolf_summon_store"
+                                "store": "soul-origins:wolf/wolf_summon_store"
                             },
                             { "type": "origins:tame" },
                             { "type": "origins:mount" }
@@ -64,6 +88,30 @@
                             {
                                 "type": "origins:execute_command",
                                 "command": "scale delay set 0"
+                            },
+                            {
+                                "type": "origins:play_sound",
+                                "sound": "soul-origins:power.wolf.summon",
+                                "volume": 0.5
+                            },
+                            {
+                                "type": "origins:spawn_particles",
+                                "particle": {
+                                    "type": "minecraft:soul_fire_flame"
+                                },
+                                "count": 20,
+                                "speed": 0.01,
+                                "force": true,
+                                "spread": {
+                                    "x": 3.0,
+                                    "y": 0.0,
+                                    "z": 3.0
+                                }
+                            },
+                            {
+                                "type": "origins:play_sound",
+                                "sound": "minecraft:entity.wolf.growl",
+                                "pitch": 0.8
                             }
                         ]
                     }

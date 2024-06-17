@@ -35,6 +35,23 @@
                         "type": "origins:add_velocity",
                         "reference": "rotation",
                         "z": 0.2
+                    },
+                    {
+                        "type": "origins:target_action",
+                        "action": {
+                            "type": "origins:spawn_particles",
+                            "particle": {
+                                "type": "minecraft:sweep_attack"
+                            },
+                            "count": 1,
+                            "speed": 0.01,
+                            "force": true,
+                            "spread": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        }
                     }
                 ]
             },
