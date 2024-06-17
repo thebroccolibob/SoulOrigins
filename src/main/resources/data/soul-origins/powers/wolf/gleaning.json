@@ -14,7 +14,7 @@
         },
         "entity_action": {
             "type": "origins:change_resource",
-            "resource": "soul-origins:okami/gleaning_tracker",
+            "resource": "soul-origins:wolf/gleaning_tracker",
             "operation": "add",
             "change": 4
         }
@@ -24,7 +24,7 @@
         "attribute": "generic.max_health",
         "modifier": {
             "operation": "add_base_late",
-            "resource": "soul-origins:okami/gleaning_tracker",
+            "resource": "soul-origins:wolf/gleaning_tracker",
             "value": 0
         }
     },
@@ -32,7 +32,7 @@
         "type": "origins:action_on_callback",
         "entity_action_respawned": {
             "type": "origins:change_resource",
-            "resource": "soul-origins:okami/gleaning_tracker",
+            "resource": "soul-origins:wolf/gleaning_tracker",
             "operation": "set",
             "change": 0
         }

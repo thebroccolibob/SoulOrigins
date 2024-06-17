@@ -8,17 +8,17 @@
         "type": "apoli:if_else",
         "condition": {
             "type": "apoli:power",
-            "power": "soul-origins:okami/hunt_active"
+            "power": "soul-origins:wolf/hunt_active"
         },
         "if_action": {
             "type": "origins:revoke_power",
-            "power": "soul-origins:okami/hunt_active",
-            "source": "soul-origins:okami/hunt"
+            "power": "soul-origins:wolf/hunt_active",
+            "source": "soul-origins:wolf/hunt"
         },
         "else_action": {
             "type": "origins:grant_power",
-            "power": "soul-origins:okami/hunt_active",
-            "source": "soul-origins:okami/hunt"
+            "power": "soul-origins:wolf/hunt_active",
+            "source": "soul-origins:wolf/hunt"
         }
     }
 }

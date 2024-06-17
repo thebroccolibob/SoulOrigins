@@ -1,0 +1,15 @@
+{
+    "name": "Wolf Deity",
+    "description": "Ride a wolf",
+    "icon": "minecraft:wolf_spawn_egg",
+    "impact": 3,
+    "powers": [
+        "soul-origins:wolf/wolf_rider",
+        "soul-origins:wolf/wolf_summon",
+        "soul-origins:wolf/hunter",
+        "soul-origins:wolf/hunt",
+        "soul-origins:wolf/gleaning",
+        "soul-origins:wolf/lunge",
+        "soul-origins:wolf/bushwacking"
+    ]
+}

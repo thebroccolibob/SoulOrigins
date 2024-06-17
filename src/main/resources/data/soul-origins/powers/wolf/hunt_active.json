@@ -40,7 +40,7 @@
     },
     "overlay": {
         "type": "soul-origins:emissive_overlay",
-        "texture_location": "soul-origins:textures/entity/okami_hunt.png"
+        "texture_location": "soul-origins:textures/entity/wolf/wolf_hunt.png"
     },
     "remove_on_hit": {
         "type": "origins:action_on_hit",
@@ -48,8 +48,8 @@
             "type": "origins:actor_action",
             "action": {
                 "type": "origins:revoke_power",
-                "power": "soul-origins:okami/hunt_active",
-                "source": "soul-origins:okami/hunt"
+                "power": "soul-origins:wolf/hunt_active",
+                "source": "soul-origins:wolf/hunt"
             }
         }
     },
@@ -59,8 +59,8 @@
             "type": "origins:target_action",
             "action": {
                 "type": "origins:revoke_power",
-                "power": "soul-origins:okami/hunt_active",
-                "source": "soul-origins:okami/hunt"
+                "power": "soul-origins:wolf/hunt_active",
+                "source": "soul-origins:wolf/hunt"
             }
         }
     },
@@ -68,7 +68,7 @@
         "type": "origins:active_self",
         "condition": {
             "type": "origins:resource",
-            "resource": "soul-origins:okami/hunt_target_cooldown",
+            "resource": "soul-origins:wolf/hunt_target_cooldown",
             "comparison": "<=",
             "compare_to": 0
         },

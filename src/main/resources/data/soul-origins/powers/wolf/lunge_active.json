@@ -53,8 +53,8 @@
             "ticks": 7,
             "action": {
                 "type": "origins:revoke_power",
-                "power": "soul-origins:okami/lunge_active",
-                "source": "soul-origins:okami/lunge"
+                "power": "soul-origins:wolf/lunge_active",
+                "source": "soul-origins:wolf/lunge"
             }
         }
     },

@@ -9,7 +9,7 @@
                     "type": "origins:resource",
                     "compare_to": 100,
                     "comparison": "<=",
-                    "resource": "soul-origins:okami/lunge_cooldown"
+                    "resource": "soul-origins:wolf/lunge_cooldown"
                 },
                 {
                     "type": "apugli:grounded"
@@ -118,8 +118,8 @@
                 },
                 {
                     "type": "origins:grant_power",
-                    "power": "soul-origins:okami/lunge_active",
-                    "source": "soul-origins:okami/lunge"
+                    "power": "soul-origins:wolf/lunge_active",
+                    "source": "soul-origins:wolf/lunge"
                 },
                 {
                     "type": "origins:exhaust",
@@ -133,7 +133,7 @@
                 {
                     "type": "soul-origins:change_cooldown",
                     "change": 100,
-                    "cooldown": "soul-origins:okami/lunge_cooldown"
+                    "cooldown": "soul-origins:wolf/lunge_cooldown"
                 }
             ]
         },
