@@ -1,0 +1,60 @@
+{
+  "type": "origins:active_self",
+  "key": "key.origins.secondary_active",
+  "cooldown": 100,
+  "hud_render": {
+    "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+    "bar_index": 10,
+    "should_render": true
+  },
+  "condition": {
+    "type": "origins:or",
+    "conditions": [
+      {
+        "type": "origins:in_rain"
+      },
+      {
+        "type": "origins:in_block_anywhere",
+        "block_condition": {
+          "type": "origins:fluid",
+          "fluid_condition": {
+            "type": "origins:in_tag",
+            "tag": "minecraft:water"
+          }
+        }
+      }
+    ]
+  },
+  "entity_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "soul-origins:use_riptide",
+        "duration": 20
+      },
+      {
+        "type": "origins:add_velocity",
+        "z": 2,
+        "client": true,
+        "server": false,
+        "space": "local"
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "apugli:grounded"
+        },
+        "if_action": {
+          "type": "soul-origins:move",
+          "move": {
+            "y": 2
+          }
+        }
+      },
+      {
+        "type": "origins:play_sound",
+        "sound": "minecraft:item.trident.riptide_2"
+      }
+    ]
+  }
+}

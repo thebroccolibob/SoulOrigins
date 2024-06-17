@@ -1,0 +1,64 @@
+{
+    "type": "origins:multiple",
+    "toggle": {
+        "type": "origins:toggle",
+        "key": "key.origins.primary_active",
+        "retain_state": false,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:soul_meter",
+            "comparison": ">",
+            "compare_to": 0
+        }
+    },
+    "use_soul_meter": {
+        "type": "origins:action_over_time",
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "*:soul_meter",
+            "operation": "add",
+            "change": -1
+        },
+        "interval": 100,
+        "condition": {
+            "type": "origins:power_active",
+            "power": "*:*_toggle"
+        }
+    },
+    "swim": {
+        "type": "origins:swimming",
+        "condition": {
+            "type": "origins:power_active",
+            "power": "*:*_toggle"
+        }
+    },
+    "trail": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "entity_action": {
+            "type": "origins:execute_command",
+            "command": "fill ~-0.75 ~-0.25 ~-0.75 ~0.75 ~1.25 ~0.75 soul-origins:decaying_water replace air"
+        },
+        "condition": {
+            "type": "origins:power_active",
+            "power": "*:*_toggle"
+        }
+    },
+    "particles": {
+        "type": "apoli:particle",
+        "particle": "minecraft:bubble",
+        "count": 4,
+        "frequency": 1,
+        "spread": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+        },
+        "offset_y": 1,
+        "speed": 0,
+        "condition": {
+            "type": "origins:power_active",
+            "power": "*:*_toggle"
+        }
+    }
+}

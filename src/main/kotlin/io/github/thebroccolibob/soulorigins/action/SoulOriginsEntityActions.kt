@@ -6,6 +6,7 @@ import io.github.apace100.apoli.power.PowerType
 import io.github.apace100.apoli.power.factory.action.ActionFactory
 import io.github.apace100.apoli.registry.ApoliRegistries
 import io.github.apace100.calio.data.SerializableData
+import io.github.apace100.calio.data.SerializableDataType
 import io.github.apace100.calio.data.SerializableDataTypes
 import io.github.thebroccolibob.soulorigins.SerializableData
 import io.github.thebroccolibob.soulorigins.SoulOrigins
@@ -15,7 +16,9 @@ import io.github.thebroccolibob.soulorigins.syncPower
 import net.minecraft.entity.AreaEffectCloudEntity
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.MovementType
 import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.item.PotionItem
 import net.minecraft.nbt.NbtElement
@@ -136,4 +139,17 @@ fun registerSoulOriginsEntityActions() {
     }
 
     register(SpawnEntityRaycastAction.factory)
+
+    register("use_riptide", SerializableData {
+        add("duration", SerializableDataTypes.INT, 20)
+    }) { data, entity ->
+        (entity as? PlayerEntity)?.useRiptide(data.getInt("duration"))
+    }
+
+    register("move", SerializableData {
+        add("move", SerializableDataTypes.VECTOR)
+        add("movement_type", SerializableDataType.enumValue(MovementType::class.java), MovementType.SELF)
+    }) { data, entity ->
+        entity.move(data.get("movement_type"), data.get("move"))
+    }
 }

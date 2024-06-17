@@ -1,0 +1,13 @@
+{
+    "name": "Fish",
+    "description": "Fish",
+    "icon": "minecraft:cod",
+    "impact": 1,
+    "powers": [
+        "soul-origins:fish/conduit",
+        "soul-origins:fish/riptide",
+        "soul-origins:fish/water_stream",
+        "soul-origins:soul_meter",
+        "soul-origins:soul_extract"
+    ]
+}
