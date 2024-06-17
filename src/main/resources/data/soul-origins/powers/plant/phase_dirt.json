@@ -1,0 +1,102 @@
+{
+    "type": "origins:multiple",
+    "phase": {
+        "type": "origins:phasing",
+        "block_condition": {
+            "type": "origins:in_tag",
+            "tag": "soul-origins:plant_phaseable"
+        },
+        "render_type": "blindness",
+        "view_distance": 24,
+        "phase_down_condition": {
+            "type": "origins:or",
+            "conditions": [
+                { "type": "origins:sneaking" },
+                { "type": "origins:swimming" }
+            ]
+        }
+    },
+    "swim": {
+        "type": "origins:swimming",
+        "condition": {
+            "type": "origins:in_block",
+            "block_condition": {
+                "type": "origins:in_tag",
+                "tag": "soul-origins:plant_phaseable"
+            }
+        }        
+    },
+    "speed": {
+        "type": "origins:conditioned_attribute",
+        "modifier": {
+            "name": "Speed Decrease",
+            "attribute": "minecraft:generic.movement_speed",
+            "operation": "multiply_total",
+            "value": -0.5
+        },
+        "condition": {
+            "type": "origins:in_block",
+            "block_condition": {
+                "type": "origins:in_tag",
+                "tag": "soul-origins:plant_phaseable"
+            }
+        }        
+    },
+    "particle": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:in_block",
+                    "block_condition": {
+                        "type": "origins:in_tag",
+                        "tag": "soul-origins:plant_phaseable"
+                    }
+                },
+                {
+                    "type": "origins:moving"
+                }
+            ]
+        },
+        "entity_action": {
+            "type": "soul-origins:block_particle",
+            "count": 4,
+            "speed": 0,
+            "offset_y": 0.5,
+            "spread": {
+                "x": 0.25,
+                "y": 0,
+                "z": 0.25
+            }
+        }
+    },
+    "hide_name": {
+        "type": "apugli:prevent_label_render",
+        "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+                "type": "origins:in_block",
+                "block_condition": {
+                    "type": "origins:in_tag",
+                    "tag": "soul-origins:plant_phaseable"
+                }
+            }
+        }
+    },
+    "air": {
+        "type": "soul-origins:drowning",
+        "condition": {
+            "type": "origins:in_block",
+            "block_condition": {
+                "type": "origins:offset",
+                "y": 1,
+                "condition": {
+                    "type": "origins:in_tag",
+                    "tag": "soul-origins:plant_phaseable"
+                }
+            }
+        }
+    }
+}

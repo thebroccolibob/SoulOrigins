@@ -1,6 +1,5 @@
 package io.github.thebroccolibob.soulorigins.power
 
-import io.github.apace100.apoli.component.PowerHolderComponent
 import io.github.apace100.apoli.data.ApoliDataTypes
 import io.github.apace100.apoli.power.Active
 import io.github.apace100.apoli.power.Active.Key
@@ -53,7 +52,7 @@ open class BrewingStandPower(
     private val containerSize = inventory.size
 
     private val fuelPower = if (entity == null || fuelPowerType == null) null else
-        PowerHolderComponent.KEY.get(entity).getPower(fuelPowerType) as? ResourcePower
+        entity.getPower(fuelPowerType) as? ResourcePower
 
     override fun createMenu(syncId: Int, playerInventory: PlayerInventory?, player: PlayerEntity?): ScreenHandler {
         return BrewingStandScreenHandler(syncId, playerInventory, this@BrewingStandPower, propertyDelegate)
@@ -146,7 +145,7 @@ open class BrewingStandPower(
         }
     }
 
-    fun canCraft(): Boolean {
+    private fun canCraft(): Boolean {
         val ingredient = inventory[3]
 
         if (ingredient.isEmpty || !isValidIngredient(ingredient)) {
@@ -197,9 +196,12 @@ open class BrewingStandPower(
     private fun consumeFuel() {
         if (fuel > 0)
             fuel--
-        else
-            fuelPower?.decrement()
-        PowerHolderComponent.syncPower(entity, fuelPowerType)
+        else {
+            fuelPower?.run {
+                decrement()
+                entity.syncPower(fuelPowerType!!)
+            }
+        }
     }
 
     override fun getKey(): Key {

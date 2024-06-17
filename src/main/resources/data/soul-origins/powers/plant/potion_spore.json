@@ -1,0 +1,35 @@
+{
+    "type": "origins:action_on_item_use",
+    "item_condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:or",
+                "conditions": [
+                    {
+                        "type": "origins:ingredient",
+                        "ingredient": {
+                            "item": "minecraft:potion"
+                        }
+                    },
+                    {
+                        "type": "origins:ingredient",
+                        "ingredient": {
+                            "item": "soul-origins:suspicious_brew"
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "soul-origins:potion_effect_count",
+                "comparison": ">",
+                "compare_to": 0
+            }
+        ]
+    },
+    "trigger": "finish",
+    "priority": 1,
+    "entity_action": {
+        "type": "soul-origins:effect_cloud_from_item"
+    }
+}

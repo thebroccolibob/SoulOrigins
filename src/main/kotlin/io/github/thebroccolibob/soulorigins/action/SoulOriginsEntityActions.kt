@@ -1,6 +1,5 @@
 package io.github.thebroccolibob.soulorigins.action
 
-import io.github.apace100.apoli.component.PowerHolderComponent
 import io.github.apace100.apoli.data.ApoliDataTypes
 import io.github.apace100.apoli.power.CooldownPower
 import io.github.apace100.apoli.power.PowerType
@@ -10,13 +9,22 @@ import io.github.apace100.calio.data.SerializableData
 import io.github.apace100.calio.data.SerializableDataTypes
 import io.github.thebroccolibob.soulorigins.SerializableData
 import io.github.thebroccolibob.soulorigins.SoulOrigins
+import io.github.thebroccolibob.soulorigins.getPower
+import io.github.thebroccolibob.soulorigins.power.EntityStorePower
+import io.github.thebroccolibob.soulorigins.syncPower
+import net.minecraft.entity.AreaEffectCloudEntity
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.item.ItemStack
+import net.minecraft.item.PotionItem
+import net.minecraft.nbt.NbtElement
 import net.minecraft.particle.BlockStateParticleEffect
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.potion.PotionUtil
 import net.minecraft.registry.Registry
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.util.math.Direction
+import net.minecraft.util.Hand
 import net.minecraft.util.math.Vec3d
 import java.util.function.BiConsumer
 
@@ -38,13 +46,11 @@ fun registerSoulOriginsEntityActions() {
         add("change", SerializableDataTypes.INT)
     }) { data, entity ->
         if (entity is LivingEntity) {
-            val component = PowerHolderComponent.KEY[entity]
             val powerType = data.get<PowerType<*>>("cooldown")
-            val p = component.getPower(powerType)
-            val change = data.getInt("change")
-            if (p is CooldownPower) {
-                p.setCooldown((p.cooldownDuration - p.remainingTicks) - change)
-                PowerHolderComponent.syncPower(entity, powerType)
+            (entity.getPower(powerType) as? CooldownPower)?.run {
+                val change = data.getInt("change")
+                setCooldown((cooldownDuration - remainingTicks) - change)
+                entity.syncPower(powerType)
             }
         }
     }
@@ -76,8 +82,14 @@ fun registerSoulOriginsEntityActions() {
         val deltaY = (entity.height * spread.y).toFloat()
         val deltaZ = (entity.width * spread.z).toFloat()
         val offsetY = entity.height * data.getFloat("offset_y")
+
+        val state = serverWorld.getBlockState(entity.blockPos).let {
+            @Suppress("DEPRECATION")
+            if (it.isAir || it.isLiquid) serverWorld.getBlockState(entity.blockPos.down()) else it
+        }
+
         serverWorld.spawnParticles(
-            BlockStateParticleEffect(ParticleTypes.BLOCK, serverWorld.getBlockState(entity.blockPos.offset(Direction.DOWN))),
+            BlockStateParticleEffect(ParticleTypes.BLOCK, state),
             entity.x,
             entity.y + offsetY,
             entity.z,
@@ -90,4 +102,38 @@ fun registerSoulOriginsEntityActions() {
     }
 
     register("apugli_raycast", FixedRaycastAction.serializableData, FixedRaycastAction::execute)
+
+    register(EntityStorePower.storeAction)
+    register(EntityStorePower.clearAction)
+
+    register("effect_cloud_from_item") { entity ->
+        if (entity.world.isClient || entity !is LivingEntity) return@register
+
+        val potionCheck = { stack: ItemStack ->
+            if (stack.item is PotionItem) stack else null
+        }
+
+        val stack = entity.getStackInHand(Hand.MAIN_HAND).let(potionCheck) ?: entity.getStackInHand(Hand.OFF_HAND).let(potionCheck) ?: return@register
+
+        AreaEffectCloudEntity(entity.world, entity.x, entity.y, entity.z).apply {
+            owner = entity
+            radius = 3.0f
+            radiusOnUse = -0.5f
+            waitTime = 10
+            radiusGrowth = -radius / duration.toFloat()
+            potion = PotionUtil.getPotion(stack)
+
+            for (statusEffectInstance in PotionUtil.getCustomPotionEffects(stack)) {
+                addEffect(StatusEffectInstance(statusEffectInstance))
+            }
+
+            stack.nbt?.run {
+                if (contains("CustomPotionColor", NbtElement.NUMBER_TYPE.toInt())) {
+                    color = getInt("CustomPotionColor")
+                }
+            }
+        }.let(entity.world::spawnEntity)
+    }
+
+    register(SpawnEntityRaycastAction.factory)
 }

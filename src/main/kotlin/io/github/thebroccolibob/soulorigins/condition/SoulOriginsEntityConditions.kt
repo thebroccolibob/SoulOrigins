@@ -8,6 +8,7 @@ import io.github.apace100.calio.data.SerializableDataTypes
 import io.github.thebroccolibob.soulorigins.SerializableData
 import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.item.MobOrbItem
+import io.github.thebroccolibob.soulorigins.power.EntityStorePower
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -55,4 +56,7 @@ fun registerSoulOriginsEntityConditions() {
     register("exists") {
         it.isAlive && !it.isRemoved
     }
+
+    register(EntityStorePower.notEmptyCondition)
+    register(EntityStorePower.entityCondition)
 }

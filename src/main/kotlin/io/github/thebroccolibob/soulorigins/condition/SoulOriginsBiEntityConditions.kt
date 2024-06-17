@@ -4,9 +4,10 @@ import io.github.apace100.apoli.power.factory.condition.ConditionFactory
 import io.github.apace100.apoli.registry.ApoliRegistries
 import io.github.apace100.calio.data.SerializableData
 import io.github.thebroccolibob.soulorigins.SoulOrigins
-import io.github.thebroccolibob.soulorigins.cca.OwnerComponent.Companion.owner
 import io.github.thebroccolibob.soulorigins.component1
 import io.github.thebroccolibob.soulorigins.component2
+import io.github.thebroccolibob.soulorigins.power.EntityStorePower
+import io.github.thebroccolibob.soulorigins.cca.OwnerComponent.Companion.owner
 import net.minecraft.entity.Entity
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.registry.Registry
@@ -33,4 +34,6 @@ fun registerSoulOriginsBiEntityConditions() {
     register("monster_owner") { actor, target ->
         (target as? MobEntity)?.owner == actor
     }
+
+    register(EntityStorePower.isStoredCondition)
 }
