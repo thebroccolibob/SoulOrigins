@@ -111,21 +111,16 @@
         }
     },
     "weakness": {
-        "type": "origins:action_over_time",
-        "interval": 1,
-        "rising_action": {
-            "type": "origins:apply_effect",
-            "effect": {
-                "effect": "minecraft:weakness",
-                "duration": 600,
-                "amplifier": 0
-            }
-        },
+        "type": "origins:modify_damage_dealt",
         "condition": {
             "type": "origins:resource",
             "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
             "comparison": ">",
             "compare_to": 0
+        },
+        "modifier": {
+            "operation": "addition",
+            "value": -4.0
         }
     },
     "silent": {
