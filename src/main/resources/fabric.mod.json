@@ -53,6 +53,9 @@
 		"java": ">=17",
 		"fabric-api": "*",
 		"fabric-language-kotlin": ">=1.9.23",
+		"origins": ">=1.10.0",
+		"apugli": ">=2.10.1",
+		"pehkui": ">=3.8.0",
 		"neutron": ">=1.0.1",
 		"extrakeybinds": ">=0.5.0"
 	},
