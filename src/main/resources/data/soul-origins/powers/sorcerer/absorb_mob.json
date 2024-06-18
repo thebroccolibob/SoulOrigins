@@ -109,6 +109,15 @@
   },
   "cooldown": {
     "type": "origins:cooldown",
-    "cooldown": 2000
+    "cooldown": 250
+  },
+  "prevent_spawn_activate": {
+    "type": "origins:action_on_callback",
+    "entity_action_gained": {
+      "type": "origins:change_resource",
+      "resource": "soul-origins:sorcerer/absorb_mob_cooldown",
+      "operation": "set",
+      "change": 0
+    }
   }
 }

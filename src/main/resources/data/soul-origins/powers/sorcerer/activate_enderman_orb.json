@@ -29,5 +29,14 @@
       "comparison": "==",
       "compare_to": 0
     }
+  },
+  "prevent_spawn_activate": {
+    "type": "origins:action_on_callback",
+    "entity_action_gained": {
+      "type": "origins:change_resource",
+      "resource": "soul-origins:sorcerer/activate_enderman_orb_cooldown",
+      "operation": "set",
+      "change": 30
+    }
   }
 }
