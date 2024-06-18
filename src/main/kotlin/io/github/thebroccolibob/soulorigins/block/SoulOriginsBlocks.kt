@@ -62,6 +62,14 @@ object SoulOriginsBlocks {
         nonOpaque()
     }))
 
+    val DECAYING_WATER = register("decaying_water", DecayingWaterBlock(30, 40, FabricBlockSettings {
+        noCollision()
+        replaceable()
+        dropsNothing()
+        noBlockBreakParticles()
+        pistonBehavior(PistonBehavior.DESTROY)
+    }))
+
     @JvmField
     val GARDEN_SCULK = register("garden_sculk", ::GardenSculkBlock) {
         strength(0.2F)

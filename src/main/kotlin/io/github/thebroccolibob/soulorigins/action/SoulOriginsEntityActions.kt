@@ -165,4 +165,17 @@ fun registerSoulOriginsEntityActions() {
             }
         }
     }
+
+    register("use_riptide", SerializableData {
+        add("duration", SerializableDataTypes.INT, 20)
+    }) { data, entity ->
+        (entity as? PlayerEntity)?.useRiptide(data.getInt("duration"))
+    }
+
+    register("move", SerializableData {
+        add("move", SerializableDataTypes.VECTOR)
+        add("movement_type", SerializableDataType.enumValue(MovementType::class.java), MovementType.SELF)
+    }) { data, entity ->
+        entity.move(data.get("movement_type"), data.get("move"))
+    }
 }
