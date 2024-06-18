@@ -12,9 +12,9 @@ import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 
-open class SurfaceBuilderProjectileItem(val block: Block, private val offsetY: Int, settings: Settings) : Item(settings) {
+open class SurfaceBuilderProjectileItem(val block: Block, protected val offsetY: Int, settings: Settings) : Item(settings) {
 
-    override fun use(world: World, user: PlayerEntity, hand: Hand?): TypedActionResult<ItemStack> {
+    override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val itemStack = user.getStackInHand(hand)
 
         world.playSound(
@@ -28,7 +28,7 @@ open class SurfaceBuilderProjectileItem(val block: Block, private val offsetY: I
             0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f)
         )
         if (!world.isClient) {
-            val projectile = SurfaceBuilderProjectileEntity(world, user, itemStack, getBlock(user).defaultState, offsetY)
+            val projectile = createProjectile(world, user, itemStack)
             projectile.setVelocity(user, user.pitch, user.yaw, 0.0f, 1.5f, 1.0f)
             world.spawnEntity(projectile)
         }
@@ -43,4 +43,7 @@ open class SurfaceBuilderProjectileItem(val block: Block, private val offsetY: I
 
     protected open fun getBlock(user: PlayerEntity) = block
 
+    protected open fun createProjectile(world: World, user: PlayerEntity, itemStack: ItemStack): SurfaceBuilderProjectileEntity {
+        return SurfaceBuilderProjectileEntity(world, user, itemStack, getBlock(user).defaultState, offsetY)
+    }
 }

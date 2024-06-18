@@ -1,0 +1,10 @@
+{
+    "name": "Plant",
+    "description": "",
+    "icon": "minecraft:small_dripleaf",
+    "impact": 1,
+    "powers": [
+        "soul-origins:enderman/telephase",
+        "soul-origins:enderman/particle"
+    ]
+}

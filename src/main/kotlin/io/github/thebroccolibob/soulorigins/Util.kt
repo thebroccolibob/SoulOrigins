@@ -11,7 +11,9 @@ import net.minecraft.block.Block
 import net.minecraft.data.client.Model
 import net.minecraft.data.client.TextureKey
 import net.minecraft.entity.Entity
+import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
+import net.minecraft.entity.data.TrackedDataHandler
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.*
@@ -201,3 +203,9 @@ fun DefaultedList<ItemStack>.toInventory(): Inventory {
 }
 
 operator fun <T> List<T>.get(range: IntRange): List<T> = range.map(this::get)
+
+interface TrackedDataRegister<T: Entity>
+
+inline fun <reified T : Entity, U> TrackedDataRegister<T>.registerData(handler: TrackedDataHandler<U>): TrackedData<U> {
+    return DataTracker.registerData(T::class.java, handler)
+}

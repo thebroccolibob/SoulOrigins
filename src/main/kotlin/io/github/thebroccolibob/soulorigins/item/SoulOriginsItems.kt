@@ -50,7 +50,7 @@ object SoulOriginsItems {
         maxCount(1)
     }))
 
-    val ARTIFICER_PLATFORM_BUILDER = register("artificer_platform_builder", SurfaceBuilderProjectileItem(SoulOriginsBlocks.ARTIFICER_PLATFORM_BUILDER, 0, FabricItemSettings {
+    val ARTIFICER_PLATFORM_BUILDER = register("artificer_platform_builder", AdjustableSurfaceBuilderProjectileItem(SoulOriginsBlocks.ARTIFICER_PLATFORM_BUILDER, 0, intArrayOf(0, 5, 7, 10, 15), FabricItemSettings {
         maxCount(16)
     }))
     val ARTIFICER_WALL_BUILDER = register("artificer_wall_builder", DirectionalSurfaceBuilderProjectileItem(SoulOriginsBlocks.ARTIFICER_NS_WALL_BUILDER, SoulOriginsBlocks.ARTIFICER_EW_WALL_BUILDER, 1, FabricItemSettings {

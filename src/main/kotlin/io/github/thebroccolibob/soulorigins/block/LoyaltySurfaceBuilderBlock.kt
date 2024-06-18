@@ -57,19 +57,13 @@ class LoyaltySurfaceBuilderBlock(rangeX: Int, rangeY: Int, rangeZ: Int, surfaceB
     }
 
     private fun breakSpawnItem(world: ServerWorld, pos: BlockPos, state: BlockState) {
-        val blockEntity = world.getBlockEntity(pos)
-        val owner = (blockEntity as LoyaltySurfaceBuilderBlockEntity).owner
+        val blockEntity = world.getBlockEntity(pos) as LoyaltySurfaceBuilderBlockEntity
+        val owner = blockEntity.owner
 
         if (owner?.isAlive == true) {
-            getDroppedStacks(state, world, pos, blockEntity).forEach {
-                LoyaltyItemEntity(
-                    world,
-                    it,
-                    owner
-                ).apply {
-                    setPosition(pos.toCenterPos())
-                    world.spawnEntity(this)
-                }
+            LoyaltyItemEntity(world, blockEntity.item, owner).apply {
+                setPosition(pos.toCenterPos())
+                world.spawnEntity(this)
             }
 
             world.breakBlock(pos, false)
