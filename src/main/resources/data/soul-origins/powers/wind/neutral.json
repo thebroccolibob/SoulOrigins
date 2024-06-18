@@ -1,4 +1,18 @@
 {
-  "type": "soul-origins:disengage",
-  "distance": 12
+  "type": "origins:multiple",
+  "disengage": {
+    "type": "soul-origins:disengage",
+    "distance": 12
+  },
+  "neutron": {
+    "type": "origins:action_on_callback",
+    "entity_action_gained": {
+      "type": "soul-origins:set_neutron",
+      "enabled": true
+    },
+    "entity_action_lost": {
+      "type": "soul-origins:set_neutron",
+      "enabled": false
+    }
+  }
 }
