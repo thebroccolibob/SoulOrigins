@@ -138,27 +138,24 @@
         }
     },
     "hide_name": {
-        "type": "apugli:prevent_label_render",
-        "bientity_condition": {
-            "type": "apoli:target_condition",
-            "condition": {
-                "type": "origins:and",
-                "conditions": [
-                    {
-                        "type": "origins:in_block",
-                        "block_condition": {
-                            "type": "origins:in_tag",
-                            "tag": "soul-origins:sculk_garden_phaseable"
-                        }
-                    },
-                    {
-                        "type": "origins:resource",
-                        "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
-                        "comparison": ">",
-                        "compare_to": 0
+        "type": "soul-origins:hide_name",
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:in_block",
+                    "block_condition": {
+                        "type": "origins:in_tag",
+                        "tag": "soul-origins:sculk_garden_phaseable"
                     }
-                ]
-            }
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+                    "comparison": ">",
+                    "compare_to": 0
+                }
+            ]
         }
     },
     "swirl": {

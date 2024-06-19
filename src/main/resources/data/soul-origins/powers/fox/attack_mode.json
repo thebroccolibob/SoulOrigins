@@ -1,0 +1,23 @@
+{
+    "type": "origins:multiple",
+    "increase_damage": {
+        "type": "apoli:modify_damage_dealt",
+        "modifier": {
+            "operation": "add_base_late",
+            "value": 3
+        }
+    },
+    "decrease_def": {
+        "type": "origins:attribute",
+        "modifier": {
+            "name": "Stealth mode health boost",
+            "attribute": "minecraft:generic.max_health",
+            "operation": "addition",
+            "value": -4
+        }
+    },
+    "tails": {
+        "type": "apugli:entity_texture_overlay",
+        "texture_location": "soul-origins:textures/entity/fox/attack_mode.png"
+    }
+}

@@ -73,15 +73,12 @@
         }
     },
     "hide_name": {
-        "type": "apugli:prevent_label_render",
-        "bientity_condition": {
-            "type": "origins:target_condition",
-            "condition": {
-                "type": "origins:in_block",
-                "block_condition": {
-                    "type": "origins:in_tag",
-                    "tag": "soul-origins:plant_phaseable"
-                }
+        "type": "soul-origins:hide_name",
+        "condition": {
+            "type": "origins:in_block",
+            "block_condition": {
+                "type": "origins:in_tag",
+                "tag": "soul-origins:plant_phaseable"
             }
         }
     },
