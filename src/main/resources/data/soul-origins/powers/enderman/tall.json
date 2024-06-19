@@ -1,0 +1,27 @@
+{
+    "type": "origins:multiple",
+    "scale": {
+        "type": "apugli:modify_scale",
+        "delay": 40,
+        "scale_types": [
+            "pehkui:width",
+            "pehkui:height"
+        ],
+        "modifier": {
+            "operation": "multiply_base",
+            "value": 0.5
+        }
+    },
+    "crouch": {
+        "type": "apugli:modify_scale",
+        "delay": 0,
+        "scale_type": "pehkui:height",
+        "modifier": {
+            "operation": "multiply_base",
+            "value": -0.12
+        },
+        "condition": {
+            "type": "origins:sneaking"
+        }
+    }
+}

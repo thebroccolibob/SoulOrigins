@@ -14,6 +14,7 @@ import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.getPower
 import io.github.thebroccolibob.soulorigins.power.EntityStorePower
 import io.github.thebroccolibob.soulorigins.syncPower
+import net.minecraft.block.BlockState
 import net.minecraft.entity.AreaEffectCloudEntity
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -27,8 +28,11 @@ import net.minecraft.particle.BlockStateParticleEffect
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.potion.PotionUtil
 import net.minecraft.registry.Registry
+import net.minecraft.registry.tag.FluidTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Hand
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
 import java.util.function.BiConsumer
 
@@ -162,6 +166,33 @@ fun registerSoulOriginsEntityActions() {
                 enabledPlayers.add(entity.uuid)
             } else {
                 enabledPlayers.remove(entity.uuid)
+            }
+        }
+    }
+
+    register("random_teleport", SerializableData {
+        add("action_on_success", ApoliDataTypes.ENTITY_ACTION, null)
+        add("attempts", SerializableDataTypes.INT, 16)
+    }) { data, entity ->
+        val mutable = BlockPos.Mutable(0, 0, 0)
+
+        for (i in 1..data.getInt("attempts")) {
+            mutable.x = entity.blockX + (entity.world.random.nextInt(64) - 32)
+            mutable.y = entity.blockY + (entity.world.random.nextInt(64) - 32)
+            mutable.z = entity.blockZ + (entity.world.random.nextInt(64) - 32)
+
+            while (mutable.y > entity.world.bottomY && !entity.world.getBlockState(mutable).blocksMovement()) {
+                mutable.move(Direction.DOWN)
+            }
+
+            val blockState: BlockState = entity.world.getBlockState(mutable)
+            val bl = blockState.blocksMovement()
+            val bl2 = blockState.fluidState.isIn(FluidTags.WATER)
+
+            if (bl && !bl2) {
+                entity.requestTeleportAndDismount(mutable.x + 0.5, mutable.y + 1.0, mutable.z + 0.5)
+                data.get<ActionFactory<Entity>.Instance?>("action_on_success")?.accept(entity)
+                break
             }
         }
     }

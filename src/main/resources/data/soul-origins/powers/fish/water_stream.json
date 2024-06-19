@@ -5,10 +5,20 @@
         "key": "key.origins.primary_active",
         "retain_state": false,
         "condition": {
-            "type": "origins:resource",
-            "resource": "*:soul_meter",
-            "comparison": ">",
-            "compare_to": 0
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:resource",
+                    "resource": "*:soul_meter",
+                    "comparison": ">",
+                    "compare_to": 0
+                },
+                {
+                    "type": "origins:dimension",
+                    "dimension": "minecraft:the_nether",
+                    "inverted": true
+                }
+            ]
         }
     },
     "consume": {

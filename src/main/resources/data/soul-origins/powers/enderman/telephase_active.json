@@ -3,26 +3,21 @@
     "phase": {
         "type": "origins:phasing",
         "phase_down_condition": {
-            "type": "origins:constant",
-            "value": true
+            "type": "origins:or",
+            "conditions": [
+                {
+                    "type": "origins:creative_flying"
+                },
+                {
+                    "type": "origins:sneaking"
+                }
+            ]
         },
         "render_type": "blindness",
         "view_distance": 16
     },
     "fly": {
         "type": "origins:creative_flight"
-    },
-    "nogravity": {
-        "type": "origins:modify_velocity",
-        "axes": ["y"],
-        "modifier": {
-            "operation": "set_total",
-            "value": 0
-        },
-        "condition": {
-            "type": "origins:creative_flying",
-            "inverted": true
-        }
     },
     "invisible": {
         "type": "origins:invisibility"
