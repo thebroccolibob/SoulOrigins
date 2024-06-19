@@ -8,6 +8,8 @@
         "soul-origins:enderman/particle",
         "soul-origins:enderman/tall",
         "soul-origins:enderman/eyes",
-        "soul-origins:enderman/water_damage"
+        "soul-origins:enderman/water_damage",
+        "soul-origins:enderman/teleport",
+        "origins:pumpkin_hate"
     ]
 }
