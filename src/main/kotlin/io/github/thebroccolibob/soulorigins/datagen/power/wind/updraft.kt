@@ -47,5 +47,8 @@ fun updraft(id: String) = leveledMultiCooldown(
     hudRender = {
         "sprite_location" to "origins:textures/gui/community/huang/resource_bar_01.png"
         "bar_index" to 8
+    },
+    otherParams = {
+        "name" to "cat"
     }
 )
