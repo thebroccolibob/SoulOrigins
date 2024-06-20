@@ -29,6 +29,10 @@
         "type": "origins:shader",
         "shader": "soul-origins:shaders/post/teleport.json"
     },
+    "night_vision": {
+        "type": "origins:night_vision",
+        "strength": 0.7
+    },
     "prevent_entity_use": {
         "type": "origins:prevent_entity_use"
     },
