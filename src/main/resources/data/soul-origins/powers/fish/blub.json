@@ -1,5 +1,7 @@
 {
     "type": "origins:active_self",
+    "name": "Blub",
+    "description": "B L U B",
     "key": "key.origins.ternary_active",
     "entity_action": {
         "type": "origins:and",

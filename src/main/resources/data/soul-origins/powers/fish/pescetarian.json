@@ -1,5 +1,7 @@
 {
     "type": "origins:multiple",
+    "name": "Always The Bigger Fish",
+    "description": "Eating fish is more nutritious for you. Any kind of fish restores hunger bar sufficiently.",
     "always": {
         "type": "origins:modify_food",
         "item_condition": {

@@ -1,5 +1,7 @@
 {
     "type": "origins:multiple",
+    "name": "Soul River",
+    "description": "Manifest soul energy into powerful streams of water that let you swim anywhere you go.",
     "toggle": {
         "type": "origins:toggle",
         "key": "key.origins.primary_active",
@@ -29,7 +31,7 @@
             "operation": "add",
             "change": -1
         },
-        "interval": 500,
+        "interval": 80,
         "condition": {
             "type": "origins:power_active",
             "power": "*:*_toggle"

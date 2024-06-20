@@ -1,5 +1,7 @@
 {
   "type": "origins:active_self",
+  "name": "Sharp Swimmer",
+  "description": "While exposed to water, do a rapid spinning torpedo dive that can harm enemies.",
   "key": "key.origins.secondary_active",
   "cooldown": 100,
   "hud_render": {

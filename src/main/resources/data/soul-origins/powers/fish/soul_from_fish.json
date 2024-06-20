@@ -1,5 +1,7 @@
 {
     "type": "origins:action_on_item_use",
+    "name": "Eat Their Souls",
+    "description": "When eating fish, you also eat their souls. Restores soul energy.",
     "item_condition": {
         "type": "origins:ingredient",
         "ingredient": {

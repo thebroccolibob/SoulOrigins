@@ -1,5 +1,7 @@
 {
   "type": "origins:action_over_time",
+  "name": "Fish Power",
+  "description": "The water has no match for you. This let's you mine efficiently underwater, see better underwater. Fish Power!",
   "entity_action": {
     "type": "origins:apply_effect",
     "effect": {
