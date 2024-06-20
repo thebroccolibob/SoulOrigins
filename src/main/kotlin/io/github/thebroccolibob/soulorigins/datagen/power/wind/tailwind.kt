@@ -84,6 +84,7 @@ fun tailwind(id: String) = leveledMultiCooldown(id, tailwindEntries, "key.origin
         "bar_index" to 23
     },
     otherParams = {
-        "name" to "cat"
+        "name" to "Tailwind"
+        "description" to "Create a powerful stream of wind launching you forward. Upgrades with Tailwind Shard."
     }
 )

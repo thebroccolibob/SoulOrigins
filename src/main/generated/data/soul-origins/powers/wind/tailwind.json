@@ -627,5 +627,7 @@
       },
       "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png"
     }
-  }
+  },
+  "description": "Create a powerful stream of wind launching you forward. Upgrades with Tailwind Shard.",
+  "name": "Tailwind"
 }

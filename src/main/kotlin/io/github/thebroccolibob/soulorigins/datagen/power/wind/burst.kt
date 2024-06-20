@@ -8,6 +8,8 @@ private val advancement = {lvl: Int -> "soul-origins:wind/burst/lvl$lvl"}
 
 val burst = JsonObject {
     "type" to "origins:active_self"
+    "name" to "Burst"
+    "description" to "Unlocked once using one Burst Shard. Create a powerful blast of wind launching entities away and giving you invisibility and speed. Must have been the wind."
     "key" to "key.origins.ternary_active"
     "condition" to {
         "type" to "origins:and"

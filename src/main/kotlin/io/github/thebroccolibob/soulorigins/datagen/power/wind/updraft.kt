@@ -49,6 +49,7 @@ fun updraft(id: String) = leveledMultiCooldown(
         "bar_index" to 8
     },
     otherParams = {
-        "name" to "cat"
+        "name" to "Updraft"
+        "description" to "Launch yourself upwards using a powerful wind blast. Upgrades with Updraft Shards."
     }
 )

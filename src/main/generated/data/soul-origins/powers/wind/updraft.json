@@ -354,5 +354,7 @@
       },
       "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png"
     }
-  }
+  },
+  "description": "Launch yourself upwards using a powerful wind blast. Upgrades with Updraft Shards.",
+  "name": "Updraft"
 }

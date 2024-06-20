@@ -15,6 +15,7 @@
       }
     ]
   },
+  "description": "Unlocked once using one Burst Shard. Create a powerful blast of wind launching entities away and giving you invisibility and speed. Must have been the wind.",
   "entity_action": {
     "type": "origins:and",
     "actions": [
@@ -197,5 +198,6 @@
       }
     ]
   },
-  "key": "key.origins.ternary_active"
+  "key": "key.origins.ternary_active",
+  "name": "Burst"
 }

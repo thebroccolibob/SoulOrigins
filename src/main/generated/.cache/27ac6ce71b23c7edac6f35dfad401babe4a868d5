@@ -1,9 +1,9 @@
-// 1.20.1	2024-06-18T00:26:58.978425571	soul-origins/Block Loot Tables
-627cf23481bf8cdeb099206664bd90d0371288c3 data/soul-origins/loot_tables/blocks/decaying_sand.json
-3136da53a980b33fb09744c5aa583adcd079924a data/soul-origins/loot_tables/blocks/artificer_ew_wall_builder.json
-2720d3ddb20c73a752c8ca4908d2adbb6f4f935f data/soul-origins/loot_tables/blocks/artificer_column_builder.json
-7599b5e94016e9b157b6d38aace8b217bdc4cd30 data/soul-origins/loot_tables/blocks/decaying_slime.json
-147e4a52aefd7b9b24b8d46b63ab72d661fa046c data/soul-origins/loot_tables/blocks/artificer_platform_builder.json
-36348c1334239b83567574c64d366d945e0fd1a1 data/soul-origins/loot_tables/blocks/decaying_rotten_flesh.json
-df82ad92aa81a21266a31ee4f3e9273bc4007fc6 data/soul-origins/loot_tables/blocks/decaying_cobweb_block.json
-3136da53a980b33fb09744c5aa583adcd079924a data/soul-origins/loot_tables/blocks/artificer_ns_wall_builder.json
+// 1.20.1	2024-06-19T23:04:54.0649504	soul-origins/Block Loot Tables
+2720d3ddb20c73a752c8ca4908d2adbb6f4f935f data\soul-origins\loot_tables\blocks\artificer_column_builder.json
+627cf23481bf8cdeb099206664bd90d0371288c3 data\soul-origins\loot_tables\blocks\decaying_sand.json
+7599b5e94016e9b157b6d38aace8b217bdc4cd30 data\soul-origins\loot_tables\blocks\decaying_slime.json
+df82ad92aa81a21266a31ee4f3e9273bc4007fc6 data\soul-origins\loot_tables\blocks\decaying_cobweb_block.json
+147e4a52aefd7b9b24b8d46b63ab72d661fa046c data\soul-origins\loot_tables\blocks\artificer_platform_builder.json
+3136da53a980b33fb09744c5aa583adcd079924a data\soul-origins\loot_tables\blocks\artificer_ew_wall_builder.json
+3136da53a980b33fb09744c5aa583adcd079924a data\soul-origins\loot_tables\blocks\artificer_ns_wall_builder.json
+36348c1334239b83567574c64d366d945e0fd1a1 data\soul-origins\loot_tables\blocks\decaying_rotten_flesh.json

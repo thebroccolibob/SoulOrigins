@@ -1,10 +1,10 @@
 {
   "advancements.soul-origins.wind.burst.lvl1": "Burst I",
-  "advancements.soul-origins.wind.burst.lvl1.description": "Unlocks burst\nSpeed & invis 30s\n100% Soul",
+  "advancements.soul-origins.wind.burst.lvl1.description": "Unlocks burst\nSpeed & invis 15s\n100% Soul",
   "advancements.soul-origins.wind.burst.lvl2": "Burst II",
   "advancements.soul-origins.wind.burst.lvl2.description": "Adds proj prot 30s\nRecharges updraft & tailwind",
   "advancements.soul-origins.wind.burst.lvl3": "Burst III",
-  "advancements.soul-origins.wind.burst.lvl3.description": "Increases to 1min",
+  "advancements.soul-origins.wind.burst.lvl3.description": "Increases to 30s",
   "advancements.soul-origins.wind.root": "Wind Spirit",
   "advancements.soul-origins.wind.root.description": "Level up your skills by finding wind crystals!",
   "advancements.soul-origins.wind.tailwind.lvl1": "Tailwind I",
