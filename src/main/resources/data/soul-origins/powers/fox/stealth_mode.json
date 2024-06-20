@@ -44,8 +44,19 @@
         "type": "soul-origins:hide_name"
     },
     "tails": {
-        "type": "apugli:entity_texture_overlay",
-        "texture_location": "soul-origins:textures/entity/fox/stealth_mode.png",
-        "use_rendering_powers": false
+        "type": "soul-origins:emissive_overlay",
+        "texture_location": "soul-origins:textures/entity/fox/stealth_mode.png"
+    },
+    "overlay": {
+        "type": "origins:overlay",
+        "texture": "minecraft:textures/misc/vignette.png",
+        "strength": 0.3,
+        "red": 0.0,
+        "green": 0.718,
+        "blue": 1.0,
+        "draw_mode": "texture",
+        "draw_phase": "below_hud",
+        "hide_with_hud": false,
+        "visible_in_third_person": false
     }
 }

@@ -1,7 +1,7 @@
 {
-    "name": "Plant",
+    "name": "Enderman",
     "description": "",
-    "icon": "minecraft:small_dripleaf",
+    "icon": "minecraft:ender_pearl",
     "impact": 1,
     "powers": [
         "soul-origins:enderman/telephase",
