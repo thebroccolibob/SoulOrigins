@@ -48,6 +48,7 @@ class ModelGenerator(output: FabricDataOutput) : FabricModelProvider(output) {
             register(SoulOriginsItems.UPDRAFT_SHARD)
             register(SoulOriginsItems.TAILWIND_SHARD)
             register(SoulOriginsItems.BURST_SHARD)
+            register(SoulOriginsItems.ARTIFICER_CORE)
             register(SoulOriginsItems.ARTIFICER_PLATFORM_BUILDER)
             register(SoulOriginsItems.ARTIFICER_WALL_BUILDER)
             register(SoulOriginsItems.ARTIFICER_COLUMN_BUILDER)

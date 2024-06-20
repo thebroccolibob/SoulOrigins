@@ -50,6 +50,10 @@ object SoulOriginsItems {
         maxCount(1)
     }))
 
+    val ARTIFICER_CORE = register("artificer_core", Item(FabricItemSettings {
+        rarity(Rarity.UNCOMMON)
+    }))
+
     val ARTIFICER_PLATFORM_BUILDER = register("artificer_platform_builder", AdjustableSurfaceBuilderProjectileItem(SoulOriginsBlocks.ARTIFICER_PLATFORM_BUILDER, 0, intArrayOf(0, 5, 7, 10, 15), FabricItemSettings {
         maxCount(16)
     }))

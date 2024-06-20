@@ -52,6 +52,16 @@ object SoulOrigins : ModInitializer {
 		SoulOriginsTags.register()
 		registerSoulOriginsLootModifier()
 
-		ResourceManagerHelper.registerBuiltinResourcePack(id("whitespace"), FabricLoader.getInstance().getModContainer(MOD_ID).get(), ResourcePackActivationType.NORMAL)
+		ResourceManagerHelper.registerBuiltinResourcePack(
+            id("whitespace"),
+            FabricLoader.getInstance().getModContainer(MOD_ID).get(),
+            ResourcePackActivationType.NORMAL,
+        )
+
+		ResourceManagerHelper.registerBuiltinResourcePack(
+			id("create_compat"),
+			FabricLoader.getInstance().getModContainer(MOD_ID).get(),
+			ResourcePackActivationType.NORMAL,
+		)
 	}
 }

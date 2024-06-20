@@ -6,6 +6,7 @@
     "powers": [
         "soul-origins:soul_meter",
         "soul-origins:soul_extract",
-        "soul-origins:artificer/shriek"
+        "soul-origins:artificer/shriek",
+        "soul-origins:artificer/craft_core"
     ]
 }
