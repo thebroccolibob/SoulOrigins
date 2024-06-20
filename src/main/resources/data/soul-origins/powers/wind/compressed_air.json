@@ -1,5 +1,7 @@
 {
     "type": "origins:multiple",
+    "name": "Create Fabric Compatibility",
+    "description": "In the Create Mod there is a Copper Backtank. Consume the air from the backtank to fully restore your Soul Meter!",
     "activate": {
         "type": "origins:active_self",
         "key": "key.use",

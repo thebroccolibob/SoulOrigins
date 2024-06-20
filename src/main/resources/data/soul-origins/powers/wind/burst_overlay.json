@@ -1,9 +1,8 @@
 {
   "type": "origins:multiple",
-
+  "hidden": true,
   "overlay": {
     "type": "origins:overlay",
-    "hidden": true,
     "texture": "soul-origins:textures/entity/wind/over_air.png",
     "strength": 0.3,
     "red": 1.0,

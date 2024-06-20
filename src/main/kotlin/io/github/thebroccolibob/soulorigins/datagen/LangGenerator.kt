@@ -71,9 +71,9 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
                 translationBuilder.add("advancements.$modId.wind.burst.lvl$lvl", "Burst ${romanNumerals[lvl]}")
             }
 
-            add("advancements.$modId.wind.burst.lvl1.description", "Unlocks burst\nSpeed & invis 30s\n100% Soul")
+            add("advancements.$modId.wind.burst.lvl1.description", "Unlocks burst\nSpeed & invis 15s\n100% Soul")
             add("advancements.$modId.wind.burst.lvl2.description", "Adds proj prot 30s\nRecharges updraft & tailwind")
-            add("advancements.$modId.wind.burst.lvl3.description", "Increases to 1min")
+            add("advancements.$modId.wind.burst.lvl3.description", "Increases to 30s")
 
             add("itemGroup.soul-origins.item_group", "Soul Origins")
 

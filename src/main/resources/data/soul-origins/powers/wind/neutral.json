@@ -1,5 +1,6 @@
 {
   "type": "origins:multiple",
+  "hidden": true,
   "disengage": {
     "type": "soul-origins:disengage",
     "distance": 12

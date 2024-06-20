@@ -1,5 +1,6 @@
 {
     "type": "origins:multiple",
+    "hidden": true,
     "invul": {
         "type": "origins:modify_damage_taken",
         "modifier": {

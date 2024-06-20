@@ -1,5 +1,7 @@
 {
     "type": "origins:multiple",
+    "name": "Glide",
+    "description": "Holding space while falling will create streams of wind that provide you a graceful descent.",
     "fall": {
         "type": "origins:modify_falling",
         "velocity": 0.02,
