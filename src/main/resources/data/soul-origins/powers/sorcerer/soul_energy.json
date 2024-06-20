@@ -30,8 +30,8 @@
       ]
     },
     "modifier": {
-      "operation": "multiply_base_multiplicative",
-      "value": 1
+      "operation": "add_base_late",
+      "value": 3
     }
   },
 

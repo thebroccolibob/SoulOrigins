@@ -1,0 +1,80 @@
+{
+    "type": "origins:multiple",
+    "walk_speed": {
+        "type": "origins:attribute",
+        "modifier": {
+            "attribute": "minecraft:generic.movement_speed",
+            "name": "Movement Mode speed boost",
+            "operation": "multiply_base",
+            "value": 0.2
+        }
+    },
+    "air_speed": {
+        "type": "origins:modify_air_speed",
+        "modifier": {
+            "operation": "multiply_base",
+            "value": 0.2
+        }
+    },
+    "reduce_damage": {
+        "type": "origins:modify_damage_dealt",
+        "modifier": {
+            "operation": "multiply_base",
+            "value": -0.5
+        }
+    },
+    "double_jumped": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 1,
+        "start_value": 0
+    },
+    "double_jump": {
+        "type": "origins:grounded",
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_double_jumped",
+            "comparison": "==",
+            "compare_to": 0
+        }
+    },
+    "track_double_jumped": {
+        "type": "apugli:action_on_jump",
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "*:*_double_jumped",
+            "operation": "set",
+            "change": 1
+        },
+        "condition": {
+            "type": "origins:on_block",
+            "block_condition": {
+                "type": "origins:movement_blocking",
+                "inverted": true
+            }
+        },
+        "hud_render": {
+            "should_render": false
+        }
+    },
+    "reset_double_jumped": {
+        "type": "origins:action_on_land",
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "*:*_double_jumped",
+            "operation": "set",
+            "change": 0
+        }
+    },
+    "wall_climb": {
+        "type": "origins:climbing",
+        "condition": {
+            "type": "origins:collided_horizontally"
+        },
+        "allow_holding": false
+    },
+    "tails": {
+        "type": "apugli:entity_texture_overlay",
+        "texture_location": "soul-origins:textures/entity/fox/movement_mode.png"
+    }
+}
