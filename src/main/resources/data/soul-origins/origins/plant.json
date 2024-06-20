@@ -1,15 +1,15 @@
 {
-    "name": "Plant",
-    "description": "",
+    "name": "Verdant Sage",
+    "description": "Along with other creatures, the abundance of soul energy has evolved plants as well. The Verdant Sage is an intelligent plant creature with a humanoid appearance.",
     "icon": "minecraft:small_dripleaf",
-    "impact": 1,
+    "impact": 3,
     "powers": [
-        "soul-origins:plant/bonemeal",
-        "soul-origins:plant/grapple",
-        "soul-origins:plant/phase_dirt",
+        "soul-origins:plant/base_health",
+        "soul-origins:plant/poison_resistance",
         "soul-origins:plant/potion_spore",
         "soul-origins:plant/water",
-        "soul-origins:plant/base_health",
-        "soul-origins:plant/poison_resistance"
+        "soul-origins:plant/bonemeal",
+        "soul-origins:plant/phase_dirt",
+        "soul-origins:plant/grapple"
     ]
 }

@@ -1,5 +1,7 @@
 {
     "type": "origins:multiple",
+    "name": "Rooted Pathway",
+    "description": "A unique ability of evolved plants is using roots as a means of escape. Breaking your body down to thin roots lets you go through dirt at the cost of losing oxygen overtime.",
     "phase": {
         "type": "origins:phasing",
         "block_condition": {

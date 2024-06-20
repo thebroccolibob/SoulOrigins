@@ -26,6 +26,8 @@ object SoulOriginsSounds {
 
     val WOLF_SUMMON = register("power.wolf.summon")
 
+    val ENDERMAN_RIFT = register("power.enderman.rift")
+
     val ARTIFICER_SURFACE_PLACE = register("block.artificer_surface.place")
     val ARTIFICER_SURFACE_DESTROY = register("block.artificer_surface.destroy")
 

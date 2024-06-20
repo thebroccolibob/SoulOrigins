@@ -1,5 +1,7 @@
 {
     "type": "origins:multiple",
+    "name": "Greenest Thumb",
+    "description": "Consuming nutritious bonemeal will fill up a meter. When the meter maxes out, you emmit life energy that grows plants around you.",
     "stored": {
         "type": "origins:resource",
         "min": 0,

@@ -141,5 +141,14 @@
         "volume": 1.0
       }
     ]
+  },
+  "power.enderman.rift": {
+    "sounds": [
+      {
+        "name":"minecraft:ambient/nether/soulsand_valley/whisper1",
+        "pitch": 1.0,
+        "volume": 1.0
+      }
+    ]
   }
 }

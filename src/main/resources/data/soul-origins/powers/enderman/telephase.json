@@ -1,5 +1,7 @@
 {
     "type": "origins:multiple",
+    "name": "Dimensional Rift",
+    "description": "Open up a rift in space and time to traverse around the world freely without the risk of being harmed or harming others. You don't understand what dimension this rift takes you to, but it feels like you are connected to the Old Builders somehow. Almost like you can hear them.",
     "cooldown": {
         "type": "origins:cooldown",
         "cooldown": 200,
@@ -53,6 +55,11 @@
                 {
                     "type": "origins:play_sound",
                     "sound": "minecraft:entity.enderman.teleport"
+                },
+                {
+                    "type": "origins:play_sound",
+                    "sound": "soul-origins:power.enderman.rift",
+                    "volume": 2.0
                 },
                 {
                     "type": "origins:spawn_particles",

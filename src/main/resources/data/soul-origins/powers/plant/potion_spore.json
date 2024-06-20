@@ -1,5 +1,7 @@
 {
     "type": "origins:action_on_item_use",
+    "name": "Spell Spores",
+    "description": "The nutrients in potions you drink cause you to disperse spores around you. These lingering spores will apply the potion effect you consumed to others nearby.",
     "item_condition": {
         "type": "origins:and",
         "conditions": [

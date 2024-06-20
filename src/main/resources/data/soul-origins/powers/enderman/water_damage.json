@@ -1,5 +1,7 @@
 {
     "type": "origins:action_over_time",
+    "name": "Hydrophobia",
+    "description": "Like Enderman, water harms your body. Occasionally you will randomly teleport due to shock.",
     "interval": 40,
     "entity_action": {
         "type": "origins:and",

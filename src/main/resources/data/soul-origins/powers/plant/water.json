@@ -1,9 +1,11 @@
 {
     "type": "origins:multiple",
+    "name": "Hyper Bloom",
+    "description": "Being exposed to water overtime causes you to build vitality. Increases maximum health overtime when exposed to water. Loses buff overtime when not exposed to water.",
     "stored": {
         "type": "origins:resource",
         "min": 0,
-        "max": 20
+        "max": 28
     },
     "boost_health": {
         "type": "origins:modify_attribute",

@@ -1,5 +1,7 @@
 {
     "type": "origins:multiple",
+    "name": "Entangling Vine",
+    "description": "A versatile appendage that lets you grapple on to blocks and pull entities towards you.",
     "target": {
         "type": "soul-origins:entity_store"
     },

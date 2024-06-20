@@ -1,5 +1,7 @@
 {
     "type": "origins:active_self",
+    "name": "Dimensional Shift",
+    "description": "You can shift your position instantly to where you look. Limited to a 32 block range.",
     "key": "key.origins.primary_active",
     "cooldown": 20,
     "hud_render": {

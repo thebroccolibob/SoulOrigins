@@ -1,5 +1,7 @@
 {
     "type": "origins:modify_damage_taken",
+    "name": "Herbal Immunity",
+    "description": "Although not tough like flesh, being a plant makes you immune to poison.",
     "damage_condition": {
         "type": "origins:name",
         "name": "magic"
