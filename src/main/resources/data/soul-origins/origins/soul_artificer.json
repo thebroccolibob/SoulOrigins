@@ -1,8 +1,9 @@
 {
-    "name": "Artificer",
-    "description": "",
+    "name": "Soul Artificer",
+    "hidden": true,
+    "description": "WIP",
     "icon": "minecraft:copper_ingot",
-    "impact": 1,
+    "impact": 3,
     "powers": [
         "soul-origins:soul_meter",
         "soul-origins:soul_extract",
