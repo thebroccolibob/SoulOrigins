@@ -1,8 +1,8 @@
 {
   "name": "Arcane Brewer",
-  "description": "",
+  "description": "A chill dude with chill brews. Time to stop for a drink!",
   "icon": "soul-origins:suspicious_brew",
-  "impact": 1,
+  "impact": 3,
   "powers": [
     "soul-origins:soul_meter",
     "soul-origins:soul_extract",

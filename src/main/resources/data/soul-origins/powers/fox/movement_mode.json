@@ -1,5 +1,6 @@
 {
     "type": "origins:multiple",
+    "hidden": true,
     "walk_speed": {
         "type": "origins:attribute",
         "modifier": {

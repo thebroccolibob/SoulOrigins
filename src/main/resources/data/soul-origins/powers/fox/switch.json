@@ -1,5 +1,7 @@
 {
     "type": "origins:active_self",
+    "name": "Tri-Fox Shift",
+    "description": "Fox Spirits are versatile explorers that have learned to flow their soul energy into different 'Tailed Spirit' forms. You can swap between these forms without limits, but beware that each mode has its benefits and flaws.",
     "entity_action": {
         "type": "origins:and",
         "actions": [

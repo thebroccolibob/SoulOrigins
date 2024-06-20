@@ -1,5 +1,7 @@
 {
     "type": "origins:multiple",
+    "name": "Attack Mode (Red)",
+    "description": "This mode increases your attack damage and also lets you lunge a short distance dealing damage to entities at the end of the lunge. You can lunge twice before needing to wait for cooldown. This mode lowers your maximum health.",
     "activate": {
         "type": "origins:active_self",
         "condition": {

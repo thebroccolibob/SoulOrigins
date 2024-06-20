@@ -1,5 +1,6 @@
 {
     "type": "origins:multiple",
+    "hidden": true,
     "increase_damage": {
         "type": "apoli:modify_damage_dealt",
         "modifier": {

@@ -1,5 +1,6 @@
 {
     "type": "origins:multiple",
+    "hidden": true,
     "color": {
         "type": "origins:model_color",
         "red": 0,

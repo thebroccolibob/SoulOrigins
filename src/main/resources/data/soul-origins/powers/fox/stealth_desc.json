@@ -1,0 +1,5 @@
+{
+  "type": "origins:simple",
+  "name": "Stealth Mode (Blue)",
+  "description": "Turn into a semi-transparent state that makes monsters ignore you. This mode also increases your maximum health, but lowers your movement speed."
+}
