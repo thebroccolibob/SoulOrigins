@@ -11,7 +11,7 @@ interface LeveledCooldownEntry {
     val charges: Int
 }
 
-fun <T: LeveledCooldownEntry> leveledMultiCooldown(id: String, entries: Iterable<T>, key: String, advancement: (T) -> String, otherConditions: Iterable<JsonObject> = emptyList(), otherActions: Iterable<JsonObject> = emptyList(), hudRender: JsonInit) = JsonObject {
+fun <T: LeveledCooldownEntry> leveledMultiCooldown(id: String, entries: Iterable<T>, key: String, advancement: (T) -> String, otherConditions: Iterable<JsonObject> = emptyList(), otherActions: Iterable<JsonObject> = emptyList(), hudRender: JsonInit, otherParams: JsonInit? = null) = JsonObject {
     "type" to "origins:multiple"
 
     entries.forEachWithNext { level, nextLevel ->
@@ -46,5 +46,7 @@ fun <T: LeveledCooldownEntry> leveledMultiCooldown(id: String, entries: Iterable
             }
         }
     }
+
+    otherParams?.invoke(this)
 }
 

@@ -1,0 +1,11 @@
+{
+  "name": "Arcane Brewer",
+  "description": "",
+  "icon": "soul-origins:suspicious_brew",
+  "impact": 1,
+  "powers": [
+    "soul-origins:soul_meter",
+    "soul-origins:soul_extract",
+    "soul-origins:brewer/brewing_stand"
+  ]
+}

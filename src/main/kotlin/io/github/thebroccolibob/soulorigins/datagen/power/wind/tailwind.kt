@@ -82,5 +82,8 @@ fun tailwind(id: String) = leveledMultiCooldown(id, tailwindEntries, "key.origin
     hudRender = {
         "sprite_location" to "origins:textures/gui/community/spiderkolo/resource_bar_03.png"
         "bar_index" to 23
+    },
+    otherParams = {
+        "name" to "cat"
     }
 )
