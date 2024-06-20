@@ -1,5 +1,7 @@
 {
     "type": "origins:multiple",
+    "name": "Moro's Binding Vow",
+    "description": "Due to your soul bond, you can summon the giant wolf deity Moro who you can ride on and fight with.",
     "store": {
         "type": "soul-origins:entity_store"
     },

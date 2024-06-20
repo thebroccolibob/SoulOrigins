@@ -1,5 +1,7 @@
 {
     "type": "origins:multiple",
+    "name": "Initiate",
+    "description": "Quickly lunge towards your current directional input and strike multiple targets at the end of the dash.",
     "activate": {
         "type": "origins:active_self",
         "condition": {

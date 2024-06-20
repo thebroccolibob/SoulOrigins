@@ -1,5 +1,7 @@
 {
     "type": "origins:phasing",
+    "name": "Forest Familiarity",
+    "description": "Being familiar with areas full of plant life, you have learned how to easily traverse through even the thickest blocks of leaves.",
     "block_condition": {
         "type": "origins:in_tag",
         "tag": "minecraft:leaves"

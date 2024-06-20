@@ -1,5 +1,7 @@
 {
     "type": "origins:multiple",
+    "name": "Hunter's Instinct",
+    "description": "After years of growing up in the wilderness, you have toned your body to it's greatest condition. Increases damage dealt, natural regeneration, and speed.",
     "speed": {
         "type": "origins:attribute",
         "modifier": {

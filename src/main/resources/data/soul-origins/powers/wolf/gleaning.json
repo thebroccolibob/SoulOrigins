@@ -1,5 +1,7 @@
 {
     "type": "origins:multiple",
+    "name": "Soul Siphon",
+    "description": "Moro absorbs the soul energy of players you've killed which powers your soul to further heights. Increases maximum health on player kill. Reverts to default health on death.",
     "tracker": {
         "type": "origins:resource",
         "min": 0,

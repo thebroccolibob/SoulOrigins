@@ -1,15 +1,15 @@
 {
     "name": "Wolf Deity",
-    "description": "Ride a wolf",
+    "description": "A human soul bounded to a wolf deity spirit named Moro. With this bond they can manifest the strengths of a true hunter.",
     "icon": "minecraft:wolf_spawn_egg",
     "impact": 3,
     "powers": [
-        "soul-origins:wolf/wolf_rider",
         "soul-origins:wolf/wolf_summon",
         "soul-origins:wolf/hunter",
-        "soul-origins:wolf/hunt",
+        "soul-origins:wolf/bushwacking",
         "soul-origins:wolf/gleaning",
         "soul-origins:wolf/lunge",
-        "soul-origins:wolf/bushwacking"
+        "soul-origins:wolf/hunt",
+        "soul-origins:wolf/wolf_rider"
     ]
 }
