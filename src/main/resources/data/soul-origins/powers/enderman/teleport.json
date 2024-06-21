@@ -7,8 +7,7 @@
     "hud_render": {
         "sprite_location": "origins:textures/gui/resource_bar.png",
         "bar_index": 6,
-        "should_render": true,
-        "inverted": true
+        "should_render": true
     },
     "entity_action": {
         "type": "origins:side",

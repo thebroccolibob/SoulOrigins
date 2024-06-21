@@ -1,0 +1,17 @@
+{
+    "type": "origins:recipe",
+    "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "id": "soul-origins:nether_wart",
+        "ingredients": [
+            { "item": "minecraft:red_mushroom" },
+            { "item": "minecraft:red_mushroom" },
+            { "item": "minecraft:sugar" },
+            { "item": "minecraft:sugar" },
+            { "item": "minecraft:sugar" }
+        ],
+        "result": {
+            "item": "minecraft:nether_wart"
+        }
+    }
+}

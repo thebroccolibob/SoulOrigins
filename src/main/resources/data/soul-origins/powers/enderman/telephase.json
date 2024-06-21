@@ -33,7 +33,22 @@
                 "type": "origins:trigger_cooldown",
                 "power": "*:*_cooldown"
             }
+        },
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_activation_cooldown",
+            "comparison": "==",
+            "compare_to": 0
         }
+    },
+    "activation_cooldown": {
+        "type": "origins:cooldown",
+        "hud_render": {
+            "sprite_location": "origins:textures/gui/resource_bar.png",
+            "bar_index": 6,
+            "should_render": true
+        },
+        "cooldown": 400
     },
     "assign_power": {
         "type": "origins:action_over_time",
@@ -101,9 +116,8 @@
                         }
                     },
                     {
-                        "type": "soul-origins:change_cooldown",
-                        "cooldown": "*:*_activate",
-                        "change": 200
+                        "type": "origins:trigger_cooldown",
+                        "power": "*:*_activation_cooldown"
                     }
                 ]
             }
