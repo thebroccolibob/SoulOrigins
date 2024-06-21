@@ -47,14 +47,45 @@
                 "type": "origins:or",
                 "conditions": [
                     {
-                        "type": "origins:in_block_anywhere",
-                        "block_condition": {
-                            "type": "origins:fluid",
-                            "fluid_condition": {
-                                "type": "origins:in_tag",
-                                "tag": "minecraft:water"
+                        "type": "origins:and",
+                        "conditions": [
+                            {
+                                "type": "origins:in_block_anywhere",
+                                "block_condition": {
+                                    "type": "origins:fluid",
+                                    "fluid_condition": {
+                                        "type": "origins:in_tag",
+                                        "tag": "minecraft:water"
+                                    }
+                                }
+                            },
+                            {
+                                "type": "origins:riding",
+                                "inverted": true
                             }
-                        }
+                        ]
+                    },
+                    {
+                        "type": "origins:and",
+                        "conditions": [
+                            {
+                                "type": "origins:in_block",
+                                "block_condition": {
+                                    "type": "origins:offset",
+                                    "y": 2,
+                                    "condition": {
+                                        "type": "origins:fluid",
+                                        "fluid_condition": {
+                                            "type": "origins:in_tag",
+                                            "tag": "minecraft:water"
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "type": "origins:riding"
+                            }
+                        ]
                     },
                     {
                         "type": "origins:in_rain"

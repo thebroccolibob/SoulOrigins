@@ -170,6 +170,7 @@ fun registerSoulOriginsEntityActions() {
         }
     }
 
+    @Suppress("DEPRECATION")
     register("random_teleport", SerializableData {
         add("action_on_success", ApoliDataTypes.ENTITY_ACTION, null)
         add("attempts", SerializableDataTypes.INT, 16)
