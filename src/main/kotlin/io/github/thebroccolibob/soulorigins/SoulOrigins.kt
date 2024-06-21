@@ -46,5 +46,6 @@ object SoulOrigins : ModInitializer {
 		SoulOriginsEffects.register()
 		SoulOriginsPotions.register()
 		SoulOriginsTags.register()
+		registerSoulOriginsLootModifier()
 	}
 }
