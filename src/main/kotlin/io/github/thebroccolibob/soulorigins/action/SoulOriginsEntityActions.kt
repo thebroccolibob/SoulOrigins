@@ -174,6 +174,8 @@ fun registerSoulOriginsEntityActions() {
         add("action_on_success", ApoliDataTypes.ENTITY_ACTION, null)
         add("attempts", SerializableDataTypes.INT, 16)
     }) { data, entity ->
+        if (entity.world.isClient || entity !is LivingEntity) return@register
+
         val mutable = BlockPos.Mutable(0, 0, 0)
 
         for (i in 1..data.getInt("attempts")) {
@@ -190,8 +192,9 @@ fun registerSoulOriginsEntityActions() {
             val bl2 = blockState.fluidState.isIn(FluidTags.WATER)
 
             if (bl && !bl2) {
-                entity.requestTeleportAndDismount(mutable.x + 0.5, mutable.y + 1.0, mutable.z + 0.5)
-                data.get<ActionFactory<Entity>.Instance?>("action_on_success")?.accept(entity)
+                if (entity.teleport(mutable.x + 0.5, mutable.y + 1.0, mutable.z + 0.5, false)) {
+                    data.get<ActionFactory<Entity>.Instance?>("action_on_success")?.accept(entity)
+                }
                 break
             }
         }
