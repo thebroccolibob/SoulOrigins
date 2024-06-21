@@ -10,6 +10,7 @@
         "soul-origins:enderman/teleport",
         "soul-origins:enderman/telephase",
         "soul-origins:enderman/eyes",
-        "soul-origins:enderman/particle"
+        "soul-origins:enderman/particle",
+        "soul-origins:enderman/prevent_enderman_anger"
     ]
 }

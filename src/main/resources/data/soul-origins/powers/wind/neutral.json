@@ -15,5 +15,8 @@
       "type": "soul-origins:set_neutron",
       "enabled": false
     }
+  },
+  "enderman": {
+    "type": "soul-origins:prevent_enderman_anger"
   }
 }

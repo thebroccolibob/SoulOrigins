@@ -5,6 +5,7 @@
   "mixins": [
     "BowItemMixin",
     "BrewingStandScreenHandlerMixin",
+    "EndermanEntityMixin",
     "HostileEntityMixin",
     "LivingEntityMixin",
     "MobEntityMixin",

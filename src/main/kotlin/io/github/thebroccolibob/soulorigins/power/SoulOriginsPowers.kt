@@ -7,9 +7,14 @@ import io.github.apace100.apoli.registry.ApoliRegistries
 import io.github.thebroccolibob.soulorigins.SoulOrigins
 import net.minecraft.entity.LivingEntity
 import net.minecraft.registry.Registry
+import java.util.function.BiFunction
 
 private fun register(powerFactory: PowerFactory<*>) {
     Registry.register(ApoliRegistries.POWER_FACTORY, powerFactory.serializerId, powerFactory)
+}
+
+fun register(path: String, factory: BiFunction<PowerType<*>, LivingEntity?, Power>) {
+    register(Power.createSimpleFactory(factory, SoulOrigins.id(path)))
 }
 
 class UseWindShardsPower(type: PowerType<*>, entity: LivingEntity?) : Power(type, entity)
@@ -17,16 +22,18 @@ class UseMobOrbPower(type: PowerType<*>, entity: LivingEntity?) : Power(type, en
 class GardenWalker(type: PowerType<*>, entity: LivingEntity?) : Power(type, entity)
 class DrowningPower(type: PowerType<*>, entity: LivingEntity?): Power(type, entity)
 class HideNamePower(type: PowerType<*>, entity: LivingEntity?): Power(type, entity)
+class PreventEndermanAngerPower(type: PowerType<*>, entity: LivingEntity?): Power(type, entity)
 
 fun registerSoulOriginsPowers() {
     register(BowSpeedPower.factory)
     register(EmissiveOverlayPower.factory)
     register(DisengagePower.factory)
-    register(Power.createSimpleFactory(::UseWindShardsPower, SoulOrigins.id("use_wind_shards")))
-    register(Power.createSimpleFactory(::UseMobOrbPower, SoulOrigins.id("use_mob_orb")))
-    register(Power.createSimpleFactory(::GardenWalker, SoulOrigins.id("walk_on_sculk_garden")))
-    register(Power.createSimpleFactory(::DrowningPower, SoulOrigins.id("drowning")))
-    register(Power.createSimpleFactory(::HideNamePower, SoulOrigins.id("hide_name")))
+    register("use_wind_shards", ::UseWindShardsPower)
+    register("use_mob_orb", ::UseMobOrbPower)
+    register("walk_on_sculk_garden", ::GardenWalker)
+    register("drowning", ::DrowningPower)
+    register("hide_name", ::HideNamePower)
+    register("prevent_enderman_anger", ::PreventEndermanAngerPower)
     register(BrewingStandPower.factory)
     register(SuspiciousBrewingStandPower.factory)
     register(EntityStorePower.factory)
