@@ -17,7 +17,7 @@
     "crouch": {
         "type": "apugli:modify_scale",
         "delay": 0,
-        "scale_type": "pehkui:height",
+        "scale_type": "pehkui:hitbox_height",
         "modifier": {
             "operation": "multiply_base",
             "value": -0.12

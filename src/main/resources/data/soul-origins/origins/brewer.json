@@ -6,7 +6,7 @@
   "powers": [
     "soul-origins:soul_meter",
     "soul-origins:soul_extract",
-    "soul-origins:brewer/brewing_stand",
-    "soul-origins:brewer/craft_nether_wart"
+    "soul-origins:brewer/craft_nether_wart",
+    "soul-origins:brewer/brewing_stand"
   ]
 }

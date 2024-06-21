@@ -1,5 +1,7 @@
 {
     "type": "origins:recipe",
+    "name": "Fermentation",
+    "description": "You can transmute mushrooms into nether wart through a \"simple\" curing process.",
     "recipe": {
         "type": "minecraft:crafting_shapeless",
         "id": "soul-origins:nether_wart",
