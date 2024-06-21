@@ -10,10 +10,6 @@ import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
 interface SuspiciousBrew {
-    fun getTranslationKey(): String
-
-    fun getTranslationKey(stack: ItemStack): String = this.getTranslationKey()
-
     fun appendTooltip(
         stack: ItemStack,
         world: World?,
@@ -30,7 +26,7 @@ interface SuspiciousBrew {
 
 class SuspiciousBrewItem(settings: Settings) : PotionItem(settings), SuspiciousBrew {
     override fun getTranslationKey(stack: ItemStack): String {
-        return super<SuspiciousBrew>.getTranslationKey(stack)
+        return this.translationKey
     }
 
     override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
@@ -40,7 +36,7 @@ class SuspiciousBrewItem(settings: Settings) : PotionItem(settings), SuspiciousB
 
 class SplashSuspiciousBrewItem(settings: Settings) : SplashPotionItem(settings), SuspiciousBrew {
     override fun getTranslationKey(stack: ItemStack): String {
-        return super<SuspiciousBrew>.getTranslationKey(stack)
+        return this.translationKey
     }
 
     override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
@@ -50,7 +46,7 @@ class SplashSuspiciousBrewItem(settings: Settings) : SplashPotionItem(settings),
 
 class LingeringSuspiciousBrewItem(settings: Settings) : LingeringPotionItem(settings), SuspiciousBrew {
     override fun getTranslationKey(stack: ItemStack): String {
-        return super<SuspiciousBrew>.getTranslationKey(stack)
+        return this.translationKey
     }
 
     override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
