@@ -2,6 +2,7 @@ package io.github.thebroccolibob.soulorigins.potion
 
 import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.effect.SoulOriginsEffects
+import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.item.Item
@@ -11,6 +12,8 @@ import net.minecraft.potion.Potions
 import net.minecraft.recipe.BrewingRecipeRegistry
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
 
 object SoulOriginsPotions {
     private fun register(path: String, potion: Potion): Potion {
@@ -25,7 +28,7 @@ object SoulOriginsPotions {
         return register(path, Potion(baseName, *effects))
     }
 
-    private fun registerSet(name: String, effect: StatusEffect, baseDuration: Int, longDuration: Int, strongAmplify: Int = 1) = PotionSet(
+    private fun registerFullSet(name: String, effect: StatusEffect, baseDuration: Int, longDuration: Int, strongAmplify: Int = 1) = FullPotionSet(
         register(name, name, StatusEffectInstance(effect, baseDuration, 0)),
         register("long_$name", name, StatusEffectInstance(effect, longDuration, 0)),
         register("strong_$name", name, StatusEffectInstance(effect, baseDuration, strongAmplify)),
@@ -34,12 +37,25 @@ object SoulOriginsPotions {
         BrewingRecipeRegistry.registerPotionRecipe(it.base, Items.GLOWSTONE_DUST, it.strong)
     }
 
-    val PRECISION = registerSet("precision", SoulOriginsEffects.PRECISION, 1800, 2400)
-    val NECROSIS = registerSet("necrosis", SoulOriginsEffects.NECROSIS, 3600, 4800)
-    val PERCEPTION = registerSet("perception", SoulOriginsEffects.PERCEPTION, 3600, 4800)
-    val THRONGLED = registerSet("throngled", SoulOriginsEffects.THRONGLED, 4800, 9600)
+    val PRECISION = registerFullSet("precision", SoulOriginsEffects.PRECISION, 1800, 2400)
+    val NECROSIS = registerFullSet("necrosis", SoulOriginsEffects.NECROSIS, 3600, 4800)
+    val PERCEPTION = registerFullSet("perception", SoulOriginsEffects.PERCEPTION, 3600, 4800)
+    val THRONGLED = registerFullSet("throngled", SoulOriginsEffects.THRONGLED, 4800, 9600)
 
-    fun register() {}
+    object MementoMori {
+        private fun key(path: String) = RegistryKey.of(RegistryKeys.POTION, SoulOrigins.id(path))
+
+        val stage0 = register("mm0", StatusEffectInstance(SoulOriginsEffects.INCOMPLETE_MEMENTO_MORI))
+        val stage1 = register("mm1", StatusEffectInstance(SoulOriginsEffects.INCOMPLETE_MEMENTO_MORI))
+        val stage2 = register("mm2", StatusEffectInstance(SoulOriginsEffects.INCOMPLETE_MEMENTO_MORI))
+
+        val final = register("memento_mori", StatusEffectInstance(SoulOriginsEffects.MEMENTO_MORI, 12000, 24000))
+        val final_long = register("long_memento_mori", StatusEffectInstance(SoulOriginsEffects.MEMENTO_MORI, 12000, 24000))
+    }
+
+    fun register() {
+        BrewingRecipeRegistry.registerPotionRecipe(MementoMori.final, Items.REDSTONE, MementoMori.final_long)
+    }
 
     data class PotionRecipe(val input: Potion, val ingredient: Item, val output: Potion)
 
@@ -55,7 +71,10 @@ object SoulOriginsPotions {
         PotionRecipe(Potions.LONG_WEAKNESS, Items.BLAZE_POWDER, NECROSIS.long),
 
         PotionRecipe(Potions.WATER, Items.GLASS_BOTTLE, THRONGLED.base),
-    )
 
-    data class PotionSet(val base: Potion, val long: Potion, val strong: Potion)
+        PotionRecipe(Potions.AWKWARD, SoulOriginsItems.TAILWIND_SHARD, MementoMori.stage0),
+        PotionRecipe(MementoMori.stage0, SoulOriginsItems.UPDRAFT_SHARD, MementoMori.stage1),
+        PotionRecipe(MementoMori.stage1, SoulOriginsItems.BURST_SHARD, MementoMori.stage2),
+        PotionRecipe(MementoMori.stage2, SoulOriginsItems.MOB_ORB, MementoMori.final),
+    )
 }

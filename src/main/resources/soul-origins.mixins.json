@@ -5,8 +5,10 @@
   "mixins": [
     "BowItemMixin",
     "BrewingStandScreenHandlerMixin",
+    "DamageTrackerMixin",
     "EndermanEntityMixin",
     "HostileEntityMixin",
+    "ItemGroupsMixin",
     "LivingEntityMixin",
     "MobEntityMixin",
     "PlayerEntityMixin",
@@ -14,6 +16,7 @@
     "PotionSlotMixin",
     "RevengeGoalMixin",
     "SculkVeinGrowCheckerMixin",
+    "ServerPlayerEntityMixin",
     "TippedArrowRecipeMixin"
   ],
   "injectors": {

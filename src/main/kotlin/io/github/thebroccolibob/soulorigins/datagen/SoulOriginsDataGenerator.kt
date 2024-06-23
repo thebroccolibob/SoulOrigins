@@ -1,13 +1,17 @@
 package io.github.thebroccolibob.soulorigins.datagen
 
+import io.github.thebroccolibob.soulorigins.SoulOriginsTags
 import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
 import io.github.thebroccolibob.soulorigins.datagen.power.PowerGenerator
+import io.github.thebroccolibob.soulorigins.potion.SoulOriginsPotions
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.advancement.Advancement
+import net.minecraft.potion.Potion
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.RegistryWrapper
 import net.minecraft.registry.tag.BlockTags
 import java.util.concurrent.CompletableFuture
@@ -22,6 +26,7 @@ object SoulOriginsDataGenerator : DataGeneratorEntrypoint {
 			addProvider(::AdvancementGenerator)
 			addProvider(::BlockLootTableGenerator)
 			addProvider(::BlockTagGenerator)
+			addProvider(::PotionTagGenerator)
 		}
 	}
 
@@ -52,5 +57,21 @@ object SoulOriginsDataGenerator : DataGeneratorEntrypoint {
 				SoulOriginsBlocks.ARTIFICER_COLUMN_BUILDER,
 			)
 		}
+	}
+
+	class PotionTagGenerator(
+		output: FabricDataOutput,
+		registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>
+	) : FabricTagProvider<Potion>(output, RegistryKeys.POTION, registriesFuture) {
+		override fun configure(arg: RegistryWrapper.WrapperLookup?) {
+			getOrCreateTagBuilder(SoulOriginsTags.SECRET_POTIONS).add(
+				SoulOriginsPotions.MementoMori.stage0,
+				SoulOriginsPotions.MementoMori.stage1,
+				SoulOriginsPotions.MementoMori.stage2,
+				SoulOriginsPotions.MementoMori.final,
+				SoulOriginsPotions.MementoMori.final_long,
+			)
+		}
+
 	}
 }

@@ -65,7 +65,8 @@
 	},
 	"custom": {
 		"cardinal-components": [
-			"soul-origins:owner"
+			"soul-origins:owner",
+			"soul-origins:whitespace"
 		]
 	}
 }

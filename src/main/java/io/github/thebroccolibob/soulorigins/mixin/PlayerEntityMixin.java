@@ -21,4 +21,5 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     private void dropBrewingStandInventory(CallbackInfo ci) {
         PowerHolderComponent.getPowers(this, BrewingStandPower.class).forEach(BrewingStandPower::onDeath);
     }
+
 }

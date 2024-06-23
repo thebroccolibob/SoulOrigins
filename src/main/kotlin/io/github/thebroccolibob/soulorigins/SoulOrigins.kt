@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory
 object SoulOrigins : ModInitializer {
 	const val MOD_ID = "soul-origins"
 
+	@JvmStatic
 	fun id(path: String) = Identifier(MOD_ID, path)
 
 	@JvmField
