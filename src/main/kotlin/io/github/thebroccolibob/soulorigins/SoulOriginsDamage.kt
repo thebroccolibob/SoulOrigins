@@ -9,7 +9,9 @@ import net.minecraft.world.World
 
 object SoulOriginsDamage {
     @JvmField
-    val MEMENTO_MORI_TYPE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, SoulOrigins.id("memento_mori"))
+    val MEMENTO_MORI_ACTIVE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, SoulOrigins.id("memento_mori_active"))
+    @JvmField
+    val MEMENTO_MORI_PASSIVE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, SoulOrigins.id("memento_mori_passive"))
 
     @JvmStatic
     fun RegistryKey<DamageType>.of(world: World): RegistryEntry<DamageType> {

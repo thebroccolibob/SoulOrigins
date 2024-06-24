@@ -60,6 +60,12 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
         }
     }
 
+    private fun TranslationBuilder.addDeathVariants(id: String, message: String, playerMessage: String? = null, itemMessage: String? = null) {
+        add("death.attack.$id", message)
+        playerMessage?.let { add("death.attack.$id.player", it)}
+        itemMessage?.let { add("death.attack.$id.item", it)}
+    }
+
     override fun generateTranslations(translationBuilder: TranslationBuilder) {
         with(translationBuilder) {
             add("advancements.$modId.wind.root", "Wind Spirit")
@@ -115,6 +121,15 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
             addPotionVariants(SoulOriginsPotions.THRONGLED.base, "Throngling")
             addPotionVariants(SoulOriginsPotions.MementoMori.final, "Memento Mori")
             addPotionVariants(SoulOriginsPotions.MementoMori.stage0, "Memento Mori", prefix = "Incomplete ")
+
+            addDeathVariants("soul-origins.memento_mori_passive",
+                message = "%s was banished from this plane of reality",
+                playerMessage = "%s was banished from this plane of reality whilst fighting %s"
+            )
+            addDeathVariants("soul-origins.memento_mori_active",
+                message = "%s was banished from this plane of reality by %s",
+                itemMessage = "%s was banished from this plane of reality by %s using %s"
+            )
         }
     }
 }

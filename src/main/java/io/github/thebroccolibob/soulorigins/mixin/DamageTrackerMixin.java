@@ -24,7 +24,10 @@ public class DamageTrackerMixin {
         if (!entity.hasStatusEffect(SoulOriginsEffects.MEMENTO_MORI)) return value;
 
         return new DamageSource(
-                SoulOriginsDamage.of(SoulOriginsDamage.MEMENTO_MORI_TYPE, entity.getWorld()),
+                SoulOriginsDamage.of(
+                        value.getAttacker() == null ? SoulOriginsDamage.MEMENTO_MORI_PASSIVE : SoulOriginsDamage.MEMENTO_MORI_ACTIVE,
+                        entity.getWorld()
+                ),
                 value.getSource(),
                 value.getAttacker()
         );

@@ -35,15 +35,17 @@ object SoulOriginsPotions {
         BrewingRecipeRegistry.registerPotionRecipe(it.base, Items.GLOWSTONE_DUST, it.strong)
     }
 
+    private val SOUL_COLOR = 2804175
+
     val PRECISION = registerFullSet("precision", SoulOriginsEffects.PRECISION, 1800, 2400)
     val NECROSIS = registerFullSet("necrosis", SoulOriginsEffects.NECROSIS, 3600, 4800)
     val PERCEPTION = registerFullSet("perception", SoulOriginsEffects.PERCEPTION, 3600, 4800)
     val THRONGLED = registerFullSet("throngled", SoulOriginsEffects.THRONGLED, 4800, 9600)
 
     object MementoMori {
-        val stage0 = register("memento_mori_stage0", "incomplete_memento_mori")
-        val stage1 = register("memento_mori_stage1", "incomplete_memento_mori")
-        val stage2 = register("memento_mori_stage2", "incomplete_memento_mori")
+        val stage0 = register("memento_mori_stage0", ColoredEmptyPotion(SOUL_COLOR, "incomplete_memento_mori"))
+        val stage1 = register("memento_mori_stage1", ColoredEmptyPotion(SOUL_COLOR, "incomplete_memento_mori"))
+        val stage2 = register("memento_mori_stage2", ColoredEmptyPotion(SOUL_COLOR, "incomplete_memento_mori"))
 
         val final = register("memento_mori", StatusEffectInstance(SoulOriginsEffects.MEMENTO_MORI, 12000))
         val final_long = register("long_memento_mori", "memento_mori", StatusEffectInstance(SoulOriginsEffects.MEMENTO_MORI, 24000))
