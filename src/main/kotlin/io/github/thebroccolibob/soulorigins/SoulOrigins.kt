@@ -15,6 +15,9 @@ import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
 import io.github.thebroccolibob.soulorigins.potion.SoulOriginsPotions
 import io.github.thebroccolibob.soulorigins.power.registerSoulOriginsPowers
 import net.fabricmc.api.ModInitializer
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.Identifier
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -48,5 +51,7 @@ object SoulOrigins : ModInitializer {
 		SoulOriginsPotions.register()
 		SoulOriginsTags.register()
 		registerSoulOriginsLootModifier()
+
+		ResourceManagerHelper.registerBuiltinResourcePack(id("whitespace"), FabricLoader.getInstance().getModContainer(MOD_ID).get(), ResourcePackActivationType.NORMAL)
 	}
 }

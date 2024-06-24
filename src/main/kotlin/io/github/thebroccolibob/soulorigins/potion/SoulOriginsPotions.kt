@@ -12,8 +12,6 @@ import net.minecraft.potion.Potions
 import net.minecraft.recipe.BrewingRecipeRegistry
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import net.minecraft.registry.RegistryKey
-import net.minecraft.registry.RegistryKeys
 
 object SoulOriginsPotions {
     private fun register(path: String, potion: Potion): Potion {
@@ -43,14 +41,12 @@ object SoulOriginsPotions {
     val THRONGLED = registerFullSet("throngled", SoulOriginsEffects.THRONGLED, 4800, 9600)
 
     object MementoMori {
-        private fun key(path: String) = RegistryKey.of(RegistryKeys.POTION, SoulOrigins.id(path))
+        val stage0 = register("memento_mori_stage0", "incomplete_memento_mori")
+        val stage1 = register("memento_mori_stage1", "incomplete_memento_mori")
+        val stage2 = register("memento_mori_stage2", "incomplete_memento_mori")
 
-        val stage0 = register("mm0", StatusEffectInstance(SoulOriginsEffects.INCOMPLETE_MEMENTO_MORI))
-        val stage1 = register("mm1", StatusEffectInstance(SoulOriginsEffects.INCOMPLETE_MEMENTO_MORI))
-        val stage2 = register("mm2", StatusEffectInstance(SoulOriginsEffects.INCOMPLETE_MEMENTO_MORI))
-
-        val final = register("memento_mori", StatusEffectInstance(SoulOriginsEffects.MEMENTO_MORI, 12000, 24000))
-        val final_long = register("long_memento_mori", StatusEffectInstance(SoulOriginsEffects.MEMENTO_MORI, 12000, 24000))
+        val final = register("memento_mori", StatusEffectInstance(SoulOriginsEffects.MEMENTO_MORI, 12000))
+        val final_long = register("long_memento_mori", "memento_mori", StatusEffectInstance(SoulOriginsEffects.MEMENTO_MORI, 24000))
     }
 
     fun register() {

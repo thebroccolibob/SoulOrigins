@@ -17,7 +17,7 @@ class WhiteSpaceComponent(private val entity: PlayerEntity) : PlayerComponent<Wh
     }
 
     override fun writeToNbt(tag: NbtCompound) {
-        tag.putBoolean("activated", isWhitespaced)
+        tag.putBoolean("Activated", isWhitespaced)
     }
 
     companion object {

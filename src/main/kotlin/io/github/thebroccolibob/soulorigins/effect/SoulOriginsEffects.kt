@@ -36,11 +36,6 @@ object SoulOriginsEffects {
         object : StatusEffect(StatusEffectCategory.BENEFICIAL, SUSPICIOUS_COLOR) {}
     )
 
-    val INCOMPLETE_MEMENTO_MORI = register(
-        "incomplete_memento_mori",
-        object : StatusEffect(StatusEffectCategory.NEUTRAL, 2804175) {}
-    )
-
     @JvmField
     val MEMENTO_MORI = register(
         "memento_mori",

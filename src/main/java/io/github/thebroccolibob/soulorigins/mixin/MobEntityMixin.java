@@ -1,6 +1,7 @@
 package io.github.thebroccolibob.soulorigins.mixin;
 
 import io.github.thebroccolibob.soulorigins.OwnedGoalAdder;
+import io.github.thebroccolibob.soulorigins.WorldsKt;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.GoalSelector;
@@ -27,5 +28,16 @@ abstract class MobEntityMixin extends LivingEntity implements OwnedGoalAdder {
     )
     void addOwnedGoals(EntityType<? extends MobEntity> entityType, World world, CallbackInfo ci) {
         this.soulOrigins$addOwnedGoals();
+    }
+
+    @Inject(
+            method = "checkDespawn",
+            at = @At("HEAD"),
+            cancellable = true)
+    void checkNoMobDimension(CallbackInfo ci) {
+        if (getWorld().getRegistryKey().equals(WorldsKt.WHITESPACE_DIMENSION)) {
+            this.discard();
+            ci.cancel();
+        }
     }
 }

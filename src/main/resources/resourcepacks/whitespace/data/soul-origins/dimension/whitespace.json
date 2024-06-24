@@ -1,0 +1,21 @@
+{
+  "type": "soul-origins:whitespace",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "soul-origins:whitespace",
+      "lakes": false,
+      "features": false,
+      "layers": [
+        {
+          "block": "dyedvoid:black_void",
+          "height": 56
+        },
+        {
+          "block": "dyedvoid:white_void",
+          "height": 8
+        }
+      ]
+    }
+  }
+}

@@ -35,6 +35,7 @@ fun registerSoulOriginsLootModifier() {
         LootTables.BASTION_HOGLIN_STABLE_CHEST,
         LootTables.ANCIENT_CITY_CHEST,
         LootTables.ANCIENT_CITY_ICE_BOX_CHEST,
+        LootTables.RUINED_PORTAL_CHEST,
         Identifier("terralith", "underground/giant_bee_hive"),
         Identifier("terralith", "underground/chest"),
         Identifier("terralith", "igloo"),

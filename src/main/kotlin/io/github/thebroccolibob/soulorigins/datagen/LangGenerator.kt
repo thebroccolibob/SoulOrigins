@@ -49,14 +49,14 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
         }
     }
 
-    private fun TranslationBuilder.addPotionVariants(potion: Potion, name: String) {
+    private fun TranslationBuilder.addPotionVariants(potion: Potion, name: String, prefix: String = "") {
         for ((item, translation) in listOf(
             Items.POTION to "Potion of ",
             Items.SPLASH_POTION to "Splash Potion of ",
             Items.LINGERING_POTION to "Lingering Potion of ",
             Items.TIPPED_ARROW to "Arrow of ",
         )) {
-            add(potion.finishTranslationKey("${item.translationKey}.effect."), "$translation$name")
+            add(potion.finishTranslationKey("${item.translationKey}.effect."), "$prefix$translation$name")
         }
     }
 
@@ -106,11 +106,15 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
             add(SoulOriginsEffects.NECROSIS, "Necrosis")
             add(SoulOriginsEffects.PERCEPTION, "Perception")
             add(SoulOriginsEffects.THRONGLED, "Throngled")
+            // Italic
+            add(SoulOriginsEffects.MEMENTO_MORI, "\u00A7oMemento Mori")
 
             addPotionVariants(SoulOriginsPotions.PRECISION.base, "Precision")
             addPotionVariants(SoulOriginsPotions.NECROSIS.base, "Necrosis")
             addPotionVariants(SoulOriginsPotions.PERCEPTION.base, "Perception")
             addPotionVariants(SoulOriginsPotions.THRONGLED.base, "Throngling")
+            addPotionVariants(SoulOriginsPotions.MementoMori.final, "Memento Mori")
+            addPotionVariants(SoulOriginsPotions.MementoMori.stage0, "Memento Mori", prefix = "Incomplete ")
         }
     }
 }

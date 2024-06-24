@@ -8,6 +8,6 @@ import net.minecraft.entity.mob.MobEntity
 class SoulOriginsComponents : EntityComponentInitializer {
     override fun registerEntityComponentFactories(registry: EntityComponentFactoryRegistry) {
         registry.registerFor(MobEntity::class.java, OwnerComponent.KEY, ::OwnerComponent)
-        registry.registerForPlayers(WhiteSpaceComponent.KEY, ::WhiteSpaceComponent, RespawnCopyStrategy.ALWAYS_COPY)
+        registry.registerForPlayers(WhiteSpaceComponent.KEY, ::WhiteSpaceComponent, RespawnCopyStrategy.CHARACTER)
     }
 }
