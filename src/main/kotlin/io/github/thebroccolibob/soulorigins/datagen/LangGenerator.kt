@@ -123,12 +123,12 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
             addPotionVariants(SoulOriginsPotions.MementoMori.stage0, "Memento Mori", prefix = "Incomplete ")
 
             addDeathVariants("soul-origins.memento_mori_passive",
-                message = "%s was banished from this plane of reality",
-                playerMessage = "%s was banished from this plane of reality whilst fighting %s"
+                message = "%s soul dwindled",
+                playerMessage = "%s soul gave out whilst fighting %s"
             )
             addDeathVariants("soul-origins.memento_mori_active",
-                message = "%s was banished from this plane of reality by %s",
-                itemMessage = "%s was banished from this plane of reality by %s using %s"
+                message = "%s soul dwindled via magic by %s",
+                itemMessage = "%s soul dwindled via magic by %s using %s"
             )
         }
     }
