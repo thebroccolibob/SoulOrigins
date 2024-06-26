@@ -4,7 +4,6 @@
     "description": "A long time ago, The Old Builders fled to The End to escape their demise. Overtime they evolved to the strange environment and became Enderman. Although you contain some Enderman traits, you somehow sustained your humanity.",
     "scale": {
         "type": "apugli:modify_scale",
-        "delay": 40,
         "scale_types": [
             "pehkui:model_width",
             "pehkui:height"

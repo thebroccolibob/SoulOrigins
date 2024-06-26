@@ -10,6 +10,7 @@
         "soul-origins:plant/water",
         "soul-origins:plant/bonemeal",
         "soul-origins:plant/phase_dirt",
-        "soul-origins:plant/grapple"
+        "soul-origins:plant/grapple",
+        "soul-origins:plant/shorter"
     ]
 }
