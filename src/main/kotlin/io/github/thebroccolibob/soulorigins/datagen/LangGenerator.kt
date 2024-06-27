@@ -91,6 +91,7 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
             add(SoulOriginsItems.TAILWIND_SHARD + "flavor", "A shard resonating with a turbulent power")
             add("item.soul-origins.wind_shard.origin_exclusive", "Only usable by wind spirits")
 
+            add(SoulOriginsItems.ARTIFICER_CORE, "Artificer Core")
             add(SoulOriginsItems.ARTIFICER_PLATFORM_BUILDER, "Brass Platform Builder")
             add(SoulOriginsItems.ARTIFICER_WALL_BUILDER, "Brass Wall Builder")
             add(SoulOriginsItems.ARTIFICER_COLUMN_BUILDER, "Brass Column Builder")

@@ -16,6 +16,7 @@
     "PotionEntityMixin",
     "PotionSlotMixin",
     "PotionUtilMixin",
+    "PowerRestrictedCraftingRecipeMixin",
     "RevengeGoalMixin",
     "SculkVeinGrowCheckerMixin",
     "ServerPlayerEntityMixin",

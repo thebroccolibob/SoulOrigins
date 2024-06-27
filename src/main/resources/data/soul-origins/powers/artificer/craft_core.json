@@ -29,7 +29,7 @@
         }
     },
     "cost": {
-        "type": "origins:modify_crafting",
+        "type": "soul-origins:action_on_restricted_recipe",
         "recipe": "soul-origins:artificer_core",
         "entity_action": {
             "type": "origins:change_resource",
