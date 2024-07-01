@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = PowerRestrictedCraftingRecipe.class, remap = false)
+@Mixin(value = PowerRestrictedCraftingRecipe.class)
 public class PowerRestrictedCraftingRecipeMixin {
     @Inject(
             method = "craft(Lnet/minecraft/inventory/RecipeInputInventory;Lnet/minecraft/registry/DynamicRegistryManager;)Lnet/minecraft/item/ItemStack;",
