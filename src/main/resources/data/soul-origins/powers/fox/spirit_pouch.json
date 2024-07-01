@@ -1,0 +1,9 @@
+{
+  "type": "origins:inventory",
+  "name": "Spirit Pouch",
+  "description": "A sub-dimensional magic pouch that is connected to your spirit. Keeps items even on death.",
+  "drop_on_death": false,
+  "key": {
+    "key": "key.origins.ternary_active"
+  }
+}
