@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "soul-origins:artificer_secondary_material"
+    },
+    "%": {
+      "item": "soul-origins:artificer_column_builder"
+    }
+  },
+  "pattern": [
+    "# #",
+    " % ",
+    "# #"
+  ],
+  "result": {
+    "item": "soul-origins:artificer_wall_builder"
+  },
+  "show_notification": true
+}

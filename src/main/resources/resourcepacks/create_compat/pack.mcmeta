@@ -1,0 +1,10 @@
+{
+  "pack": {
+    "pack_format": 15,
+    "supported_formats": [
+      15,
+      41
+    ],
+    "description": "Compatability with Create"
+  }
+}

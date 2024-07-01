@@ -8,8 +8,10 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.advancement.Advancement
+import net.minecraft.data.server.recipe.RecipeJsonProvider
 import net.minecraft.potion.Potion
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.RegistryWrapper
@@ -27,6 +29,7 @@ object SoulOriginsDataGenerator : DataGeneratorEntrypoint {
 			addProvider(::BlockLootTableGenerator)
 			addProvider(::BlockTagGenerator)
 			addProvider(::PotionTagGenerator)
+			addProvider(::RecipeGenerator)
 		}
 	}
 
@@ -71,6 +74,12 @@ object SoulOriginsDataGenerator : DataGeneratorEntrypoint {
 				SoulOriginsPotions.MementoMori.final,
 				SoulOriginsPotions.MementoMori.final_long,
 			)
+		}
+	}
+
+	class RecipeGenerator(output: FabricDataOutput) : FabricRecipeProvider(output) {
+		override fun generate(exporter: Consumer<RecipeJsonProvider>) {
+			exporter.generateSoulOriginsRecipes()
 		}
 
 	}
