@@ -3,6 +3,7 @@ package io.github.thebroccolibob.soulorigins.mixin;
 import com.mojang.authlib.GameProfile;
 import io.github.thebroccolibob.soulorigins.cca.WhiteSpaceComponent;
 import io.github.thebroccolibob.soulorigins.effect.SoulOriginsEffects;
+import io.github.thebroccolibob.soulorigins.power.ActionOnDeathPower;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
@@ -29,5 +30,13 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity {
         if (hasStatusEffect(SoulOriginsEffects.MEMENTO_MORI)) {
             WhiteSpaceComponent.setWhitespaced(this, true);
         }
+    }
+
+    @Inject(
+            method = "onDeath",
+            at = @At("HEAD")
+    )
+    private void executeOnDeathActions(DamageSource damageSource, CallbackInfo ci) {
+        ActionOnDeathPower.executeAll(this);
     }
 }

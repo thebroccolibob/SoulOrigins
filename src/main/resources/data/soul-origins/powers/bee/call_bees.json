@@ -1,0 +1,37 @@
+{
+    "type": "origins:active_self",
+    "key": "key.origins.secondary_active",
+    "cooldown": 200,
+    "hud_render": {
+        "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+        "bar_index": 14,
+        "should_render": true
+    },
+    "entity_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "origins:area_of_effect",
+                "radius": 32,
+                "bientity_condition": {
+                    "type": "origins:target_condition",
+                    "condition": {
+                        "type": "origins:entity_type",
+                        "entity_type": "minecraft:bee"
+                    }
+                },
+                "bientity_action": {
+                    "type": "origins:invert",
+                    "action": {
+                        "type": "soul-origins:pathfind_towards"
+                    }
+                }
+            },
+            {
+                "type": "origins:play_sound",
+                "sound": "minecraft:block.beehive.work",
+                "volume": 4
+            }
+        ]
+    }
+}

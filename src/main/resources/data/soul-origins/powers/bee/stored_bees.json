@@ -1,0 +1,251 @@
+{
+    "type": "origins:multiple",
+    "count": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 16,
+        "hud_render": {
+            "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+            "bar_index": 14,
+            "should_render": true
+        }
+    },
+    "collect": {
+        "type": "origins:action_on_entity_use",
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_count",
+            "comparison": "<",
+            "compare_to": 16
+        },
+        "bientity_condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:target_condition",
+                    "condition": {
+                        "type": "origins:entity_type",
+                        "entity_type": "minecraft:bee"
+                    }
+                },
+                {
+                    "type": "soul-origins:leashed",
+                    "inverted": true
+                }
+            ]
+        },
+        "action_result": "success",
+        "item_condition": {
+            "type": "origins:empty"
+        },
+        "bientity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:actor_action",
+                    "action": {
+                        "type": "origins:play_sound",
+                        "sound": "minecraft:block.beehive.enter"
+                    }
+                },
+                {
+                    "type": "origins:actor_action",
+                    "action": {
+                        "type": "origins:change_resource",
+                        "resource": "*:*_count",
+                        "operation": "add",
+                        "change": 1
+                    }
+                },
+                {
+                    "type": "origins:target_action",
+                    "action": {
+                        "type": "soul-origins:despawn"
+                    }
+                }
+            ]
+        }
+    },
+    "autocollect": {
+        "type": "origins:action_over_time",
+        "interval": 10,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_count",
+            "comparison": "<",
+            "compare_to": 16
+        },
+        "entity_action": {
+            "type": "origins:area_of_effect",
+            "radius": 1.5,
+            "bientity_condition": {
+                "type": "origins:and",
+                "conditions": [
+                    {
+                        "type": "origins:target_condition",
+                        "condition": {
+                            "type": "origins:entity_type",
+                            "entity_type": "minecraft:bee"
+                        }
+                    },
+                    {
+                        "type": "soul-origins:leashed",
+                        "inverted": true
+                    },
+                    {
+                        "type": "origins:invert",
+                        "condition": {
+                            "type": "soul-origins:facing",
+                            "axes": ["x", "z"],
+                            "actor_rotation": "head",
+                            "comparison": ">=",
+                            "compare_to": 0.4
+                        }
+                    }
+                ]
+            },
+            "bientity_action": {
+                "type": "origins:and",
+                "actions": [
+                    {
+                        "type": "origins:actor_action",
+                        "action": {
+                            "type": "origins:play_sound",
+                            "sound": "minecraft:block.beehive.enter"
+                        }
+                    },
+                    {
+                        "type": "origins:actor_action",
+                        "action": {
+                            "type": "origins:change_resource",
+                            "resource": "*:*_count",
+                            "operation": "add",
+                            "change": 1
+                        }
+                    },
+                    {
+                        "type": "origins:target_action",
+                        "action": {
+                            "type": "soul-origins:despawn"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "summon": {
+        "type": "origins:active_self",
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_count",
+            "comparison": ">",
+            "compare_to": 0
+        },
+        "key": "key.origins.primary_active",
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "soul-origins:spawn_entity_raycast",
+                    "entities_intercept": false,
+                    "distance": 5,
+                    "fluid_handling": "any",
+                    "shape_type": "collider",
+                    "in_block": false,
+                    "missable": false,
+                    "offset": {
+                        "y": 0.2
+                    },
+                    "entity_type": "minecraft:bee",
+                    "bientity_action": {
+                        "type": "origins:and",
+                        "actions": [
+                            {
+                                "type": "soul-origins:set_mob_owned"
+                            },
+                            {
+                                "type": "origins:if_else",
+                                "condition": {
+                                    "type": "apoli:actor_condition",
+                                    "condition": {
+                                        "type": "origins:inventory",
+                                        "slot": "weapon.mainhand",
+                                        "item_condition": {
+                                            "type": "apoli:ingredient",
+                                            "ingredient": {
+                                                "item": "minecraft:lead"
+                                            }
+                                        }
+                                    }
+                                },
+                                "if_action": {
+                                    "type": "origins:and",
+                                    "actions": [
+                                        {
+                                            "type": "soul-origins:leash"
+                                        },
+                                        {
+                                            "type": "origins:actor_action",
+                                            "action": {
+                                                "type": "origins:equipped_item_action",
+                                                "equipment_slot": "mainhand",
+                                                "action": {
+                                                    "type": "origins:consume",
+                                                    "amount": 1
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:block.beehive.exit"
+                },
+                {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_count",
+                    "operation": "add",
+                    "change": -1
+                },
+                {
+                    "type": "origins:swing_hand"
+                }
+            ]
+        }
+    },
+    "death_release": {
+        "type": "soul-origins:action_on_death",
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_count",
+            "comparison": ">",
+            "compare_to": 0
+        },
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "soul-origins:repeat",
+                    "resource": "*:*_count",
+                    "action": {
+                        "type": "soul-origins:spawn_entity",
+                        "entity_type": "minecraft:bee",
+                        "bientity_action": {
+                            "type": "soul-origins:set_mob_owned"
+                        }
+                    }
+                },
+                {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_count",
+                    "operation": "set",
+                    "change": 0
+                }
+            ]
+        }
+    }
+}

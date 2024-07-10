@@ -46,7 +46,7 @@ object SpawnEntityRaycastAction {
             data.get("shape_type"),
             data.get("fluid_handling")
         )
-        if (blockHit.type != HitResult.Type.MISS) {
+        if (!data.getBoolean("missable") || blockHit.type != HitResult.Type.MISS) {
             if (hitResult == null || hitResult.type == HitResult.Type.MISS) {
                 hitResult = blockHit
             } else {
@@ -55,7 +55,7 @@ object SpawnEntityRaycastAction {
                 }
             }
         }
-        if (hitResult != null && hitResult.type != HitResult.Type.MISS) {
+        if (hitResult != null) {
             if (data.isPresent("command_along_ray")) {
                 executeStepCommands(
                     entity,
@@ -160,6 +160,7 @@ object SpawnEntityRaycastAction {
         add("bientity_action", ApoliDataTypes.BIENTITY_ACTION, null)
         add("in_block", SerializableDataTypes.BOOLEAN, false)
         add("offset", SerializableDataTypes.VECTOR, null)
+        add("missable", SerializableDataTypes.BOOLEAN, true)
 
         add("entities_intercept", SerializableDataTypes.BOOLEAN, false)
         add("intercept_entity_condition", ApoliDataTypes.ENTITY_CONDITION, null)
