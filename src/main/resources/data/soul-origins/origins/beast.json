@@ -1,0 +1,11 @@
+{
+  "name": "Beast",
+  "icon": "minecraft:beef",
+  "impact": 3,
+  "powers": [
+    "soul-origins:soul_meter",
+    "soul-origins:soul_extract",
+    "soul-origins:beast/transform",
+    "soul-origins:beast/toggle"
+  ]
+}

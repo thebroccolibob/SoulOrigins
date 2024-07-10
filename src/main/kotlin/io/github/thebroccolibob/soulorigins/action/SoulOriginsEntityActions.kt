@@ -5,16 +5,15 @@ import io.github.apace100.apoli.data.ApoliDataTypes
 import io.github.apace100.apoli.power.CooldownPower
 import io.github.apace100.apoli.power.PowerType
 import io.github.apace100.apoli.power.factory.action.ActionFactory
+import io.github.apace100.apoli.power.factory.condition.ConditionFactory
 import io.github.apace100.apoli.registry.ApoliRegistries
 import io.github.apace100.calio.data.SerializableData
 import io.github.apace100.calio.data.SerializableDataType
 import io.github.apace100.calio.data.SerializableDataTypes
-import io.github.thebroccolibob.soulorigins.SerializableData
-import io.github.thebroccolibob.soulorigins.SoulOrigins
-import io.github.thebroccolibob.soulorigins.getPower
+import io.github.thebroccolibob.soulorigins.*
 import io.github.thebroccolibob.soulorigins.power.EntityStorePower
-import io.github.thebroccolibob.soulorigins.syncPower
 import net.minecraft.block.BlockState
+import net.minecraft.block.pattern.CachedBlockPosition
 import net.minecraft.entity.AreaEffectCloudEntity
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -198,6 +197,31 @@ fun registerSoulOriginsEntityActions() {
                 }
                 break
             }
+        }
+    }
+
+    register("destroy_rect", SerializableData {
+        add("horizontal", SerializableDataTypes.DOUBLE)
+        add("up", SerializableDataTypes.DOUBLE)
+        add("down", SerializableDataTypes.DOUBLE)
+        add("block_condition", ApoliDataTypes.BLOCK_CONDITION, null)
+        add("drop", SerializableDataTypes.BOOLEAN, true)
+    }) { data, entity ->
+        val world = entity.world
+        val horizontal = data.getDouble("horizontal")
+        val up = data.getDouble("up")
+        val down = data.getDouble("down")
+        val drop = data.getBoolean("drop")
+        val corner1 = BlockPos.ofFloored(entity.pos - Vec3d(horizontal, down, horizontal))
+        val corner2 = BlockPos.ofFloored(entity.pos + Vec3d(horizontal, up, horizontal))
+        val condition = data.get<ConditionFactory<CachedBlockPosition>.Instance?>("block_condition")
+
+        BlockPos.iterate(corner1, corner2).let { iterator ->
+            if (condition == null) iterator else iterator.mapNotNull {
+                if (condition.test(CachedBlockPosition(world, it, true))) it.toImmutable() else null
+            }
+        }.forEach {
+            world.breakBlock(it, drop)
         }
     }
 

@@ -1,0 +1,29 @@
+{
+    "type": "origins:multiple",
+    "size": {
+        "type": "apugli:modify_scale",
+        "scale_types": [
+            "pehkui:model_width",
+            "pehkui:height"
+        ],
+        "modifier": {
+            "operation": "multiply_base",
+            "value": 0.5
+        },
+        "condition": {
+            "type": "origins:power_active",
+            "power": "*:beast/toggle"
+        }
+    },
+    "texture": {
+        "type": "apugli:entity_texture_overlay",
+        "render_original_model": false,
+        "render_player_outer_layer": false,
+        "show_first_person": true,
+        "condition": {
+            "type": "origins:power_active",
+            "power": "*:beast/toggle"
+        },
+        "texture_location": "soul-origins:textures/entity/beast/beast.png"
+    }
+}

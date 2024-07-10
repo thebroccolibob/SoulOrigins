@@ -1,0 +1,46 @@
+{
+    "type": "origins:multiple",
+    "level": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 300
+    },
+    "cooldown": {
+        "type": "origins:cooldown",
+        "cooldown": 100
+    },
+    "check": {
+        "type": "origins:action_over_time",
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "*:*_cooldown",
+            "operation": "add",
+            "change": 1
+        },
+        "falling_action": {
+            "type": "cooldown"
+        },
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:power_active",
+                    "power": "*:beast/toggle"
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "*:*_cooldown",
+                    "comparison": "<=",
+                    "compare_to": 0
+                },
+                {
+                    "type": "apugli:key_pressed",
+                    "key": {
+                        "key": "key.origins.secondary_active",
+                        "continuous": true
+                    }
+                }
+            ]
+        }
+    }
+}
