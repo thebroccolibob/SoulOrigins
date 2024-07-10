@@ -31,8 +31,8 @@
         }
     },
     "reset": {
-        "type": "origins:action_on_callback",
-        "entity_action_respawned": {
+        "type": "soul-origins:action_on_death",
+        "entity_action": {
             "type": "origins:change_resource",
             "resource": "soul-origins:wolf/gleaning_tracker",
             "operation": "set",

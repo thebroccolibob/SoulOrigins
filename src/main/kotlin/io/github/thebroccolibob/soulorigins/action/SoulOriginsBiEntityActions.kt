@@ -9,11 +9,14 @@ import io.github.apace100.apoli.registry.ApoliRegistries
 import io.github.apace100.calio.data.SerializableData
 import io.github.apace100.calio.data.SerializableDataTypes
 import io.github.thebroccolibob.soulorigins.*
+import io.github.thebroccolibob.soulorigins.cca.OwnerComponent.Companion.owner
 import io.github.thebroccolibob.soulorigins.item.MobOrbItem
 import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
 import io.github.thebroccolibob.soulorigins.power.EntityStorePower
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.mob.MobEntity
+import net.minecraft.entity.mob.PathAwareEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registry
@@ -105,5 +108,22 @@ fun registerSoulOriginsBiEntityActions() {
         }
 
         target.velocityModified = true
+    }
+
+    register("set_mob_owned") { actor, target ->
+        if (target !is MobEntity || actor !is LivingEntity) return@register
+        target.owner = actor
+        target.setPersistent()
+        (target as OwnedGoalAdder).`soulOrigins$addOwnedGoals`()
+    }
+
+    register("pathfind_towards", SerializableData {
+        add("speed", SerializableDataTypes.DOUBLE, 1.0)
+    }) { data, actor, target ->
+        (actor as? PathAwareEntity)?.navigation?.startMovingTo(target, data.getDouble("speed"))
+    }
+
+    register("leash") { actor, target ->
+        (target as? MobEntity)?.attachLeash(actor, true)
     }
 }

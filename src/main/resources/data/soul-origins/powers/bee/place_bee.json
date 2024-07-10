@@ -1,0 +1,84 @@
+{
+    "type": "origins:active_self",
+    "condition": {
+        "type": "origins:resource",
+        "resource": "*:bee/stored_bees_count",
+        "comparison": ">",
+        "compare_to": 0
+    },
+    "key": "key.origins.primary_active",
+    "entity_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "soul-origins:spawn_entity_raycast",
+                "entities_intercept": false,
+                "distance": 5,
+                "fluid_handling": "any",
+                "shape_type": "collider",
+                "in_block": false,
+                "missable": false,
+                "offset": {
+                    "y": 0.2
+                },
+                "entity_type": "minecraft:bee",
+                "bientity_action": {
+                    "type": "origins:and",
+                    "actions": [
+                        {
+                            "type": "soul-origins:set_mob_owned"
+                        },
+                        {
+                            "type": "origins:if_else",
+                            "condition": {
+                                "type": "apoli:actor_condition",
+                                "condition": {
+                                    "type": "origins:inventory",
+                                    "slot": "weapon.mainhand",
+                                    "item_condition": {
+                                        "type": "apoli:ingredient",
+                                        "ingredient": {
+                                            "item": "minecraft:lead"
+                                        }
+                                    }
+                                }
+                            },
+                            "if_action": {
+                                "type": "origins:and",
+                                "actions": [
+                                    {
+                                        "type": "soul-origins:leash"
+                                    },
+                                    {
+                                        "type": "origins:actor_action",
+                                        "action": {
+                                            "type": "origins:equipped_item_action",
+                                            "equipment_slot": "mainhand",
+                                            "action": {
+                                                "type": "origins:consume",
+                                                "amount": 1
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "origins:play_sound",
+                "sound": "minecraft:block.beehive.exit"
+            },
+            {
+                "type": "origins:change_resource",
+                "resource": "*:bee/stored_bees_count",
+                "operation": "add",
+                "change": -1
+            },
+            {
+                "type": "origins:swing_hand"
+            }
+        ]
+    }
+}

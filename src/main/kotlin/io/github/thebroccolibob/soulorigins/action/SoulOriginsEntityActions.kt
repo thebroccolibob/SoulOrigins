@@ -200,4 +200,6 @@ fun registerSoulOriginsEntityActions() {
             }
         }
     }
+
+    register(RepeatAction.entityAction)
 }

@@ -38,4 +38,5 @@ fun registerSoulOriginsPowers() {
     register(SuspiciousBrewingStandPower.factory)
     register(EntityStorePower.factory)
     register(ActionOnRestrictedRecipePower.factory)
+    register(ActionOnDeathPower.factory)
 }

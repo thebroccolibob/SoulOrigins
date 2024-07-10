@@ -1,0 +1,118 @@
+{
+    "type": "origins:action_over_time",
+    "name": "Beelloon",
+    "description": "Leashing a bee will cause it to slow your fall, preventing fall damage. 3 or more bees will be enough to lift you into the air.",
+    "interval": 20,
+    "condition": {
+        "type": "apugli:entity_in_radius",
+        "radius": 8,
+        "bientity_condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:target_condition",
+                    "condition": {
+                        "type": "origins:entity_type",
+                        "entity_type": "minecraft:bee"
+                    }
+                },
+                {
+                    "type": "soul-origins:leashed"
+                }
+            ]
+        },
+        "comparison": ">=",
+        "compare_to": 1
+    },
+    "entity_action": {
+        "type": "apoli:if_else",
+        "condition": {
+            "type": "apugli:entity_in_radius",
+            "radius": 8,
+            "bientity_condition": {
+                "type": "origins:and",
+                "conditions": [
+                    {
+                        "type": "origins:target_condition",
+                        "condition": {
+                            "type": "origins:entity_type",
+                            "entity_type": "minecraft:bee"
+                        }
+                    },
+                    {
+                        "type": "soul-origins:leashed"
+                    }
+                ]
+            },
+            "comparison": ">=",
+            "compare_to": 3
+        },
+        "if_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:apply_effect",
+                    "effect": {
+                        "effect": "minecraft:levitation",
+                        "amplifier": 1,
+                        "duration": 21,
+                        "show_icon": false,
+                        "show_particles": false
+                    }
+                },
+                {
+                    "type": "origins:area_of_effect",
+                    "bientity_condition": {
+                        "type": "origins:and",
+                        "conditions": [
+                            {
+                                "type": "origins:target_condition",
+                                "condition": {
+                                    "type": "origins:entity_type",
+                                    "entity_type": "minecraft:bee"
+                                }
+                            },
+                            {
+                                "type": "soul-origins:leashed"
+                            }
+                        ]
+                    },
+                    "radius": 5,
+                    "shape": "sphere",
+                    "bientity_action": {
+                        "type": "origins:target_action",
+                        "action": {
+                            "type": "origins:add_velocity",
+                            "space": "world",
+                            "set": true,
+                            "y": 0.2
+                        }
+                    }
+                }
+            ]
+        },
+        "else_action": {
+            "type": "origins:apply_effect",
+            "effect": {
+                "effect": "minecraft:slow_falling",
+                "amplifier": 3,
+                "duration": 21,
+                "show_icon": false,
+                "show_particles": false
+            }
+        }
+    },
+    "falling_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "origins:clear_effect",
+                "effect": "minecraft:levitation"
+            },
+            {
+                "type": "origins:clear_effect",
+                "effect": "minecraft:slow_falling"
+            }
+        ]
+    }
+}

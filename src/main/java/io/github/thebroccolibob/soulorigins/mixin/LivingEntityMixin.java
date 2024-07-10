@@ -5,14 +5,18 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import io.github.apace100.apoli.component.PowerHolderComponent;
+import io.github.thebroccolibob.soulorigins.power.ActionOnDeathPower;
 import io.github.thebroccolibob.soulorigins.power.DrowningPower;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.registry.tag.TagKey;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -35,5 +39,13 @@ public abstract class LivingEntityMixin {
     )
     private boolean bypassSecondCheck(BlockState instance, Block block, Operation<Boolean> original, @Share("hasDrowningPower") LocalBooleanRef hasPowerRef) {
         return original.call(instance, block) && !hasPowerRef.get();
+    }
+
+    @Inject(
+            method = "onDeath",
+            at = @At("HEAD")
+    )
+    private void executeOnDeathActions(DamageSource damageSource, CallbackInfo ci) {
+        ActionOnDeathPower.executeAll((LivingEntity) (Object) this);
     }
 }
