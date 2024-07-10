@@ -18,7 +18,7 @@ class OwnerComponent(private val entity: MobEntity) : Component, AutoSyncedCompo
     var owner: LivingEntity? = null
         get() {
             if (entity.world.isClient || uuid == null) return null
-            if (field == null || field!!.uuid != uuid) {
+            if (field == null || field!!.isRemoved || field!!.uuid != uuid) {
                 field = (entity.world as ServerWorld).getEntity(uuid) as? LivingEntity
             }
             return field

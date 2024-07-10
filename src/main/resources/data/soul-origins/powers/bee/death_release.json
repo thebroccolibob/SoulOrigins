@@ -1,0 +1,31 @@
+{
+    "type": "soul-origins:action_on_death",
+    "condition": {
+        "type": "origins:resource",
+        "resource": "*:bee/stored_bees_count",
+        "comparison": ">",
+        "compare_to": 0
+    },
+    "entity_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "soul-origins:repeat",
+                "resource": "*:bee/stored_bees_count",
+                "action": {
+                    "type": "soul-origins:spawn_entity",
+                    "entity_type": "minecraft:bee",
+                    "bientity_action": {
+                        "type": "soul-origins:set_mob_owned"
+                    }
+                }
+            },
+            {
+                "type": "origins:change_resource",
+                "resource": "*:bee/stored_bees_count",
+                "operation": "set",
+                "change": 0
+            }
+        ]
+    }
+}

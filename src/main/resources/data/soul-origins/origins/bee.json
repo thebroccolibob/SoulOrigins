@@ -6,6 +6,10 @@
     "powers": [
         "soul-origins:bee/stored_bees",
         "soul-origins:bee/call_bees",
-        "soul-origins:bee/beelloon"        
+        "soul-origins:bee/death_release",
+        "soul-origins:bee/place_bee",
+        "soul-origins:bee/beelloon",
+        "soul-origins:bee/prevent_anger",
+        "soul-origins:bee/eat"
     ]
 }

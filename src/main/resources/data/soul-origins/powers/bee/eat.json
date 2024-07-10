@@ -1,0 +1,39 @@
+{
+    "type": "origins:multiple",
+    "honey_bottle": {
+        "type": "origins:modify_food",
+        "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+                "item": "minecraft:honey_bottle"
+            }
+        },
+        "saturation_modifier": {
+            "operation": "set_base",
+            "value": 1.0
+        },
+        "entity_action": {
+            "type": "origins:heal",
+            "amount": 2
+        }
+    },
+    "honeycomb": {
+        "type": "apugli:edible_item",
+        "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+                "item": "minecraft:honeycomb"
+            }
+        },
+        "food_component": {
+            "always_edible": true,
+            "hunger": 3,
+            "saturation": 0.6,
+            "snack": true
+        },
+        "entity_action": {
+            "type": "origins:heal",
+            "amount": 1
+        }
+    }
+}
