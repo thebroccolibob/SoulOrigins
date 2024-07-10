@@ -10,6 +10,8 @@
         "soul-origins:bee/place_bee",
         "soul-origins:bee/beelloon",
         "soul-origins:bee/prevent_anger",
-        "soul-origins:bee/eat"
+        "soul-origins:bee/eat",
+        "soul-origins:bee/particle",
+        "soul-origins:bee/sound"
     ]
 }

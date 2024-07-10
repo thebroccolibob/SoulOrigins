@@ -1,5 +1,7 @@
 {
     "type": "origins:multiple",
+    "name": "Honeyed Composition",
+    "description": "Being made of honey and honeycombs, you can eat these items as high quality foods and they will even heal you directly.",
     "honey_bottle": {
         "type": "origins:modify_food",
         "item_condition": {

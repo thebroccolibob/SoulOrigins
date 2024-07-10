@@ -1,5 +1,7 @@
 {
     "type": "origins:action_over_time",
+    "name": "Beelloon",
+    "description": "Leashing a bee will cause it to slow your fall, preventing fall damage. 3 or more bees will be enough to lift you into the air.",
     "interval": 20,
     "condition": {
         "type": "apugli:entity_in_radius",

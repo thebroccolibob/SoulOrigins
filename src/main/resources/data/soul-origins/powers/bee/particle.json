@@ -1,0 +1,14 @@
+{
+    "type": "origins:particle",
+    "hidden": true,
+    "frequency": 60,
+    "count": 1,
+    "particle": "minecraft:falling_honey",
+    "speed": 0,
+    "visible_in_first_person": true,
+    "condition": {
+        "type": "origins:food_level",
+        "comparison": ">=",
+        "compare_to": 18
+    }
+}

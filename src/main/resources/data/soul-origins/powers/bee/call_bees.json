@@ -1,5 +1,7 @@
 {
     "type": "origins:multiple",
+    "name": "Call of the Hive",
+    "description": "Cause all nearby bees to return to the hive (you).",
     "cooldown": {
         "type": "origins:cooldown",
         "cooldown": 200,
