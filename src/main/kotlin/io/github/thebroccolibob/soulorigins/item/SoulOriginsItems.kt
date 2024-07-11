@@ -4,6 +4,7 @@ import io.github.thebroccolibob.soulorigins.FabricItemSettings
 import io.github.thebroccolibob.soulorigins.ItemGroup
 import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
+import io.github.thebroccolibob.soulorigins.put
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistry
 import net.minecraft.entity.EntityType
 import net.minecraft.item.*
@@ -112,9 +113,22 @@ object SoulOriginsItems {
                                     add(handItem.defaultStack.writeNbt(NbtCompound()))
                                 })
                             }
+                            if (it == EntityType.WARDEN) {
+                                put("Brain") {
+                                    put("memories") {
+                                        put("minecraft:dig_cooldown") {
+                                            put("value") {}
+                                            putLong("ttl", 1200)
+                                        }
+                                    }
+                                }
+                            }
                         })
                     })
                 }
+
+                entries.add(MANDALORIAN_HELMET)
+                entries.add(TEST_GUN)
             }
         }
     )

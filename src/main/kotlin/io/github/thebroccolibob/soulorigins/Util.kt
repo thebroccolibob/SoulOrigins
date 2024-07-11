@@ -71,6 +71,12 @@ fun NbtList.setIfEmpty(index: Int, element: NbtElement) : Boolean {
 
 fun NbtCompound.getList(key: String, type: Byte): NbtList = getList(key, type.toInt())
 
+inline fun NbtCompound(init: NbtCompound.() -> Unit): NbtCompound = NbtCompound().apply(init)
+
+inline fun NbtCompound.put(key: String, init: NbtCompound.() -> Unit) {
+    put(key, NbtCompound(init))
+}
+
 fun <T: Any> Optional<T>.toNullable(): T? = orElse(null)
 fun <T: Any> T?.toOptional() = Optional.ofNullable(this)
 
