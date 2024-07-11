@@ -1,0 +1,16 @@
+{
+    "name": "The Old Builder",
+    "description": "A long time ago, before soul energy was evolving species, before even normal humans roamed, there was a group called The Old Builders. They were geniuses that invented many things we see today, but their intelligence was eventually their downfall. Except for this origin. The last Old Builder. ",
+    "icon": "minecraft:ender_pearl",
+    "impact": 3,
+    "powers": [
+        "soul-origins:enderman/tall",
+        "origins:pumpkin_hate",
+        "soul-origins:enderman/water_damage",
+        "soul-origins:enderman/teleport",
+        "soul-origins:enderman/telephase",
+        "soul-origins:enderman/eyes",
+        "soul-origins:enderman/particle",
+        "soul-origins:enderman/prevent_enderman_anger"
+    ]
+}

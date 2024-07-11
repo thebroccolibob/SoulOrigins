@@ -1,0 +1,16 @@
+{
+    "type": "origins:particle",
+    "hidden": true,
+    "particle": "minecraft:portal",
+    "spread": {
+        "x": 0.5,
+        "y": 0,
+        "z": 0.5
+    },
+    "count": 1,
+    "frequency": 1,
+    "speed": 1.0,
+    "offset_y": 0.5,
+    "visible_in_first_person": true,
+    "visible_while_invisible": true
+}

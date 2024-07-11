@@ -25,6 +25,24 @@
     ],
     "subtitle": "subtitles.soul-origins.power.wind.burst_large"
   },
+  "power.sorcerer.teleport": {
+    "sounds": [
+      {
+        "name": "soul-origins:sorcerer/teleport",
+        "pitch": 2.0,
+        "volume": 0.5
+      }
+    ]
+  },
+  "power.sorcerer.sculk": {
+    "sounds": [
+      {
+        "name":"soul-origins:sorcerer/sculk_garden_summon",
+        "pitch": 1.0,
+        "volume": 1.0
+      }
+    ]
+  },
   "items.wind_shard.level": {
     "sounds": [
       {
@@ -34,5 +52,103 @@
       }
     ],
     "subtitle": "subtitles.soul-origins.items.wind_shard.level"
+  },
+  "power.wind.afterburst": {
+    "sounds": [
+      {
+        "name": "minecraft:ambient/nether/soulsand_valley/wind1",
+        "pitch": 1.0,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:ambient/nether/soulsand_valley/wind2",
+        "pitch": 1.0,
+        "volume": 1.0
+      }
+    ]
+  },
+  "power.wind.float": {
+    "sounds": [
+      {
+        "name": "soul-origins:wind/float1",
+        "pitch": 1.0,
+        "volume": 1.0
+      },
+      {
+        "name": "soul-origins:wind/float2",
+        "pitch": 1.0,
+        "volume": 1.0
+      },
+      {
+        "name": "soul-origins:wind/float3",
+        "pitch": 1.0,
+        "volume": 1.0
+      },
+      {
+        "name": "soul-origins:wind/float4",
+        "pitch": 1.0,
+        "volume": 1.0
+      }
+    ]
+  },
+  "power.wind.land": {
+    "sounds": [
+      {
+        "name": "soul-origins:wind/land1",
+        "pitch": 1.0,
+        "volume": 1.0
+      },
+      {
+        "name": "soul-origins:wind/land2",
+        "pitch": 1.0,
+        "volume": 1.0
+      }
+    ]
+  },
+  "block.artificer_surface.place": {
+    "sounds": [
+      {
+        "name": "tile/piston/out",
+        "volume": 0.15
+      }
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.artificer_surface.destroy": {
+    "sounds": [
+      {
+        "name": "tile/piston/in",
+        "volume": 0.15
+      }
+    ],
+    "subtitle": "subtitles.block.generic.destroy"
+  },
+  "power.wolf.summon": {
+    "sounds": [
+      {
+        "name": "minecraft:ambient/nether/crimson_forest/shine1",
+        "pitch": 1.0,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:ambient/nether/crimson_forest/shine2",
+        "pitch": 1.0,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:ambient/nether/crimson_forest/shine3",
+        "pitch": 1.0,
+        "volume": 1.0
+      }
+    ]
+  },
+  "power.enderman.rift": {
+    "sounds": [
+      {
+        "name":"minecraft:ambient/nether/soulsand_valley/whisper1",
+        "pitch": 1.0,
+        "volume": 1.0
+      }
+    ]
   }
 }

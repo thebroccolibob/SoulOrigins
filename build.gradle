@@ -89,6 +89,10 @@ dependencies {
 	modImplementation("com.github.Virtuoel:Pehkui:${project.pehkui_version}", {
 		exclude group: "net.fabricmc.fabric-api"
 	})
+	modImplementation "maven.modrinth:origins-extra-keybinds-fabric:${project.extrakeybinds_version}"
+
+	modImplementation "maven.modrinth:neutron:${project.neutron_version}"
+
 }
 
 processResources {

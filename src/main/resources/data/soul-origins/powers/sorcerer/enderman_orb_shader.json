@@ -1,0 +1,11 @@
+{
+  "type": "origins:shader",
+  "hidden": true,
+  "shader": "minecraft:shaders/post/deconverge.json",
+  "condition": {
+    "type": "origins:resource",
+    "resource": "soul-origins:sorcerer/activate_enderman_orb_cooldown",
+    "comparison": ">",
+    "compare_to": 0
+  }
+}

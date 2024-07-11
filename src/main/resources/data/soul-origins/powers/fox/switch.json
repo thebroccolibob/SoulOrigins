@@ -1,0 +1,84 @@
+{
+    "type": "origins:active_self",
+    "name": "Tri-Fox Shift",
+    "description": "Fox Spirits are versatile explorers that have learned to flow their soul energy into different 'Tailed Spirit' forms. You can swap between these forms without limits, but beware that each mode has its benefits and flaws.",
+    "entity_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "origins:if_else_list",
+                "actions": [
+                    {
+                        "condition": {
+                            "type": "origins:power",
+                            "power": "*:fox/stealth_mode"
+                        },
+                        "action": {
+                            "type": "origins:and",
+                            "actions": [
+                                {
+                                    "type": "origins:revoke_power",
+                                    "power": "*:fox/stealth_mode",
+                                    "source": "*:fox/switch"
+                                },
+                                {
+                                    "type": "origins:grant_power",
+                                    "power": "*:fox/movement_mode",
+                                    "source": "*:fox/switch"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "condition": {
+                            "type": "origins:power",
+                            "power": "*:fox/movement_mode"
+                        },
+                        "action": {
+                            "type": "origins:and",
+                            "actions": [
+                                {
+                                    "type": "origins:revoke_power",
+                                    "power": "*:fox/movement_mode",
+                                    "source": "*:fox/switch"
+                                },
+                                {
+                                    "type": "origins:grant_power",
+                                    "power": "*:fox/attack_mode",
+                                    "source": "*:fox/switch"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "condition": {
+                            "type": "origins:power",
+                            "power": "*:fox/attack_mode"
+                        },
+                        "action": {
+                            "type": "origins:revoke_power",
+                            "power": "*:fox/attack_mode",
+                            "source": "*:fox/switch"
+                        }
+                    },
+                    {
+                        "condition": {
+                            "type": "origins:constant",
+                            "value": true
+                        },
+                        "action": {
+                            "type": "origins:grant_power",
+                            "power": "*:fox/stealth_mode",
+                            "source": "*:fox/switch"
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.fox.ambient",
+                "volume": 0.3
+            }
+        ]
+    }
+}

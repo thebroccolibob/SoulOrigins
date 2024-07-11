@@ -1,0 +1,8 @@
+{
+  "type": "origins:particle",
+  "hidden": true,
+  "particle": "minecraft:sculk_soul",
+  "count": 10,
+  "speed": 0.1,
+  "frequency": 4
+}

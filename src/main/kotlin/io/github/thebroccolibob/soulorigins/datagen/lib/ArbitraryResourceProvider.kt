@@ -2,14 +2,14 @@ package io.github.thebroccolibob.soulorigins.datagen.lib
 
 import com.google.gson.JsonObject
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.minecraft.data.DataOutput
+import net.minecraft.data.DataOutput.OutputType
 import net.minecraft.data.DataProvider
 import net.minecraft.data.DataWriter
 import net.minecraft.util.Identifier
 import java.util.*
 import java.util.concurrent.CompletableFuture
 
-abstract class ArbitraryResourceProvider(val dataOutput: FabricDataOutput, val directoryName: String, private val name: String = directoryName) : DataProvider {
+abstract class ArbitraryResourceProvider(val dataOutput: FabricDataOutput, val directoryName: String, private val type: OutputType = OutputType.DATA_PACK, private val name: String = directoryName) : DataProvider {
 
     abstract fun Writer.generateResources()
 
@@ -23,7 +23,7 @@ abstract class ArbitraryResourceProvider(val dataOutput: FabricDataOutput, val d
         val entries = mutableListOf<CompletableFuture<*>>()
 
         fun json(path: String, jsonObject: JsonObject) {
-            entries.add(DataProvider.writeToPath(writer, jsonObject, dataOutput.getResolver(DataOutput.OutputType.DATA_PACK, directoryName).resolveJson(Identifier(dataOutput.modId, path))))
+            entries.add(DataProvider.writeToPath(writer, jsonObject, dataOutput.getResolver(type, directoryName).resolveJson(Identifier(dataOutput.modId, path))))
         }
 
         inline fun json(path: String, jsonInit: JsonInit) {
@@ -31,7 +31,7 @@ abstract class ArbitraryResourceProvider(val dataOutput: FabricDataOutput, val d
         }
 
         fun plaintext(path: String, fileExtension: String, text: String) {
-            entries.add(writePlaintextToPath(writer, text, dataOutput.getResolver(DataOutput.OutputType.DATA_PACK, directoryName).resolve(Identifier(dataOutput.modId, path), fileExtension)))
+            entries.add(writePlaintextToPath(writer, text, dataOutput.getResolver(type, directoryName).resolve(Identifier(dataOutput.modId, path), fileExtension)))
         }
 
         fun function(path: String, commands: String) {

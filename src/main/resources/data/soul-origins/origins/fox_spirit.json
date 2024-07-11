@@ -1,0 +1,14 @@
+{
+  "name": "Fox Spirit",
+  "description": "A mischievous species of spirits that love exploring the world!",
+  "icon": "minecraft:sweet_berries",
+  "impact": 3,
+  "powers": [
+    "soul-origins:fox/switch",
+    "soul-origins:fox/stealth_desc",
+    "soul-origins:fox/speed_desc",
+    "soul-origins:fox/lunge",
+    "soul-origins:fox/spirit_pouch",
+    "soul-origins:fox/short"
+  ]
+}

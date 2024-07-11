@@ -1,5 +1,7 @@
 {
     "type": "origins:multiple",
+    "name": "Glide",
+    "description": "Holding space while falling will create streams of wind that provide you a graceful descent.",
     "fall": {
         "type": "origins:modify_falling",
         "velocity": 0.02,
@@ -24,6 +26,53 @@
                 "key": "key.jump",
                 "continuous": true
             }
+        }
+    },
+    "swirl": {
+        "type": "apugli:energy_swirl",
+        "texture_location": "minecraft:textures/entity/wither/wither_armor.png",
+        "speed": 0.01,
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:power_active",
+                    "power": "soul-origins:wind/float_fall"
+                },
+                {
+                    "type": "origins:fall_distance",
+                    "comparison": ">=",
+                    "compare_to": 0.1
+                }
+            ]
+        }
+    },
+    "sound": {
+        "type": "origins:action_over_time",
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:power_active",
+                    "power": "soul-origins:wind/float_fall"
+                },
+                {
+                    "type": "origins:fall_distance",
+                    "comparison": ">=",
+                    "compare_to": 0.1
+                }
+            ]
+        },
+        "interval": 1,
+        "rising_action": {
+            "type": "origins:play_sound",
+            "sound": "soul-origins:power.wind.float",
+            "volume": 0.2,
+            "pitch": 2.0
+        },
+        "falling_action": {
+            "type": "origins:play_sound",
+            "sound": "soul-origins:power.wind.land"
         }
     }
 }

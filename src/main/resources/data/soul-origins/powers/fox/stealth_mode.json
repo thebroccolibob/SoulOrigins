@@ -1,0 +1,63 @@
+{
+    "type": "origins:multiple",
+    "hidden": true,
+    "color": {
+        "type": "origins:model_color",
+        "red": 0,
+        "blue": 1,
+        "green": 1,
+        "alpha": 0.2
+    },
+    "increase_def": {
+        "type": "origins:attribute",
+        "modifier": {
+            "name": "Stealth mode health boost",
+            "attribute": "minecraft:generic.max_health",
+            "operation": "addition",
+            "value": 10
+        }
+    },
+    "decrease_speed": {
+        "type": "origins:attribute",
+        "modifier": {
+            "name": "Stealth mode speed decrease",
+            "attribute": "minecraft:generic.movement_speed",
+            "operation": "multiply_base",
+            "value": -0.15
+        }
+    },
+    "bushwack": {
+        "type": "origins:phasing",
+        "block_condition": {
+            "type": "origins:in_tag",
+            "tag": "minecraft:leaves"
+        },
+        "render_type": "none"
+    },
+    "ignore": {
+        "type": "apugli:mobs_ignore"
+    },
+    "vision": {
+        "type": "origins:night_vision",
+        "strength": 0.5
+    },
+    "hide_name": {
+        "type": "soul-origins:hide_name"
+    },
+    "tails": {
+        "type": "soul-origins:emissive_overlay",
+        "texture_location": "soul-origins:textures/entity/fox/stealth_mode.png"
+    },
+    "overlay": {
+        "type": "origins:overlay",
+        "texture": "minecraft:textures/misc/vignette.png",
+        "strength": 0.3,
+        "red": 0.0,
+        "green": 0.718,
+        "blue": 1.0,
+        "draw_mode": "texture",
+        "draw_phase": "below_hud",
+        "hide_with_hud": false,
+        "visible_in_third_person": false
+    }
+}

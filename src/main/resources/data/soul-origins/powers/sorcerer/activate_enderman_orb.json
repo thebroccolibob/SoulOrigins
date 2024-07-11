@@ -1,0 +1,42 @@
+{
+  "type": "origins:multiple",
+  "hidden": true,
+  "cooldown": {
+    "type": "origins:cooldown",
+    "cooldown": 30,
+    "inverted": true,
+    "hud_render": {
+      "should_render": true,
+      "sprite_location": "origins:textures/gui/resource_bar.png",
+      "bar_index": 6
+    }
+  },
+  "teleport": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "rising_action": {
+      "type": "origins:raycast",
+      "distance": 16,
+      "block": true,
+      "entity": false,
+      "shape_type": "collider",
+      "fluid_handling": "none",
+      "command_at_hit": "tp @s ~ ~ ~"
+    },
+    "condition": {
+      "type": "origins:resource",
+      "resource": "soul-origins:sorcerer/activate_enderman_orb_cooldown",
+      "comparison": "==",
+      "compare_to": 0
+    }
+  },
+  "prevent_spawn_activate": {
+    "type": "origins:action_on_callback",
+    "entity_action_gained": {
+      "type": "origins:change_resource",
+      "resource": "soul-origins:sorcerer/activate_enderman_orb_cooldown",
+      "operation": "set",
+      "change": 30
+    }
+  }
+}

@@ -1,13 +1,18 @@
 {
+    "name": "Wind Spirit",
+    "description": "A curious spirit of unknown beginnings that grows stronger through shards scattered across the world.",
+    "icon": "soul-origins:burst_shard",
+    "impact": 3,
     "powers": [
+        "soul-origins:wind/compressed_air",
+        "soul-origins:soul_meter",
+        "soul-origins:soul_extract",
+        "soul-origins:wind/use_shards",
+        "soul-origins:wind/float",
         "soul-origins:wind/tailwind",
         "soul-origins:wind/updraft",
-        "soul-origins:wind/float",
-        "soul-origins:wind/neutral",
         "soul-origins:wind/burst",
-        "soul-origins:wind/compressed_air",
-        "soul-origins:wind/use_shards",
-        "soul-origins:soul_meter",
-        "soul-origins:soul_extract"
+        "soul-origins:wind/neutral",
+        "soul-origins:wind/burst_overlay"
     ]
 }

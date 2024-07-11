@@ -1,0 +1,124 @@
+{
+    "type": "origins:multiple",
+    "name": "Moro's Binding Vow",
+    "description": "Due to your soul bond, you can summon the giant wolf deity Moro who you can ride on and fight with.",
+    "store": {
+        "type": "soul-origins:entity_store"
+    },
+    "activate": {
+        "type": "origins:active_self",
+        "key": "key.origins.secondary_active",
+        "cooldown": 60,
+        "hud_render": {
+            "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png",
+            "bar_index": 5
+        },
+        "entity_action": {
+            "type": "origins:side",
+            "side": "server",
+            "action": {
+                "type": "apoli:if_else",
+                "condition": {
+                    "type": "soul-origins:stored_entity",
+                    "store": "soul-origins:wolf/wolf_summon_store"
+                },
+                "if_action": {
+                    "type": "origins:and",
+                    "actions": [
+                        {
+                            "type": "soul-origins:stored_entity_action",
+                            "store": "soul-origins:wolf/wolf_summon_store",
+                            "entity_action": {
+                                "type": "soul-origins:despawn"
+                            }
+                        },
+                        {
+                            "type": "soul-origins:clear_entity_store",
+                            "store": "soul-origins:wolf/wolf_summon_store"
+                        },
+                        {
+                            "type": "origins:play_sound",
+                            "sound": "soul-origins:power.wolf.summon",
+                            "volume": 0.5
+                        },
+                        {
+                            "type": "origins:spawn_particles",
+                            "particle": {
+                                "type": "minecraft:soul_fire_flame"
+                            },
+                            "count": 20,
+                            "speed": 0.01,
+                            "force": true,
+                            "spread": {
+                                "x": 3.0,
+                                "y": 0.0,
+                                "z": 3.0
+                            }
+                        },
+                        {
+                            "type": "origins:play_sound",
+                            "sound": "minecraft:entity.wolf.ambient",
+                            "pitch": 0.8
+                        }
+                    ]
+                },
+                "else_action": {
+                    "type": "soul-origins:spawn_entity",
+                    "entity_type": "minecraft:wolf",
+                    "tag": {
+                        "CustomName": "{\"text\":\"Moro\"}",
+                        "CollarColor": 15
+                    },
+                    "bientity_action": {
+                        "type": "origins:and",
+                        "actions": [
+                            {
+                                "type": "soul-origins:set_entity_store",
+                                "store": "soul-origins:wolf/wolf_summon_store"
+                            },
+                            { "type": "origins:tame" },
+                            { "type": "origins:mount" }
+                        ]
+                    },
+                    "entity_action": {
+                        "type": "origins:and",
+                        "actions": [
+                            {
+                                "type": "origins:execute_command",
+                                "command": "scale set 2"
+                            },
+                            {
+                                "type": "origins:execute_command",
+                                "command": "scale delay set 0"
+                            },
+                            {
+                                "type": "origins:play_sound",
+                                "sound": "soul-origins:power.wolf.summon",
+                                "volume": 0.5
+                            },
+                            {
+                                "type": "origins:spawn_particles",
+                                "particle": {
+                                    "type": "minecraft:soul_fire_flame"
+                                },
+                                "count": 20,
+                                "speed": 0.01,
+                                "force": true,
+                                "spread": {
+                                    "x": 3.0,
+                                    "y": 0.0,
+                                    "z": 3.0
+                                }
+                            },
+                            {
+                                "type": "origins:play_sound",
+                                "sound": "minecraft:entity.wolf.growl",
+                                "pitch": 0.8
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "type": "origins:multiple",
+    "name": "Always The Bigger Fish",
+    "description": "Eating fish is more nutritious for you. Any kind of fish restores hunger bar sufficiently.",
+    "always": {
+        "type": "origins:modify_food",
+        "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+                "tag": "minecraft:fishes"
+            }
+        },
+        "always_edible": true
+    },
+    "increase": {
+        "type": "origins:modify_food",
+        "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+                "tag": "soul-origins:raw_fishes"
+            }
+        },
+        "food_modifier": {
+            "operation": "multiply_base",
+            "value": 1
+        },
+        "saturation_modifier": {
+            "operation": "multiply_base",
+            "value": 1
+        }
+    }
+}

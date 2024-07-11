@@ -1,5 +1,6 @@
 {
     "type": "origins:multiple",
+    "hidden": true,
     "prevent_damage": {
         "type": "origins:modify_damage_taken",
         "damage_condition": {
@@ -29,7 +30,7 @@
         "type": "origins:action_on_callback",
         "entity_action_added": {
             "type": "origins:delay",
-            "ticks": 600,
+            "ticks": 300,
             "action": {
                 "type": "origins:revoke_power",
                 "power": "soul-origins:wind/shield",

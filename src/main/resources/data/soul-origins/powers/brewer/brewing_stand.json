@@ -1,0 +1,7 @@
+{
+  "type": "soul-origins:suspicious_brewing_stand",
+  "name": "Suspicious Brewery",
+  "description": "A brewing stand, anywhere you go! Fuel with soul energy to make any potion, including secret ones exclusive to you!",
+  "key": "key.origins.primary_active",
+  "fuel_resource": "soul-origins:soul_meter"
+}

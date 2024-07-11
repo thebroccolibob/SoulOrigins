@@ -1,0 +1,5 @@
+{
+    "type": "soul-origins:emissive_overlay",
+    "texture_location": "soul-origins:textures/entity/enderman/eyes.png",
+    "hidden": true
+}

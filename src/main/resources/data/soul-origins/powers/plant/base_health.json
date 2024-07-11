@@ -1,0 +1,11 @@
+{
+    "type": "origins:attribute",
+    "name": "Brittle Bloom",
+    "description": "Plants are still going through a long path of evolution. Your body isn't fully evolved to a humanoid form as durable as flesh. Lowers maximum health.",
+    "modifier": {
+        "name": "Plant Base Health",
+        "attribute": "minecraft:generic.max_health",
+        "operation": "addition",
+        "value": -4
+    }
+}

@@ -5,13 +5,12 @@ import io.github.apace100.apoli.power.factory.action.ActionFactory
 import io.github.apace100.apoli.util.MiscUtil
 import io.github.apace100.calio.data.SerializableData
 import io.github.apace100.calio.data.SerializableDataTypes
-import io.github.thebroccolibob.soulorigins.Soulorigins
+import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.toNullable
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.util.Identifier
 import net.minecraft.util.Pair
 import java.util.function.Consumer
 
@@ -48,7 +47,7 @@ object SpawnEntityAction {
     }
 
     val factory: ActionFactory<Entity> = ActionFactory(
-            Identifier(Soulorigins.MOD_ID, "spawn_entity"),
+            SoulOrigins.id("spawn_entity"),
             SerializableData()
                 .add("entity_type", SerializableDataTypes.ENTITY_TYPE)
                 .add("tag", SerializableDataTypes.NBT, null)

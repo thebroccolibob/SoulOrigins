@@ -1,0 +1,38 @@
+{
+    "type": "origins:multiple",
+    "name": "Hunter's Instinct",
+    "description": "After years of growing up in the wilderness, you have toned your body to it's greatest condition. Increases damage dealt, natural regeneration, and speed.",
+    "speed": {
+        "type": "origins:attribute",
+        "modifier": {
+            "name": "Speed increase",
+            "attribute": "minecraft:generic.movement_speed",
+            "operation": "multiply_base",
+            "value": 0.2
+        }
+    },
+    "strength": {
+        "type": "origins:modify_damage_dealt",
+        "modifier": {
+            "operation": "add_base_late",
+            "value": 3
+        }
+    },
+    "regeneration": {
+        "type": "origins:action_over_time",
+        "entity_action": {
+            "type": "origins:heal",
+            "amount": 1
+        },
+        "interval": 50,
+        "condition": {
+            "type": "origins:food_level",
+            "comparison": ">",
+            "compare_to": 6
+        }
+    },
+    "bow": {
+        "type": "soul-origins:bow_speed",
+        "multiplier": 2
+    }
+}

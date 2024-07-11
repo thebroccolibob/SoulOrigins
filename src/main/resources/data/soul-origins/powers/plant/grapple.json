@@ -1,0 +1,303 @@
+{
+    "type": "origins:multiple",
+    "name": "Entangling Vine",
+    "description": "A versatile appendage that lets you grapple on to blocks and pull entities towards you.",
+    "target": {
+        "type": "soul-origins:entity_store"
+    },
+    "activate": {
+        "type": "origins:active_self",
+        "key": "key.origins.primary_active",
+        "entity_action": {
+            "type": "origins:if_else",
+            "condition": {
+                "type": "soul-origins:entity_stored",
+                "store": "soul-origins:plant/grapple_target"
+            },
+            "if_action": {
+                "type": "origins:and",
+                "actions": [
+                    {
+                        "type": "soul-origins:stored_entity_action",
+                        "store": "soul-origins:plant/grapple_target",
+                        "bientity_action": {
+                            "type": "origins:if_else",
+                            "condition": {
+                                "type": "origins:target_condition",
+                                "condition": {
+                                    "type": "origins:entity_type",
+                                    "entity_type": "minecraft:marker"
+                                }
+                            },
+                            "if_action": {
+                                "type": "origins:target_action",
+                                "action": {
+                                    "type": "soul-origins:despawn"
+                                }
+                            },
+                            "else_action": {
+                                "type": "origins:and",
+                                "actions": [
+                                    {
+                                        "type": "origins:target_action",
+                                        "action": {
+                                            "type": "origins:add_velocity",
+                                            "reference": "world",
+                                            "y": 0.3
+                                        }
+                                    },
+                                    {
+                                        "type": "soul-origins:proportional_velocity",
+                                        "server": true,
+                                        "client": false,
+                                        "multiplier": {
+                                            "x": 1.0,
+                                            "y": 1.0,
+                                            "z": 1.0
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "type": "soul-origins:clear_entity_store",
+                        "store": "soul-origins:plant/grapple_target"
+                    },
+                    {
+                        "type": "origins:play_sound",
+                        "sound": "minecraft:block.big_dripleaf.tilt_down",
+                        "pitch": 1.2
+                    }
+                ]
+            },
+            "else_action": {
+                "type": "origins:side",
+                "side": "server",
+                "action": {
+                    "type": "soul-origins:spawn_entity_raycast",
+                    "entities_intercept": true,
+                    "distance": 16,
+                    "fluid_handling": "none",
+                    "shape_type": "collider",
+                    "in_block": true,
+                    "offset": {
+                        "y": 0.5
+                    },
+                    "entity_type": "minecraft:marker",
+                    "bientity_action": {
+                        "type": "soul-origins:set_entity_store",
+                        "store": "soul-origins:plant/grapple_target"
+                    },
+                    "intercept_entity_condition": {
+                        "type": "origins:or",
+                        "conditions": [
+                            {
+                                "type": "origins:living"
+                            },
+                            {
+                                "type": "origins:in_tag",
+                                "tag": "soul-origins:vine_grabbable"
+                            }
+                        ]
+                    },
+                    "intercept_bientity_action": {
+                        "type": "soul-origins:set_entity_store",
+                        "store": "soul-origins:plant/grapple_target"
+                    },
+                    "hit_action": {
+                        "type": "origins:play_sound",
+                        "sound": "minecraft:block.big_dripleaf.tilt_up",
+                        "pitch": 1.3
+                    }
+                }
+            }
+        }
+    },
+    "tick": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "condition": {
+            "type": "soul-origins:entity_stored",
+            "store": "soul-origins:plant/grapple_target"
+        },
+        "entity_action": {
+            "type": "origins:side",
+            "side": "server",
+            "action": {
+                "type": "origins:and",
+                "actions": [
+                    {
+                        "type": "origins:if_else",
+                        "condition": {
+                            "type": "soul-origins:stored_entity",
+                            "store": "soul-origins:plant/grapple_target"
+                        },
+                        "if_action": {
+                            "type": "soul-origins:stored_entity_action",
+                            "store": "soul-origins:plant/grapple_target",
+                            "bientity_action": {
+                                "type": "origins:if_else",
+                                "condition": {
+                                    "type": "origins:target_condition",
+                                    "condition": {
+                                        "type": "origins:entity_type",
+                                        "entity_type": "minecraft:marker"
+                                    }
+                                },
+                                "if_action": {
+                                    "type": "origins:if_else",
+                                    "condition": {
+                                        "type": "origins:target_condition",
+                                        "condition": {
+                                            "type": "origins:in_block",
+                                            "block_condition": {
+                                                "type": "origins:movement_blocking"
+                                            }
+                                        }
+                                    },
+                                    "if_action": {
+                                        "type": "origins:if_else",
+                                        "condition": {
+                                            "type": "origins:distance",
+                                            "comparison": ">",
+                                            "compare_to": 4
+                                        },
+                                        "if_action": {
+                                            "type": "origins:invert",
+                                            "action": {
+                                                "type": "soul-origins:proportional_velocity",
+                                                "server": true,
+                                                "client": false,
+                                                "multiplier": {
+                                                    "x": 0.07,
+                                                    "y": 0.1,
+                                                    "z": 0.07
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "else_action": {
+                                        "type": "origins:and",
+                                        "actions": [
+                                            {
+                                                "type": "origins:target_action",
+                                                "action": {
+                                                    "type": "soul-origins:despawn"
+                                                }
+                                            },
+                                            {
+                                                "type": "origins:actor_action",
+                                                "action": {
+                                                    "type": "soul-origins:clear_entity_store",
+                                                    "store": "soul-origins:plant/grapple_target"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "else_action": {
+                            "type": "soul-origins:clear_entity_store",
+                            "store": "soul-origins:plant/grapple_target"
+                        }
+                    },
+                    {
+                        "type": "origins:if_else",
+                        "condition": {
+                            "type": "soul-origins:stored_entity",
+                            "store": "soul-origins:plant/grapple_target",
+                            "bientity_condition": {
+                                "type": "origins:distance",
+                                "comparison": ">",
+                                "compare_to": 32
+                            }
+                        },
+                        "if_action": {
+                            "type": "origins:and",
+                            "actions": [
+                                {
+                                    "type": "soul-origins:stored_entity_action",
+                                    "store": "soul-origins:plant/grapple_target",
+                                    "entity_action": {
+                                        "type": "origins:if_else",
+                                        "condition": {
+                                            "type": "origins:entity_type",
+                                            "entity_type": "minecraft:marker"
+                                        },
+                                        "if_action": {
+                                            "type": "soul-origins:despawn"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "soul-origins:clear_entity_store",
+                                    "store": "soul-origins:plant/grapple_target"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "soul-origins:stored_entity_action",
+                        "store": "soul-origins:plant/grapple_target",
+                        "bientity_action": {
+                            "type": "soul-origins:raycast_between",
+                            "particle": "soul-origins:vine",
+                            "offset": {
+                                "x": -0.3,
+                                "y": -0.2,
+                                "z": 0
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "death": {
+        "type": "origins:action_on_callback",
+        "entity_action_removed": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "soul-origins:stored_entity_action",
+                    "store": "soul-origins:plant/grapple_target",
+                    "entity_action": {
+                        "type": "origins:if_else",
+                        "condition": {
+                            "type": "origins:entity_type",
+                            "entity_type": "minecraft:marker"
+                        },
+                        "if_action": {
+                            "type": "soul-origins:despawn"
+                        }
+                    }
+                },
+                {
+                    "type": "soul-origins:clear_entity_store",
+                    "store": "soul-origins:plant/grapple_target"
+                }
+            ]
+        }
+    },
+    "reduce_fall_damage": {
+        "type": "origins:modify_damage_taken",
+        "condition": {
+            "type": "soul-origins:stored_entity",
+            "store": "soul-origins:plant/grapple_target",
+            "entity_condition": {
+                "type": "origins:entity_type",
+                "entity_type": "minecraft:marker"
+            }
+        },
+        "damage_condition": {
+            "type": "origins:name",
+            "name": "fall"
+        },
+        "modifier": {
+            "operation": "multiply_total",
+            "value": -0.75
+        }
+    }
+}

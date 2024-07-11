@@ -1,0 +1,11 @@
+{
+  "type": "origins:action_over_time",
+  "name": "Burning Soul",
+  "description": "Your soul is stronger than other creatures. Passively regain Soul Meter overtime.",
+  "entity_action": {
+    "type": "origins:change_resource",
+    "resource": "soul-origins:soul_meter",
+    "change": 1
+  },
+  "interval": 40
+}

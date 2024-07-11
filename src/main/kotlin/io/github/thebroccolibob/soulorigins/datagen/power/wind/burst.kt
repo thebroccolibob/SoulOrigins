@@ -8,13 +8,12 @@ private val advancement = {lvl: Int -> "soul-origins:wind/burst/lvl$lvl"}
 
 val burst = JsonObject {
     "type" to "origins:active_self"
-    "key" to "key.origins.secondary_active"
+    "name" to "Burst"
+    "description" to "Unlocked once using one Burst Shard. Create a powerful blast of wind launching entities away and giving you invisibility and speed. Must have been the wind."
+    "key" to "key.origins.ternary_active"
     "condition" to {
         "type" to "origins:and"
         "conditions".to [
-            {
-                "type" to "origins:sneaking"
-            },
             {
                 "type" to "origins:resource"
                 "resource" to "soul-origins:soul_meter"
@@ -111,7 +110,7 @@ val burst = JsonObject {
                     "type" to "origins:apply_effect"
                     "effect" to {
                         "effect" to "minecraft:speed"
-                        "duration" to if (it == 3) 1200 else 600
+                        "duration" to if (it == 3) 600 else 300
                         "is_ambient" to true
                     }
                 },
@@ -119,7 +118,7 @@ val burst = JsonObject {
                     "type" to "origins:apply_effect"
                     "effect" to {
                         "effect" to "minecraft:invisibility"
-                        "duration" to if (it == 3) 1200 else 600
+                        "duration" to if (it == 3) 600 else 300
                         "is_ambient" to true
                     }
                 },

@@ -7,7 +7,7 @@ import io.github.thebroccolibob.soulorigins.datagen.power.wind.tailwind
 import io.github.thebroccolibob.soulorigins.datagen.power.wind.updraft
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 
-class PowerGenerator(dataOutput: FabricDataOutput) : ArbitraryResourceProvider(dataOutput, "powers", "Powers") {
+class PowerGenerator(dataOutput: FabricDataOutput) : ArbitraryResourceProvider(dataOutput, "powers", name = "Powers") {
     private fun Writer.json(path: String, power: (String) -> JsonObject) {
         json(path, power(path))
     }

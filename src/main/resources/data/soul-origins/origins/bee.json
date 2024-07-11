@@ -1,0 +1,17 @@
+{
+    "name": "Walking Beehive",
+    "description": "A large beehive animated by soul magic",
+    "icon": "minecraft:bee_nest",
+    "impact": 2,
+    "powers": [
+        "soul-origins:bee/stored_bees",
+        "soul-origins:bee/call_bees",
+        "soul-origins:bee/death_release",
+        "soul-origins:bee/place_bee",
+        "soul-origins:bee/beelloon",
+        "soul-origins:bee/prevent_anger",
+        "soul-origins:bee/eat",
+        "soul-origins:bee/particle",
+        "soul-origins:bee/sound"
+    ]
+}

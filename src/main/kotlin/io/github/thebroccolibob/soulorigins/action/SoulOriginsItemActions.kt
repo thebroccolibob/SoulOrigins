@@ -5,12 +5,11 @@ import io.github.apace100.apoli.registry.ApoliRegistries
 import io.github.apace100.calio.data.SerializableData
 import io.github.apace100.calio.data.SerializableDataTypes
 import io.github.thebroccolibob.soulorigins.SerializableData
-import io.github.thebroccolibob.soulorigins.Soulorigins
+import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.component1
 import io.github.thebroccolibob.soulorigins.component2
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
 import net.minecraft.world.World
 import java.util.function.BiConsumer
 import net.minecraft.util.Pair as McPair
@@ -20,7 +19,7 @@ private fun register(actionFactory: ActionFactory<McPair<World, ItemStack>>) {
 }
 
 private fun register(id: String, data: SerializableData, effect: BiConsumer<SerializableData.Instance, McPair<World, ItemStack>>) {
-    register(ActionFactory(Identifier(Soulorigins.MOD_ID, id), data, effect))
+    register(ActionFactory(SoulOrigins.id(id), data, effect))
 }
 
 fun registerSoulOriginsItemActions() {

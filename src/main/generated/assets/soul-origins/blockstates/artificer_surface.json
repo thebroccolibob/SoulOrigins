@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "soul-origins:block/artificer_surface_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "soul-origins:block/artificer_surface"
+    },
+    "axis=z": {
+      "model": "soul-origins:block/artificer_surface_horizontal",
+      "x": 90
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+    "type": "origins:multiple",
+    "hidden": true,
+    "knockback": {
+        "type": "origins:attribute",
+        "modifier": {
+            "name": "No knockback",
+            "attribute": "minecraft:generic.knockback_resistance",
+            "operation": "addition",
+            "value": 1
+        }
+    },
+    "reduce_damage": {
+        "type": "origins:modify_damage_taken",
+        "modifier": {
+            "operation": "multiply_base_multiplicative",
+            "value": 0.5
+        }
+    },
+    "aoe": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "entity_action": {
+            "type": "origins:area_of_effect",
+            "shape": "cube",
+            "radius": 1,
+            "bientity_action": {
+                "type": "origins:and",
+                "actions": [
+                    {
+                        "type": "origins:damage",
+                        "damage_type": "minecraft:player_attack",
+                        "amount": 3
+                    },
+                    {
+                        "type": "origins:add_velocity",
+                        "reference": "rotation",
+                        "z": 0.2
+                    },
+                    {
+                        "type": "origins:target_action",
+                        "action": {
+                            "type": "origins:spawn_particles",
+                            "particle": {
+                                "type": "minecraft:sweep_attack"
+                            },
+                            "count": 1,
+                            "speed": 0.01,
+                            "force": true,
+                            "spread": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        }
+                    }
+                ]
+            },
+            "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                    "type": "origins:living"
+                }
+            }
+        }
+    },
+    "remove": {
+        "type": "origins:action_on_callback",
+        "entity_action_added": {
+            "type": "origins:delay",
+            "ticks": 7,
+            "action": {
+                "type": "origins:revoke_power",
+                "power": "soul-origins:wolf/lunge_active",
+                "source": "soul-origins:wolf/lunge"
+            }
+        }
+    },
+    "particles": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "entity_action": {
+            "type": "soul-origins:block_particle",
+            "count": 6,
+            "speed": 0,
+            "offset_y": 0.1,
+            "spread": {
+                "x": 0.25,
+                "y": 0,
+                "z": 0.25
+            }
+        }
+    }
+}

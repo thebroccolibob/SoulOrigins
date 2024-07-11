@@ -1,8 +1,7 @@
 package io.github.thebroccolibob.soulorigins.entity.ai.goal
 
-import io.github.thebroccolibob.soulorigins.entity.OwnableMonster
-import io.github.thebroccolibob.soulorigins.entity.isTamed
-import io.github.thebroccolibob.soulorigins.entity.owner
+import io.github.thebroccolibob.soulorigins.cca.OwnerComponent.Companion.isOwned
+import io.github.thebroccolibob.soulorigins.cca.OwnerComponent.Companion.owner
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.goal.TrackTargetGoal
@@ -18,7 +17,7 @@ class MonsterAttackWithOwnerGoal(private val monster: MobEntity) : TrackTargetGo
     }
 
     override fun canStart(): Boolean {
-        if (monster.isTamed) {
+        if (monster.isOwned) {
             val owner = monster.owner
             if (owner == null) {
                 return false
@@ -29,7 +28,7 @@ class MonsterAttackWithOwnerGoal(private val monster: MobEntity) : TrackTargetGo
                 return i != this.lastAttackTime && this.canTrack(
                     target,
                     TargetPredicate.DEFAULT
-                ) && (target !is OwnableMonster || target.owner != owner)
+                ) && (target as? MobEntity)?.owner != owner
             }
         } else {
             return false

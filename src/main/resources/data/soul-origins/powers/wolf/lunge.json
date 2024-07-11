@@ -1,0 +1,166 @@
+{
+    "type": "origins:multiple",
+    "name": "Initiate",
+    "description": "Quickly lunge towards your current directional input and strike multiple targets at the end of the dash.",
+    "activate": {
+        "type": "origins:active_self",
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:resource",
+                    "compare_to": 100,
+                    "comparison": "<=",
+                    "resource": "soul-origins:wolf/lunge_cooldown"
+                },
+                {
+                    "type": "apugli:grounded"
+                },
+                {
+                    "type": "origins:or",
+                    "conditions": [
+                        {
+                            "type": "apugli:key_pressed",
+                            "key": {
+                                "continuous": true,
+                                "key": "key.forward"
+                            }
+                        },
+                        {
+                            "type": "apugli:key_pressed",
+                            "key": {
+                                "continuous": true,
+                                "key": "key.back"
+                            }
+                        },
+                        {
+                            "type": "apugli:key_pressed",
+                            "key": {
+                                "continuous": true,
+                                "key": "key.left"
+                            }
+                        },
+                        {
+                            "type": "apugli:key_pressed",
+                            "key": {
+                                "continuous": true,
+                                "key": "key.right"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:if_else",
+                    "condition": {
+                        "type": "apugli:key_pressed",
+                        "key": {
+                            "continuous": true,
+                            "key": "key.forward"
+                        }
+                    },
+                    "if_action": {
+                        "type": "apoli:add_velocity",
+                        "client": true,
+                        "space": "local_horizontal_normalized",
+                        "z": 2.5
+                    }
+                },
+                {
+                    "type": "origins:if_else",
+                    "condition": {
+                        "type": "apugli:key_pressed",
+                        "key": {
+                            "continuous": true,
+                            "key": "key.back"
+                        }
+                    },
+                    "if_action": {
+                        "type": "apoli:add_velocity",
+                        "client": true,
+                        "space": "local_horizontal_normalized",
+                        "z": -2.0
+                    }
+                },
+                {
+                    "type": "origins:if_else",
+                    "condition": {
+                        "type": "apugli:key_pressed",
+                        "key": {
+                            "continuous": true,
+                            "key": "key.left"
+                        }
+                    },
+                    "if_action": {
+                        "type": "apoli:add_velocity",
+                        "client": true,
+                        "space": "local_horizontal_normalized",
+                        "x": 2.0
+                    }
+                },
+                {
+                    "type": "origins:if_else",
+                    "condition": {
+                        "type": "apugli:key_pressed",
+                        "key": {
+                            "continuous": true,
+                            "key": "key.right"
+                        }
+                    },
+                    "if_action": {
+                        "type": "apoli:add_velocity",
+                        "client": true,
+                        "space": "local_horizontal_normalized",
+                        "x": -2.0
+                    }
+                },
+                {
+                    "type": "origins:grant_power",
+                    "power": "soul-origins:wolf/lunge_active",
+                    "source": "soul-origins:wolf/lunge"
+                },
+                {
+                    "type": "origins:exhaust",
+                    "amount": 0.05
+                },
+                {
+                    "type": "origins:play_sound",
+                    "category": "players",
+                    "sound": "minecraft:entity.player.attack.sweep"
+                },
+                {
+                    "type": "soul-origins:change_cooldown",
+                    "change": 100,
+                    "cooldown": "soul-origins:wolf/lunge_cooldown"
+                },
+                {
+                    "type": "origins:spawn_particles",
+                    "particle": {
+                        "type": "soul-origins:gust_emitter_small"
+                    },
+                    "count": 1,
+                    "speed": 0.01,
+                    "force": true,
+                    "spread": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                }
+            ]
+        },
+        "key": "key.origins.primary_active"
+    },
+    "cooldown": {
+        "type": "origins:cooldown",
+        "cooldown": 200,
+        "hud_render": {
+            "bar_index": 2,
+            "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png"
+        }
+    }
+}

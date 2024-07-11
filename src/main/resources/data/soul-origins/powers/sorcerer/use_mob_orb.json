@@ -1,3 +1,4 @@
 {
-  "type": "soul-origins:use_mob_orb"
+  "type": "soul-origins:use_mob_orb",
+  "hidden": true
 }

@@ -1,0 +1,28 @@
+{
+    "type": "origins:multiple",
+    "name": "Evolved Build",
+    "description": "A long time ago, The Old Builders fled to The End to escape their demise. Overtime they evolved to the strange environment and became Enderman. Although you contain some Enderman traits, you somehow sustained your humanity.",
+    "scale": {
+        "type": "apugli:modify_scale",
+        "scale_types": [
+            "pehkui:model_width",
+            "pehkui:height"
+        ],
+        "modifier": {
+            "operation": "multiply_base",
+            "value": 0.5
+        }
+    },
+    "crouch": {
+        "type": "apugli:modify_scale",
+        "delay": 0,
+        "scale_type": "pehkui:hitbox_height",
+        "modifier": {
+            "operation": "multiply_base",
+            "value": -0.12
+        },
+        "condition": {
+            "type": "origins:sneaking"
+        }
+    }
+}

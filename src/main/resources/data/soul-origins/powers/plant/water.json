@@ -1,0 +1,201 @@
+{
+    "type": "origins:multiple",
+    "name": "Hyper Bloom",
+    "description": "Being exposed to water overtime causes you to build vitality. Increases maximum health overtime when exposed to water. Loses buff overtime when not exposed to water.",
+    "stored": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 28
+    },
+    "boost_health": {
+        "type": "origins:modify_attribute",
+        "attribute": "generic.max_health",
+        "modifier": {
+            "operation": "add_base_late",
+            "resource": "soul-origins:plant/water_stored",
+            "value": 0,
+            "modifier": {
+                "operation": "multiply_total",
+                "value": -0.5
+            }
+        }
+    },
+    "drink": {
+        "type": "origins:action_on_item_use",
+        "item_condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:ingredient",
+                    "ingredient": {
+                        "item": "minecraft:potion"
+                    }
+                },
+                {
+                    "type": "soul-origins:potion",
+                    "potion": "minecraft:water"
+                }
+            ]
+        },
+        "trigger": "finish",
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "soul-origins:plant/water_stored",
+            "operation": "add",
+            "change": 1
+        }
+    },
+    "osmosis": {
+        "type": "origins:action_over_time",
+        "condition": {
+            "type": "origins:or",
+            "conditions": [
+                {
+                    "type": "origins:and",
+                    "conditions": [
+                        {
+                            "type": "apoli:in_block",
+                            "block_condition": {
+                                "type": "origins:fluid",
+                                "fluid_condition": {
+                                    "type": "origins:in_tag",
+                                    "tag": "minecraft:water"
+                                }
+                            }
+                        },
+                        {
+                            "type": "apoli:in_block_anywhere",
+                            "block_condition": {
+                                "type": "origins:fluid",
+                                "fluid_condition": {
+                                    "type": "origins:in_tag",
+                                    "tag": "minecraft:water"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "origins:in_rain"
+                }
+            ]
+        },
+        "interval": 100,
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:change_resource",
+                    "resource": "soul-origins:plant/water_stored",
+                    "change": 1
+                },
+                {
+                    "type": "origins:heal",
+                    "amount": 0.5
+                }
+            ]
+        }
+    },
+    "reset": {
+        "type": "soul-origins:action_on_death",
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "soul-origins:plant/water_stored",
+            "operation": "set",
+            "change": 0
+        }
+    },
+    "drain_standard": {
+        "type": "origins:action_over_time",
+        "interval": 2400,
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "soul-origins:plant/water_stored",
+            "operation": "add",
+            "change": -1
+        },
+        "condition": {
+            "type": "origins:biome",
+            "condition": {
+                "type": "origins:and",
+                "conditions": [
+                    {
+                        "type": "origins:temperature",
+                        "comparison": ">",
+                        "compare_to": 0.1
+                    },
+                    {
+                        "type": "origins:temperature",
+                        "comparison": "<",
+                        "compare_to": 1.0
+                    },
+                    {
+                        "type": "origins:in_tag",
+                        "tag": "soul-origins:plant_no_dry",
+                        "inverted": true
+                    }
+                ]
+            }
+        }
+    },
+    "drain_warm": {
+        "type": "origins:action_over_time",
+        "interval": 1200,
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "soul-origins:plant/water_stored",
+            "operation": "add",
+            "change": -1
+        },
+        "condition": {
+            "type": "origins:biome",
+            "condition": {
+                "type": "origins:and",
+                "conditions": [
+                    {
+                        "type": "origins:temperature",
+                        "comparison": ">=",
+                        "compare_to": 1.0
+                    },
+                    {
+                        "type": "origins:in_tag",
+                        "tag": "minecraft:is_nether",
+                        "inverted": true
+                    },
+                    {
+                        "type": "origins:in_tag",
+                        "tag": "soul-origins:plant_no_dry",
+                        "inverted": true
+                    }
+                ]
+            }
+        }
+    },
+    "drain_hot": {
+        "type": "origins:action_over_time",
+        "interval": 600,
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "soul-origins:plant/water_stored",
+            "operation": "add",
+            "change": -1
+        },
+        "condition": {
+            "type": "origins:biome",
+            "condition": {
+                "type": "origins:and",
+                "conditions": [
+                    {
+                        "type": "origins:in_tag",
+                        "tag": "minecraft:is_nether"
+                    },
+                    {
+                        "type": "origins:in_tag",
+                        "tag": "soul-origins:plant_no_dry",
+                        "inverted": true
+                    }
+                ]
+            }
+        }
+    }
+}

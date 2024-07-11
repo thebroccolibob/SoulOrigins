@@ -1,15 +1,28 @@
 {
   "type": "origins:active_self",
+  "name": "Soul Sacrifice",
+  "description": "Sacrifice a Soul Orb to activate an ability associated to the monster in the orb.",
   "key": "key.origins.secondary_active",
   "condition": {
-    "type": "origins:equipped_item",
-    "equipment_slot": "mainhand",
-    "item_condition": {
-      "type": "origins:ingredient",
-      "ingredient": {
-          "item": "soul-origins:mob_orb"
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:equipped_item",
+        "equipment_slot": "mainhand",
+        "item_condition": {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "item": "soul-origins:mob_orb"
+          }
+        }
+      },
+      {
+        "type": "origins:resource",
+        "resource": "soul-origins:soul_meter",
+        "comparison": ">=",
+        "compare_to": 1
       }
-    }
+    ]
   },
   "entity_action": {
     "type": "origins:and",
@@ -36,9 +49,41 @@
                 "fluid_handling": "none",
                 "command_at_hit": "fill ~ ~-1 ~-1 ~ ~2 ~1 soul-origins:decaying_rotten_flesh replace air",
                 "hit_action": {
-                  "type": "origins:play_sound",
-                  "sound": "minecraft:block.froglight.place",
-                  "volume": 2
+                  "type": "origins:and",
+                  "actions": [
+                    {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:block.froglight.place",
+                      "volume": 2
+                    },
+                    {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:particle.soul_escape",
+                      "volume": 3
+                    },
+                    {
+                      "type": "origins:equipped_item_action",
+                      "equipment_slot": "mainhand",
+                      "action": {
+                        "type": "origins:consume",
+                        "amount": 1
+                      }
+                    },
+                    {
+                      "type": "origins:change_resource",
+                      "resource": "soul-origins:soul_meter",
+                      "change": -1
+                    },
+                    {
+                      "type": "origins:raycast",
+                      "distance": 8,
+                      "block": true,
+                      "entity": false,
+                      "shape_type": "collider",
+                      "fluid_handling": "none",
+                      "command_at_hit": "particle minecraft:soul_fire_flame ~ ~ ~ 1.5 0 1.5 0.01 20 force @a"
+                    }
+                  ]
                 }
               },
               "else_action": {
@@ -50,9 +95,41 @@
                 "fluid_handling": "none",
                 "command_at_hit": "fill ~-1 ~-1 ~ ~1 ~2 ~ soul-origins:decaying_rotten_flesh replace air",
                 "hit_action": {
-                  "type": "origins:play_sound",
-                  "sound": "minecraft:block.froglight.place",
-                  "volume": 2
+                  "type": "origins:and",
+                  "actions": [
+                    {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:block.froglight.place",
+                      "volume": 2
+                    },
+                    {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:particle.soul_escape",
+                      "volume": 3
+                    },
+                    {
+                      "type": "origins:equipped_item_action",
+                      "equipment_slot": "mainhand",
+                      "action": {
+                        "type": "origins:consume",
+                        "amount": 1
+                      }
+                    },
+                    {
+                      "type": "origins:change_resource",
+                      "resource": "soul-origins:soul_meter",
+                      "change": -1
+                    },
+                    {
+                      "type": "origins:raycast",
+                      "distance": 8,
+                      "block": true,
+                      "entity": false,
+                      "shape_type": "collider",
+                      "fluid_handling": "none",
+                      "command_at_hit": "particle minecraft:soul_fire_flame ~ ~ ~ 1.5 0 1.5 0.01 20 force @a"
+                    }
+                  ]
                 }
               }
             }
@@ -63,37 +140,49 @@
               "entity_type": "minecraft:husk"
             },
             "action": {
-              "type": "origins:if_else",
-              "condition": {
-                "type": "soul-origins:facing_east_west"
-              },
-              "if_action": {
-                "type": "origins:raycast",
-                "distance": 8,
-                "block": true,
-                "entity": false,
-                "shape_type": "collider",
-                "fluid_handling": "none",
-                "command_at_hit": "fill ~ ~4 ~-1 ~ ~7 ~1 soul-origins:decaying_sand replace air",
-                "hit_action": {
-                  "type": "origins:play_sound",
-                  "sound": "minecraft:block.sand.place",
-                  "volume": 2
-                }
-              },
-              "else_action": {
-                "type": "origins:raycast",
-                "distance": 8,
-                "block": true,
-                "entity": false,
-                "shape_type": "collider",
-                "fluid_handling": "none",
-                "command_at_hit": "fill ~-1 ~4 ~ ~1 ~7 ~ soul-origins:decaying_sand replace air",
-                "hit_action": {
-                  "type": "origins:play_sound",
-                  "sound": "minecraft:block.sand.place",
-                  "volume": 2
-                }
+              "type": "origins:raycast",
+              "distance": 8,
+              "block": true,
+              "entity": false,
+              "shape_type": "collider",
+              "fluid_handling": "none",
+              "command_at_hit": "fill ~-1 ~4 ~-1 ~1 ~6 ~1 soul-origins:falling_decaying_sand replace air",
+              "hit_action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:block.sand.place",
+                    "volume": 2
+                  },
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:particle.soul_escape",
+                    "volume": 3
+                  },
+                  {
+                    "type": "origins:equipped_item_action",
+                    "equipment_slot": "mainhand",
+                    "action": {
+                      "type": "origins:consume",
+                      "amount": 1
+                    }
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "soul-origins:soul_meter",
+                    "change": -1
+                  },
+                  {
+                    "type": "origins:raycast",
+                    "distance": 8,
+                    "block": true,
+                    "entity": false,
+                    "shape_type": "collider",
+                    "fluid_handling": "none",
+                    "command_at_hit": "particle minecraft:soul_fire_flame ~ ~ ~ 1.5 0 1.5 0.01 20 force @a"
+                  }
+                ]
               }
             }
           },
@@ -116,9 +205,41 @@
                 "fluid_handling": "none",
                 "command_at_hit": "fill ~ ~-1 ~-1 ~ ~2 ~1 minecraft:water[level= 15] replace air",
                 "hit_action": {
-                  "type": "origins:play_sound",
-                  "sound": "minecraft:item.bucket.empty",
-                  "volume": 2
+                  "type": "origins:and",
+                  "actions": [
+                    {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:item.bucket.empty",
+                      "volume": 2
+                    },
+                    {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:particle.soul_escape",
+                      "volume": 3
+                    },
+                    {
+                      "type": "origins:equipped_item_action",
+                      "equipment_slot": "mainhand",
+                      "action": {
+                        "type": "origins:consume",
+                        "amount": 1
+                      }
+                    },
+                    {
+                      "type": "origins:change_resource",
+                      "resource": "soul-origins:soul_meter",
+                      "change": -1
+                    },
+                    {
+                      "type": "origins:raycast",
+                      "distance": 8,
+                      "block": true,
+                      "entity": false,
+                      "shape_type": "collider",
+                      "fluid_handling": "none",
+                      "command_at_hit": "particle minecraft:soul_fire_flame ~ ~1 ~ 1.5 0 1.5 0.01 20 force @a"
+                    }
+                  ]
                 }
               },
               "else_action": {
@@ -130,10 +251,202 @@
                 "fluid_handling": "none",
                 "command_at_hit": "fill ~-1 ~-1 ~ ~1 ~2 ~ minecraft:water[level= 15] replace air",
                 "hit_action": {
-                  "type": "origins:play_sound",
-                  "sound": "minecraft:item.bucket.empty",
-                  "volume": 2
+                  "type": "origins:and",
+                  "actions": [
+                    {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:item.bucket.empty",
+                      "volume": 2
+                    },
+                    {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:particle.soul_escape",
+                      "volume": 3
+                    },
+                    {
+                      "type": "origins:equipped_item_action",
+                      "equipment_slot": "mainhand",
+                      "action": {
+                        "type": "origins:consume",
+                        "amount": 1
+                      }
+                    },
+                    {
+                      "type": "origins:change_resource",
+                      "resource": "soul-origins:soul_meter",
+                      "change": -1
+                    },
+                    {
+                      "type": "origins:raycast",
+                      "distance": 8,
+                      "block": true,
+                      "entity": false,
+                      "shape_type": "collider",
+                      "fluid_handling": "none",
+                      "command_at_hit": "particle minecraft:soul_fire_flame ~ ~1 ~ 1.5 0 1.5 0.01 20 force @a"
+                    }
+                  ]
                 }
+              }
+            }
+          },
+          {
+            "condition": {
+              "type": "soul-origins:held_mob_orb",
+              "entity_type": "minecraft:slime"
+            },
+            "action": {
+              "type": "origins:raycast",
+              "distance": 8,
+              "block": true,
+              "entity": false,
+              "shape_type": "collider",
+              "fluid_handling": "none",
+              "command_at_hit": "fill ~-1 ~ ~-1 ~1 ~ ~1 soul-origins:decaying_slime replace air",
+              "hit_action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:block.slime_block.place",
+                    "volume": 2
+                  },
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:particle.soul_escape",
+                    "volume": 3
+                  },
+                  {
+                    "type": "origins:equipped_item_action",
+                    "equipment_slot": "mainhand",
+                    "action": {
+                      "type": "origins:consume",
+                      "amount": 1
+                    }
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "soul-origins:soul_meter",
+                    "change": -1
+                  },
+                  {
+                    "type": "origins:raycast",
+                    "distance": 8,
+                    "block": true,
+                    "entity": false,
+                    "shape_type": "collider",
+                    "fluid_handling": "none",
+                    "command_at_hit": "particle minecraft:soul_fire_flame ~ ~ ~ 1.5 0 1.5 0.01 20 force @a"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "condition": {
+              "type": "soul-origins:held_mob_orb",
+              "entity_type": "minecraft:spider"
+            },
+            "action": {
+              "type": "origins:raycast",
+              "distance": 8,
+              "block": true,
+              "entity": false,
+              "shape_type": "collider",
+              "fluid_handling": "none",
+              "command_at_hit": "fill ~-1 ~ ~-1 ~1 ~ ~1 soul-origins:decaying_cobweb_block replace air",
+              "hit_action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:block.stone.place",
+                    "volume": 2
+                  },
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:particle.soul_escape",
+                    "volume": 3
+                  },
+                  {
+                    "type": "origins:equipped_item_action",
+                    "equipment_slot": "mainhand",
+                    "action": {
+                      "type": "origins:consume",
+                      "amount": 1
+                    }
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "soul-origins:soul_meter",
+                    "change": -1
+                  },
+                  {
+                    "type": "origins:raycast",
+                    "distance": 8,
+                    "block": true,
+                    "entity": false,
+                    "shape_type": "collider",
+                    "fluid_handling": "none",
+                    "command_at_hit": "particle minecraft:soul_fire_flame ~ ~ ~ 1.5 0 1.5 0.01 20 force @a"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "condition": {
+              "type": "soul-origins:held_mob_orb",
+              "entity_type": "minecraft:cave_spider"
+            },
+            "action": {
+              "type": "origins:raycast",
+              "distance": 8,
+              "block": true,
+              "entity": false,
+              "shape_type": "collider",
+              "fluid_handling": "none",
+              "command_at_hit": "fill ~-1 ~ ~-1 ~1 ~ ~1 soul-origins:decaying_cobweb_block replace air",
+              "block_action": {
+                "type": "origins:execute_command",
+                "command": "summon area_effect_cloud ~ ~1 ~ {Duration:100,Radius:2f,RadiusPerTick:0f,Particle:\"mobSpell\",Effects:[{Id:15,Amplifier:0,Duration:100}]}"
+              },
+              "hit_action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:block.stone.place",
+                    "volume": 2
+                  },
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:particle.soul_escape",
+                    "volume": 3
+                  },
+                  {
+                    "type": "origins:equipped_item_action",
+                    "equipment_slot": "mainhand",
+                    "action": {
+                      "type": "origins:consume",
+                      "amount": 1
+                    }
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "soul-origins:soul_meter",
+                    "change": -1
+                  },
+                  {
+                    "type": "origins:raycast",
+                    "distance": 8,
+                    "block": true,
+                    "entity": false,
+                    "shape_type": "collider",
+                    "fluid_handling": "none",
+                    "command_at_hit": "particle minecraft:soul_fire_flame ~ ~ ~ 1.5 0 1.5 0.01 20 force @a"
+                  }
+                ]
               }
             }
           },
@@ -143,11 +456,39 @@
               "entity_type": "minecraft:skeleton"
             },
             "action": {
-              "type": "apugli:fire_projectile",
-              "count": 5.0,
-              "divergence": 100.0,
-              "entity_type": "minecraft:arrow",
-              "tag": "{pickup:0}"
+              "type": "origins:and",
+              "actions": [
+                {
+                  "type": "apugli:fire_projectile",
+                  "count": 5.0,
+                  "divergence": 100.0,
+                  "entity_type": "minecraft:arrow",
+                  "tag": "{pickup:0}"
+                },
+                {
+                  "type": "origins:equipped_item_action",
+                  "equipment_slot": "mainhand",
+                  "action": {
+                    "type": "origins:consume",
+                    "amount": 1
+                  }
+                },
+                {
+                  "type": "origins:play_sound",
+                  "sound": "minecraft:entity.ender_eye.launch",
+                  "volume": 2
+                },
+                {
+                  "type": "origins:play_sound",
+                  "sound": "minecraft:particle.soul_escape",
+                  "volume": 3
+                },
+                {
+                  "type": "origins:change_resource",
+                  "resource": "soul-origins:soul_meter",
+                  "change": -1
+                }
+              ]
             }
           },
           {
@@ -156,14 +497,42 @@
               "entity_type": "minecraft:stray"
             },
             "action": {
-              "type": "apugli:fire_projectile",
-              "count": 5.0,
-              "divergence": 100.0,
-              "entity_type": "minecraft:arrow",
-              "tag": {
-                "pickup": 0,
-                "Potion": "minecraft:slowness"
-              }
+              "type": "origins:and",
+              "actions": [
+                {
+                  "type": "apugli:fire_projectile",
+                  "count": 5.0,
+                  "divergence": 100.0,
+                  "entity_type": "minecraft:arrow",
+                  "tag": {
+                    "pickup": 0,
+                    "Potion": "minecraft:slowness"
+                  }
+                },
+                {
+                  "type": "origins:equipped_item_action",
+                  "equipment_slot": "mainhand",
+                  "action": {
+                    "type": "origins:consume",
+                    "amount": 1
+                  }
+                },
+                {
+                  "type": "origins:play_sound",
+                  "sound": "minecraft:entity.ender_eye.launch",
+                  "volume": 2
+                },
+                {
+                  "type": "origins:play_sound",
+                  "sound": "minecraft:particle.soul_escape",
+                  "volume": 3
+                },
+                {
+                  "type": "origins:change_resource",
+                  "resource": "soul-origins:soul_meter",
+                  "change": -1
+                }
+              ]
             }
           },
           {
@@ -172,29 +541,160 @@
               "entity_type": "minecraft:wither_skeleton"
             },
             "action": {
-              "type": "apugli:fire_projectile",
-              "count": 5.0,
-              "divergence": 100.0,
-              "entity_type": "minecraft:arrow",
-              "tag": {
-                "pickup": 0,
-                "Fire": 200,
-                "HasVisualFire": 1
+              "type": "origins:and",
+              "actions": [
+                {
+                  "type": "apugli:fire_projectile",
+                  "count": 5.0,
+                  "divergence": 100.0,
+                  "entity_type": "minecraft:arrow",
+                  "tag": {
+                    "pickup": 0,
+                    "Fire": 200,
+                    "HasVisualFire": 1
+                  }
+                },
+                {
+                  "type": "origins:equipped_item_action",
+                  "equipment_slot": "mainhand",
+                  "action": {
+                    "type": "origins:consume",
+                    "amount": 1
+                  }
+                },
+                {
+                  "type": "origins:play_sound",
+                  "sound": "minecraft:entity.ender_eye.launch",
+                  "volume": 2
+                },
+                {
+                  "type": "origins:play_sound",
+                  "sound": "minecraft:particle.soul_escape",
+                  "volume": 3
+                },
+                {
+                  "type": "origins:change_resource",
+                  "resource": "soul-origins:soul_meter",
+                  "change": -1
+                }
+              ]
+            }
+          },
+          {
+            "condition": {
+              "type": "soul-origins:held_mob_orb",
+              "entity_type": "minecraft:enderman"
+            },
+            "action": {
+              "type": "origins:raycast",
+              "distance": 16,
+              "block": true,
+              "entity": false,
+              "shape_type": "collider",
+              "fluid_handling": "none",
+              "hit_action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:trigger_cooldown",
+                    "power": "soul-origins:sorcerer/activate_enderman_orb_cooldown"
+                  },
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "soul-origins:power.sorcerer.teleport"
+                  },
+                  {
+                    "type": "origins:equipped_item_action",
+                    "equipment_slot": "mainhand",
+                    "action": {
+                      "type": "origins:consume",
+                      "amount": 1
+                    }
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "soul-origins:soul_meter",
+                    "change": -1
+                  }
+                ]
               }
+            }
+          },
+          {
+            "condition": {
+              "type": "soul-origins:held_mob_orb",
+              "entity_type": "minecraft:creeper"
+            },
+            "action": {
+              "type": "apugli:explosion_raycast",
+              "distance": 16,
+              "power": 1,
+              "action_on_hit": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:entity.creeper.primed",
+                    "volume": 1,
+                    "pitch": 4
+                  },
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:particle.soul_escape",
+                    "volume": 3
+                  },
+                  {
+                    "type": "origins:equipped_item_action",
+                    "equipment_slot": "mainhand",
+                    "action": {
+                      "type": "origins:consume",
+                      "amount": 1
+                    }
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "soul-origins:soul_meter",
+                    "change": -1
+                  }
+                ]
+              },
+              "destruction_type": "none",
+              "damage_self": true,
+              "damage_modifier": {
+                "operation": "multiply_base_multiplicative",
+                "value": -0.25
+              }
+            }
+          },
+          {
+            "condition": {
+              "type": "soul-origins:held_mob_orb",
+              "entity_type": "minecraft:warden"
+            },
+            "action": {
+              "type": "origins:and",
+              "actions": [
+                {
+                  "type": "origins:trigger_cooldown",
+                  "power": "soul-origins:sorcerer/sculk_garden_cooldown"
+                },
+                {
+                  "type": "origins:play_sound",
+                  "sound": "soul-origins:power.sorcerer.sculk",
+                  "volume": 3
+                },
+                {
+                  "type": "origins:equipped_item_action",
+                  "equipment_slot": "mainhand",
+                  "action": {
+                    "type": "origins:consume",
+                    "amount": 1
+                  }
+                }
+              ]
             }
           }
         ]
-      },
-      {
-        "type": "origins:equipped_item_action",
-        "equipment_slot": "mainhand",
-        "action": {
-          "type": "origins:consume",
-          "amount": 1
-        }
-      },
-      {
-        "type": "origins:swing_hand"
       }
     ]
   }

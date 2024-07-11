@@ -1,0 +1,12 @@
+{
+    "name": "Soul Artificer",
+    "description": "WIP",
+    "icon": "minecraft:copper_ingot",
+    "impact": 3,
+    "powers": [
+        "soul-origins:soul_meter",
+        "soul-origins:soul_extract",
+        "soul-origins:artificer/shriek",
+        "soul-origins:artificer/craft_core"
+    ]
+}

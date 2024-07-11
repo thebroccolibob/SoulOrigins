@@ -1,0 +1,12 @@
+{
+  "type": "apugli:modify_scale",
+  "hidden": true,
+  "scale_types": [
+    "pehkui:model_width",
+    "pehkui:height"
+  ],
+  "modifier": {
+    "operation": "multiply_base",
+    "value": -0.11
+  }
+}

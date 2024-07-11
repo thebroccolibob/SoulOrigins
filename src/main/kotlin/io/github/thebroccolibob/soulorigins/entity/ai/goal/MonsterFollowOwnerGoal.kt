@@ -1,6 +1,6 @@
 package io.github.thebroccolibob.soulorigins.entity.ai.goal
 
-import io.github.thebroccolibob.soulorigins.entity.owner
+import io.github.thebroccolibob.soulorigins.cca.OwnerComponent.Companion.owner
 import net.minecraft.block.LeavesBlock
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.goal.Goal

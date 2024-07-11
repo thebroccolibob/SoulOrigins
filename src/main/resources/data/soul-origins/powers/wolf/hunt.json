@@ -1,0 +1,23 @@
+{
+    "type": "origins:active_self",
+    "name": "Death's Presence",
+    "description": "Turn yourself invisible with only glowing red eyes present to strike fear on targets. Invisibility ends when hit.",
+    "key": "key.origins.ternary_active",
+    "entity_action": {
+        "type": "apoli:if_else",
+        "condition": {
+            "type": "apoli:power",
+            "power": "soul-origins:wolf/hunt_active"
+        },
+        "if_action": {
+            "type": "origins:revoke_power",
+            "power": "soul-origins:wolf/hunt_active",
+            "source": "soul-origins:wolf/hunt"
+        },
+        "else_action": {
+            "type": "origins:grant_power",
+            "power": "soul-origins:wolf/hunt_active",
+            "source": "soul-origins:wolf/hunt"
+        }
+    }
+}

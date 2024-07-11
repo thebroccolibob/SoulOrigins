@@ -1,3 +1,5 @@
 {
-  "type": "soul-origins:use_wind_shards"
+  "type": "soul-origins:use_wind_shards",
+  "name": "Gathering Wind Shards",
+  "description": "Three unique Wind Shards will naturally spawn in generated chests. When collected, only the Wind Spirit can use them to become stronger. Read advancements to discover the buffs."
 }

@@ -1,0 +1,4 @@
+{
+  "type": "origins:shader",
+  "shader": "soul-origins:shaders/post/teleport.json"
+}

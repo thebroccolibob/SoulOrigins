@@ -1,7 +1,24 @@
 {
     "type": "origins:multiple",
+    "name": "Sacred Treasure",
+    "description": "With your 'Monster Manipulation' you can capture a Warden. This Warden will not be tamed.",
+    "cooldown": {
+        "type": "origins:cooldown",
+        "cooldown": 600,
+        "hud_render": {
+            "inverted": true,
+            "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+            "bar_index": 15
+        }
+    },
     "walk": {
-        "type": "soul-origins:walk_on_sculk_garden"
+        "type": "soul-origins:walk_on_sculk_garden",
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+            "comparison": ">",
+            "compare_to": 0
+        }
     },
     "phase": {
         "type": "origins:phasing",
@@ -10,16 +27,58 @@
             "tag": "soul-origins:sculk_garden_phaseable"
         },
         "render_type": "blindness",
-        "view_distance": 16
+        "view_distance": 16,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+            "comparison": ">",
+            "compare_to": 0
+        }
     },
     "swim": {
         "type": "origins:swimming",
         "condition": {
-            "type": "origins:in_block",
-            "block_condition": {
-                "type": "origins:in_tag",
-                "tag": "soul-origins:sculk_garden_phaseable"
-            }
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:in_block",
+                    "block_condition": {
+                        "type": "origins:in_tag",
+                        "tag": "soul-origins:sculk_garden_phaseable"
+                    }
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+                    "comparison": ">",
+                    "compare_to": 0
+                }
+            ]
+        }
+    },
+    "climb": {
+        "type": "origins:climbing",
+        "allow_holding": true,
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:in_block",
+                    "block_condition": {
+                        "type": "origins:block",
+                        "block": "minecraft:sculk_vein"
+                    }
+                },
+                {
+                    "type": "origins:collided_horizontally"
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+                    "comparison": ">",
+                    "compare_to": 0
+                }
+            ]
         }
     },
     "spread": {
@@ -28,6 +87,40 @@
         "entity_action": {
             "type": "origins:execute_command",
             "command": "function soul-origins:spread_sculk_garden"
+        },
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+            "comparison": ">",
+            "compare_to": 0
+        }
+    },
+    "health": {
+        "type": "origins:conditioned_attribute",
+        "modifier": {
+            "attribute": "minecraft:generic.max_health",
+            "operation": "addition",
+            "value": -6
+        },
+        "tick_rate": 1,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+            "comparison": ">",
+            "compare_to": 0
+        }
+    },
+    "weakness": {
+        "type": "origins:modify_damage_dealt",
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+            "comparison": ">",
+            "compare_to": 0
+        },
+        "modifier": {
+            "operation": "addition",
+            "value": -2.0
         }
     },
     "silent": {
@@ -36,18 +129,71 @@
             "minecraft:step",
             "minecraft:swim",
             "minecraft:hit_ground"
-        ]
+        ],
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+            "comparison": ">",
+            "compare_to": 0
+        }
     },
-    "remove": {
+    "hide_name": {
+        "type": "soul-origins:hide_name",
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:in_block",
+                    "block_condition": {
+                        "type": "origins:in_tag",
+                        "tag": "soul-origins:sculk_garden_phaseable"
+                    }
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+                    "comparison": ">",
+                    "compare_to": 0
+                }
+            ]
+        }
+    },
+    "swirl": {
+        "type": "apugli:energy_swirl",
+        "texture_location": "soul-origins:textures/entity/sorcerer/sculk_garden_texture.png",
+        "speed": 0.01,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+            "comparison": ">",
+            "compare_to": 0
+        }
+    },
+    "overlay": {
+        "type": "origins:overlay",
+        "texture": "minecraft:textures/misc/vignette.png",
+        "strength": 0.3,
+        "red": 1.0,
+        "green": 0.22,
+        "blue": 0.2,
+        "draw_mode": "texture",
+        "draw_phase": "below_hud",
+        "hide_with_hud": false,
+        "visible_in_third_person": false,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+            "comparison": ">",
+            "compare_to": 0
+        }
+    },
+    "prevent_spawn_activate": {
         "type": "origins:action_on_callback",
-        "entity_action_added": {
-            "type": "origins:delay",
-            "ticks": 600,
-            "action": {
-                "type": "origins:revoke_power",
-                "power": "soul-origins:sorcerer/sculk_garden",
-                "source": "soul-origins:activate_orb"
-            }
+        "entity_action_gained": {
+            "type": "origins:change_resource",
+            "resource": "soul-origins:sorcerer/sculk_garden_cooldown",
+            "operation": "set",
+            "change": 600
         }
     }
 }

@@ -1,9 +1,15 @@
 {
   "origins": [
     "soul-origins:soul_sorcerer",
-    "soul-origins:mob_sorcerer",
     "soul-origins:wind_spirit",
-    "soul-origins:okami",
+    "soul-origins:wolf_deity",
+    "soul-origins:plant",
+    "soul-origins:enderman",
+    "soul-origins:fish",
+    "soul-origins:fox_spirit",
+    "soul-origins:brewer",
+    "soul-origins:soul_artificer",
+    "soul-origins:bee",
     "soul-origins:mandalorian"
   ]
 }

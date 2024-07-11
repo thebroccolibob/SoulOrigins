@@ -1,7 +1,6 @@
 package io.github.thebroccolibob.soulorigins.datagen.power.wind
 
 import io.github.thebroccolibob.soulorigins.datagen.lib.JsonObject
-import io.github.thebroccolibob.soulorigins.datagen.lib.listOfJson
 import io.github.thebroccolibob.soulorigins.datagen.power.LeveledCooldownEntry
 import io.github.thebroccolibob.soulorigins.datagen.power.levelAction
 import io.github.thebroccolibob.soulorigins.datagen.power.leveledMultiCooldown
@@ -21,10 +20,6 @@ private val advancement = { (lvl, _, _, _): UpdraftEntry -> "soul-origins:wind/u
 
 fun updraft(id: String) = leveledMultiCooldown(
     id, updraftEntries, "key.origins.secondary_active", advancement,
-    otherConditions = listOfJson({
-        "type" to "origins:sneaking"
-        "inverted" to true
-    }),
     otherActions = listOf(
         levelAction(updraftEntries, advancement) {
             "type" to "apoli:add_velocity"
@@ -52,5 +47,9 @@ fun updraft(id: String) = leveledMultiCooldown(
     hudRender = {
         "sprite_location" to "origins:textures/gui/community/huang/resource_bar_01.png"
         "bar_index" to 8
+    },
+    otherParams = {
+        "name" to "Updraft"
+        "description" to "Launch yourself upwards using a powerful wind blast. Upgrades with Updraft Shards."
     }
 )

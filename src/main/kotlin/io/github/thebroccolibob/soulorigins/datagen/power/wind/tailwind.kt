@@ -82,5 +82,9 @@ fun tailwind(id: String) = leveledMultiCooldown(id, tailwindEntries, "key.origin
     hudRender = {
         "sprite_location" to "origins:textures/gui/community/spiderkolo/resource_bar_03.png"
         "bar_index" to 23
+    },
+    otherParams = {
+        "name" to "Tailwind"
+        "description" to "Create a powerful stream of wind launching you forward. Upgrades with Tailwind Shard."
     }
 )

@@ -1,0 +1,41 @@
+{
+    "type": "origins:multiple",
+    "recipe": {
+        "type": "origins:recipe",
+        "recipe": {
+            "id": "soul-origins:artificer_core",
+            "type": "minecraft:crafting_shaped",
+            "pattern": [
+                "#$#",
+                "&%&",
+                "#$#"
+            ],
+            "key": {
+                "#": { "tag": "soul-origins:artificer_primary_material" },
+                "$": { "tag": "soul-origins:artificer_logic_component" },
+                "%": { "item": "minecraft:lapis_lazuli" },
+                "&": { "item": "minecraft:redstone" }
+            },
+            "result": {
+                "item": "soul-origins:artificer_core",
+                "count": 1
+            }
+        },
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:soul_meter",
+            "comparison": ">=",
+            "compare_to": 1
+        }
+    },
+    "cost": {
+        "type": "soul-origins:action_on_restricted_recipe",
+        "recipe": "soul-origins:artificer_core",
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "*:soul_meter",
+            "operation": "add",
+            "change": -1
+        }
+    }
+}
