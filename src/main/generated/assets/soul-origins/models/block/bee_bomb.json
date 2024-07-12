@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "minecraft:block/bee_nest_bottom",
+    "side": "soul-origins:block/bee_bomb_side",
+    "top": "minecraft:block/bee_nest_top"
+  }
+}

@@ -37,6 +37,7 @@ import java.util.*
 import kotlin.reflect.KMutableProperty0
 import kotlin.reflect.KProperty
 import net.minecraft.util.Pair as McPair
+import net.minecraft.util.math.random.Random as MCRandom
 
 inline fun FabricItemSettings(init: FabricItemSettings.() -> Unit) = FabricItemSettings().apply(init)
 
@@ -210,5 +211,8 @@ inline fun <reified T : Entity, U> TrackedDataRegister<T>.registerData(handler: 
     return DataTracker.registerData(T::class.java, handler)
 }
 
-infix fun ItemStack.isOf(item: Item): Boolean = this.isOf(item)
-infix fun ItemStack.`!isOf`(item: Item): Boolean = !this.isOf(item)
+public fun <T> Collection<T>.random(random: MCRandom): T {
+    if (isEmpty())
+        throw NoSuchElementException("Collection is empty.")
+    return elementAt(random.nextInt(size))
+}

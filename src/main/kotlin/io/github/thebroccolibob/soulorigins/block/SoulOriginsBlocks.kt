@@ -125,9 +125,7 @@ object SoulOriginsBlocks {
         pistonBehavior(PistonBehavior.BLOCK)
     }))
 
-    val BEE_BOMB = register("bee_bomb", ::BeeBombBlock) {
-
-    }
+    val BEE_BOMB = register("bee_bomb", BeeBombBlock(FabricBlockSettings.copy(Blocks.BEE_NEST)))
 
     fun register() {}
 }

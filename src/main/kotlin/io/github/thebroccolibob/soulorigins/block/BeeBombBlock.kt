@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
@@ -41,12 +42,15 @@ class BeeBombBlock(settings: Settings) : Block(settings), BlockEntityProvider {
         hit: BlockHitResult
     ): ActionResult {
         val stack = player.getStackInHand(hand)
-        if (!stack.isOf(Items.FLINT_AND_STEEL) && !stack.isOf(Items.FIRE_CHARGE))
+        if (state[LIT] || (!stack.isOf(Items.FLINT_AND_STEEL) && !stack.isOf(Items.FIRE_CHARGE)))
             return super.onUse(state, world, pos, player, hand, hit)
 
         world.setBlockState(pos, state.with(LIT, true))
         world.playSound(null, pos, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS)
         world.scheduleBlockTick(pos, this, DELAY)
+        val centerPos = pos.toCenterPos()
+        for (i in 0..<4)
+            world.addParticle(ParticleTypes.LARGE_SMOKE, centerPos.x, centerPos.y + 0.5, centerPos.z, 0.0, 0.0, 0.0)
 
         return ActionResult.SUCCESS
     }
@@ -58,10 +62,14 @@ class BeeBombBlock(settings: Settings) : Block(settings), BlockEntityProvider {
         blockEntity.spawnAll()
     }
 
+    override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
+        world.playSound(null, pos, SoundEvents.BLOCK_BEEHIVE_WORK, SoundCategory.BLOCKS, 1.0f, 1.0f)
+    }
+
+    override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity = BeeBombBlockEntity(pos, state)
+
     companion object {
         val LIT: BooleanProperty = Properties.LIT
         const val DELAY = 80
     }
-
-    override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity = BeeBombBlockEntity(pos, state)
 }

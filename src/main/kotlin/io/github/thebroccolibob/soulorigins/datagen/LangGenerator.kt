@@ -1,5 +1,6 @@
 package io.github.thebroccolibob.soulorigins.datagen
 
+import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
 import io.github.thebroccolibob.soulorigins.datagen.power.LeveledCooldownEntry
 import io.github.thebroccolibob.soulorigins.datagen.power.wind.tailwindEntries
 import io.github.thebroccolibob.soulorigins.datagen.power.wind.updraftEntries
@@ -97,6 +98,8 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
             add(SoulOriginsItems.ARTIFICER_COLUMN_BUILDER, "Brass Column Builder")
             add("item.soul-origins.artificer_builder.place_distance", "Place Distance: %s")
             add("item.soul-origins.artificer_builder.place_distance.none", "Unset")
+
+            add(SoulOriginsBlocks.BEE_BOMB, "Bee Bomb")
 
             add(SoulOriginsItems.MOB_ORB, "Mob Orb")
             add(SoulOriginsItems.MOB_ORB + "empty", "Empty")

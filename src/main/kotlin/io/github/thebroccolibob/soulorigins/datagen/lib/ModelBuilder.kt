@@ -4,6 +4,7 @@ package io.github.thebroccolibob.soulorigins.datagen.lib
 
 import net.minecraft.block.Block
 import net.minecraft.data.client.*
+import net.minecraft.data.client.VariantSettings.Rotation
 import net.minecraft.item.Item
 import net.minecraft.state.property.Property
 import net.minecraft.util.Identifier
@@ -87,6 +88,11 @@ inline fun BlockStateModelGenerator.upload(model: Model, id: Identifier, texture
 inline fun BlockStateModelGenerator.upload(model: Model, block: Block, textureMapBuilder: TextureMapBuilder.() -> Unit): Identifier =
     upload(model, block.modelId, textureMapBuilder)
 
+fun BlockStateModelGenerator.upload(texturedModel: TexturedModel.Factory, block: Block): Identifier =
+    texturedModel.upload(block, this.modelCollector)
+
+fun BlockStateModelGenerator.upload(texturedModel: TexturedModel.Factory, block: Block, suffix: String): Identifier =
+    texturedModel.upload(block, suffix, this.modelCollector)
 
 @JvmInline
 value class TextureMapBuilder(val result: TextureMap = TextureMap()) {
@@ -94,4 +100,18 @@ value class TextureMapBuilder(val result: TextureMap = TextureMap()) {
     infix fun TextureKey.to(id: Identifier) {
         result.put(this, id)
     }
+}
+
+fun BlockStateVariant(
+    model: Identifier,
+    x: Rotation? = null,
+    y: Rotation? = null,
+    uvLock: Boolean? = null,
+    weight: Int? = null,
+): BlockStateVariant = BlockStateVariant.create().apply {
+    put(VariantSettings.MODEL, model)
+    x?.let { put(VariantSettings.X, it) }
+    y?.let { put(VariantSettings.Y, it) }
+    uvLock?.let { put(VariantSettings.UVLOCK, it) }
+    weight?.let { put(VariantSettings.WEIGHT, it) }
 }

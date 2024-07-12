@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-27T00:55:35.565495595	soul-origins/Model Definitions
+// 1.20.1	2024-07-12T10:57:07.145925728	soul-origins/Model Definitions
 51aefa3d7c5e8692f49c35289025f4f41739b88c assets/soul-origins/blockstates/decaying_slime.json
 c0c47b8470d6e5d25e66017baa9e88e662e4ac25 assets/soul-origins/models/block/artificer_builder.json
 84d7bbc12032a661009a8cc1efc810ab648a98a1 assets/soul-origins/models/item/mob_orb_spider.json
@@ -11,6 +11,7 @@ c0c47b8470d6e5d25e66017baa9e88e662e4ac25 assets/soul-origins/models/block/artifi
 1cf65cb105d3dbe8e88e81244ca79dc0428aabdb assets/soul-origins/models/item/mob_orb_skeleton.json
 9025fdb602b6a9c1f69e5a77af976c442269f8dd assets/soul-origins/blockstates/decaying_cobweb_block.json
 d2b555e890a86a394fe300798bed9fe734ae1183 assets/soul-origins/models/item/lingering_suspicious_brew.json
+bbe0e6578863ace32777c9e9c1daf937a962f0b1 assets/soul-origins/models/block/bee_bomb.json
 a96301e77dc469428fe18f51b305f59cb329724e assets/soul-origins/models/block/artificer_column.json
 5782da44e82e316f2b4a6a419183ade9e72f2b83 assets/soul-origins/models/item/mob_orb_slime.json
 d53fa742f279d284de6970b17ace176b2559de24 assets/soul-origins/models/item/mob_orb_witherskeleton.json
@@ -20,8 +21,10 @@ c0fcbd16c4a5b1ba60cea59348836d0f155a355a assets/soul-origins/models/item/mob_orb
 65cb3dd356933dbb9050e9812d71095078113c58 assets/soul-origins/blockstates/artificer_surface.json
 39d35a61c79f442a9ed1bb8549cc6d8ac7641bcf assets/soul-origins/models/item/artificer_column_builder.json
 af3a605b968d770ed9ee7dc8225151c9b4774788 assets/soul-origins/blockstates/decaying_rotten_flesh.json
+aa127ec7f890b8af85cb1105798d0beb24183d25 assets/soul-origins/models/item/bee_bomb.json
 cec0511695d9e9f4659d4dd938e4b1520b25a04f assets/soul-origins/models/item/splash_suspicious_brew.json
 635db06656a1ce3e4e85ddd77afd6a1f356ee6d6 assets/soul-origins/blockstates/artificer_column_builder.json
+532a8975b21a276d5f185bef9dd05c7a330db8a8 assets/soul-origins/models/block/bee_bomb_lit.json
 7c7b15f315e7f51efed4dd19409e4d06685795c0 assets/soul-origins/models/block/artificer_surface_horizontal.json
 e21d6428677b491103f8fc15a0911c8938f7f73a assets/soul-origins/blockstates/artificer_column.json
 1e37f2226f760ce44552efc298d54efc356664a9 assets/soul-origins/models/item/mob_orb_husk.json
@@ -32,6 +35,7 @@ e21d6428677b491103f8fc15a0911c8938f7f73a assets/soul-origins/blockstates/artific
 f3d42feabd42cc165b106b7624ed74f9c5d95a50 assets/soul-origins/blockstates/garden_sculk.json
 4f1eb48199b7942d5430995922d01a62fe6e507c assets/soul-origins/models/item/artificer_wall_builder.json
 600d173e514d40d194d42f49bcbf70225da85947 assets/soul-origins/models/item/mob_orb_zombie.json
+95eef7dfca72e121ea397058ae5fa0971426ce99 assets/soul-origins/blockstates/bee_bomb.json
 c6113de0f1cbe49061c6b631c6a27b54199c9f0d assets/soul-origins/models/item/mob_orb_enderman.json
 35ad214a979201d8a7c2d8dfc74ab5214d294493 assets/soul-origins/blockstates/falling_decaying_sand.json
 a9d38023ee0f5f025a94fdd845fcbda15cec32e6 assets/soul-origins/models/block/artificer_surface.json
