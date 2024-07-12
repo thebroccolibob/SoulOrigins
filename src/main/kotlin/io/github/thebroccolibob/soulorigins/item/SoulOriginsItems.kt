@@ -4,12 +4,11 @@ import io.github.thebroccolibob.soulorigins.FabricItemSettings
 import io.github.thebroccolibob.soulorigins.ItemGroup
 import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistry
+import net.minecraft.block.Block
 import net.minecraft.entity.EntityType
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
-import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
+import net.minecraft.item.*
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtList
 import net.minecraft.recipe.BrewingRecipeRegistry
@@ -18,10 +17,15 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
+import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
 
 object SoulOriginsItems {
-    private fun <T: Item> register(id: String, item: T): T = Registry.register(Registries.ITEM, SoulOrigins.id(id), item)
+    private fun <T: Item> register(id: Identifier, item: T): T = Registry.register(Registries.ITEM, id, item)
+
+    private fun <T: Item> register(path: String, item: T): T = register(SoulOrigins.id(path), item)
+
+    private fun register(block: Block, settings: FabricItemSettings = FabricItemSettings()): BlockItem = register(Registries.BLOCK.getId(block), BlockItem(block, settings))
 
     private fun registerShard(type: String, color: Formatting) = register("${type}_shard", WindShardItem(color, FabricItemSettings {
         maxCount(1)
@@ -63,6 +67,8 @@ object SoulOriginsItems {
     val ARTIFICER_COLUMN_BUILDER = register("artificer_column_builder", SurfaceBuilderProjectileItem(SoulOriginsBlocks.ARTIFICER_COLUMN_BUILDER, 0, FabricItemSettings {
         maxCount(16)
     }))
+
+    val BEE_BOMB = register(SoulOriginsBlocks.BEE_BOMB)
 
     val ITEM_GROUP: ItemGroup = Registry.register(
         Registries.ITEM_GROUP,

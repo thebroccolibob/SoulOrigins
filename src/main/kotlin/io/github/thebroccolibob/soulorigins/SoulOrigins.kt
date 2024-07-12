@@ -14,6 +14,7 @@ import io.github.thebroccolibob.soulorigins.entity.SoulOriginsEntities
 import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
 import io.github.thebroccolibob.soulorigins.potion.SoulOriginsPotions
 import io.github.thebroccolibob.soulorigins.power.registerSoulOriginsPowers
+import io.github.thebroccolibob.soulorigins.recipe.SoulOriginsRecipeSerializers
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType
@@ -50,6 +51,7 @@ object SoulOrigins : ModInitializer {
 		SoulOriginsEffects.register()
 		SoulOriginsPotions.register()
 		SoulOriginsTags.register()
+		SoulOriginsRecipeSerializers.register()
 		registerSoulOriginsLootModifier()
 
 		ResourceManagerHelper.registerBuiltinResourcePack(

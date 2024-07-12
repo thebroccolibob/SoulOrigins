@@ -27,6 +27,7 @@ object SoulOriginsBlockEntities {
     }
 
     val SURFACE_BUILDER = register("surface_builder", ::LoyaltySurfaceBuilderBlockEntity, SoulOriginsBlocks.ARTIFICER_PLATFORM_BUILDER, SoulOriginsBlocks.ARTIFICER_NS_WALL_BUILDER, SoulOriginsBlocks.ARTIFICER_EW_WALL_BUILDER)
+    val BEE_BOMB = register("bee_bomb", ::BeeBombBlockEntity, SoulOriginsBlocks.BEE_BOMB)
 
     fun register() {}
 }

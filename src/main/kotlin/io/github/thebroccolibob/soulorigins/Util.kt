@@ -209,3 +209,6 @@ interface TrackedDataRegister<T: Entity>
 inline fun <reified T : Entity, U> TrackedDataRegister<T>.registerData(handler: TrackedDataHandler<U>): TrackedData<U> {
     return DataTracker.registerData(T::class.java, handler)
 }
+
+infix fun ItemStack.isOf(item: Item): Boolean = this.isOf(item)
+infix fun ItemStack.`!isOf`(item: Item): Boolean = !this.isOf(item)
