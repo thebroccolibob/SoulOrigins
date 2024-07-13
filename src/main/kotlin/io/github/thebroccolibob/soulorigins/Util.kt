@@ -216,3 +216,17 @@ public fun <T> Collection<T>.random(random: MCRandom): T {
         throw NoSuchElementException("Collection is empty.")
     return elementAt(random.nextInt(size))
 }
+
+fun <T> Iterable<T>.mapToNbt(transform: (value: T) -> NbtElement): NbtList {
+    val list = NbtList()
+    this.forEach {
+        list.add(transform(it))
+    }
+    return list
+}
+
+fun Iterable<NbtElement>.toNbtList(): NbtList {
+    return NbtList().apply {
+        this@toNbtList.forEach(::add)
+    }
+}

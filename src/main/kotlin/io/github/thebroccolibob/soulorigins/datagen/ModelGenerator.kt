@@ -1,9 +1,9 @@
 package io.github.thebroccolibob.soulorigins.datagen
 
 import io.github.thebroccolibob.soulorigins.SoulOrigins
-import io.github.thebroccolibob.soulorigins.block.BeeBombBlock
 import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
-import io.github.thebroccolibob.soulorigins.datagen.lib.*
+import io.github.thebroccolibob.soulorigins.datagen.lib.textureId
+import io.github.thebroccolibob.soulorigins.datagen.lib.upload
 import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
@@ -34,22 +34,14 @@ class ModelGenerator(output: FabricDataOutput) : FabricModelProvider(output) {
             blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(SoulOriginsBlocks.ARTIFICER_EW_WALL_BUILDER, artificerBuilder))
             blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(SoulOriginsBlocks.ARTIFICER_COLUMN_BUILDER, artificerBuilder))
 
-            registerStates(SoulOriginsBlocks.BEE_BOMB, BeeBombBlock.LIT) { lit ->
-                BlockStateVariant(
-                    if (lit)
-                        upload(Models.CUBE_BOTTOM_TOP, SoulOriginsBlocks.BEE_BOMB.modelId("_lit")) {
-                            TextureKey.TOP to SoulOriginsBlocks.BEE_BOMB.textureId("_top_lit")
-                            TextureKey.SIDE to SoulOriginsBlocks.BEE_BOMB.textureId("_side_lit")
-                            TextureKey.BOTTOM to SoulOriginsBlocks.BEE_BOMB.textureId("_bottom_lit")
-                        }
-                    else
-                        upload(Models.CUBE_BOTTOM_TOP, SoulOriginsBlocks.BEE_BOMB) {
-                            TextureKey.TOP to Blocks.BEE_NEST.textureId("_top")
-                            TextureKey.SIDE to SoulOriginsBlocks.BEE_BOMB.textureId("_side")
-                            TextureKey.BOTTOM to Blocks.BEE_NEST.textureId("_bottom")
-                        }
-                )
-            }
+            blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(
+                SoulOriginsBlocks.BEE_BOMB,
+                upload(Models.CUBE_BOTTOM_TOP, SoulOriginsBlocks.BEE_BOMB) {
+                    TextureKey.TOP to Blocks.BEE_NEST.textureId("_top")
+                    TextureKey.SIDE to SoulOriginsBlocks.BEE_BOMB.textureId("_side")
+                    TextureKey.BOTTOM to Blocks.BEE_NEST.textureId("_bottom")
+                }
+            ))
         }
     }
 

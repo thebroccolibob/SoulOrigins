@@ -20,7 +20,9 @@
     "RevengeGoalMixin",
     "SculkVeinGrowCheckerMixin",
     "ServerPlayerEntityMixin",
-    "TippedArrowRecipeMixin"
+    "TippedArrowRecipeMixin",
+    "TntBlockMixin",
+    "TntEntityAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

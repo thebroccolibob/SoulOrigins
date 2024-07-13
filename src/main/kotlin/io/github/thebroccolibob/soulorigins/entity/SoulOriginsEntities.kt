@@ -22,5 +22,12 @@ object SoulOriginsEntities {
         trackRangeChunks(8)
     }.build())
 
+    val BEE_BOMB = register("bee_bomb", FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::BeeBombEntity).apply {
+        fireImmune()
+        dimensions(EntityDimensions.changing(0.98F, 0.98F))
+        trackRangeChunks(10)
+        trackedUpdateRate(10)
+    }.build())
+
     fun register() {}
 }

@@ -4,6 +4,7 @@ import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
 import io.github.thebroccolibob.soulorigins.client.particle.GustEmitterParticle
 import io.github.thebroccolibob.soulorigins.client.particle.GustParticle
 import io.github.thebroccolibob.soulorigins.client.particle.VineParticle
+import io.github.thebroccolibob.soulorigins.client.render.entity.BeeBombEntityRenderer
 import io.github.thebroccolibob.soulorigins.entity.SoulOriginsEntities
 import io.github.thebroccolibob.soulorigins.item.MobOrbItem
 import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
@@ -36,5 +37,6 @@ object SoulOriginsClient : ClientModInitializer {
 
 		EntityRendererRegistry.register(SoulOriginsEntities.SURFACE_BUILDER_PROJECTILE, ::FlyingItemEntityRenderer)
 		EntityRendererRegistry.register(SoulOriginsEntities.LOYALTY_ITEM, ::FlyingItemEntityRenderer)
+		EntityRendererRegistry.register(SoulOriginsEntities.BEE_BOMB, ::BeeBombEntityRenderer)
 	}
 }

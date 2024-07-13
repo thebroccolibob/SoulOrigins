@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "soul-origins:block/bee_bomb_bottom_lit",
-    "side": "soul-origins:block/bee_bomb_side_lit",
-    "top": "soul-origins:block/bee_bomb_top_lit"
-  }
-}

@@ -1,0 +1,84 @@
+package io.github.thebroccolibob.soulorigins.entity
+
+import io.github.thebroccolibob.soulorigins.hasPower
+import io.github.thebroccolibob.soulorigins.mixin.TntEntityAccessor
+import io.github.thebroccolibob.soulorigins.random
+import io.github.thebroccolibob.soulorigins.times
+import net.merchantpug.apugli.power.PreventBeeAngerPower
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.MovementType
+import net.minecraft.entity.TntEntity
+import net.minecraft.entity.passive.BeeEntity
+import net.minecraft.nbt.NbtCompound
+import net.minecraft.particle.ParticleTypes
+import net.minecraft.util.math.Box
+import net.minecraft.world.World
+import net.minecraft.world.World.ExplosionSourceType
+import kotlin.math.cos
+import kotlin.math.sin
+
+class BeeBombEntity(entityType: EntityType<out BeeBombEntity>, world: World, private val bees: List<NbtCompound> = listOf()) : TntEntity(entityType, world) {
+    constructor(world: World, bees: List<NbtCompound>, x: Double, y: Double, z: Double, igniter: LivingEntity?) : this(SoulOriginsEntities.BEE_BOMB, world, bees) {
+        setPosition(x, y, z)
+        val d = world.random.nextDouble() * (Math.PI * 2).toFloat()
+        setVelocity(-sin(d) * 0.02, 0.2, -cos(d) * 0.02)
+        fuse = 80
+        prevX = x
+        prevY = y
+        prevZ = z
+        @Suppress("CAST_NEVER_SUCCEEDS")
+        (this as TntEntityAccessor).setCausingEntity(igniter)
+    }
+
+    override fun tick() {
+        if (!hasNoGravity()) {
+            velocity = velocity.add(0.0, -0.04, 0.0)
+        }
+
+        move(MovementType.SELF, velocity)
+        velocity *= 0.98
+        if (isOnGround) {
+            velocity = velocity.multiply(0.7, -0.5, 0.7)
+        }
+
+        fuse -= 1
+
+        if (fuse - 1 <= 0) {
+            discard()
+            if (!world.isClient) {
+                explode()
+            }
+        } else {
+            updateWaterState()
+            if (world.isClient) {
+                world.addParticle(ParticleTypes.SMOKE, this.x, this.y + 0.5, this.z, 0.0, 0.0, 0.0)
+            }
+        }
+    }
+
+    private fun explode() {
+        world.createExplosion(this, this.x, getBodyY(0.0625), this.z, 1f, ExplosionSourceType.TNT)
+        val entities = world.getOtherEntities(null, Box.of(pos, ANGER_RANGE, ANGER_RANGE, ANGER_RANGE)) { it.isLiving && it !is BeeEntity && !it.hasPower<PreventBeeAngerPower>() }
+        for (bee in bees) {
+            EntityType.BEE.create(world)?.apply {
+                readNbt(bee)
+                refreshPositionAndAngles(this@BeeBombEntity.blockPos, yaw, pitch)
+                setVelocity(
+                    this@BeeBombEntity.random.nextTriangular(0.0, 0.2),
+                    this@BeeBombEntity.random.nextTriangular(0.0, 0.2),
+                    this@BeeBombEntity.random.nextTriangular(0.0, 0.2),
+                )
+                world.spawnEntity(this)
+                universallyAnger()
+                if (entities.isNotEmpty()) {
+                    target = entities.random(world.random) as LivingEntity
+                }
+            }
+        }
+    }
+
+    companion object {
+        const val ANGER_RANGE = 16.0
+    }
+}

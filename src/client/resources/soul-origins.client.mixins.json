@@ -5,7 +5,8 @@
   "client": [
     "EntityRendererMixin",
     "MinecraftClientMixin",
-    "ModelPredicateProviderRegistryMixin"
+    "ModelPredicateProviderRegistryMixin",
+    "TntEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

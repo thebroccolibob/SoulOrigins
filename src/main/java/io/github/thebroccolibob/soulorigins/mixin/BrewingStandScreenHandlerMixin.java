@@ -8,12 +8,15 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(BrewingStandScreenHandler.class)
-public class BrewingStandScreenHandlerMixin implements IngredientSlotProvider {
+public class BrewingStandScreenHandlerMixin {
     @ModifyArg(
             method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;Lnet/minecraft/screen/PropertyDelegate;)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/BrewingStandScreenHandler;addSlot(Lnet/minecraft/screen/slot/Slot;)Lnet/minecraft/screen/slot/Slot;", ordinal = 3)
     )
     private Slot replaceWithProvider(Slot par1) {
-        return this.replaceIngredientSlot(par1);
+        if (this instanceof IngredientSlotProvider provider) {
+            return provider.replaceIngredientSlot(par1);
+        }
+        return par1;
     }
 }

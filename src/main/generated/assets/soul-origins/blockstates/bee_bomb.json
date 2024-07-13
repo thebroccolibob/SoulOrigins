@@ -1,10 +1,7 @@
 {
   "variants": {
-    "lit=false": {
+    "": {
       "model": "soul-origins:block/bee_bomb"
-    },
-    "lit=true": {
-      "model": "soul-origins:block/bee_bomb_lit"
     }
   }
 }
