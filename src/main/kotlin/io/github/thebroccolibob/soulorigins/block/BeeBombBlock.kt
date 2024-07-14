@@ -35,6 +35,9 @@ class BeeBombBlock(settings: Settings) : TntBlock(settings), BlockEntityProvider
     }
 
     companion object {
+        /**
+         * @see [io.github.thebroccolibob.soulorigins.mixin.TntBlockMixin]
+         */
         @JvmStatic
         fun explodeBomb(world: World, pos: BlockPos, igniter: LivingEntity?) {
             if (!world.isClient) {

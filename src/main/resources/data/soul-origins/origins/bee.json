@@ -12,6 +12,7 @@
         "soul-origins:bee/prevent_anger",
         "soul-origins:bee/eat",
         "soul-origins:bee/particle",
-        "soul-origins:bee/sound"
+        "soul-origins:bee/sound",
+        "soul-origins:bee/passive"
     ]
 }
