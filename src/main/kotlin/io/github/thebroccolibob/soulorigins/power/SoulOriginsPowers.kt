@@ -23,6 +23,7 @@ class GardenWalker(type: PowerType<*>, entity: LivingEntity?) : Power(type, enti
 class DrowningPower(type: PowerType<*>, entity: LivingEntity?): Power(type, entity)
 class HideNamePower(type: PowerType<*>, entity: LivingEntity?): Power(type, entity)
 class PreventEndermanAngerPower(type: PowerType<*>, entity: LivingEntity?): Power(type, entity)
+class CraftBeeBombPower(type: PowerType<*>, entity: LivingEntity?): Power(type, entity)
 
 fun registerSoulOriginsPowers() {
     register(BowSpeedPower.factory)
@@ -34,6 +35,7 @@ fun registerSoulOriginsPowers() {
     register("drowning", ::DrowningPower)
     register("hide_name", ::HideNamePower)
     register("prevent_enderman_anger", ::PreventEndermanAngerPower)
+    register("craft_bee_bomb", ::CraftBeeBombPower)
     register(BrewingStandPower.factory)
     register(SuspiciousBrewingStandPower.factory)
     register(EntityStorePower.factory)

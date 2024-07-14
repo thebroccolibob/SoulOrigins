@@ -35,11 +35,14 @@ class BeeBombCraftingRecipe(id: Identifier, category: CraftingRecipeCategory) : 
 
         return SoulOriginsItems.BEE_BOMB.defaultStack.apply {
             hive.nbt?.let { nbt ->
-                setSubNbt("BlockEntityTag", nbt
-                    .getList("Bees", NbtCompound.COMPOUND_TYPE)
-                    .mapNotNull { (it as? NbtCompound)?.getCompound("EntityTag") }
-                    .toNbtList()
-                )
+                setSubNbt("BlockEntityTag", NbtCompound().apply {
+                    put("Bees", nbt
+                        .getCompound("BlockEntityTag")
+                        .getList("Bees", NbtCompound.COMPOUND_TYPE)
+                        .mapNotNull { (it as? NbtCompound)?.getCompound("EntityTag") }
+                        .toNbtList()
+                    )
+                })
             }
         }
     }
