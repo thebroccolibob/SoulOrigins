@@ -5,6 +5,8 @@ import io.github.thebroccolibob.soulorigins.datagen.power.LeveledCooldownEntry
 import io.github.thebroccolibob.soulorigins.datagen.power.wind.tailwindEntries
 import io.github.thebroccolibob.soulorigins.datagen.power.wind.updraftEntries
 import io.github.thebroccolibob.soulorigins.effect.SoulOriginsEffects
+import io.github.thebroccolibob.soulorigins.entity.LoyaltyItemEntity
+import io.github.thebroccolibob.soulorigins.entity.SoulOriginsEntities
 import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
 import io.github.thebroccolibob.soulorigins.plus
 import io.github.thebroccolibob.soulorigins.potion.SoulOriginsPotions
@@ -134,6 +136,9 @@ class LangGenerator(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataO
                 message = "%s soul dwindled via magic by %s",
                 itemMessage = "%s soul dwindled via magic by %s using %s"
             )
+
+            add(SoulOriginsEntities.BEE_BOMB, "Primed Bee Bomb")
+            add(LoyaltyItemEntity.NAME_TRANSLATION, "Returning %s")
         }
     }
 }

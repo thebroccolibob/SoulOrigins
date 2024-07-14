@@ -38,6 +38,8 @@
   "effect.soul-origins.perception": "Perception",
   "effect.soul-origins.precision": "Precision",
   "effect.soul-origins.throngled": "Throngled",
+  "entity.soul-origins.bee_bomb": "Primed Bee Bomb",
+  "entity.soul-origins.loyalty_item.name": "Returning %s",
   "item.minecraft.lingering_potion.effect.incomplete_memento_mori": "Incomplete Lingering Potion of Memento Mori",
   "item.minecraft.lingering_potion.effect.memento_mori": "Lingering Potion of Memento Mori",
   "item.minecraft.lingering_potion.effect.necrosis": "Lingering Potion of Necrosis",

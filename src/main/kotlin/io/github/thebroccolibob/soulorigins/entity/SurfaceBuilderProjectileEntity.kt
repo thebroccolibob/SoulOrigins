@@ -18,6 +18,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtHelper
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.sound.SoundCategory
+import net.minecraft.text.Text
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
@@ -126,4 +127,8 @@ class SurfaceBuilderProjectileEntity : ThrownItemEntity {
     }
 
     override fun getDefaultItem(): Item = Items.STONE
+
+    override fun getName(): Text {
+        return customName ?: item.name
+    }
 }

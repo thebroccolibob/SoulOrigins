@@ -12,6 +12,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
+import net.minecraft.text.Text
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
@@ -97,7 +98,13 @@ class LoyaltyItemEntity(type: EntityType<LoyaltyItemEntity>, world: World) : Ent
         }
     }
 
+    override fun getName(): Text {
+        return customName ?: Text.translatable(NAME_TRANSLATION, item.name)
+    }
+
     companion object : TrackedDataRegister<LoyaltyItemEntity> {
         val ITEM = registerData(TrackedDataHandlerRegistry.ITEM_STACK)
+
+        const val NAME_TRANSLATION = "entity.soul-origins.loyalty_item.name"
     }
 }
