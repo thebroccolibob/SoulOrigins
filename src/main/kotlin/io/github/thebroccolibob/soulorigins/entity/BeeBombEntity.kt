@@ -80,6 +80,6 @@ class BeeBombEntity(entityType: EntityType<out BeeBombEntity>, world: World, pri
 
     companion object {
         const val ANGER_RANGE = 16.0
-        const val MAX_VELOCITY = 1.0
+        const val MAX_VELOCITY = 0.5
     }
 }

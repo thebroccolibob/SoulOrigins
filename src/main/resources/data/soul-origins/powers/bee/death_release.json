@@ -1,6 +1,6 @@
 {
     "type": "soul-origins:action_on_death",
-    "name": "Beevenge",
+    "name": "Beeware",
     "description": "If you die, all your bees will be released, wreaking havoc on your attackers.",
     "condition": {
         "type": "origins:resource",

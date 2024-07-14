@@ -1,5 +1,6 @@
 {
   "type": "origins:recipe",
+  "name": "Bee Bomb",
   "recipe": {
     "id": "soul-origins:bee_bomb",
     "type": "soul-origins:bee_bomb"
