@@ -14,5 +14,7 @@ object SoulOriginsTags {
 
     val ARTIFICER_SECONDARY_MATERIAL: TagKey<Item> = TagKey.of(RegistryKeys.ITEM, SoulOrigins.id("artificer_secondary_material"))
 
+    val BEE_BOMB_INGREDIENT: TagKey<Item> = TagKey.of(RegistryKeys.ITEM, SoulOrigins.id("bee_bomb_ingredient"))
+
     fun register() {}
 }

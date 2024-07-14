@@ -1,0 +1,30 @@
+{
+  "type": "origins:recipe",
+  "recipe": {
+    "id": "soul-origins:bee_bomb",
+    "type": "soul-origins:bee_bomb"
+  },
+  "badges": [
+    {
+      "type": "origins:crafting_recipe",
+      "sprite": "origins:textures/gui/badge/recipe.png",
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "id": "soul-origins:bee_bomb",
+        "ingredients": [
+          {
+            "item": "minecraft:tnt"
+          },
+          {
+            "tag": "soul-origins:bee_bomb_ingredient"
+          }
+        ],
+        "result": {
+          "item": "soul-origins:bee_bomb",
+          "count": 1
+        }
+      }
+    }
+  ]
+
+}

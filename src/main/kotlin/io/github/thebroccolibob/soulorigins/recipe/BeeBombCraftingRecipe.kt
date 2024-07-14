@@ -1,5 +1,6 @@
 package io.github.thebroccolibob.soulorigins.recipe
 
+import io.github.thebroccolibob.soulorigins.SoulOriginsTags
 import io.github.thebroccolibob.soulorigins.getList
 import io.github.thebroccolibob.soulorigins.item.SoulOriginsItems
 import io.github.thebroccolibob.soulorigins.toNbtList
@@ -22,7 +23,7 @@ class BeeBombCraftingRecipe(id: Identifier, category: CraftingRecipeCategory) : 
 
         for (stack in inventory.inputStacks) when {
             stack.isOf(Items.TNT) -> tnt = true
-            !stack.isOf(SoulOriginsItems.BEE_BOMB) && stack.nbt?.getCompound("BlockEntityTag")?.contains(BEES_KEY) == true -> hive = true
+            !stack.isOf(SoulOriginsItems.BEE_BOMB) && (stack.isIn(SoulOriginsTags.BEE_BOMB_INGREDIENT)) || stack.nbt?.getCompound("BlockEntityTag")?.contains(BEES_KEY) == true -> hive = true
             stack.isEmpty -> {}
             else -> return false
         }
@@ -31,7 +32,7 @@ class BeeBombCraftingRecipe(id: Identifier, category: CraftingRecipeCategory) : 
     }
 
     override fun craft(inventory: RecipeInputInventory, registryManager: DynamicRegistryManager): ItemStack {
-        val hive = inventory.inputStacks.first { it.nbt?.getCompound("BlockEntityTag")?.contains(BEES_KEY) == true }
+        val hive = inventory.inputStacks.firstOrNull { it.nbt?.getCompound("BlockEntityTag")?.contains(BEES_KEY) == true } ?: return ItemStack.EMPTY
 
         return SoulOriginsItems.BEE_BOMB.defaultStack.apply {
             hive.nbt?.let { nbt ->

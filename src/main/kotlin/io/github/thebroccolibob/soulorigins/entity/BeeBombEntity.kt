@@ -65,11 +65,11 @@ class BeeBombEntity(entityType: EntityType<out BeeBombEntity>, world: World, pri
                 readNbt(bee)
                 refreshPositionAndAngles(this@BeeBombEntity.blockPos, yaw, pitch)
                 setVelocity(
-                    this@BeeBombEntity.random.nextTriangular(0.0, 0.2),
-                    this@BeeBombEntity.random.nextTriangular(0.0, 0.2),
-                    this@BeeBombEntity.random.nextTriangular(0.0, 0.2),
+                    this@BeeBombEntity.random.nextTriangular(0.0, MAX_VELOCITY),
+                    this@BeeBombEntity.random.nextTriangular(0.0, MAX_VELOCITY),
+                    this@BeeBombEntity.random.nextTriangular(0.0, MAX_VELOCITY),
                 )
-                world.spawnEntity(this)
+                this@BeeBombEntity.world.spawnEntity(this)
                 universallyAnger()
                 if (entities.isNotEmpty()) {
                     target = entities.random(world.random) as LivingEntity
@@ -80,5 +80,6 @@ class BeeBombEntity(entityType: EntityType<out BeeBombEntity>, world: World, pri
 
     companion object {
         const val ANGER_RANGE = 16.0
+        const val MAX_VELOCITY = 1.0
     }
 }

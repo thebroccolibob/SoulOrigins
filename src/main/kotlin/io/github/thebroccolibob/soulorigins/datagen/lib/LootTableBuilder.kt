@@ -20,8 +20,8 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.LootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.predicate.NumberRange
-import net.minecraft.predicate.entity.LocationPredicate
 import net.minecraft.predicate.StatePredicate
+import net.minecraft.predicate.entity.LocationPredicate
 import net.minecraft.predicate.item.EnchantmentPredicate
 import net.minecraft.predicate.item.ItemPredicate
 import net.minecraft.util.Identifier
@@ -170,4 +170,10 @@ fun uniform(min: Int, max: Int) = uniform(min.toFloat(), max.toFloat())
 
 inline fun FabricBlockLootTableProvider.addTable(block: Block, init: LootTable.Builder.() -> Unit) {
     addDrop(block, lootTable(init))
+}
+
+inline fun FabricBlockLootTableProvider.addPool(block: Block, rolls: Int = 1, init: LootPool.Builder.() -> Unit) {
+    addTable(block) {
+        pool(rolls, init)
+    }
 }

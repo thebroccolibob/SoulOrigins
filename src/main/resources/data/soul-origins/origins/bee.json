@@ -9,10 +9,10 @@
         "soul-origins:bee/death_release",
         "soul-origins:bee/place_bee",
         "soul-origins:bee/beelloon",
-        "soul-origins:bee/prevent_anger",
+        "soul-origins:bee/bee_friend",
         "soul-origins:bee/eat",
         "soul-origins:bee/particle",
         "soul-origins:bee/sound",
-        "soul-origins:bee/passive"
+        "soul-origins:bee/bee_bomb"
     ]
 }

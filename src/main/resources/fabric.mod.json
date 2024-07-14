@@ -61,7 +61,8 @@
 	},
 	"suggests": {
 		"create": ">=0.5.1",
-		"simplyswords": ">=1.55.0"
+		"simplyswords": ">=1.55.0",
+		"unbeeleaveable": ">=1.1.0"
 	},
 	"custom": {
 		"cardinal-components": [
