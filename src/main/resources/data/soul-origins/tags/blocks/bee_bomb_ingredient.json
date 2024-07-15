@@ -1,0 +1,10 @@
+{
+  "values": [
+    "minecraft:bee_nest",
+    "minecraft:beehive",
+    {
+      "id": "unbeeleaveable:exitless_beehive",
+      "required": false
+    }
+  ]
+}

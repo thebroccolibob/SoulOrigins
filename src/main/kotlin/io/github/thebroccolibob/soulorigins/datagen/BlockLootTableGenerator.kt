@@ -1,5 +1,6 @@
 package io.github.thebroccolibob.soulorigins.datagen
 
+import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
 import io.github.thebroccolibob.soulorigins.block.entity.BeeBombBlockEntity
 import io.github.thebroccolibob.soulorigins.datagen.lib.*
@@ -76,5 +77,7 @@ class BlockLootTableGenerator(dataOutput: FabricDataOutput) : FabricBlockLootTab
                 withOperation(BeeBombBlockEntity.BEES_KEY, "BlockEntityTag.${BeeBombBlockEntity.BEES_KEY}")
             })
         }
+
+        lootTables.put(SoulOrigins.id("blocks/bee_silk_touch", ))
     }
 }

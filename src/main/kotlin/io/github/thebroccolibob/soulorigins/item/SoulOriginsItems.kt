@@ -4,7 +4,6 @@ import io.github.thebroccolibob.soulorigins.FabricItemSettings
 import io.github.thebroccolibob.soulorigins.ItemGroup
 import io.github.thebroccolibob.soulorigins.SoulOrigins
 import io.github.thebroccolibob.soulorigins.block.SoulOriginsBlocks
-import io.github.thebroccolibob.soulorigins.block.entity.BeeBombBlockEntity
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistry
 import net.minecraft.block.Block
@@ -69,17 +68,7 @@ object SoulOriginsItems {
         maxCount(16)
     }))
 
-    val BEE_BOMB = register("bee_bomb", object: BlockItem(SoulOriginsBlocks.BEE_BOMB, FabricItemSettings()) {
-        override fun getDefaultStack(): ItemStack {
-            return ItemStack(this).apply {
-                setSubNbt("BlockEntityTag", NbtCompound().apply {
-                    put(BeeBombBlockEntity.BEES_KEY, NbtList().apply {
-                        repeat(3) { add(NbtCompound()) }
-                    })
-                })
-            }
-        }
-    })
+    val BEE_BOMB = register(SoulOriginsBlocks.BEE_BOMB)
 
     val ITEM_GROUP: ItemGroup = Registry.register(
         Registries.ITEM_GROUP,

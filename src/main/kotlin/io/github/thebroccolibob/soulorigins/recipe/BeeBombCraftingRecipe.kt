@@ -9,6 +9,7 @@ import net.minecraft.inventory.RecipeInputInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.NbtList
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.SpecialCraftingRecipe
 import net.minecraft.recipe.book.CraftingRecipeCategory
@@ -23,7 +24,7 @@ class BeeBombCraftingRecipe(id: Identifier, category: CraftingRecipeCategory) : 
 
         for (stack in inventory.inputStacks) when {
             stack.isOf(Items.TNT) -> tnt = true
-            !stack.isOf(SoulOriginsItems.BEE_BOMB) && (stack.isIn(SoulOriginsTags.BEE_BOMB_INGREDIENT)) || stack.nbt?.getCompound("BlockEntityTag")?.contains(BEES_KEY) == true -> hive = true
+            isHive(stack) -> hive = true
             stack.isEmpty -> {}
             else -> return false
         }
@@ -31,20 +32,25 @@ class BeeBombCraftingRecipe(id: Identifier, category: CraftingRecipeCategory) : 
         return tnt && hive
     }
 
+    private fun isHive(stack: ItemStack) =
+        !stack.isOf(SoulOriginsItems.BEE_BOMB) && (stack.isIn(SoulOriginsTags.BEE_BOMB_INGREDIENT)) || stack.nbt?.getCompound(
+            "BlockEntityTag"
+        )?.contains(BEES_KEY) == true
+
     override fun craft(inventory: RecipeInputInventory, registryManager: DynamicRegistryManager): ItemStack {
-        val hive = inventory.inputStacks.firstOrNull { it.nbt?.getCompound("BlockEntityTag")?.contains(BEES_KEY) == true } ?: return ItemStack.EMPTY
+        val hive = inventory.inputStacks.firstOrNull(::isHive) ?: return ItemStack.EMPTY
 
         return SoulOriginsItems.BEE_BOMB.defaultStack.apply {
-            hive.nbt?.let { nbt ->
-                setSubNbt("BlockEntityTag", NbtCompound().apply {
-                    put("Bees", nbt
-                        .getCompound("BlockEntityTag")
-                        .getList("Bees", NbtCompound.COMPOUND_TYPE)
-                        .mapNotNull { (it as? NbtCompound)?.getCompound("EntityTag") }
-                        .toNbtList()
-                    )
-                })
-            }
+            setSubNbt("BlockEntityTag", NbtCompound().apply {
+                put("Bees",
+                    hive.nbt
+                        ?.getCompound("BlockEntityTag")
+                        ?.getList("Bees", NbtCompound.COMPOUND_TYPE)
+                        ?.mapNotNull { (it as? NbtCompound)?.getCompound("EntityTag") }
+                        ?.toNbtList()
+                    ?: NbtList()
+                )
+            })
         }
     }
 
